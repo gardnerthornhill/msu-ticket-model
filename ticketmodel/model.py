@@ -86,3 +86,52 @@ def select_tier2(df: pd.DataFrame, tier1_features) -> list[dict]:
         feats = list(tier1_features) + [pf]
         results.append({"features": feats, "price_feature": pf, "rmse": loo_metrics(df, feats)["rmse"]})
     return _rank(results)
+
+
+def fit(df: pd.DataFrame, features) -> dict:
+    if len(df) < MIN_TRAINING_ROWS:
+        raise ModelError(f"need at least {MIN_TRAINING_ROWS} training rows, have {len(df)}")
+    X = _design(df, features)
+    y = df[TARGET].to_numpy(float)
+    res = sm.OLS(y, X).fit()
+    Xn = X.to_numpy(float)
+    return {
+        "features": list(features),
+        "intercept": float(res.params["const"]),
+        "coef": {f: float(res.params[f]) for f in features},
+        "stderr": {k: float(v) for k, v in res.bse.items()},
+        "resid_se": float(np.sqrt(res.scale)),
+        "df_resid": int(res.df_resid),
+        "n": int(len(df)),
+        "xtx_inv": np.linalg.pinv(Xn.T @ Xn).tolist(),
+        "data_hash": hashlib.sha256(df[list(features) + [TARGET]].to_csv(index=False).encode()).hexdigest()[:12],
+    }
+
+
+def save_model(model: dict, path) -> None:
+    from pathlib import Path
+
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
+    Path(path).write_text(json.dumps(model, indent=1))
+
+
+def load_model(path) -> dict:
+    from pathlib import Path
+
+    p = Path(path)
+    if not p.exists():
+        raise ModelError(f"no saved model at {p}; run train")
+    return json.loads(p.read_text())
+
+
+def predict(model: dict, df: pd.DataFrame) -> pd.DataFrame:
+    feats = model["features"]
+    X = _design(df, feats).to_numpy(float)
+    beta = np.array([model["intercept"]] + [model["coef"][f] for f in feats])
+    point = X @ beta
+    V = np.asarray(model["xtx_inv"], float)
+    se = model["resid_se"] * np.sqrt(1.0 + np.einsum("ij,jk,ik->i", X, V, X))
+    t = stats.t.ppf(0.5 + INTERVAL / 2, model["df_resid"])
+    return pd.DataFrame(
+        {"pred": _clip(point), "lo": _clip(point - t * se), "hi": _clip(point + t * se)}, index=df.index
+    )
