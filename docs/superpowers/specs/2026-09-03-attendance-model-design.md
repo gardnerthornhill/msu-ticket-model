@@ -3,6 +3,10 @@
 Date: 2026-09-03
 Status: approved in chat, pending spec review
 
+Note: the seed `data/tickets.csv` and the exploration scripts (`data/build.py`, `data/analyze.py`,
+`data/joined.csv`) predate this spec. The first implementation task converts the seed file to the
+schema below and moves the exploration scripts to `exploration/`.
+
 ## Goal
 
 Predict announced attendance for Mississippi State football home games at Davis Wade Stadium from
@@ -93,7 +97,7 @@ must equal that local date, otherwise the row is flagged as a join error.
 | conf_game      | CFBD `conferenceGame` as 0/1                                                  |
 | opp_p4         | opponent conference in {SEC, Big Ten, Big 12, ACC} → 1 else 0                 |
 | opp_fcs        | opponent classification != fbs → 1 else 0                                     |
-| opp_ranked     | opponent in AP Top 25 for that season/week → 1 else 0; upcoming games use the latest poll in the cache |
+| opp_ranked     | opponent in AP Top 25 → 1 else 0. Poll used: the season's poll for the game's week if cached; otherwise the latest cached poll for that season with week < game week; otherwise 0 with a warning |
 | opp_ap_rank    | rank if ranked, else 30                                                       |
 | opp_elo        | pregame Elo from the game record; if null, the opponent's rating from `elo_S.json`; if still null (FCS), season minimum FBS Elo minus 100 |
 | opp_sp         | opponent SP+ rating for the season; FCS → season minimum FBS SP+ minus 10     |
@@ -128,7 +132,8 @@ prediction variance (observation-level), also clipped.
 Written by `train`. Contains:
 - Row counts (games, with attendance, with price).
 - For each of: season-mean baseline, price-only (`log_getin`), Tier 1, Tier 2 — LOO-RMSE, LOO-MAE,
-  LOO-R².
+  LOO-R². The season-mean baseline predicts each held-out game with the mean attendance of the
+  other games in its season, falling back to the global mean when the season has no other rows.
 - Tier 1 top-five subset table; Tier 2 price-feature comparison.
 - Fitted coefficients with standard errors for both tiers.
 - Per-game table: season, opponent, price, actual attendance, Tier 1 LOO prediction, Tier 2 LOO
