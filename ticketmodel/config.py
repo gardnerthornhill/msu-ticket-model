@@ -27,7 +27,7 @@ REFRESH_WINDOW_DAYS = 14
 INTERVAL = 0.80  # prediction interval coverage
 
 SITE_NAME = "Davis Wade Forecast"
-SITE_URL = "https://gardnerthornhill.github.io/msu-ticket-model"  # GitHub Pages URL; no trailing slash
+SITE_URL = ""  # default when the SITE_URL environment variable is unset: no canonical links, no sitemap
 
 
 @dataclass(frozen=True)

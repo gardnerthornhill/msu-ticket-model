@@ -4,7 +4,9 @@
 {% set next = (data.games | selectattr("slug", "equalto", data.next_game) | list | first) if data.next_game else none %}
 {% set played_here = season_games | selectattr("status", "equalto", "played") | list %}
 {% block head %}
-<script type="application/ld+json">{{ {"@context": "https://schema.org", "@type": "WebSite", "name": data.site_name, "url": data.site_url ~ "/", "description": page.description, "about": {"@type": "SportsTeam", "name": "Mississippi State Bulldogs football", "sport": "American football"}} | json | safe }}</script>
+{% set ld = {"@context": "https://schema.org", "@type": "WebSite", "name": data.site_name, "description": page.description, "about": {"@type": "SportsTeam", "name": "Mississippi State Bulldogs football", "sport": "American football"}} %}
+{% if data.site_url %}{% set _ = ld.update({"url": data.site_url ~ "/"}) %}{% endif %}
+<script type="application/ld+json">{{ ld | json | safe }}</script>
 {% endblock %}
 {% block main %}
 {% if next %}

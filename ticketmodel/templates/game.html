@@ -4,7 +4,9 @@
 {% set f = g.forecast %}
 {% set model = data.models[g.tier] %}
 {% block head %}
-<script type="application/ld+json">{{ {"@context": "https://schema.org", "@type": "SportsEvent", "name": g.opponent ~ " at Mississippi State", "startDate": g.date, "location": {"@type": "Place", "name": data.venue, "address": "Starkville, MS"}, "homeTeam": {"@type": "SportsTeam", "name": "Mississippi State Bulldogs"}, "awayTeam": {"@type": "SportsTeam", "name": g.opponent}, "url": data.site_url ~ "/" ~ page.path} | json | safe }}</script>
+{% set ld = {"@context": "https://schema.org", "@type": "SportsEvent", "name": g.opponent ~ " at Mississippi State", "startDate": g.date, "location": {"@type": "Place", "name": data.venue, "address": "Starkville, MS"}, "homeTeam": {"@type": "SportsTeam", "name": "Mississippi State Bulldogs"}, "awayTeam": {"@type": "SportsTeam", "name": g.opponent}} %}
+{% if data.site_url %}{% set _ = ld.update({"url": data.site_url ~ "/" ~ page.path}) %}{% endif %}
+<script type="application/ld+json">{{ ld | json | safe }}</script>
 {% endblock %}
 {% block main %}
 <section class="hero hero-game">

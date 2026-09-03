@@ -2,6 +2,7 @@
 and the CFBD cache. Pure formatting: every number here was produced by train or predict."""
 import json
 import math
+import os
 import re
 import shutil
 from datetime import date, datetime
@@ -185,6 +186,12 @@ def game_notes(warnings: list[str], season: int, opponent: str) -> list[str]:
     return notes
 
 
+def site_url() -> str:
+    """Public URL of the site, from the SITE_URL environment variable, without a trailing slash.
+    Empty means: emit no canonical links, no og:url and no sitemap."""
+    return os.environ.get("SITE_URL", SITE_URL).strip().rstrip("/")
+
+
 def site_data(paths: Paths, today: str | None = None) -> dict:
     today = today or date.today().isoformat()
     for p in (paths.features, paths.train_summary, paths.tier1, paths.tier2):
@@ -279,7 +286,7 @@ def site_data(paths: Paths, today: str | None = None) -> dict:
     upcoming_games = [g for g in games if g["status"] == "upcoming" and g["date"] >= today]
     next_game = upcoming_games[0]["slug"] if upcoming_games else None
     return {
-        "site_name": SITE_NAME, "site_url": SITE_URL, "team": TEAM, "venue": VENUE, "capacity": CAPACITY,
+        "site_name": SITE_NAME, "site_url": site_url(), "team": TEAM, "venue": VENUE, "capacity": CAPACITY,
         "interval": INTERVAL, "generated": today, "trained": summary.get("generated"),
         "seasons": seasons, "current_season": current, "next_game": next_game,
         "axis_min": axis_min, "bar_max": bar_max, "bar_max_current": bar_max_current,
@@ -367,13 +374,19 @@ def build_site(paths: Paths, http=None, today: str | None = None) -> dict:
     for asset in STATIC.iterdir():
         shutil.copyfile(asset, out / asset.name)
     (out / "data.json").write_text(json.dumps(data, indent=1, default=float))
-    (out / "robots.txt").write_text(
-        "User-agent: *\nAllow: /\n\n" + "".join(f"User-agent: {bot}\nAllow: /\n\n" for bot in
-                                              ("OAI-SearchBot", "ChatGPT-User", "PerplexityBot", "ClaudeBot"))
-        + f"Sitemap: {SITE_URL}/sitemap.xml\n")
-    urls = "".join(f"  <url><loc>{SITE_URL}/{p['path']}</loc><lastmod>{data['generated']}</lastmod></url>\n" for p in pages)
-    (out / "sitemap.xml").write_text(
-        '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-        + urls + "</urlset>\n")
-    (out / ".nojekyll").write_text("")
+    url = data["site_url"]
+    robots = "User-agent: *\nAllow: /\n\n" + "".join(
+        f"User-agent: {bot}\nAllow: /\n\n" for bot in ("OAI-SearchBot", "ChatGPT-User", "PerplexityBot", "ClaudeBot"))
+    sitemap = out / "sitemap.xml"
+    if url:
+        robots += f"Sitemap: {url}/sitemap.xml\n"
+        urls = "".join(f"  <url><loc>{url}/{p['path']}</loc><lastmod>{data['generated']}</lastmod></url>\n" for p in pages)
+        sitemap.write_text('<?xml version="1.0" encoding="UTF-8"?>\n'
+                           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + "</urlset>\n")
+    elif sitemap.exists():
+        sitemap.unlink()
+    (out / "robots.txt").write_text(robots)
+    nojekyll = out / ".nojekyll"
+    if nojekyll.exists():
+        nojekyll.unlink()
     return data

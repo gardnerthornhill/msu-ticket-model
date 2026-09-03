@@ -3,7 +3,9 @@
 {% set played = data.games | selectattr("status", "equalto", "played") | list %}
 {% set t = data.track %}
 {% block head %}
-<script type="application/ld+json">{{ {"@context": "https://schema.org", "@type": "Dataset", "name": "Mississippi State home attendance forecasts and results", "description": page.description, "url": data.site_url ~ "/track-record.html", "distribution": [{"@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": data.site_url ~ "/data.json"}], "temporalCoverage": data.seasons[0] ~ "/" ~ data.seasons[-1]} | json | safe }}</script>
+{% set ld = {"@context": "https://schema.org", "@type": "Dataset", "name": "Mississippi State home attendance forecasts and results", "description": page.description, "temporalCoverage": data.seasons[0] ~ "/" ~ data.seasons[-1]} %}
+{% if data.site_url %}{% set _ = ld.update({"url": data.site_url ~ "/track-record.html", "distribution": [{"@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": data.site_url ~ "/data.json"}]}) %}{% endif %}
+<script type="application/ld+json">{{ ld | json | safe }}</script>
 {% endblock %}
 {% block main %}
 <section class="page-head">

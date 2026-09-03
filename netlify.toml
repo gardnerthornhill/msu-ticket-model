@@ -1,0 +1,5 @@
+# Netlify serves the prebuilt site/ folder straight from main. The daily GitHub Action
+# rebuilds site/ and commits it, so there is nothing to build here.
+[build]
+  publish = "site"
+  command = "echo 'site/ is prebuilt by the daily-model GitHub Action'"

@@ -13,4 +13,3 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
-Sitemap: https://gardnerthornhill.github.io/msu-ticket-model/sitemap.xml

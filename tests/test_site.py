@@ -68,7 +68,8 @@ def test_site_data_models_carry_labels_means_and_swing(trained):
     assert data["metrics"]["Tier 2 (priced rows)"]["rmse"] > 0
 
 
-def test_build_site_writes_pages_logos_and_seo_files(trained):
+def test_build_site_writes_pages_logos_and_seo_files(trained, monkeypatch):
+    monkeypatch.setenv("SITE_URL", "https://example.netlify.app")
     calls = []
 
     def http(url):
@@ -100,3 +101,26 @@ def test_site_command_from_cli(trained, monkeypatch):
     monkeypatch.setattr(site.logos, "default_http", lambda url: (200, b"png"))
     assert cli.main(["site", "--root", str(trained.root)]) == 0
     assert (trained.site_dir / "index.html").exists()
+
+
+def test_site_has_no_links_back_to_the_author_when_no_site_url(trained, monkeypatch):
+    monkeypatch.delenv("SITE_URL", raising=False)
+    site.build_site(trained, http=lambda url: (200, b"png"), today="2024-10-20")
+    out = trained.site_dir
+    for page in list(out.rglob("*.html")) + [out / "data.json"]:
+        text = page.read_text()
+        assert "github.com" not in text and "gardnerthornhill" not in text, page
+    html = (out / "index.html").read_text()
+    assert 'rel="canonical"' not in html and "og:url" not in html
+    assert "Sitemap:" not in (out / "robots.txt").read_text()
+    assert not (out / "sitemap.xml").exists()
+
+
+def test_site_url_from_environment_drives_canonical_and_sitemap(trained, monkeypatch):
+    monkeypatch.setenv("SITE_URL", "https://example.netlify.app/")
+    site.build_site(trained, http=lambda url: (200, b"png"), today="2024-10-20")
+    out = trained.site_dir
+    html = (out / "games" / "2024-rival-c.html").read_text()
+    assert '<link rel="canonical" href="https://example.netlify.app/games/2024-rival-c.html">' in html
+    assert "https://example.netlify.app/sitemap.xml" in (out / "robots.txt").read_text()
+    assert "https://example.netlify.app/track-record.html" in (out / "sitemap.xml").read_text()

@@ -5,13 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ page.title }} | {{ data.site_name }}</title>
 <meta name="description" content="{{ page.description }}">
+{% if data.site_url %}
 <link rel="canonical" href="{{ data.site_url }}/{{ page.path }}">
+{% endif %}
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{{ data.site_name }}">
 <meta property="og:title" content="{{ page.title }}">
 <meta property="og:description" content="{{ page.description }}">
+{% if data.site_url %}
 <meta property="og:url" content="{{ data.site_url }}/{{ page.path }}">
 <meta property="og:image" content="{{ data.site_url }}/logos/msu.png">
+{% endif %}
 <meta name="twitter:card" content="summary">
 <meta name="theme-color" content="#5D1725">
 <link rel="icon" href="{{ root }}logos/msu.png" type="image/png">
@@ -42,7 +46,7 @@
 <footer class="footer">
   <div class="wrap footer-inner">
     <p>Forecasts come from a model trained on Mississippi State home games since 2023. Get-in prices are from <a href="https://www.ticketdata.com/performer/mississippi-state-bulldogs-football">ticketdata.com</a>; schedules, attendance and ratings from <a href="https://collegefootballdata.com">CollegeFootballData</a>. Model last retrained {{ data.trained }}; page built {{ data.generated }}.</p>
-    <p>An independent project, not affiliated with Mississippi State University or its athletics department. Team marks belong to their schools. <a href="https://github.com/gardnerthornhill/msu-ticket-model">Source and data on GitHub</a>.</p>
+    <p>An independent project, not affiliated with Mississippi State University or its athletics department. Team marks belong to their schools. <a href="{{ root }}data.json">Everything on this site as JSON</a>.</p>
   </div>
 </footer>
 <script src="{{ root }}site.js" defer></script>

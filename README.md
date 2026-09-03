@@ -55,9 +55,13 @@ python3 -m http.server -d site 8000      # then open http://localhost:8000
 
 Opponent logos are downloaded once from ESPN's CDN by CFBD team id into `logos/` (a missing
 logo becomes initials, never an error). The Mississippi State mark is `logos/msu.png`, a
-transparent cut of `logos/MSU.png`. `.github/workflows/pages.yml` publishes `site/` to GitHub
-Pages on every push to `main`; enable it once under Settings -> Pages -> Source: GitHub Actions.
-The canonical URL lives in `ticketmodel/config.py` (`SITE_URL`).
+transparent cut of `logos/MSU.png`.
+
+Hosting: `netlify.toml` tells Netlify to publish the prebuilt `site/` folder from `main` with no
+build step, so every daily commit redeploys. Set a `SITE_URL` environment variable (the public
+URL, no trailing slash) where the site is generated, i.e. as a repository variable for the daily
+Action, to emit canonical links, Open Graph URLs and a sitemap; without it the site carries no
+absolute links to itself. The pages deliberately carry no link back to the repository.
 
 ## How the data flows
 
@@ -169,7 +173,7 @@ data/             tickets.csv, features.csv, cfbd_raw/
 models/           fitted models as JSON
 reports/          model_report.md, train_summary.json, predictions.csv
 logos/            team logos (MSU mark plus ESPN logos by team id)
-site/             generated static site (GitHub Pages)
+site/             generated static site (published by Netlify)
 exploration/      the original correlation analysis that motivated the model
 docs/superpowers/ design spec and implementation plan
 tests/            pytest suite (synthetic fixtures, no network)
