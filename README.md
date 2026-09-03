@@ -86,6 +86,33 @@ Before the first game, paste the **upcoming**-tab rows for the new season into t
 and `reports/predictions.csv`. Tier 2 stays blank until the season has three priced games, since
 the price feature is relative to the season median.
 
+## Daily automation
+
+`.github/workflows/daily-model.yml` runs every morning at 7am Central: it refreshes the
+in-progress CFBD season, retrains, re-predicts, and commits any changes. It needs one repository
+secret, `CFBD_API_KEY`, set once from this folder:
+
+```
+gh secret set CFBD_API_KEY --body "$(cut -d= -f2- .env)"
+```
+
+ticketdata.com blocks automated access with Cloudflare (plain HTTP and headless browsers alike
+get the "Just a moment" page from a GitHub runner), so prices are pasted in, not scraped. To add
+or update prices from any device: open the repo's **Actions** tab, choose **daily-model**, press
+**Run workflow**, and paste rows into the box, one per line:
+
+```
+Alabama,2026-10-03,91
+Auburn,2026-11-14,80,2026-10-01
+```
+
+Rows are matched on opponent and date, so pasting a game again updates its price. A missing
+observed date becomes today. The same thing locally:
+
+```
+python3 -m ticketmodel add-tickets --rows "Alabama,2026-10-03,91"
+```
+
 ## Commands
 
 ```
@@ -94,6 +121,7 @@ python3 -m ticketmodel build     # -> data/features.csv
 python3 -m ticketmodel train     # -> models/*.json, reports/model_report.md
 python3 -m ticketmodel predict   # -> reports/predictions.csv
 python3 -m ticketmodel all       # fetch, build, train, predict
+python3 -m ticketmodel add-tickets --rows "..."   # upsert pasted price rows into data/tickets.csv
 python3 -m pytest                # tests, no network
 ```
 

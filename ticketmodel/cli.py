@@ -12,7 +12,7 @@ from . import features as feat
 from . import model as mdl
 from . import report as rpt
 from .config import DEFAULT_PATHS, MIN_PRICED_PER_SEASON, MIN_TRAINING_ROWS, Paths
-from .tickets import TicketError, load_tickets
+from .tickets import TicketError, load_tickets, upsert_rows
 
 PRED_COLUMNS = ["season", "date", "opponent", "getin", "tier1_pred", "tier1_lo", "tier1_hi", "tier2_pred", "tier2_lo", "tier2_hi"]
 
@@ -120,12 +120,17 @@ def cmd_predict(paths: Paths) -> pd.DataFrame:
 
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(prog="ticketmodel", description="Mississippi State home attendance model")
-    p.add_argument("command", choices=["fetch", "build", "train", "predict", "all"])
+    p.add_argument("command", choices=["fetch", "build", "train", "predict", "all", "add-tickets"])
+    p.add_argument("--rows", default=None, help="add-tickets: CSV rows opponent,date,getin[,observed], one per line (default: stdin)")
     p.add_argument("--refresh", type=int, nargs="*", default=[], metavar="SEASON", help="force re-download of these seasons")
     p.add_argument("--root", type=Path, default=None, help="repo root (default: this checkout)")
     a = p.parse_args(argv)
     paths = Paths(a.root.resolve()) if a.root else DEFAULT_PATHS
     try:
+        if a.command == "add-tickets":
+            rows = a.rows if a.rows is not None else sys.stdin.read()
+            added, updated = upsert_rows(paths.tickets, rows, date.today().isoformat())
+            print(f"tickets: added {added}, updated {updated} -> {paths.tickets}")
         if a.command in ("fetch", "all"):
             cmd_fetch(paths, a.refresh)
         if a.command == "build":

@@ -1,0 +1,63 @@
+name: daily-model
+# Every morning: refresh the in-progress CFBD season, retrain, re-predict, and commit any
+# changes. Run it by hand from the Actions tab to paste in new ticket prices first.
+# ticketdata.com blocks automated access (Cloudflare), so prices are pasted, not scraped.
+
+on:
+  schedule:
+    - cron: "0 12 * * *"        # 12:00 UTC = 7am Central (CDT) / 6am (CST)
+  workflow_dispatch:
+    inputs:
+      ticket_rows:
+        description: "Ticket rows to add or update, one per line: opponent,date,getin[,observed]  (e.g. Alabama,2026-10-03,91)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-model
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -q -r requirements.txt
+
+      - name: Add pasted ticket rows
+        if: ${{ github.event.inputs.ticket_rows != '' }}
+        env:
+          ROWS: ${{ github.event.inputs.ticket_rows }}
+        run: python -m ticketmodel add-tickets --rows "$ROWS"
+
+      - name: Fetch, build, train, predict
+        env:
+          CFBD_API_KEY: ${{ secrets.CFBD_API_KEY }}
+        run: python -m ticketmodel all
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          # Skip the commit when the only change is the report's "Generated <date>" line.
+          if git diff --cached --quiet -- . ':(exclude)reports/model_report.md'; then
+            real_lines=$(git diff --cached -U0 -- reports/model_report.md | grep -E '^[+-][^+-]' | grep -vc '^[+-]Generated ' || true)
+            if [ "${real_lines:-0}" -eq 0 ]; then
+              echo "No changes to commit."
+              exit 0
+            fi
+          fi
+          git commit -m "Daily model update $(date -u +%Y-%m-%d)"
+          git push

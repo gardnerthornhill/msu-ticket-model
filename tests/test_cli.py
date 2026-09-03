@@ -80,3 +80,20 @@ def test_main_all_without_key_fails_cleanly(fixture_root, monkeypatch, capsys):
     monkeypatch.setattr(cli.cfbd, "api_key", no_key)
     assert cli.main(["all", "--root", str(fixture_root)]) == 1
     assert "CFBD_API_KEY" in capsys.readouterr().err
+
+
+def test_add_tickets_command_upserts_rows(fixture_root, capsys):
+    paths = Paths(fixture_root)
+    rc = cli.main(["add-tickets", "--rows", "Rival D,2024-11-09,55\nRival C,2024-10-26,50", "--root", str(fixture_root)])
+    assert rc == 0
+    out = capsys.readouterr().out
+    assert "added 1" in out and "updated 1" in out
+    df = pd.read_csv(paths.tickets)
+    assert df[(df["opponent"] == "Rival D") & (df["date"] == "2024-11-09")].iloc[0]["getin"] == 55
+    assert df[(df["opponent"] == "Rival C") & (df["date"] == "2024-10-26")].iloc[0]["getin"] == 50
+    assert len(df) == 12
+
+
+def test_add_tickets_rejects_bad_rows(fixture_root, capsys):
+    assert cli.main(["add-tickets", "--rows", "Rival D,11/09/2024,55", "--root", str(fixture_root)]) == 1
+    assert "error:" in capsys.readouterr().err
