@@ -1,6 +1,9 @@
+import numpy as np
+import pandas as pd
 import pytest
 
-from ticketmodel.features import FeatureError, ap_rank_lookup, local_datetime, opponent_rank, resolve_opponent
+from ticketmodel.features import FEATURE_COLUMNS, FeatureError, ap_rank_lookup, build_features, local_datetime, opponent_rank, resolve_opponent
+from ticketmodel.tickets import load_tickets
 
 RANKINGS = [
     {"season": 2025, "seasonType": "regular", "week": 1, "polls": [
@@ -67,3 +70,96 @@ def test_rank_with_no_poll_warns():
 def test_local_datetime_shifts_calendar_day():
     assert local_datetime("2023-10-01T01:00:00.000Z").strftime("%Y-%m-%d %H:%M") == "2023-09-30 20:00"
     assert local_datetime("2025-09-27T20:15:00.000Z").strftime("%Y-%m-%d %H:%M") == "2025-09-27 15:15"
+
+
+def row(df, season, opp):
+    return df[(df["season"] == season) & (df["opponent"] == opp)].iloc[0]
+
+
+def test_only_home_non_neutral_games_in_order(features):
+    df, _ = features
+    assert list(df.columns) == FEATURE_COLUMNS
+    assert len(df) == 12
+    assert not {"Rival E", "Bowl Foe"} & set(df["opponent"])
+    assert list(df["date"]) == sorted(df["date"])
+
+
+def test_utc_to_central_date_and_kickoff(features):
+    df, _ = features
+    r = row(df, 2023, "Rival A")
+    assert r["date"] == "2023-09-16" and r["kickoff_hr"] == 20.0
+    r = row(df, 2023, "Rival D")
+    assert r["date"] == "2023-11-23" and r["kickoff_hr"] == 18.5
+
+
+def test_fcs_opponent_is_flagged_and_imputed(features):
+    df, warnings = features
+    r = row(df, 2023, "FCS U")
+    assert r["opp_fcs"] == 1 and r["opp_p4"] == 0 and r["conf_game"] == 0
+    assert r["opp_elo"] == 1290 - 100
+    assert r["opp_sp"] == -5.0 - 10
+    assert r["opp_ranked"] == 0 and r["opp_ap_rank"] == 30
+    assert any("FCS U" in w and "Elo" in w for w in warnings)
+
+
+def test_ranked_flag_exact_week_and_fallback(features):
+    df, _ = features
+    assert row(df, 2023, "Rival A")[["opp_ranked", "opp_ap_rank"]].tolist() == [1, 10]   # week-3 poll
+    assert row(df, 2023, "Rival B")["opp_ranked"] == 0                                    # week 7 -> week-3 poll
+    assert row(df, 2023, "Rival D")[["opp_ranked", "opp_ap_rank"]].tolist() == [1, 5]    # week-12 poll
+    assert row(df, 2024, "Rival A")[["opp_ranked", "opp_ap_rank"]].tolist() == [1, 8]    # week 4 -> week-1 poll
+    assert row(df, 2024, "Rival C")["opp_ranked"] == 0                                    # upcoming, week-1 poll
+
+
+def test_upcoming_game_uses_elo_ratings_and_has_null_attendance(features):
+    df, _ = features
+    r = row(df, 2024, "Rival C")
+    assert r["opp_elo"] == 1500 and pd.isna(r["attendance"]) and r["completed"] == 0
+    assert row(df, 2024, "Rival D")["opp_elo"] == 1820
+
+
+def test_completed_flag(features):
+    df, _ = features
+    assert df["completed"].sum() == 10
+
+
+def test_rel_log_price_uses_season_median_including_upcoming(features):
+    df, _ = features
+    assert row(df, 2024, "Rival A")["rel_log_price"] == pytest.approx(0.0)      # median of log(12, 40, 45)
+    assert row(df, 2024, "FCS U")["rel_log_price"] == pytest.approx(np.log(12) - np.log(40))
+    assert pd.isna(row(df, 2024, "Rival B")["rel_log_price"])
+
+
+def test_price_columns_and_observed(features):
+    df, _ = features
+    assert row(df, 2023, "Rival D")["getin"] == 63
+    assert row(df, 2023, "Rival D")["log_getin"] == pytest.approx(np.log(63))
+    assert row(df, 2024, "Rival C")["observed"] == "2024-10-20"
+    assert row(df, 2023, "Rival D")["observed"] is None or pd.isna(row(df, 2023, "Rival D")["observed"])
+
+
+def test_missing_ticket_row_gives_null_price_and_warning(features):
+    df, warnings = features
+    assert pd.isna(row(df, 2024, "Rival D")["getin"])
+    assert any("Rival D" in w and "no ticket row" in w for w in warnings)
+
+
+def test_ticket_date_mismatch_raises(tmp_path, seasons, tickets_text):
+    p = tmp_path / "t.csv"
+    p.write_text(tickets_text.replace("Rival A,2023-09-16", "Rival A,2023-09-17"))
+    with pytest.raises(FeatureError, match="date"):
+        build_features(load_tickets(p), seasons)
+
+
+def test_unknown_opponent_raises(tmp_path, seasons, tickets_text):
+    p = tmp_path / "t.csv"
+    p.write_text(tickets_text + "Nowhere State,2023-10-21,5,\n")
+    with pytest.raises(FeatureError, match="Nowhere State"):
+        build_features(load_tickets(p), seasons)
+
+
+def test_season_without_cfbd_data_raises(tmp_path, seasons, tickets_text):
+    p = tmp_path / "t.csv"
+    p.write_text(tickets_text + "Rival A,2022-09-10,20,\n")
+    with pytest.raises(FeatureError, match="2022"):
+        build_features(load_tickets(p), seasons)
