@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m %}
+{% set played = data.games | selectattr("status", "equalto", "played") | list %}
+{% set t = data.track %}
+{% block head %}
+<script type="application/ld+json">{{ {"@context": "https://schema.org", "@type": "Dataset", "name": "Mississippi State home attendance forecasts and results", "description": page.description, "url": data.site_url ~ "/track-record.html", "distribution": [{"@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": data.site_url ~ "/data.json"}], "temporalCoverage": data.seasons[0] ~ "/" ~ data.seasons[-1]} | json | safe }}</script>
+{% endblock %}
+{% block main %}
+<section class="page-head">
+  <h1>Track record</h1>
+  <p class="lede">Across {{ t.n }} tracked home games since {{ data.seasons[0] }}, the forecast missed the announced crowd by {{ t.mae | num }} on a typical game, and the real number landed inside the 80% range {{ t.inside }} times out of {{ t.n }}. Each game here is scored with a model that never saw that game: it was refit on the other games first, so the numbers are what the model would have said beforehand.</p>
+</section>
+
+<section class="kpis" aria-label="Headline accuracy">
+  <div class="kpi"><span class="kpi-value">{{ t.n }}</span><span class="kpi-label">games scored, {{ t.priced }} of them with a get-in price</span></div>
+  <div class="kpi"><span class="kpi-value">{{ t.mae | num }}</span><span class="kpi-label">typical miss in seats (mean absolute error)</span></div>
+  <div class="kpi"><span class="kpi-value">{{ t.inside_rate | pct }}</span><span class="kpi-label">of games inside the 80% range, {{ t.inside }} of {{ t.n }}</span></div>
+  <div class="kpi"><span class="kpi-value">{{ t.sellouts }}</span><span class="kpi-label">games announced at the full {{ data.capacity | num }}</span></div>
+</section>
+
+<section class="scatter-section">
+  <h2>Forecast against the announced crowd</h2>
+  <p>Dots on the line are perfect calls. Above it, more people came than forecast. Filled dots used the price model; hollow dots had no listed price and used the schedule-only model.</p>
+  {% set lo = data.axis_min %}{% set hi = data.capacity %}
+  {% set W = 640 %}{% set H = 520 %}{% set L = 64 %}{% set R = 24 %}{% set T = 20 %}{% set B = 52 %}
+  <div class="scatter-wrap">
+  <svg class="scatter" viewBox="0 0 {{ W }} {{ H }}" role="img" aria-labelledby="scatter-title" data-scatter>
+    <title id="scatter-title">Forecast versus actual attendance for {{ t.n }} games</title>
+    {% for tick in [40000, 45000, 50000, 55000, 60000] %}
+    {% if tick >= lo %}
+    <line class="grid" x1="{{ L }}" x2="{{ W - R }}" y1="{{ scale(tick, lo, hi, H - B, T) }}" y2="{{ scale(tick, lo, hi, H - B, T) }}"/>
+    <line class="grid" y1="{{ T }}" y2="{{ H - B }}" x1="{{ scale(tick, lo, hi, L, W - R) }}" x2="{{ scale(tick, lo, hi, L, W - R) }}"/>
+    <text class="tick" x="{{ L - 8 }}" y="{{ scale(tick, lo, hi, H - B, T) }}" text-anchor="end" dominant-baseline="middle">{{ (tick / 1000) | int }}k</text>
+    <text class="tick" x="{{ scale(tick, lo, hi, L, W - R) }}" y="{{ H - B + 18 }}" text-anchor="middle">{{ (tick / 1000) | int }}k</text>
+    {% endif %}
+    {% endfor %}
+    <line class="cap" x1="{{ L }}" x2="{{ W - R }}" y1="{{ scale(hi, lo, hi, H - B, T) }}" y2="{{ scale(hi, lo, hi, H - B, T) }}"/>
+    <text class="tick cap-label" x="{{ L + 6 }}" y="{{ scale(hi, lo, hi, H - B, T) - 7 }}" text-anchor="start">Sellout {{ hi | num }}</text>
+    <line class="diag" x1="{{ scale(lo, lo, hi, L, W - R) }}" y1="{{ scale(lo, lo, hi, H - B, T) }}" x2="{{ scale(hi, lo, hi, L, W - R) }}" y2="{{ scale(hi, lo, hi, H - B, T) }}"/>
+    <text class="axis-label" x="{{ (L + W - R) / 2 }}" y="{{ H - 8 }}" text-anchor="middle">Forecast</text>
+    <text class="axis-label" transform="translate(16 {{ (T + H - B) / 2 }}) rotate(-90)" text-anchor="middle">Actual</text>
+    {% for g in played %}
+    <a href="{{ root }}games/{{ g.slug }}.html" class="dot-link">
+      <circle class="dot-hit" cx="{{ scale(g.forecast.pred, lo, hi, L, W - R) }}" cy="{{ scale(g.actual, lo, hi, H - B, T) }}" r="14"
+        data-label="{{ g.season }} {{ g.opponent }}" data-forecast="{{ g.forecast.pred | num }}" data-actual="{{ g.actual | num }}" data-error="{{ g.error | signed }}"/>
+      <circle class="dot {{ 'dot-priced' if g.tier == 'tier2' else 'dot-schedule' }}" cx="{{ scale(g.forecast.pred, lo, hi, L, W - R) }}" cy="{{ scale(g.actual, lo, hi, H - B, T) }}" r="6">
+        <title>{{ g.season }} {{ g.opponent }}: forecast {{ g.forecast.pred | num }}, actual {{ g.actual | num }} ({{ g.error | signed }})</title>
+      </circle>
+    </a>
+    {% endfor %}
+  </svg>
+  <div class="tooltip" hidden></div>
+  </div>
+  <div class="legend" aria-hidden="true">
+    <span><i class="key key-dot"></i>Price model</span>
+    <span><i class="key key-dot-hollow"></i>Schedule-only model</span>
+    <span><i class="key key-line"></i>Perfect forecast</span>
+  </div>
+</section>
+
+<section class="results">
+  <div class="board-head">
+    <h2>Every game</h2>
+    <div class="filters" role="group" aria-label="Season">
+      <button type="button" data-season="all" aria-pressed="true">All seasons</button>
+      {% for s in data.seasons if s in (played | map(attribute="season") | list) %}
+      <button type="button" data-season="{{ s }}" aria-pressed="false">{{ s }}</button>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="table-scroll">
+  <table class="results-table" data-sortable>
+    <thead>
+      <tr>
+        <th scope="col" data-sort="text">Game</th>
+        <th scope="col" data-sort="num">Get-in</th>
+        <th scope="col" data-sort="num">Forecast</th>
+        <th scope="col">80% range</th>
+        <th scope="col" data-sort="num">Actual</th>
+        <th scope="col" data-sort="num">Miss</th>
+        <th scope="col" data-sort="text">Range</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for g in played | sort(attribute="date", reverse=true) %}
+      <tr data-season="{{ g.season }}">
+        <td data-value="{{ g.date }}"><a class="game-cell" href="{{ root }}games/{{ g.slug }}.html">{{ m.logo(g, root, "xs") }}<span><span class="game-name">{{ g.opponent }}{% if g.ap_rank %} <span class="rank">No. {{ g.ap_rank }}</span>{% endif %}</span><span class="game-date">{{ g.date_label }}</span></span></a></td>
+        <td class="num" data-value="{{ g.getin or -1 }}">{% if g.getin %}{{ g.getin | money }}{% else %}<span class="muted">none</span>{% endif %}</td>
+        <td class="num" data-value="{{ g.forecast.pred }}">{{ g.forecast.pred | num }}{% if g.tier == "tier1" %}<span class="cell-sub">schedule-only model</span>{% endif %}</td>
+        <td class="num range-cell">{{ g.forecast.lo | num }} to {{ g.forecast.hi | num }}</td>
+        <td class="num" data-value="{{ g.actual }}">{{ g.actual | num }}{% if g.sellout %}<span class="cell-sub">sellout</span>{% endif %}</td>
+        <td class="num" data-value="{{ g.error }}">{{ g.error | signed }}</td>
+        <td data-value="{{ 'a' if g.inside else 'b' }}">{{ m.inside_chip(g) }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  <p class="board-note">Miss is forecast minus actual, so a negative number means more fans came than the model expected. The 2024 rows without a price show what the schedule-only model would have said.</p>
+</section>
+{% endblock %}

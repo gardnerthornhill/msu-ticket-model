@@ -121,3 +121,39 @@ def test_save_load_round_trip(tmp_path):
 def test_load_missing_model_is_error(tmp_path):
     with pytest.raises(mdl.ModelError, match="run train"):
         mdl.load_model(tmp_path / "nope.json")
+
+
+def noisy_tier1_df():
+    df = exact_tier1_df()
+    df["attendance"] = df["attendance"] + np.arange(12) * 37  # break the exact fit so intervals have width
+    return df
+
+
+def test_loo_intervals_match_a_refit_without_the_held_out_row():
+    df = noisy_tier1_df()
+    out = mdl.loo_intervals(df, ["conf_game", "opp_elo"])
+    assert list(out.columns) == ["pred", "lo", "hi", "p_sellout"] and len(out) == 12
+    i = 3
+    m = mdl.fit(df.drop(index=i).reset_index(drop=True), ["conf_game", "opp_elo"])
+    p = mdl.predict(m, df.iloc[[i]])
+    assert out.loc[i, "pred"] == pytest.approx(p["pred"].iloc[0])
+    assert out.loc[i, "lo"] == pytest.approx(p["lo"].iloc[0])
+    assert out.loc[i, "hi"] == pytest.approx(p["hi"].iloc[0])
+    assert (out["lo"] <= out["pred"]).all() and (out["pred"] <= out["hi"]).all()
+    assert out["pred"].tolist() == pytest.approx(mdl.loo_predictions(df, ["conf_game", "opp_elo"]).tolist())
+
+
+def test_predict_sellout_probability_matches_t_tail():
+    from scipy import stats
+
+    df = noisy_tier1_df()
+    df["attendance"] = df["attendance"] + 8000  # push the top games above capacity
+    m = mdl.fit(df, ["conf_game", "opp_elo"])
+    p = mdl.predict(m, df)
+    assert p["p_sellout"].between(0, 1).all()
+    X = mdl._design(df, m["features"]).to_numpy(float)
+    point = X @ np.array([m["intercept"]] + [m["coef"][f] for f in m["features"]])
+    se = m["resid_se"] * np.sqrt(1 + np.einsum("ij,jk,ik->i", X, np.array(m["xtx_inv"]), X))
+    expected = stats.t.sf((CAPACITY - point) / se, m["df_resid"])
+    assert p["p_sellout"].tolist() == pytest.approx(expected.tolist())
+    assert (p["p_sellout"] > 0.5).any() and (p["p_sellout"] < 0.5).any()

@@ -8,6 +8,9 @@ TEAM = "Mississippi State"
 CONF = {"FCS U": "SWAC", "Mid Major": "Mid-American", "Rival A": "SEC", "Rival B": "SEC",
         "Rival C": "SEC", "Rival D": "SEC", "Rival E": "SEC", "Bowl Foe": "ACC"}
 CLASS = {"FCS U": "fcs"}
+TEAM_ID = 344
+OPP_ID = {"FCS U": 2016, "Mid Major": 2459, "Rival A": 333, "Rival B": 2, "Rival C": 99,
+          "Rival D": 145, "Rival E": 61, "Bowl Foe": 154}
 
 
 def _game(season, week, opp, start, conf, attendance, elo, completed=True, home=True, neutral=False):
@@ -17,6 +20,7 @@ def _game(season, week, opp, start, conf, attendance, elo, completed=True, home=
         "id": abs(hash((season, week, opp))) % 10**8, "season": season, "week": week, "seasonType": "regular",
         "startDate": start, "completed": completed, "neutralSite": neutral, "conferenceGame": conf,
         "attendance": attendance, "homeTeam": home_team, "awayTeam": away_team,
+        "homeId": TEAM_ID if home else OPP_ID[opp], "awayId": OPP_ID[opp] if home else TEAM_ID,
         "homeConference": "SEC" if home else CONF[opp], "awayConference": CONF[opp] if home else "SEC",
         "homeClassification": "fbs" if home else cls, "awayClassification": cls if home else "fbs",
         "homePregameElo": 1450 if home else elo, "awayPregameElo": elo if home else 1450,

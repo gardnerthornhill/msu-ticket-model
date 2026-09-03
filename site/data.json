@@ -1,0 +1,2479 @@
+{
+ "site_name": "Davis Wade Forecast",
+ "site_url": "https://gardnerthornhill.github.io/msu-ticket-model",
+ "team": "Mississippi State",
+ "venue": "Davis Wade Stadium",
+ "capacity": 60417,
+ "interval": 0.8,
+ "generated": "2026-09-03",
+ "trained": "2026-09-03",
+ "seasons": [
+  2023,
+  2024,
+  2025,
+  2026
+ ],
+ "current_season": 2026,
+ "next_game": "2026-ul-monroe",
+ "axis_min": 35000,
+ "bar_max": 11000,
+ "bar_max_current": 6000,
+ "games": [
+  {
+   "season": 2023,
+   "week": 1,
+   "date": "2023-09-02",
+   "date_label": "Sat, Sep 2, 2023",
+   "date_short": "Sat, Sep 2",
+   "kickoff": "3 p.m. CT",
+   "opponent": "SE Louisiana",
+   "slug": "2023-se-louisiana",
+   "opp_id": 2545,
+   "logo": "2545.png",
+   "attendance": 50041,
+   "actual": 50041,
+   "completed": 1,
+   "status": "played",
+   "getin": 8.0,
+   "observed": null,
+   "observed_label": null,
+   "ranked": 0,
+   "ap_rank": null,
+   "elo": 862.0,
+   "sp": -36.3,
+   "conf_game": 0,
+   "rel_log_price": -0.6352312727973843,
+   "tier": "tier2",
+   "tier_label": "Price model",
+   "forecast": {
+    "pred": 49025,
+    "lo": 44633,
+    "hi": 53416,
+    "p_sellout": 0.0025926370290919707
+   },
+   "error": -1016,
+   "inside": true,
+   "sellout": false,
+   "breakdown": {
+    "baseline": 53466.199999996854,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 0.0,
+      "display": "Unranked",
+      "mean_display": "60% of games ranked",
+      "contribution": -443.20513303214244
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 862.0,
+      "display": "862",
+      "mean_display": "1,639",
+      "contribution": -1492.89277775369
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": -36.3,
+      "display": "-36.3",
+      "mean_display": "+8.0",
+      "contribution": 1799.939925043668
+     },
+     {
+      "feature": "rel_log_price",
+      "label": "Get-in price, relative to the season",
+      "value": -0.6352312727973843,
+      "display": "$8, 53% of the season median",
+      "mean_display": "the season median",
+      "contribution": -4305.460114520384
+     }
+    ],
+    "total": 49024.5818997343,
+    "capped": false
+   },
+   "notes": [
+    "No Elo; imputed 862.0.",
+    "No SP+; imputed -36.3."
+   ]
+  },
+  {
+   "season": 2023,
+   "week": 2,
+   "date": "2023-09-09",
+   "date_label": "Sat, Sep 9, 2023",
+   "date_short": "Sat, Sep 9",
+   "kickoff": "6:30 p.m. CT",
+   "opponent": "Arizona",
+   "slug": "2023-arizona",
+   "opp_id": 12,
+   "logo": "12.png",
+   "attendance": 51648,
+   "actual": 51648,
+   "completed": 1,
+   "status": "played",
+   "getin": 12.0,
+   "observed": null,
+   "observed_label": null,
+   "ranked": 0,
+   "ap_rank": null,
+   "elo": 1416.0,
+   "sp": 14.1,
+   "conf_game": 0,
+   "rel_log_price": -0.2297661646892197,
+   "tier": "tier2",
+   "tier_label": "Price model",
+   "forecast": {
+    "pred": 49005,
+    "lo": 43377,
+    "hi": 54633,
+    "p_sellout": 0.009688060309853086
+   },
+   "error": -2643,
+   "inside": true,
+   "sellout": false,
+   "breakdown": {
+    "baseline": 53359.06666665869,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 0.0,
+      "display": "Unranked",
+      "mean_display": "60% of games ranked",
+      "contribution": -306.04640237686834
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 1416.0,
+      "display": "1,416",
+      "mean_display": "1,602",
+      "contribution": -1089.7894519589456
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": 14.1,
+      "display": "+14.1",
+      "mean_display": "+4.7",
+      "contribution": -1214.863699711772
+     },
+     {
+      "feature": "rel_log_price",
+      "label": "Get-in price, relative to the season",
+      "value": -0.2297661646892197,
+      "display": "$12, 79% of the season median",
+      "mean_display": "the season median",
+      "contribution": -1743.1244460741575
+     }
+    ],
+    "total": 49005.24266653695,
+    "capped": false
+   },
+   "notes": []
+  },
+  {
+   "season": 2023,
+   "week": 3,
+   "date": "2023-09-16",
+   "date_label": "Sat, Sep 16, 2023",
+   "date_short": "Sat, Sep 16",
+   "kickoff": "11 a.m. CT",
+   "opponent": "LSU",
+   "slug": "2023-lsu",
+   "opp_id": 99,
+   "logo": "99.png",
+   "attendance": 60084,
+   "actual": 60084,
+   "completed": 1,
+   "status": "played",
+   "getin": 31.0,
+   "observed": null,
+   "observed_label": null,
+   "ranked": 1,
+   "ap_rank": 14,
+   "elo": 1687.0,
+   "sp": 19.1,
+   "conf_game": 1,
+   "rel_log_price": 0.7193143900079262,
+   "tier": "tier2",
+   "tier_label": "Price model",
+   "forecast": {
+    "pred": 56851,
+    "lo": 52888,
+    "hi": 60417,
+    "p_sellout": 0.1225856397270752
+   },
+   "error": -3233,
+   "inside": true,
+   "sellout": false,
+   "breakdown": {
+    "baseline": 52796.66666666401,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 1.0,
+      "display": "Yes, No. 14",
+      "mean_display": "53% of games ranked",
+      "contribution": -156.08616515858617
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 1687.0,
+      "display": "1,687",
+      "mean_display": "1,584",
+      "contribution": 523.3850243638736
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": 19.1,
+      "display": "+19.1",
+      "mean_display": "+4.3",
+      "contribution": -1450.078061556594
+     },
+     {
+      "feature": "rel_log_price",
+      "label": "Get-in price, relative to the season",
+      "value": 0.7193143900079262,
+      "display": "$31, 2.1\u00d7 the season median",
+      "mean_display": "the season median",
+      "contribution": 5136.980449232131
+     }
+    ],
+    "total": 56850.86791354483,
+    "capped": false
+   },
+   "notes": []
+  },
+  {
+   "season": 2023,
+   "week": 5,
+   "date": "2023-09-30",
+   "date_label": "Sat, Sep 30, 2023",
+   "date_short": "Sat, Sep 30",
+   "kickoff": "8 p.m. CT",
+   "opponent": "Alabama",
+   "slug": "2023-alabama",
+   "opp_id": 333,
+   "logo": "333.png",
+   "attendance": 60111,
+   "actual": 60111,
+   "completed": 1,
+   "status": "played",
+   "getin": 25.0,
+   "observed": null,
+   "observed_label": null,
+   "ranked": 1,
+   "ap_rank": 12,
+   "elo": 1959.0,
+   "sp": 23.1,
+   "conf_game": 1,
+   "rel_log_price": 0.5042030103909805,
+   "tier": "tier2",
+   "tier_label": "Price model",
+   "forecast": {
+    "pred": 56114,
+    "lo": 52630,
+    "hi": 59598,
+    "p_sellout": 0.060473483492365705
+   },
+   "error": -3997,
+   "inside": false,
+   "sellout": false,
+   "breakdown": {
+    "baseline": 52794.8666666585,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 1.0,
+      "display": "Yes, No. 12",
+      "mean_display": "53% of games ranked",
+      "contribution": 334.1821355700095
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 1959.0,
+      "display": "1,959",
+      "mean_display": "1,566",
+      "contribution": 321.94949287931036
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": 23.1,
+      "display": "+23.1",
+      "mean_display": "+4.1",
+      "contribution": -674.8988358656555
+     },
+     {
+      "feature": "rel_log_price",
+      "label": "Get-in price, relative to the season",
+      "value": 0.5042030103909805,
+      "display": "$25, 1.7\u00d7 the season median",
+      "mean_display": "the season median",
+      "contribution": 3337.4682261304697
+     }
+    ],
+    "total": 56113.56768537263,
+    "capped": false
+   },
+   "notes": []
+  },
+  {
+   "season": 2023,
+   "week": 6,
+   "date": "2023-10-07",
+   "date_label": "Sat, Oct 7, 2023",
+   "date_short": "Sat, Oct 7",
+   "kickoff": "11 a.m. CT",
+   "opponent": "Western Michigan",
+   "slug": "2023-western-michigan",
+   "opp_id": 2711,
+   "logo": "2711.png",
+   "attendance": 47158,
+   "actual": 47158,
+   "completed": 1,
+   "status": "played",
+   "getin": 6.0,
+   "observed": null,
+   "observed_label": null,
+   "ranked": 0,
+   "ap_rank": null,
+   "elo": 1249.0,
+   "sp": -15.9,
+   "conf_game": 0,
+   "rel_log_price": -0.9229133452491652,
+   "tier": "tier2",
+   "tier_label": "Price model",
+   "forecast": {
+    "pred": 47302,
+    "lo": 43315,
+    "hi": 51288,
+    "p_sellout": 0.0005587943976769345
+   },
+   "error": 144,
+   "inside": true,
+   "sellout": false,
+   "breakdown": {
+    "baseline": 53658.39999999886,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 0.0,
+      "display": "Unranked",
+      "mean_display": "60% of games ranked",
+      "contribution": -423.66572569483685
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 1249.0,
+      "display": "1,249",
+      "mean_display": "1,613",
+      "contribution": -710.7108766256636
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": -15.9,
+      "display": "-15.9",
+      "mean_display": "+6.7",
+      "contribution": 1093.805905949428
+     },
+     {
+      "feature": "rel_log_price",
+      "label": "Get-in price, relative to the season",
+      "value": -0.9229133452491652,
+      "display": "$6, 40% of the season median",
+      "mean_display": "the season median",
+      "contribution": -6316.326617255489
+     }
+    ],
+    "total": 47301.502686372296,
+    "capped": false
+   },
+   "notes": []
+  },
+  {
+   "season": 2023,
+   "week": 10,
+   "date": "2023-11-04",
+   "date_label": "Sat, Nov 4, 2023",
+   "date_short": "Sat, Nov 4",
+   "kickoff": "6:30 p.m. CT",
+   "opponent": "Kentucky",
+   "slug": "2023-kentucky",
+   "opp_id": 96,
+   "logo": "96.png",
+   "attendance": 52329,
+   "actual": 52329,
+   "completed": 1,
+   "status": "played",
+   "getin": 10.0,
+   "observed": null,
+   "observed_label": null,
+   "ranked": 0,
+   "ap_rank": null,
+   "elo": 1600.0,
+   "sp": 10.5,
+   "conf_game": 1,
+   "rel_log_price": -0.4120877214831742,
+   "tier": "tier2",
+   "tier_label": "Price model",
+   "forecast": {
+    "pred": 49121,
+    "lo": 45134,
+    "hi": 53108,
+    "p_sellout": 0.0015103755413002904
+   },
+   "error": -3208,
+   "inside": true,
+   "sellout": false,
+   "breakdown": {
+    "baseline": 53313.666666659876,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 0.0,
+      "display": "Unranked",
+      "mean_display": "60% of games ranked",
+      "contribution": -1022.1567406060552
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 1600.0,
+      "display": "1,600",
+      "mean_display": "1,590",
+      "contribution": 17.698024609944355
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": 10.5,
+      "display": "+10.5",
+      "mean_display": "+4.9",
+      "contribution": -347.7201370363033
+     },
+     {
+      "feature": "rel_log_price",
+      "label": "Get-in price, relative to the season",
+      "value": -0.4120877214831742,
+      "display": "$10, 66% of the season median",
+      "mean_display": "the season median",
+      "contribution": -2840.564465380682
+     }
+    ],
+    "total": 49120.92334824678,
+    "capped": false
+   },
+   "notes": []
+  },
+  {
+   "season": 2023,
+   "week": 12,
+   "date": "2023-11-18",
+   "date_label": "Sat, Nov 18, 2023",
+   "date_short": "Sat, Nov 18",
+   "kickoff": "11 a.m. CT",
+   "opponent": "Southern Miss",
+   "slug": "2023-southern-miss",
+   "opp_id": 2572,
+   "logo": "2572.png",
+   "attendance": null,
+   "actual": null,
+   "completed": 1,
+   "status": "unreported",
+   "getin": 19.0,
+   "observed": null,
+   "observed_label": null,
+   "ranked": 0,
+   "ap_rank": null,
+   "elo": 1184.0,
+   "sp": -14.4,
+   "conf_game": 0,
+   "rel_log_price": 0.2297661646892201,
+   "tier": "tier2",
+   "tier_label": "Price model",
+   "forecast": {
+    "pred": 54461,
+    "lo": 50290,
+    "hi": 58632,
+    "p_sellout": 0.03877122055415892
+   },
+   "error": null,
+   "inside": null,
+   "sellout": false,
+   "breakdown": {
+    "baseline": 53252.12499999142,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 0.0,
+      "display": "Unranked",
+      "mean_display": "56% of games ranked",
+      "contribution": -401.9800480581282
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 1184.0,
+      "display": "1,184",
+      "mean_display": "1,590",
+      "contribution": -791.0162271759066
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": -14.4,
+      "display": "-14.4",
+      "mean_display": "+5.2",
+      "contribution": 950.0104782620142
+     },
+     {
+      "feature": "rel_log_price",
+      "label": "Get-in price, relative to the season",
+      "value": 0.2297661646892201,
+      "display": "$19, 1.3\u00d7 the season median",
+      "mean_display": "the season median",
+      "contribution": 1452.026517656586
+     }
+    ],
+    "total": 54461.165720675985,
+    "capped": false
+   },
+   "notes": []
+  },
+  {
+   "season": 2023,
+   "week": 13,
+   "date": "2023-11-23",
+   "date_label": "Thu, Nov 23, 2023",
+   "date_short": "Thu, Nov 23",
+   "kickoff": "6:30 p.m. CT",
+   "opponent": "Ole Miss",
+   "slug": "2023-ole-miss",
+   "opp_id": 145,
+   "logo": "145.png",
+   "attendance": 60412,
+   "actual": 60412,
+   "completed": 1,
+   "status": "played",
+   "getin": 63.0,
+   "observed": null,
+   "observed_label": null,
+   "ranked": 1,
+   "ap_rank": 12,
+   "elo": 1676.0,
+   "sp": 18.4,
+   "conf_game": 1,
+   "rel_log_price": 1.4284619119143125,
+   "tier": "tier2",
+   "tier_label": "Price model",
+   "forecast": {
+    "pred": 60417,
+    "lo": 58901,
+    "hi": 60417,
+    "p_sellout": 0.8061182460920733
+   },
+   "error": 5,
+   "inside": true,
+   "sellout": false,
+   "breakdown": {
+    "baseline": 52774.799999990675,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 1.0,
+      "display": "Yes, No. 12",
+      "mean_display": "53% of games ranked",
+      "contribution": 213.59569402133152
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 1676.0,
+      "display": "1,676",
+      "mean_display": "1,584",
+      "contribution": 164.1869692119684
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": 18.4,
+      "display": "+18.4",
+      "mean_display": "+4.4",
+      "contribution": -770.0360269489832
+     },
+     {
+      "feature": "rel_log_price",
+      "label": "Get-in price, relative to the season",
+      "value": 1.4284619119143125,
+      "display": "$63, 4.2\u00d7 the season median",
+      "mean_display": "the season median",
+      "contribution": 10951.362197699325
+     }
+    ],
+    "total": 63333.90883397432,
+    "capped": true
+   },
+   "notes": []
+  },
+  {
+   "season": 2024,
+   "week": 1,
+   "date": "2024-08-31",
+   "date_label": "Sat, Aug 31, 2024",
+   "date_short": "Sat, Aug 31",
+   "kickoff": "5 p.m. CT",
+   "opponent": "Eastern Kentucky",
+   "slug": "2024-eastern-kentucky",
+   "opp_id": 2198,
+   "logo": "2198.png",
+   "attendance": 48724,
+   "actual": 48724,
+   "completed": 1,
+   "status": "played",
+   "getin": null,
+   "observed": null,
+   "observed_label": null,
+   "ranked": 0,
+   "ap_rank": null,
+   "elo": 660.0,
+   "sp": -43.0,
+   "conf_game": 0,
+   "rel_log_price": null,
+   "tier": "tier1",
+   "tier_label": "Schedule-only model",
+   "forecast": {
+    "pred": 49194,
+    "lo": 44195,
+    "hi": 54193,
+    "p_sellout": 0.004230878284093566
+   },
+   "error": 470,
+   "inside": true,
+   "sellout": false,
+   "breakdown": {
+    "baseline": 52351.050000000556,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 0.0,
+      "display": "Unranked",
+      "mean_display": "45% of games ranked",
+      "contribution": -3868.8434335811544
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 660.0,
+      "display": "660",
+      "mean_display": "1,548",
+      "contribution": 10721.4281693259
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": -43.0,
+      "display": "-43.0",
+      "mean_display": "+4.2",
+      "contribution": -10009.608797573026
+     }
+    ],
+    "total": 49194.02593817227,
+    "capped": false
+   },
+   "notes": [
+    "No Elo; imputed 660.0.",
+    "No SP+; imputed -43.0."
+   ]
+  },
+  {
+   "season": 2024,
+   "week": 3,
+   "date": "2024-09-14",
+   "date_label": "Sat, Sep 14, 2024",
+   "date_short": "Sat, Sep 14",
+   "kickoff": "6:30 p.m. CT",
+   "opponent": "Toledo",
+   "slug": "2024-toledo",
+   "opp_id": 2649,
+   "logo": "2649.png",
+   "attendance": 47412,
+   "actual": 47412,
+   "completed": 1,
+   "status": "played",
+   "getin": null,
+   "observed": null,
+   "observed_label": null,
+   "ranked": 0,
+   "ap_rank": null,
+   "elo": 1524.0,
+   "sp": -2.5,
+   "conf_game": 0,
+   "rel_log_price": null,
+   "tier": "tier1",
+   "tier_label": "Schedule-only model",
+   "forecast": {
+    "pred": 47348,
+    "lo": 42729,
+    "hi": 51967,
+    "p_sellout": 0.0008160335086027257
+   },
+   "error": -64,
+   "inside": true,
+   "sellout": false,
+   "breakdown": {
+    "baseline": 52416.65000000097,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 0.0,
+      "display": "Unranked",
+      "mean_display": "45% of games ranked",
+      "contribution": -3848.0418341014138
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 1524.0,
+      "display": "1,524",
+      "mean_display": "1,505",
+      "contribution": -224.90557513144478
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": -2.5,
+      "display": "-2.5",
+      "mean_display": "+2.2",
+      "contribution": -996.0216573810055
+     }
+    ],
+    "total": 47347.680933387106,
+    "capped": false
+   },
+   "notes": []
+  },
+  {
+   "season": 2024,
+   "week": 4,
+   "date": "2024-09-21",
+   "date_label": "Sat, Sep 21, 2024",
+   "date_short": "Sat, Sep 21",
+   "kickoff": "11 a.m. CT",
+   "opponent": "Florida",
+   "slug": "2024-florida",
+   "opp_id": 57,
+   "logo": "57.png",
+   "attendance": 49655,
+   "actual": 49655,
+   "completed": 1,
+   "status": "played",
+   "getin": null,
+   "observed": null,
+   "observed_label": null,
+   "ranked": 0,
+   "ap_rank": null,
+   "elo": 1485.0,
+   "sp": 13.8,
+   "conf_game": 1,
+   "rel_log_price": null,
+   "tier": "tier1",
+   "tier_label": "Schedule-only model",
+   "forecast": {
+    "pred": 51736,
+    "lo": 47038,
+    "hi": 56433,
+    "p_sellout": 0.012558336013752735
+   },
+   "error": 2081,
+   "inside": true,
+   "sellout": false,
+   "breakdown": {
+    "baseline": 52304.499999997104,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 0.0,
+      "display": "Unranked",
+      "mean_display": "45% of games ranked",
+      "contribution": -3730.641478065764
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 1485.0,
+      "display": "1,485",
+      "mean_display": "1,507",
+      "contribution": 281.0659014518688
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": 13.8,
+      "display": "+13.8",
+      "mean_display": "+1.4",
+      "contribution": 2880.7335560492675
+     }
+    ],
+    "total": 51735.65797943248,
+    "capped": false
+   },
+   "notes": []
+  },
+  {
+   "season": 2024,
+   "week": 8,
+   "date": "2024-10-19",
+   "date_label": "Sat, Oct 19, 2024",
+   "date_short": "Sat, Oct 19",
+   "kickoff": "3:15 p.m. CT",
+   "opponent": "Texas A&M",
+   "slug": "2024-texas-a-m",
+   "opp_id": 245,
+   "logo": "245.png",
+   "attendance": 50127,
+   "actual": 50127,
+   "completed": 1,
+   "status": "played",
+   "getin": 10.0,
+   "observed": null,
+   "observed_label": null,
+   "ranked": 1,
+   "ap_rank": 14,
+   "elo": 1781.0,
+   "sp": 17.0,
+   "conf_game": 1,
+   "rel_log_price": 0.0526802578289133,
+   "tier": "tier2",
+   "tier_label": "Price model",
+   "forecast": {
+    "pred": 54962,
+    "lo": 51285,
+    "hi": 58639,
+    "p_sellout": 0.03458264185304705
+   },
+   "error": 4835,
+   "inside": false,
+   "sellout": false,
+   "breakdown": {
+    "baseline": 53460.46666666199,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 1.0,
+      "display": "Yes, No. 14",
+      "mean_display": "53% of games ranked",
+      "contribution": 1360.1777972697164
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 1781.0,
+      "display": "1,781",
+      "mean_display": "1,577",
+      "contribution": -460.2223604323438
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": 17.0,
+      "display": "+17.0",
+      "mean_display": "+4.5",
+      "contribution": 332.5159434481938
+     },
+     {
+      "feature": "rel_log_price",
+      "label": "Get-in price, relative to the season",
+      "value": 0.0526802578289133,
+      "display": "$10, 1.1\u00d7 the season median",
+      "mean_display": "the season median",
+      "contribution": 269.0603067208494
+     }
+    ],
+    "total": 54961.9983536684,
+    "capped": false
+   },
+   "notes": []
+  },
+  {
+   "season": 2024,
+   "week": 9,
+   "date": "2024-10-26",
+   "date_label": "Sat, Oct 26, 2024",
+   "date_short": "Sat, Oct 26",
+   "kickoff": "11:45 a.m. CT",
+   "opponent": "Arkansas",
+   "slug": "2024-arkansas",
+   "opp_id": 8,
+   "logo": "8.png",
+   "attendance": 49303,
+   "actual": 49303,
+   "completed": 1,
+   "status": "played",
+   "getin": null,
+   "observed": null,
+   "observed_label": null,
+   "ranked": 0,
+   "ap_rank": null,
+   "elo": 1490.0,
+   "sp": 11.0,
+   "conf_game": 1,
+   "rel_log_price": null,
+   "tier": "tier1",
+   "tier_label": "Schedule-only model",
+   "forecast": {
+    "pred": 50897,
+    "lo": 46323,
+    "hi": 55472,
+    "p_sellout": 0.006664380642029821
+   },
+   "error": 1594,
+   "inside": true,
+   "sellout": false,
+   "breakdown": {
+    "baseline": 52322.0999999998,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 0.0,
+      "display": "Unranked",
+      "mean_display": "45% of games ranked",
+      "contribution": -3746.3145335334416
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 1490.0,
+      "display": "1,490",
+      "mean_display": "1,507",
+      "contribution": 206.9723885849671
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": 11.0,
+      "display": "+11.0",
+      "mean_display": "+1.5",
+      "contribution": 2114.416673694244
+     }
+    ],
+    "total": 50897.17452874557,
+    "capped": false
+   },
+   "notes": []
+  },
+  {
+   "season": 2024,
+   "week": 10,
+   "date": "2024-11-02",
+   "date_label": "Sat, Nov 2, 2024",
+   "date_short": "Sat, Nov 2",
+   "kickoff": "3:15 p.m. CT",
+   "opponent": "Massachusetts",
+   "slug": "2024-massachusetts",
+   "opp_id": 113,
+   "logo": "113.png",
+   "attendance": 48617,
+   "actual": 48617,
+   "completed": 1,
+   "status": "played",
+   "getin": null,
+   "observed": null,
+   "observed_label": null,
+   "ranked": 0,
+   "ap_rank": null,
+   "elo": 1025.0,
+   "sp": -21.9,
+   "conf_game": 0,
+   "rel_log_price": null,
+   "tier": "tier1",
+   "tier_label": "Schedule-only model",
+   "forecast": {
+    "pred": 49258,
+    "lo": 44803,
+    "hi": 53714,
+    "p_sellout": 0.0020418774854606535
+   },
+   "error": 641,
+   "inside": true,
+   "sellout": false,
+   "breakdown": {
+    "baseline": 52356.399999998495,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 0.0,
+      "display": "Unranked",
+      "mean_display": "45% of games ranked",
+      "contribution": -3842.443856279932
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 1025.0,
+      "display": "1,025",
+      "mean_display": "1,530",
+      "contribution": 6068.49833574642
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": -21.9,
+      "display": "-21.9",
+      "mean_display": "+3.2",
+      "contribution": -5324.025502333766
+     }
+    ],
+    "total": 49258.42897713122,
+    "capped": false
+   },
+   "notes": []
+  },
+  {
+   "season": 2024,
+   "week": 13,
+   "date": "2024-11-23",
+   "date_label": "Sat, Nov 23, 2024",
+   "date_short": "Sat, Nov 23",
+   "kickoff": "3:15 p.m. CT",
+   "opponent": "Missouri",
+   "slug": "2024-missouri",
+   "opp_id": 142,
+   "logo": "142.png",
+   "attendance": 47824,
+   "actual": 47824,
+   "completed": 1,
+   "status": "played",
+   "getin": 9.0,
+   "observed": null,
+   "observed_label": null,
+   "ranked": 0,
+   "ap_rank": null,
+   "elo": 1684.0,
+   "sp": 14.0,
+   "conf_game": 1,
+   "rel_log_price": -0.0526802578289129,
+   "tier": "tier2",
+   "tier_label": "Price model",
+   "forecast": {
+    "pred": 55121,
+    "lo": 51698,
+    "hi": 58543,
+    "p_sellout": 0.029833761116871225
+   },
+   "error": 7297,
+   "inside": false,
+   "sellout": false,
+   "breakdown": {
+    "baseline": 53613.99999999261,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 0.0,
+      "display": "Unranked",
+      "mean_display": "60% of games ranked",
+      "contribution": 2155.3698072368193
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 1684.0,
+      "display": "1,684",
+      "mean_display": "1,584",
+      "contribution": 732.3539124768084
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": 14.0,
+      "display": "+14.0",
+      "mean_display": "+4.7",
+      "contribution": -910.894873759389
+     },
+     {
+      "feature": "rel_log_price",
+      "label": "Get-in price, relative to the season",
+      "value": -0.0526802578289129,
+      "display": "$9, 95% of the season median",
+      "mean_display": "the season median",
+      "contribution": -470.27126280818646
+     }
+    ],
+    "total": 55120.55758313866,
+    "capped": false
+   },
+   "notes": []
+  },
+  {
+   "season": 2025,
+   "week": 2,
+   "date": "2025-09-06",
+   "date_label": "Sat, Sep 6, 2025",
+   "date_short": "Sat, Sep 6",
+   "kickoff": "6:30 p.m. CT",
+   "opponent": "Arizona State",
+   "slug": "2025-arizona-state",
+   "opp_id": 9,
+   "logo": "9.png",
+   "attendance": 50808,
+   "actual": 50808,
+   "completed": 1,
+   "status": "played",
+   "getin": 32.0,
+   "observed": null,
+   "observed_label": null,
+   "ranked": 1,
+   "ap_rank": 12,
+   "elo": 1700.0,
+   "sp": 3.9,
+   "conf_game": 0,
+   "rel_log_price": -0.3409265869705931,
+   "tier": "tier2",
+   "tier_label": "Price model",
+   "forecast": {
+    "pred": 52009,
+    "lo": 47677,
+    "hi": 56341,
+    "p_sellout": 0.011885129107887237
+   },
+   "error": 1201,
+   "inside": true,
+   "sellout": false,
+   "breakdown": {
+    "baseline": 53415.066666657534,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 1.0,
+      "display": "Yes, No. 12",
+      "mean_display": "53% of games ranked",
+      "contribution": 594.3322662665242
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 1700.0,
+      "display": "1,700",
+      "mean_display": "1,583",
+      "contribution": 174.2660245861907
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": 3.9,
+      "display": "+3.9",
+      "mean_display": "+5.3",
+      "contribution": 60.67997983695047
+     },
+     {
+      "feature": "rel_log_price",
+      "label": "Get-in price, relative to the season",
+      "value": -0.3409265869705931,
+      "display": "$32, 71% of the season median",
+      "mean_display": "the season median",
+      "contribution": -2235.292574224901
+     }
+    ],
+    "total": 52009.0523631223,
+    "capped": false
+   },
+   "notes": []
+  },
+  {
+   "season": 2025,
+   "week": 3,
+   "date": "2025-09-13",
+   "date_label": "Sat, Sep 13, 2025",
+   "date_short": "Sat, Sep 13",
+   "kickoff": "5 p.m. CT",
+   "opponent": "Alcorn State",
+   "slug": "2025-alcorn-state",
+   "opp_id": 2016,
+   "logo": "2016.png",
+   "attendance": 49158,
+   "actual": 49158,
+   "completed": 1,
+   "status": "played",
+   "getin": 26.0,
+   "observed": null,
+   "observed_label": null,
+   "ranked": 0,
+   "ap_rank": null,
+   "elo": 618.0,
+   "sp": -46.6,
+   "conf_game": 0,
+   "rel_log_price": -0.5485659517488375,
+   "tier": "tier2",
+   "tier_label": "Price model",
+   "forecast": {
+    "pred": 50863,
+    "lo": 45519,
+    "hi": 56207,
+    "p_sellout": 0.01703856772651262
+   },
+   "error": 1705,
+   "inside": true,
+   "sellout": false,
+   "breakdown": {
+    "baseline": 53525.06666666433,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 0.0,
+      "display": "Unranked",
+      "mean_display": "60% of games ranked",
+      "contribution": -562.1884293565112
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 618.0,
+      "display": "618",
+      "mean_display": "1,655",
+      "contribution": -1284.571170354035
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": -46.6,
+      "display": "-46.6",
+      "mean_display": "+8.7",
+      "contribution": 3018.5341967696586
+     },
+     {
+      "feature": "rel_log_price",
+      "label": "Get-in price, relative to the season",
+      "value": -0.5485659517488375,
+      "display": "$26, 58% of the season median",
+      "mean_display": "the season median",
+      "contribution": -3833.787413120297
+     }
+    ],
+    "total": 50863.053850603144,
+    "capped": false
+   },
+   "notes": [
+    "No Elo; imputed 618.0.",
+    "No SP+; imputed -46.6."
+   ]
+  },
+  {
+   "season": 2025,
+   "week": 4,
+   "date": "2025-09-20",
+   "date_label": "Sat, Sep 20, 2025",
+   "date_short": "Sat, Sep 20",
+   "kickoff": "3:15 p.m. CT",
+   "opponent": "Northern Illinois",
+   "slug": "2025-northern-illinois",
+   "opp_id": 2459,
+   "logo": "2459.png",
+   "attendance": 45803,
+   "actual": 45803,
+   "completed": 1,
+   "status": "played",
+   "getin": 11.0,
+   "observed": null,
+   "observed_label": null,
+   "ranked": 0,
+   "ap_rank": null,
+   "elo": 1453.0,
+   "sp": -16.7,
+   "conf_game": 0,
+   "rel_log_price": -1.408767216971949,
+   "tier": "tier2",
+   "tier_label": "Price model",
+   "forecast": {
+    "pred": 43596,
+    "lo": 38769,
+    "hi": 48424,
+    "p_sellout": 0.0003721101209564767
+   },
+   "error": -2207,
+   "inside": true,
+   "sellout": false,
+   "breakdown": {
+    "baseline": 53748.73333333021,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 0.0,
+      "display": "Unranked",
+      "mean_display": "60% of games ranked",
+      "contribution": -728.296236776153
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 1453.0,
+      "display": "1,453",
+      "mean_display": "1,599",
+      "contribution": 44.10812237256993
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": -16.7,
+      "display": "-16.7",
+      "mean_display": "+6.7",
+      "contribution": 323.1122939660841
+     },
+     {
+      "feature": "rel_log_price",
+      "label": "Get-in price, relative to the season",
+      "value": -1.408767216971949,
+      "display": "$11, 24% of the season median",
+      "mean_display": "the season median",
+      "contribution": -9791.249230200114
+     }
+    ],
+    "total": 43596.408282692595,
+    "capped": false
+   },
+   "notes": []
+  },
+  {
+   "season": 2025,
+   "week": 5,
+   "date": "2025-09-27",
+   "date_label": "Sat, Sep 27, 2025",
+   "date_short": "Sat, Sep 27",
+   "kickoff": "3:15 p.m. CT",
+   "opponent": "Tennessee",
+   "slug": "2025-tennessee",
+   "opp_id": 2633,
+   "logo": "2633.png",
+   "attendance": 60417,
+   "actual": 60417,
+   "completed": 1,
+   "status": "played",
+   "getin": 95.0,
+   "observed": null,
+   "observed_label": null,
+   "ranked": 1,
+   "ap_rank": 15,
+   "elo": 1838.0,
+   "sp": 15.0,
+   "conf_game": 1,
+   "rel_log_price": 0.7472144018302211,
+   "tier": "tier2",
+   "tier_label": "Price model",
+   "forecast": {
+    "pred": 57809,
+    "lo": 53897,
+    "hi": 60417,
+    "p_sellout": 0.19087906736627236
+   },
+   "error": -2608,
+   "inside": true,
+   "sellout": true,
+   "breakdown": {
+    "baseline": 52774.466666668544,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 1.0,
+      "display": "Yes, No. 15",
+      "mean_display": "53% of games ranked",
+      "contribution": 491.56963172821537
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 1838.0,
+      "display": "1,838",
+      "mean_display": "1,574",
+      "contribution": 43.455444358429204
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": 15.0,
+      "display": "+15.0",
+      "mean_display": "+4.6",
+      "contribution": -150.49914705209665
+     },
+     {
+      "feature": "rel_log_price",
+      "label": "Get-in price, relative to the season",
+      "value": 0.7472144018302211,
+      "display": "$95, 2.1\u00d7 the season median",
+      "mean_display": "the season median",
+      "contribution": 4649.814283850585
+     }
+    ],
+    "total": 57808.806879553675,
+    "capped": false
+   },
+   "notes": []
+  },
+  {
+   "season": 2025,
+   "week": 9,
+   "date": "2025-10-25",
+   "date_label": "Sat, Oct 25, 2025",
+   "date_short": "Sat, Oct 25",
+   "kickoff": "3:15 p.m. CT",
+   "opponent": "Texas",
+   "slug": "2025-texas",
+   "opp_id": 251,
+   "logo": "251.png",
+   "attendance": 52680,
+   "actual": 52680,
+   "completed": 1,
+   "status": "played",
+   "getin": 48.0,
+   "observed": null,
+   "observed_label": null,
+   "ranked": 1,
+   "ap_rank": 22,
+   "elo": 1944.0,
+   "sp": 16.2,
+   "conf_game": 1,
+   "rel_log_price": 0.0645385211375715,
+   "tier": "tier2",
+   "tier_label": "Price model",
+   "forecast": {
+    "pred": 54441,
+    "lo": 50494,
+    "hi": 58389,
+    "p_sellout": 0.032243443481678395
+   },
+   "error": 1761,
+   "inside": true,
+   "sellout": false,
+   "breakdown": {
+    "baseline": 53290.266666664,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 1.0,
+      "display": "Yes, No. 22",
+      "mean_display": "53% of games ranked",
+      "contribution": 401.73173010206256
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 1944.0,
+      "display": "1,944",
+      "mean_display": "1,567",
+      "contribution": 1031.359716628379
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": 16.2,
+      "display": "+16.2",
+      "mean_display": "+4.5",
+      "contribution": -697.3907110710197
+     },
+     {
+      "feature": "rel_log_price",
+      "label": "Get-in price, relative to the season",
+      "value": 0.0645385211375715,
+      "display": "$48, 1.1\u00d7 the season median",
+      "mean_display": "the season median",
+      "contribution": 415.51115932462505
+     }
+    ],
+    "total": 54441.478561648044,
+    "capped": false
+   },
+   "notes": []
+  },
+  {
+   "season": 2025,
+   "week": 11,
+   "date": "2025-11-08",
+   "date_label": "Sat, Nov 8, 2025",
+   "date_short": "Sat, Nov 8",
+   "kickoff": "11 a.m. CT",
+   "opponent": "Georgia",
+   "slug": "2025-georgia",
+   "opp_id": 61,
+   "logo": "61.png",
+   "attendance": 53017,
+   "actual": 53017,
+   "completed": 1,
+   "status": "played",
+   "getin": 45.0,
+   "observed": null,
+   "observed_label": null,
+   "ranked": 1,
+   "ap_rank": 5,
+   "elo": 2017.0,
+   "sp": 24.1,
+   "conf_game": 1,
+   "rel_log_price": 0.0,
+   "tier": "tier2",
+   "tier_label": "Price model",
+   "forecast": {
+    "pred": 53583,
+    "lo": 49505,
+    "hi": 57660,
+    "p_sellout": 0.022133575694098982
+   },
+   "error": 566,
+   "inside": true,
+   "sellout": false,
+   "breakdown": {
+    "baseline": 53267.79999999402,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 1.0,
+      "display": "Yes, No. 5",
+      "mean_display": "53% of games ranked",
+      "contribution": 387.02538987089576
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 2017.0,
+      "display": "2,017",
+      "mean_display": "1,562",
+      "contribution": 871.9561463764117
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": 24.1,
+      "display": "+24.1",
+      "mean_display": "+4.0",
+      "contribution": -923.2628510657864
+     },
+     {
+      "feature": "rel_log_price",
+      "label": "Get-in price, relative to the season",
+      "value": 0.0,
+      "display": "$45, at the season median",
+      "mean_display": "the season median",
+      "contribution": -20.67392540856238
+     }
+    ],
+    "total": 53582.84475976698,
+    "capped": false
+   },
+   "notes": []
+  },
+  {
+   "season": 2025,
+   "week": 14,
+   "date": "2025-11-28",
+   "date_label": "Fri, Nov 28, 2025",
+   "date_short": "Fri, Nov 28",
+   "kickoff": "11 a.m. CT",
+   "opponent": "Ole Miss",
+   "slug": "2025-ole-miss",
+   "opp_id": 145,
+   "logo": "145.png",
+   "attendance": 60417,
+   "actual": 60417,
+   "completed": 1,
+   "status": "played",
+   "getin": 133.0,
+   "observed": null,
+   "observed_label": null,
+   "ranked": 1,
+   "ap_rank": 6,
+   "elo": 1959.0,
+   "sp": 24.0,
+   "conf_game": 1,
+   "rel_log_price": 1.083686638451434,
+   "tier": "tier2",
+   "tier_label": "Price model",
+   "forecast": {
+    "pred": 60241,
+    "lo": 55834,
+    "hi": 60417,
+    "p_sellout": 0.47869365978491085
+   },
+   "error": -176,
+   "inside": true,
+   "sellout": true,
+   "breakdown": {
+    "baseline": 52774.46666666312,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 1.0,
+      "display": "Yes, No. 6",
+      "mean_display": "53% of games ranked",
+      "contribution": 359.1491612127977
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 1959.0,
+      "display": "1,959",
+      "mean_display": "1,566",
+      "contribution": 702.7151171844897
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": 24.0,
+      "display": "+24.0",
+      "mean_display": "+4.0",
+      "contribution": -913.5053679120123
+     },
+     {
+      "feature": "rel_log_price",
+      "label": "Get-in price, relative to the season",
+      "value": 1.083686638451434,
+      "display": "$133, 3\u00d7 the season median",
+      "mean_display": "the season median",
+      "contribution": 7318.224481927472
+     }
+    ],
+    "total": 60241.05005907586,
+    "capped": false
+   },
+   "notes": []
+  },
+  {
+   "season": 2026,
+   "week": 1,
+   "date": "2026-09-05",
+   "date_label": "Sat, Sep 5, 2026",
+   "date_short": "Sat, Sep 5",
+   "kickoff": "6:30 p.m. CT",
+   "opponent": "UL Monroe",
+   "slug": "2026-ul-monroe",
+   "opp_id": 2433,
+   "logo": "2433.png",
+   "attendance": null,
+   "actual": null,
+   "completed": 0,
+   "status": "upcoming",
+   "getin": 32.0,
+   "observed": "2026-09-03",
+   "observed_label": "Thu, Sep 3",
+   "ranked": 0,
+   "ap_rank": null,
+   "elo": 1177.0,
+   "sp": -28.9,
+   "conf_game": 0,
+   "rel_log_price": -0.3629054936893685,
+   "tier": "tier2",
+   "tier_label": "Price model",
+   "forecast": {
+    "pred": 51353,
+    "lo": 46838,
+    "hi": 55867,
+    "p_sellout": 0.00965995768380637
+   },
+   "error": null,
+   "inside": null,
+   "sellout": false,
+   "breakdown": {
+    "baseline": 53252.12499999142,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 0.0,
+      "display": "Unranked",
+      "mean_display": "56% of games ranked",
+      "contribution": -401.9800480581282
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 1177.0,
+      "display": "1,177",
+      "mean_display": "1,590",
+      "contribution": -804.6481424619047
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": -28.9,
+      "display": "-28.9",
+      "mean_display": "+5.2",
+      "contribution": 1651.2590654614644
+     },
+     {
+      "feature": "rel_log_price",
+      "label": "Get-in price, relative to the season",
+      "value": -0.3629054936893685,
+      "display": "$32, 70% of the season median",
+      "mean_display": "the season median",
+      "contribution": -2344.1762171929995
+     }
+    ],
+    "total": 51352.57965773985,
+    "capped": false
+   },
+   "notes": []
+  },
+  {
+   "season": 2026,
+   "week": 4,
+   "date": "2026-09-26",
+   "date_label": "Sat, Sep 26, 2026",
+   "date_short": "Sat, Sep 26",
+   "kickoff": "Kickoff to be announced",
+   "opponent": "Missouri",
+   "slug": "2026-missouri",
+   "opp_id": 142,
+   "logo": "142.png",
+   "attendance": null,
+   "actual": null,
+   "completed": 0,
+   "status": "upcoming",
+   "getin": 46.0,
+   "observed": "2026-09-03",
+   "observed_label": "Thu, Sep 3",
+   "ranked": 1,
+   "ap_rank": 25,
+   "elo": 1750.0,
+   "sp": 15.4,
+   "conf_game": 1,
+   "rel_log_price": 0.0,
+   "tier": "tier2",
+   "tier_label": "Price model",
+   "forecast": {
+    "pred": 53365,
+    "lo": 49442,
+    "hi": 57288,
+    "p_sellout": 0.016093989224330838
+   },
+   "error": null,
+   "inside": null,
+   "sellout": false,
+   "breakdown": {
+    "baseline": 53252.12499999142,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 1.0,
+      "display": "Yes, No. 25",
+      "mean_display": "56% of games ranked",
+      "contribution": 312.65114848965527
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 1750.0,
+      "display": "1,750",
+      "mean_display": "1,590",
+      "contribution": 311.2214945205098
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": 15.4,
+      "display": "+15.4",
+      "mean_display": "+5.2",
+      "contribution": -491.1762733616841
+     },
+     {
+      "feature": "rel_log_price",
+      "label": "Get-in price, relative to the season",
+      "value": 0.0,
+      "display": "$46, at the season median",
+      "mean_display": "the season median",
+      "contribution": -19.680337966238778
+     }
+    ],
+    "total": 53365.141031673666,
+    "capped": false
+   },
+   "notes": [
+    "No 2026 Elo yet; using 2025 final Elo 1750."
+   ]
+  },
+  {
+   "season": 2026,
+   "week": 5,
+   "date": "2026-10-03",
+   "date_label": "Sat, Oct 3, 2026",
+   "date_short": "Sat, Oct 3",
+   "kickoff": "Kickoff to be announced",
+   "opponent": "Alabama",
+   "slug": "2026-alabama",
+   "opp_id": 333,
+   "logo": "333.png",
+   "attendance": null,
+   "actual": null,
+   "completed": 0,
+   "status": "upcoming",
+   "getin": 93.0,
+   "observed": "2026-09-03",
+   "observed_label": "Thu, Sep 3",
+   "ranked": 1,
+   "ap_rank": 13,
+   "elo": 1857.0,
+   "sp": 17.6,
+   "conf_game": 1,
+   "rel_log_price": 0.7039580966641612,
+   "tier": "tier2",
+   "tier_label": "Price model",
+   "forecast": {
+    "pred": 57976,
+    "lo": 54278,
+    "hi": 60417,
+    "p_sellout": 0.1937366027150591
+   },
+   "error": null,
+   "inside": null,
+   "sellout": false,
+   "breakdown": {
+    "baseline": 53252.12499999142,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 1.0,
+      "display": "Yes, No. 13",
+      "mean_display": "56% of games ranked",
+      "contribution": 312.65114848965527
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 1857.0,
+      "display": "1,857",
+      "mean_display": "1,590",
+      "contribution": 519.5950567493377
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": 17.6,
+      "display": "+17.6",
+      "mean_display": "+5.2",
+      "contribution": -597.5726107298766
+     },
+     {
+      "feature": "rel_log_price",
+      "label": "Get-in price, relative to the season",
+      "value": 0.7039580966641612,
+      "display": "$93, 2\u00d7 the season median",
+      "mean_display": "the season median",
+      "contribution": 4489.338465272931
+     }
+    ],
+    "total": 57976.13705977347,
+    "capped": false
+   },
+   "notes": [
+    "No 2026 Elo yet; using 2025 final Elo 1857."
+   ]
+  },
+  {
+   "season": 2026,
+   "week": 8,
+   "date": "2026-10-24",
+   "date_label": "Sat, Oct 24, 2026",
+   "date_short": "Sat, Oct 24",
+   "kickoff": "Kickoff to be announced",
+   "opponent": "Oklahoma",
+   "slug": "2026-oklahoma",
+   "opp_id": 201,
+   "logo": "201.png",
+   "attendance": null,
+   "actual": null,
+   "completed": 0,
+   "status": "upcoming",
+   "getin": 46.0,
+   "observed": "2026-09-03",
+   "observed_label": "Thu, Sep 3",
+   "ranked": 1,
+   "ap_rank": 10,
+   "elo": 1810.0,
+   "sp": 18.8,
+   "conf_game": 1,
+   "rel_log_price": 0.0,
+   "tier": "tier2",
+   "tier_label": "Price model",
+   "forecast": {
+    "pred": 53318,
+    "lo": 49392,
+    "hi": 57243,
+    "p_sellout": 0.015669498366869792
+   },
+   "error": null,
+   "inside": null,
+   "sellout": false,
+   "breakdown": {
+    "baseline": 53252.12499999142,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 1.0,
+      "display": "Yes, No. 10",
+      "mean_display": "56% of games ranked",
+      "contribution": 312.65114848965527
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 1810.0,
+      "display": "1,810",
+      "mean_display": "1,590",
+      "contribution": 428.0664826862077
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": 18.8,
+      "display": "+18.8",
+      "mean_display": "+5.2",
+      "contribution": -655.6069765670725
+     },
+     {
+      "feature": "rel_log_price",
+      "label": "Get-in price, relative to the season",
+      "value": 0.0,
+      "display": "$46, at the season median",
+      "mean_display": "the season median",
+      "contribution": -19.680337966238778
+     }
+    ],
+    "total": 53317.555316633974,
+    "capped": false
+   },
+   "notes": [
+    "No 2026 Elo yet; using 2025 final Elo 1810."
+   ]
+  },
+  {
+   "season": 2026,
+   "week": 10,
+   "date": "2026-11-07",
+   "date_label": "Sat, Nov 7, 2026",
+   "date_short": "Sat, Nov 7",
+   "kickoff": "Kickoff to be announced",
+   "opponent": "Vanderbilt",
+   "slug": "2026-vanderbilt",
+   "opp_id": 238,
+   "logo": "238.png",
+   "attendance": null,
+   "actual": null,
+   "completed": 0,
+   "status": "upcoming",
+   "getin": 34.0,
+   "observed": "2026-09-03",
+   "observed_label": "Thu, Sep 3",
+   "ranked": 0,
+   "ap_rank": null,
+   "elo": 1880.0,
+   "sp": 9.8,
+   "conf_game": 1,
+   "rel_log_price": -0.3022808718729335,
+   "tier": "tier2",
+   "tier_label": "Price model",
+   "forecast": {
+    "pred": 51238,
+    "lo": 46354,
+    "hi": 56123,
+    "p_sellout": 0.013212353698140642
+   },
+   "error": null,
+   "inside": null,
+   "sellout": false,
+   "breakdown": {
+    "baseline": 53252.12499999142,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 0.0,
+      "display": "Unranked",
+      "mean_display": "56% of games ranked",
+      "contribution": -401.9800480581282
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 1880.0,
+      "display": "1,880",
+      "mean_display": "1,590",
+      "contribution": 564.3856355461885
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": 9.8,
+      "display": "+9.8",
+      "mean_display": "+5.2",
+      "contribution": -220.3492327881032
+     },
+     {
+      "feature": "rel_log_price",
+      "label": "Get-in price, relative to the season",
+      "value": -0.3022808718729335,
+      "display": "$34, 74% of the season median",
+      "mean_display": "the season median",
+      "contribution": -1955.8611157616424
+     }
+    ],
+    "total": 51238.32023892974,
+    "capped": false
+   },
+   "notes": [
+    "No 2026 Elo yet; using 2025 final Elo 1880."
+   ]
+  },
+  {
+   "season": 2026,
+   "week": 11,
+   "date": "2026-11-14",
+   "date_label": "Sat, Nov 14, 2026",
+   "date_short": "Sat, Nov 14",
+   "kickoff": "Kickoff to be announced",
+   "opponent": "Auburn",
+   "slug": "2026-auburn",
+   "opp_id": 2,
+   "logo": "2.png",
+   "attendance": null,
+   "actual": null,
+   "completed": 0,
+   "status": "upcoming",
+   "getin": 83.0,
+   "observed": "2026-09-03",
+   "observed_label": "Thu, Sep 3",
+   "ranked": 0,
+   "ap_rank": null,
+   "elo": 1670.0,
+   "sp": 11.5,
+   "conf_game": 1,
+   "rel_log_price": 0.5901992113075032,
+   "tier": "tier2",
+   "tier_label": "Price model",
+   "forecast": {
+    "pred": 56464,
+    "lo": 51660,
+    "hi": 60417,
+    "p_sellout": 0.14284698249977335
+   },
+   "error": null,
+   "inside": null,
+   "sellout": false,
+   "breakdown": {
+    "baseline": 53252.12499999142,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 0.0,
+      "display": "Unranked",
+      "mean_display": "56% of games ranked",
+      "contribution": -401.9800480581282
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 1670.0,
+      "display": "1,670",
+      "mean_display": "1,590",
+      "contribution": 155.428176966246
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": 11.5,
+      "display": "+11.5",
+      "mean_display": "+5.2",
+      "contribution": -302.56458439079734
+     },
+     {
+      "feature": "rel_log_price",
+      "label": "Get-in price, relative to the season",
+      "value": 0.5901992113075032,
+      "display": "$83, 1.8\u00d7 the season median",
+      "mean_display": "the season median",
+      "contribution": 3760.6857861726153
+     }
+    ],
+    "total": 56463.694330681355,
+    "capped": false
+   },
+   "notes": [
+    "No 2026 Elo yet; using 2025 final Elo 1670."
+   ]
+  },
+  {
+   "season": 2026,
+   "week": 12,
+   "date": "2026-11-21",
+   "date_label": "Sat, Nov 21, 2026",
+   "date_short": "Sat, Nov 21",
+   "kickoff": "12 p.m. CT",
+   "opponent": "Tennessee Tech",
+   "slug": "2026-tennessee-tech",
+   "opp_id": 2635,
+   "logo": "2635.png",
+   "attendance": null,
+   "actual": null,
+   "completed": 0,
+   "status": "upcoming",
+   "getin": 19.0,
+   "observed": "2026-09-03",
+   "observed_label": "Thu, Sep 3",
+   "ranked": 0,
+   "ap_rank": null,
+   "elo": 1159.0,
+   "sp": -42.9,
+   "conf_game": 0,
+   "rel_log_price": -0.8842024173226548,
+   "tier": "tier2",
+   "tier_label": "Price model",
+   "forecast": {
+    "pred": 48656,
+    "lo": 43339,
+    "hi": 53973,
+    "p_sellout": 0.005869827208869822
+   },
+   "error": null,
+   "inside": null,
+   "sellout": false,
+   "breakdown": {
+    "baseline": 53252.12499999142,
+    "terms": [
+     {
+      "feature": "opp_ranked",
+      "label": "Opponent ranked in the AP Top 25",
+      "value": 0.0,
+      "display": "Unranked",
+      "mean_display": "56% of games ranked",
+      "contribution": -401.9800480581282
+     },
+     {
+      "feature": "opp_elo",
+      "label": "Opponent Elo rating",
+      "value": 1159.0,
+      "display": "1,159",
+      "mean_display": "1,590",
+      "contribution": -839.701638911614
+     },
+     {
+      "feature": "opp_sp",
+      "label": "Opponent SP+ rating",
+      "value": -42.9,
+      "display": "-42.9",
+      "mean_display": "+5.2",
+      "contribution": 2328.3266668954166
+     },
+     {
+      "feature": "rel_log_price",
+      "label": "Get-in price, relative to the season",
+      "value": -0.8842024173226548,
+      "display": "$19, 41% of the season median",
+      "mean_display": "the season median",
+      "contribution": -5683.206824088054
+     }
+    ],
+    "total": 48655.56315582904,
+    "capped": false
+   },
+   "notes": [
+    "No Elo; imputed 1159.0.",
+    "No SP+; imputed -42.9."
+   ]
+  }
+ ],
+ "track": {
+  "n": 21,
+  "rmse": 2657.9900032059672,
+  "mae": 1973.904761904762,
+  "inside": 18,
+  "inside_rate": 0.8571428571428571,
+  "priced": 16,
+  "sellouts": 2
+ },
+ "models": {
+  "tier1": {
+   "features": [
+    "opp_ranked",
+    "opp_elo",
+    "opp_sp"
+   ],
+   "intercept": 66020.71598019965,
+   "coef": {
+    "opp_ranked": 8537.775016258985,
+    "opp_elo": -11.897543457049899,
+    "opp_sp": 211.9514814931897
+   },
+   "stderr": {
+    "const": 7813.255380210201,
+    "opp_ranked": 1972.0463865296974,
+    "opp_elo": 5.532006421121634,
+    "opp_sp": 89.82740670848992
+   },
+   "resid_se": 3043.4473485404296,
+   "df_resid": 17,
+   "n": 21,
+   "means": {
+    "opp_ranked": 0.42857142857142855,
+    "opp_elo": 1506.047619047619,
+    "opp_sp": 1.9666666666666672
+   },
+   "range": {
+    "opp_ranked": [
+     0.0,
+     1.0
+    ],
+    "opp_elo": [
+     618.0,
+     2017.0
+    ],
+    "opp_sp": [
+     -46.6,
+     24.1
+    ]
+   },
+   "swing": {
+    "opp_ranked": 8537.775016258985,
+    "opp_elo": -16644.663296412808,
+    "opp_sp": 14984.969741568513
+   },
+   "baseline": 52178.33333333691,
+   "labels": {
+    "opp_ranked": "Opponent ranked in the AP Top 25",
+    "opp_elo": "Opponent Elo rating",
+    "opp_sp": "Opponent SP+ rating"
+   },
+   "help": {
+    "opp_ranked": "1 when the opponent was in that week's AP Top 25, otherwise 0.",
+    "opp_elo": "CollegeFootballData's Elo rating for the opponent entering the game. Before an opponent has played, last season's final Elo stands in.",
+    "opp_sp": "Bill Connelly's SP+ rating for the opponent that season. Positive is better than average."
+   },
+   "mean_labels": {
+    "opp_ranked": "43% of games ranked",
+    "opp_elo": "1,506",
+    "opp_sp": "+2.0"
+   }
+  },
+  "tier2": {
+   "features": [
+    "opp_ranked",
+    "opp_elo",
+    "opp_sp",
+    "rel_log_price"
+   ],
+   "intercept": 49987.30537520371,
+   "coef": {
+    "opp_ranked": 714.6311965477835,
+    "opp_elo": 1.9474164694282976,
+    "opp_sp": -48.361971530996584,
+    "rel_log_price": 6405.237505763496
+   },
+   "stderr": {
+    "const": 9308.648487697092,
+    "opp_ranked": 2788.568667695927,
+    "opp_elo": 6.859150709941972,
+    "opp_sp": 120.6423884081439,
+    "rel_log_price": 1819.3291007129667
+   },
+   "resid_se": 2523.7995391980085,
+   "df_resid": 11,
+   "n": 16,
+   "means": {
+    "opp_ranked": 0.5625,
+    "opp_elo": 1590.1875,
+    "opp_sp": 5.24375,
+    "rel_log_price": 0.0030725383638827153
+   },
+   "range": {
+    "opp_ranked": [
+     0.0,
+     1.0
+    ],
+    "opp_elo": [
+     618.0,
+     2017.0
+    ],
+    "opp_sp": [
+     -46.6,
+     24.1
+    ],
+    "rel_log_price": [
+     -1.408767216971949,
+     1.4284619119143125
+    ]
+   },
+   "swing": {
+    "opp_ranked": 714.6311965477835,
+    "opp_elo": 2724.4356407301884,
+    "opp_sp": -3419.1913872414584,
+    "rel_log_price": 18173.126428786974
+   },
+   "baseline": 53252.12499999142,
+   "labels": {
+    "opp_ranked": "Opponent ranked in the AP Top 25",
+    "opp_elo": "Opponent Elo rating",
+    "opp_sp": "Opponent SP+ rating",
+    "rel_log_price": "Get-in price, relative to the season"
+   },
+   "help": {
+    "opp_ranked": "1 when the opponent was in that week's AP Top 25, otherwise 0.",
+    "opp_elo": "CollegeFootballData's Elo rating for the opponent entering the game. Before an opponent has played, last season's final Elo stands in.",
+    "opp_sp": "Bill Connelly's SP+ rating for the opponent that season. Positive is better than average.",
+    "rel_log_price": "The cheapest resale ticket on ticketdata.com, compared with the median get-in price of that season's home games. Measured on a log scale, so doubling the price counts the same in any season."
+   },
+   "mean_labels": {
+    "opp_ranked": "56% of games ranked",
+    "opp_elo": "1,590",
+    "opp_sp": "+5.2",
+    "rel_log_price": "the season median"
+   }
+  }
+ },
+ "metrics": {
+  "Season mean (all rows)": {
+   "rmse": 4904.693149310045,
+   "mae": 3789.634920634921,
+   "r2": -0.016893887462816837,
+   "n": 21
+  },
+  "Tier 1 (all rows)": {
+   "rmse": 3181.807035703093,
+   "mae": 2506.640777937813,
+   "r2": 0.5720434984796936,
+   "n": 21
+  },
+  "Season mean (priced rows)": {
+   "rmse": 5635.136601173825,
+   "mae": 4874.083333333334,
+   "r2": -0.22026042879187524,
+   "n": 16
+  },
+  "Price only (priced rows)": {
+   "rmse": 3589.108883690504,
+   "mae": 2965.490169812482,
+   "r2": 0.5049866641042859,
+   "n": 16
+  },
+  "Tier 1 (priced rows)": {
+   "rmse": 3680.586029695124,
+   "mae": 3163.1996098630575,
+   "r2": 0.47943186781214076,
+   "n": 16
+  },
+  "Tier 2 (priced rows)": {
+   "rmse": 2967.054672935671,
+   "mae": 2287.627463972624,
+   "r2": 0.6617056616843415,
+   "n": 16
+  }
+ },
+ "tier1_candidates": [
+  {
+   "features": [
+    "opp_ranked",
+    "opp_elo",
+    "opp_sp"
+   ],
+   "rmse": 3181.807035703093
+  },
+  {
+   "features": [
+    "opp_ranked"
+   ],
+   "rmse": 3530.4527064319122
+  },
+  {
+   "features": [
+    "conf_game"
+   ],
+   "rmse": 4263.5410343257945
+  },
+  {
+   "features": [
+    "opp_p4"
+   ],
+   "rmse": 4301.834286528828
+  },
+  {
+   "features": [
+    "opp_sp"
+   ],
+   "rmse": 4352.6392646576305
+  }
+ ],
+ "tier2_candidates": [
+  {
+   "features": [
+    "opp_ranked",
+    "opp_elo",
+    "opp_sp",
+    "rel_log_price"
+   ],
+   "price_feature": "rel_log_price",
+   "rmse": 2967.054672935671
+  },
+  {
+   "features": [
+    "opp_ranked",
+    "opp_elo",
+    "opp_sp",
+    "log_getin"
+   ],
+   "price_feature": "log_getin",
+   "rmse": 3620.4485802673016
+  }
+ ],
+ "counts": {
+  "games": 29,
+  "with_attendance": 21,
+  "with_price": 16
+ },
+ "caveats": [
+  "Small sample: a couple of dozen games. Coefficients are rough; the leave-one-out numbers are the honest accuracy.",
+  "Attendance is the announced figure and is capped at Davis Wade Stadium capacity (60,417); sellouts flatten the top end, and intervals clipped at capacity no longer carry their nominal 80% coverage.",
+  "The get-in price is the final price recorded by ticketdata near game day, not a price observed weeks out.",
+  "Price levels shift season to season; the season-relative price feature exists for that reason.",
+  "Tier 1 features were chosen by the same leave-one-out scores reported here, so the headline RMSE is optimistic; the runner-up subsets in the selection table bracket the realistic range.",
+  "Individual coefficients are not interpretable when the selected features are collinear (for example opponent Elo and SP+); judge the model by its leave-one-out error, not by coefficient signs.",
+  "Tier 2 uses a season-relative price, so it only becomes meaningful once a season has at least 3 priced games; predictions leave Tier 2 blank until then."
+ ],
+ "warnings": [
+  "2023 SE Louisiana: no Elo; imputed 862.0",
+  "2023 SE Louisiana: no SP+; imputed -36.3",
+  "2024 Eastern Kentucky: no Elo; imputed 660.0",
+  "2024 Eastern Kentucky: no SP+; imputed -43.0",
+  "2025 Alcorn State: no Elo; imputed 618.0",
+  "2025 Alcorn State: no SP+; imputed -46.6",
+  "2026 Missouri: no 2026 Elo yet; using 2025 final Elo 1750",
+  "2026 Alabama: no 2026 Elo yet; using 2025 final Elo 1857",
+  "2026 Oklahoma: no 2026 Elo yet; using 2025 final Elo 1810",
+  "2026 Vanderbilt: no 2026 Elo yet; using 2025 final Elo 1880",
+  "2026 Auburn: no 2026 Elo yet; using 2025 final Elo 1670",
+  "2026 Tennessee Tech: no Elo; imputed 1159.0",
+  "2026 Tennessee Tech: no SP+; imputed -42.9"
+ ]
+}

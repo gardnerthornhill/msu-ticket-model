@@ -13,6 +13,7 @@ from .config import (
     CAPACITY,
     INTERVAL,
     MAX_SUBSET_SIZE,
+    MIN_PRICED_PER_SEASON,
     MIN_TRAINING_ROWS,
     PRICE_FEATURES,
     SELECTION_TOLERANCE,
@@ -105,8 +106,9 @@ def select_tier2(df: pd.DataFrame, tier1_features) -> list[dict]:
     return _rank(results)
 
 
-def fit(df: pd.DataFrame, features) -> dict:
-    if len(df) < MIN_TRAINING_ROWS:
+def fit(df: pd.DataFrame, features, check_rows: bool = True) -> dict:
+    """OLS fit. `check_rows=False` lets a leave-one-out refit run one row under the minimum."""
+    if check_rows and len(df) < MIN_TRAINING_ROWS:
         raise ModelError(f"need at least {MIN_TRAINING_ROWS} training rows, have {len(df)}")
     X = _design(df, features)
     y = df[TARGET].to_numpy(float)
@@ -142,6 +144,8 @@ def load_model(path) -> dict:
 
 
 def predict(model: dict, df: pd.DataFrame) -> pd.DataFrame:
+    """Point forecast, clipped 80% interval, and the probability the game sells out
+    (P(attendance >= capacity) under the same t prediction interval)."""
     feats = model["features"]
     X = _design(df, feats).to_numpy(float)
     beta = np.array([model["intercept"]] + [model["coef"][f] for f in feats])
@@ -149,6 +153,50 @@ def predict(model: dict, df: pd.DataFrame) -> pd.DataFrame:
     V = np.asarray(model["xtx_inv"], float)
     se = model["resid_se"] * np.sqrt(1.0 + np.einsum("ij,jk,ik->i", X, V, X))
     t = stats.t.ppf(0.5 + INTERVAL / 2, model["df_resid"])
+    p_sellout = stats.t.sf((CAPACITY - point) / se, model["df_resid"])
     return pd.DataFrame(
-        {"pred": _clip(point), "lo": _clip(point - t * se), "hi": _clip(point + t * se)}, index=df.index
+        {"pred": _clip(point), "lo": _clip(point - t * se), "hi": _clip(point + t * se), "p_sellout": p_sellout},
+        index=df.index,
     )
+
+
+def loo_intervals(df: pd.DataFrame, features) -> pd.DataFrame:
+    """Leave-one-out forecast with interval: each row is predicted by a model fit on the others."""
+    rows = []
+    n = len(df)
+    for i in range(n):
+        others = df.drop(index=df.index[i]).reset_index(drop=True)
+        rows.append(predict(fit(others, features, check_rows=False), df.iloc[[i]]).iloc[0])
+    return pd.DataFrame(rows).reset_index(drop=True)
+
+
+UPCOMING_COLUMNS = [f"{t}_{c}" for t in ("tier1", "tier2") for c in ("pred", "lo", "hi", "p_sellout")]
+
+
+def predict_upcoming(df: pd.DataFrame, m1: dict, m2: dict) -> tuple[pd.DataFrame, list[str]]:
+    """Forecast every home game not yet played. Tier 2 needs a price and a season with at least
+    MIN_PRICED_PER_SEASON priced games; otherwise its columns stay blank. Returns (frame, warnings)."""
+    priced_per_season = df[df["getin"].notna()].groupby("season").size()
+    up = df[(df["completed"] == 0) & df["attendance"].isna()].reset_index(drop=True)
+    out = up[["season", "date", "opponent", "getin"]].copy()
+    for c in UPCOMING_COLUMNS:
+        out[c] = np.nan
+    warnings: list[str] = []
+    if not len(up):
+        return out, warnings
+    p1 = predict(m1, up)
+    for c in ("pred", "lo", "hi"):
+        out[f"tier1_{c}"] = p1[c].round()
+    out["tier1_p_sellout"] = p1["p_sellout"]
+    priced = up["getin"].notna()
+    for season, n in priced_per_season.items():
+        if n < MIN_PRICED_PER_SEASON and (priced & (up["season"] == season)).any():
+            warnings.append(f"season {season} has only {n} priced game(s); Tier 2 needs {MIN_PRICED_PER_SEASON}, showing Tier 1 only")
+    enough_priced = up["season"].map(priced_per_season).fillna(0) >= MIN_PRICED_PER_SEASON
+    tier2 = priced & enough_priced
+    if tier2.any():
+        p2 = predict(m2, up[tier2])
+        for c in ("pred", "lo", "hi"):
+            out.loc[tier2, f"tier2_{c}"] = p2[c].round()
+        out.loc[tier2, "tier2_p_sellout"] = p2["p_sellout"]
+    return out, warnings

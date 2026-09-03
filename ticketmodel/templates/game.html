@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m %}
+{% set g = page.game %}
+{% set f = g.forecast %}
+{% set model = data.models[g.tier] %}
+{% block head %}
+<script type="application/ld+json">{{ {"@context": "https://schema.org", "@type": "SportsEvent", "name": g.opponent ~ " at Mississippi State", "startDate": g.date, "location": {"@type": "Place", "name": data.venue, "address": "Starkville, MS"}, "homeTeam": {"@type": "SportsTeam", "name": "Mississippi State Bulldogs"}, "awayTeam": {"@type": "SportsTeam", "name": g.opponent}, "url": data.site_url ~ "/" ~ page.path} | json | safe }}</script>
+{% endblock %}
+{% block main %}
+<section class="hero hero-game">
+  <p class="hero-kicker"><a href="{{ root }}index.html">{{ data.current_season }} outlook</a>{% if g.season != data.current_season %} / <a href="{{ root }}track-record.html">{{ g.season }} season</a>{% endif %} / Week {{ g.week }}</p>
+  <div class="hero-matchup">
+    {{ m.logo(g, root, "xl", "msu") }}
+    <span class="hero-vs">vs</span>
+    {{ m.logo(g, root, "xl") }}
+  </div>
+  <h1 class="hero-title">{{ g.opponent }}{% if g.ap_rank %} <span class="rank">No. {{ g.ap_rank }}</span>{% endif %}</h1>
+  <p class="hero-when">{{ g.date_label }}. {{ g.kickoff }}. {{ data.venue }}.</p>
+
+  <div class="hero-forecast">
+    <div class="figure">
+      <span class="figure-num">{{ f.pred | num }}</span>
+      <span class="figure-label">{% if g.status == "played" %}forecast, made without this game{% else %}forecast attendance{% endif %}</span>
+    </div>
+    {% if g.status == "played" %}
+    <div class="figure figure-actual">
+      <span class="figure-num">{{ g.actual | num }}</span>
+      <span class="figure-label">announced attendance{% if g.sellout %}, a sellout{% endif %}</span>
+    </div>
+    {% endif %}
+    <div class="hero-gauge">
+      {{ m.gauge(g, data, "hero", axis=true) }}
+      {{ m.gauge_legend(played=(g.status == "played")) }}
+    </div>
+    <dl class="facts">
+      <div><dt>80% range</dt><dd>{{ f.lo | num }} to {{ f.hi | num }}</dd></div>
+      {% if g.status == "played" %}
+      <div><dt>Miss</dt><dd>{{ g.error | signed }} {{ m.inside_chip(g) }}</dd></div>
+      {% else %}
+      <div><dt>Sellout odds</dt><dd>{{ f.p_sellout | pct }}</dd></div>
+      {% endif %}
+      <div><dt>Get-in price</dt><dd>{% if g.getin %}{{ g.getin | money }}{% if g.observed_label %} on {{ g.observed_label }}{% endif %}{% else %}none listed{% endif %}</dd></div>
+      <div><dt>Model</dt><dd>{{ g.tier_label }}</dd></div>
+    </dl>
+  </div>
+  {% if g.status == "unreported" %}
+  <p class="notice">CollegeFootballData has no announced attendance for this game, so it is not part of the track record. The forecast above uses the full model.</p>
+  {% endif %}
+</section>
+
+<section class="section">
+  <h2>Why {{ f.pred | num }}</h2>
+  {{ m.terms(g, data, none) }}
+</section>
+
+<section class="section">
+  <h2>The inputs</h2>
+  <div class="table-scroll">
+  <table class="inputs-table">
+    <thead><tr><th scope="col">Variable</th><th scope="col">This game</th><th scope="col">Training average</th><th scope="col" class="num">Weight</th><th scope="col" class="num">Seats moved</th></tr></thead>
+    <tbody>
+      {% for t in g.breakdown.terms %}
+      <tr>
+        <td><span class="input-name">{{ t.label }}</span><span class="cell-sub">{{ model.help[t.feature] }}</span></td>
+        <td>{{ t.display }}</td>
+        <td>{{ t.mean_display }}</td>
+        <td class="num">{{ model.coef[t.feature] | dec(model.coef[t.feature] | abs < 100 and 2 or 0) }}</td>
+        <td class="num">{{ t.contribution | signed }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  <p class="board-note">Weight is the change in forecast attendance for a one-unit change in the variable. Seats moved is that weight times this game's distance from the training average. <a href="{{ root }}model.html">How the weights were fitted</a>.</p>
+  {% if g.notes %}
+  <h3>Data notes</h3>
+  <ul class="notes">
+    {% for n in g.notes %}<li>{{ n }}</li>{% endfor %}
+  </ul>
+  {% endif %}
+</section>
+{% endblock %}

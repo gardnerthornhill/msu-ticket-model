@@ -26,6 +26,9 @@ MIN_PRICED_PER_SEASON = 3  # Tier 2 predictions need this many priced games in t
 REFRESH_WINDOW_DAYS = 14
 INTERVAL = 0.80  # prediction interval coverage
 
+SITE_NAME = "Davis Wade Forecast"
+SITE_URL = "https://gardnerthornhill.github.io/msu-ticket-model"  # GitHub Pages URL; no trailing slash
+
 
 @dataclass(frozen=True)
 class Paths:
@@ -70,6 +73,18 @@ class Paths:
     @property
     def predictions(self) -> Path:
         return self.reports_dir / "predictions.csv"
+
+    @property
+    def train_summary(self) -> Path:
+        return self.reports_dir / "train_summary.json"
+
+    @property
+    def logos_dir(self) -> Path:
+        return self.root / "logos"
+
+    @property
+    def site_dir(self) -> Path:
+        return self.root / "site"
 
 
 ROOT = Path(__file__).resolve().parent.parent

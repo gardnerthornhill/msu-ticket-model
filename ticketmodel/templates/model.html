@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m %}
+{% set t2 = data.models.tier2 %}{% set t1 = data.models.tier1 %}
+{% set faq = [
+  ("Why does the ticket price matter more than who Mississippi State is playing?",
+   "The get-in price is set by thousands of buyers and sellers deciding, in real time, how much they want to be in the building. It already bakes in the opponent, the weather, the record, kickoff time and everything else. Opponent strength on its own explains less: within a season, the rank correlation between price and crowd size was about 0.93 to 0.95."),
+  ("What does the 80% range mean?",
+   "It is a prediction interval. If the model's assumptions hold, the announced crowd lands inside that range four times out of five. It is wider for unusual games and narrower near the middle of the training data. Ranges that touch " ~ (data.capacity | num) ~ " are cut off there, because the stadium cannot hold more."),
+  ("Why is every forecast capped at " ~ (data.capacity | num) ~ "?",
+   "That is the largest crowd Davis Wade Stadium has announced; the official capacity is listed a little lower. A linear model can produce numbers above it, so the forecast and the range are clipped."),
+  ("How often does the forecast change?",
+   "Every morning a job refreshes the schedule and ratings from CollegeFootballData, retrains the model and rebuilds this site. Get-in prices are pasted in by hand, because ticketdata.com blocks automated access; a forecast moves whenever its price is updated."),
+  ("How good is it, honestly?",
+   "On the " ~ data.counts.with_price ~ " games with both a price and an attendance figure, the price model's leave-one-out error is " ~ (data.metrics['Tier 2 (priced rows)'].rmse | num) ~ " seats (root mean square), against " ~ (data.metrics['Season mean (priced rows)'].rmse | num) ~ " for guessing the season average. That is a small sample; the weights are rough and will shift as games are added."),
+] %}
+{% block head %}
+{% set ns = namespace(items=[]) %}
+{% for q, a in faq %}{% set ns.items = ns.items + [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}}] %}{% endfor %}
+<script type="application/ld+json">{{ {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": ns.items} | json | safe }}</script>
+{% endblock %}
+{% block main %}
+<section class="page-head">
+  <h1>How the forecast works</h1>
+  <p class="lede">The forecast is a straight-line model fitted to Mississippi State home games since {{ data.seasons[0] }}. One number does most of the work: the cheapest resale ticket on ticketdata.com, the get-in price, compared with the rest of that season. Opponent strength fills in the rest. The model is refit every morning, and every number on this site comes out of that fit.</p>
+</section>
+
+<section class="section">
+  <h2>What goes in</h2>
+  <p>Four variables, all known before kickoff.</p>
+  <dl class="defs">
+    {% for f in t2.features %}
+    <div><dt>{{ t2.labels[f] }}</dt><dd>{{ t2.help[f] }}</dd></div>
+    {% endfor %}
+  </dl>
+</section>
+
+<section class="section">
+  <h2>How much each variable weighs</h2>
+  <p>The price model starts from an average training game, {{ t2.baseline | num }} fans, and moves that number by each variable's weight times how far the game sits from average. The bars show the full swing each variable can produce: its weight times the gap between the lowest and highest value seen in training.</p>
+  <ul class="swings">
+    {% set smax = t2.swing.values() | map("abs") | max %}
+    {% for f in t2.features %}
+    <li class="swing">
+      <span class="swing-label">{{ t2.labels[f] }}<small>weight {{ t2.coef[f] | dec(t2.coef[f] | abs < 100 and 2 or 0) }}, give or take {{ t2.stderr[f] | dec(t2.stderr[f] | abs < 100 and 2 or 0) }}</small></span>
+      <span class="swing-bar" aria-hidden="true"><i class="{{ 'pos' if t2.swing[f] >= 0 else 'neg' }}" style="width:{{ ((t2.swing[f] | abs) / smax * 100) | round(1) }}%"></i></span>
+      <span class="swing-val">{{ t2.swing[f] | signed }} seats</span>
+    </li>
+    {% endfor %}
+  </ul>
+  <p>Read the price bar and stop there. The three opponent variables overlap heavily (a ranked opponent has a high Elo and a high SP+), so their individual weights partly cancel and are not meaningful on their own. Judge the model by its out-of-sample error, below, not by the sign of any one weight.</p>
+
+  <h3>The schedule-only fallback</h3>
+  <p>When a game has no listed get-in price, or the season has fewer than three priced games, the forecast uses a model with the opponent variables only. Its average game is {{ t1.baseline | num }} fans.</p>
+  <div class="table-scroll">
+  <table class="coef-table">
+    <thead><tr><th scope="col">Variable</th><th scope="col" class="num">Price model weight</th><th scope="col" class="num">Schedule-only weight</th></tr></thead>
+    <tbody>
+      <tr><td>Average game</td><td class="num">{{ t2.baseline | num }}</td><td class="num">{{ t1.baseline | num }}</td></tr>
+      {% for f in t2.features %}
+      <tr><td>{{ t2.labels[f] }}</td>
+        <td class="num">{{ t2.coef[f] | dec(t2.coef[f] | abs < 100 and 2 or 0) }} <span class="cell-sub">± {{ t2.stderr[f] | dec(t2.stderr[f] | abs < 100 and 2 or 0) }}</span></td>
+        <td class="num">{% if f in t1.coef %}{{ t1.coef[f] | dec(t1.coef[f] | abs < 100 and 2 or 0) }} <span class="cell-sub">± {{ t1.stderr[f] | dec(t1.stderr[f] | abs < 100 and 2 or 0) }}</span>{% else %}<span class="muted">not used</span>{% endif %}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section class="section">
+  <h2>How accurate it is</h2>
+  <p>Each game was forecast by a model that had never seen it (leave-one-out). RMSE is the root mean square error in seats; R² is the share of the variation in crowd size the model explains, where zero means no better than the average.</p>
+  <div class="table-scroll">
+  <table class="metrics-table">
+    <thead><tr><th scope="col">Model</th><th scope="col" class="num">Games</th><th scope="col" class="num">RMSE</th><th scope="col" class="num">Typical miss</th><th scope="col" class="num">R²</th></tr></thead>
+    <tbody>
+      {% for label, mt in data.metrics.items() %}
+      <tr{% if label == "Tier 2 (priced rows)" %} class="highlight"{% endif %}>
+        <td>{{ label | replace("Tier 2", "Price model") | replace("Tier 1", "Schedule-only") | replace("(priced rows)", "(games with a price)") | replace("(all rows)", "(all games)") }}</td>
+        <td class="num">{{ mt.n }}</td><td class="num">{{ mt.rmse | num }}</td><td class="num">{{ mt.mae | num }}</td><td class="num">{{ mt.r2 | dec(2) }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  <p>The <a href="{{ root }}track-record.html">track record</a> shows every one of those games.</p>
+
+  <h3>How the variables were chosen</h3>
+  <p>Every subset of up to three schedule variables was scored by leave-one-out error, and the smallest subset within 5% of the best was kept. The price variable was then added in two forms; the season-relative form won.</p>
+  <div class="table-scroll">
+  <table class="cand-table">
+    <thead><tr><th scope="col">Candidate</th><th scope="col" class="num">Leave-one-out RMSE</th></tr></thead>
+    <tbody>
+      {% for c in data.tier1_candidates %}
+      <tr><td>{{ c.features | map("feat") | join(" + ") }}</td><td class="num">{{ c.rmse | num }}</td></tr>
+      {% endfor %}
+      {% for c in data.tier2_candidates %}
+      <tr><td>{{ c.features | map("feat") | join(" + ") }}</td><td class="num">{{ c.rmse | num }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Where the data comes from</h2>
+  <ul class="plain">
+    <li><strong>Get-in prices</strong> from <a href="https://www.ticketdata.com/performer/mississippi-state-bulldogs-football">ticketdata.com</a>, recorded by hand. Training prices are the final price near game day; an upcoming game's price is whatever was last pasted in, and the date it was seen is shown on each game.</li>
+    <li><strong>Schedule, attendance, AP polls, Elo and SP+</strong> from <a href="https://collegefootballdata.com">CollegeFootballData</a>, refreshed daily during the season.</li>
+    <li><strong>Code and data</strong> are public on <a href="https://github.com/gardnerthornhill/msu-ticket-model">GitHub</a>, including <a href="{{ root }}data.json">everything on this site as JSON</a>.</li>
+  </ul>
+</section>
+
+<section class="section">
+  <h2>What to keep in mind</h2>
+  <ul class="plain">
+    {% for c in data.caveats %}<li>{{ c | replace("Tier 1", "schedule-only") | replace("Tier 2", "price model") | replace("LOO", "leave-one-out") }}</li>{% endfor %}
+  </ul>
+</section>
+
+<section class="section faq">
+  <h2>Questions people ask</h2>
+  {% for q, a in faq %}
+  <h3>{{ q }}</h3>
+  <p>{{ a }}</p>
+  {% endfor %}
+</section>
+{% endblock %}

@@ -40,6 +40,25 @@ opponent Elo and SP+ are collinear and partly cancel.
 Full accuracy tables, the chosen features, per-game leave-one-out predictions, and caveats are
 regenerated into `reports/model_report.md` on every training run.
 
+## The site
+
+`site/` is a static site generated from the model outputs: a 2026 outlook with the forecast,
+80% range and sellout odds for every home game, a track record of every tracked game scored
+leave-one-out, a page per game showing how much each variable moved the number, and a
+plain-English explanation of the weights. It is rebuilt by `python3 -m ticketmodel site`
+(and by `all`), so the daily Action keeps it current. To look at it locally:
+
+```
+python3 -m ticketmodel site
+python3 -m http.server -d site 8000      # then open http://localhost:8000
+```
+
+Opponent logos are downloaded once from ESPN's CDN by CFBD team id into `logos/` (a missing
+logo becomes initials, never an error). The Mississippi State mark is `logos/msu.png`, a
+transparent cut of `logos/MSU.png`. `.github/workflows/pages.yml` publishes `site/` to GitHub
+Pages on every push to `main`; enable it once under Settings -> Pages -> Source: GitHub Actions.
+The canonical URL lives in `ticketmodel/config.py` (`SITE_URL`).
+
 ## How the data flows
 
 ```
@@ -49,7 +68,9 @@ data/cfbd_raw/    (CFBD games, AP polls, SP+, Elo; fetched once per season)
         |
         v
 data/features.csv -> models/tier2.json (+ tier1.json) -> reports/model_report.md
+                                                       -> reports/train_summary.json
                                                        -> reports/predictions.csv
+                                                       -> site/  (with logos/)
 ```
 
 - **Ticket prices** come from ticketdata.com, which sits behind Cloudflare, so they are pasted in
@@ -73,7 +94,8 @@ python3 -m ticketmodel all
    pre-game row if there was one. Opponent names may include the mascot; the pipeline strips it.
    Leave `getin` blank when the site shows no price.
 2. `python3 -m ticketmodel all`
-3. Read `reports/predictions.csv` (the `tier2_*` columns) and `reports/model_report.md`.
+3. Read `reports/predictions.csv` (the `tier2_*` columns) and `reports/model_report.md`, or
+   open the rebuilt `site/`.
 
 Once CFBD posts the attendance, the game moves from predictions into the training set on the
 next run.
@@ -120,7 +142,8 @@ python3 -m ticketmodel fetch     # CFBD -> data/cfbd_raw/ (per the refresh rule;
 python3 -m ticketmodel build     # -> data/features.csv
 python3 -m ticketmodel train     # -> models/*.json, reports/model_report.md
 python3 -m ticketmodel predict   # -> reports/predictions.csv
-python3 -m ticketmodel all       # fetch, build, train, predict
+python3 -m ticketmodel site      # -> site/ (downloads any missing opponent logos)
+python3 -m ticketmodel all       # fetch, build, train, predict, site
 python3 -m ticketmodel add-tickets --rows "..."   # upsert pasted price rows into data/tickets.csv
 python3 -m pytest                # tests, no network
 ```
@@ -139,11 +162,14 @@ python3 -m pytest                # tests, no network
 ## Layout
 
 ```
-ticketmodel/      config, tickets loader, CFBD fetch/cache, feature build, model, report, CLI
+ticketmodel/      config, tickets loader, CFBD fetch/cache, feature build, model, report, site, CLI
+ticketmodel/templates, ticketmodel/static   Jinja templates, CSS and JS for the site
 scripts/          browser console snippet for ticketdata.com
 data/             tickets.csv, features.csv, cfbd_raw/
 models/           fitted models as JSON
-reports/          model_report.md, predictions.csv
+reports/          model_report.md, train_summary.json, predictions.csv
+logos/            team logos (MSU mark plus ESPN logos by team id)
+site/             generated static site (GitHub Pages)
 exploration/      the original correlation analysis that motivated the model
 docs/superpowers/ design spec and implementation plan
 tests/            pytest suite (synthetic fixtures, no network)

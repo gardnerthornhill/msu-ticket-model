@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page.title }} | {{ data.site_name }}</title>
+<meta name="description" content="{{ page.description }}">
+<link rel="canonical" href="{{ data.site_url }}/{{ page.path }}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{ data.site_name }}">
+<meta property="og:title" content="{{ page.title }}">
+<meta property="og:description" content="{{ page.description }}">
+<meta property="og:url" content="{{ data.site_url }}/{{ page.path }}">
+<meta property="og:image" content="{{ data.site_url }}/logos/msu.png">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#5D1725">
+<link rel="icon" href="{{ root }}logos/msu.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ root }}site.css">
+{% block head %}{% endblock %}
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <a class="brand" href="{{ root }}index.html">
+      <img src="{{ root }}logos/msu.png" alt="" width="52" height="40">
+      <span class="brand-name">{{ data.site_name }}</span>
+    </a>
+    <nav class="nav" aria-label="Site">
+      <a href="{{ root }}index.html" {% if page.template == 'index.html' %}aria-current="page"{% endif %}>{{ data.current_season }} outlook</a>
+      <a href="{{ root }}track-record.html" {% if page.template == 'track-record.html' %}aria-current="page"{% endif %}>Track record</a>
+      <a href="{{ root }}model.html" {% if page.template == 'model.html' %}aria-current="page"{% endif %}>How it works</a>
+    </nav>
+  </div>
+</header>
+<main id="main" class="wrap">
+{% block main %}{% endblock %}
+</main>
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <p>Forecasts come from a model trained on Mississippi State home games since 2023. Get-in prices are from <a href="https://www.ticketdata.com/performer/mississippi-state-bulldogs-football">ticketdata.com</a>; schedules, attendance and ratings from <a href="https://collegefootballdata.com">CollegeFootballData</a>. Model last retrained {{ data.trained }}; page built {{ data.generated }}.</p>
+    <p>An independent project, not affiliated with Mississippi State University or its athletics department. Team marks belong to their schools. <a href="https://github.com/gardnerthornhill/msu-ticket-model">Source and data on GitHub</a>.</p>
+  </div>
+</footer>
+<script src="{{ root }}site.js" defer></script>
+</body>
+</html>

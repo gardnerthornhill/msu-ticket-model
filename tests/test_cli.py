@@ -97,3 +97,30 @@ def test_add_tickets_command_upserts_rows(fixture_root, capsys):
 def test_add_tickets_rejects_bad_rows(fixture_root, capsys):
     assert cli.main(["add-tickets", "--rows", "Rival D,11/09/2024,55", "--root", str(fixture_root)]) == 1
     assert "error:" in capsys.readouterr().err
+
+
+def test_train_writes_summary_json_with_loo_intervals(fixture_root):
+    paths = Paths(fixture_root)
+    cli.cmd_train(paths)
+    s = json.loads(paths.train_summary.read_text())
+    assert {"generated", "counts", "metrics", "tier1_candidates", "tier2_candidates",
+            "tier1_model", "tier2_model", "per_game", "warnings"} <= set(s)
+    assert len(s["per_game"]) == 10
+    g = s["per_game"][0]
+    assert {"tier1_loo", "tier1_lo", "tier1_hi", "tier2_loo", "tier2_lo", "tier2_hi"} <= set(g)
+    priced = [r for r in s["per_game"] if r["getin"] is not None]
+    assert len(priced) == 8
+    assert all(r["tier2_lo"] <= r["tier2_loo"] <= r["tier2_hi"] for r in priced)
+    assert all(r["tier2_loo"] is None for r in s["per_game"] if r["getin"] is None)
+
+
+def test_predict_upcoming_reports_sellout_odds(fixture_root):
+    paths = Paths(fixture_root)
+    cli.cmd_train(paths)
+    from ticketmodel import model as mdl
+    df = pd.read_csv(paths.features)
+    out, warnings = mdl.predict_upcoming(df, mdl.load_model(paths.tier1), mdl.load_model(paths.tier2))
+    assert list(out["opponent"]) == ["Rival C", "Rival D"]
+    assert out["tier1_p_sellout"].between(0, 1).all()
+    c = out[out["opponent"] == "Rival C"].iloc[0]
+    assert 0 <= c["tier2_p_sellout"] <= 1 and warnings == []

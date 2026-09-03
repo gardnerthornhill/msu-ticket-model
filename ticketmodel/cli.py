@@ -1,5 +1,6 @@
-"""Command line: fetch | build | train | predict | all."""
+"""Command line: fetch | build | train | predict | site | all."""
 import argparse
+import json
 import sys
 from datetime import date
 from pathlib import Path
@@ -11,7 +12,8 @@ from . import cfbd
 from . import features as feat
 from . import model as mdl
 from . import report as rpt
-from .config import DEFAULT_PATHS, MIN_PRICED_PER_SEASON, MIN_TRAINING_ROWS, Paths
+from . import site as web
+from .config import DEFAULT_PATHS, MIN_TRAINING_ROWS, Paths
 from .tickets import TicketError, load_tickets, upsert_rows
 
 PRED_COLUMNS = ["season", "date", "opponent", "getin", "tier1_pred", "tier1_lo", "tier1_hi", "tier2_pred", "tier2_lo", "tier2_hi"]
@@ -58,9 +60,16 @@ def cmd_train(paths: Paths) -> dict:
 
     tier1_loo, tier2_loo = mdl.loo_metrics(t1, tier1_feats), mdl.loo_metrics(t2, tier2_feats)
     per_game = t1[["season", "date", "opponent", "getin", "attendance"]].copy()
-    per_game["tier1_loo"] = np.round(tier1_loo["preds"])
-    per_game["tier2_loo"] = np.nan
-    per_game.loc[per_game["getin"].notna(), "tier2_loo"] = np.round(tier2_loo["preds"])
+    iv1, iv2 = mdl.loo_intervals(t1, tier1_feats), mdl.loo_intervals(t2, tier2_feats)
+    per_game["tier1_loo"], per_game["tier1_lo"], per_game["tier1_hi"] = np.round(iv1["pred"]), np.round(iv1["lo"]), np.round(iv1["hi"])
+    per_game["tier1_p_sellout"] = iv1["p_sellout"].to_numpy()
+    for c in ("tier2_loo", "tier2_lo", "tier2_hi", "tier2_p_sellout"):
+        per_game[c] = np.nan
+    priced = per_game["getin"].notna()
+    per_game.loc[priced, "tier2_loo"] = np.round(iv2["pred"]).to_numpy()
+    per_game.loc[priced, "tier2_lo"] = np.round(iv2["lo"]).to_numpy()
+    per_game.loc[priced, "tier2_hi"] = np.round(iv2["hi"]).to_numpy()
+    per_game.loc[priced, "tier2_p_sellout"] = iv2["p_sellout"].to_numpy()
     metrics = {
         "Season mean (all rows)": mdl.metrics(t1["attendance"], mdl.season_mean_baseline(t1)),
         "Tier 1 (all rows)": {k: v for k, v in tier1_loo.items() if k != "preds"},
@@ -81,10 +90,20 @@ def cmd_train(paths: Paths) -> dict:
         "warnings": df.attrs.get("warnings", []),
     }
     rpt.write_report(paths.report, summary)
+    _write_summary(paths.train_summary, summary)
     print(f"Tier 1 features: {tier1_feats}  LOO-RMSE {tier1_loo['rmse']:.0f}")
     print(f"Tier 2 features: {tier2_feats}  LOO-RMSE {tier2_loo['rmse']:.0f}")
     print(f"wrote {paths.report}")
     return summary
+
+
+def _write_summary(path: Path, summary: dict) -> None:
+    """Persist the training summary as JSON (NaN -> null) so `site` can read it without retraining."""
+    per_game = summary["per_game"]
+    records = per_game.astype(object).where(per_game.notna(), None).to_dict("records")
+    payload = {**summary, "per_game": records}
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, indent=1, default=float))
 
 
 def cmd_predict(paths: Paths) -> pd.DataFrame:
@@ -92,25 +111,9 @@ def cmd_predict(paths: Paths) -> pd.DataFrame:
     if not paths.features.exists():
         raise mdl.ModelError(f"no {paths.features}; run build")
     df = pd.read_csv(paths.features)
-    priced_per_season = df[df["getin"].notna()].groupby("season").size()
-    up = df[(df["completed"] == 0) & df["attendance"].isna()].reset_index(drop=True)
-    out = up[["season", "date", "opponent", "getin"]].copy()
-    for c in PRED_COLUMNS[4:]:
-        out[c] = np.nan
-    if len(up):
-        p1 = mdl.predict(m1, up)
-        out["tier1_pred"], out["tier1_lo"], out["tier1_hi"] = p1["pred"].round(), p1["lo"].round(), p1["hi"].round()
-        priced = up["getin"].notna()
-        for season, n in priced_per_season.items():
-            if n < MIN_PRICED_PER_SEASON and (priced & (up["season"] == season)).any():
-                print(f"warning: season {season} has only {n} priced game(s); Tier 2 needs {MIN_PRICED_PER_SEASON}, showing Tier 1 only")
-        enough_priced = up["season"].map(priced_per_season).fillna(0) >= MIN_PRICED_PER_SEASON
-        tier2 = priced & enough_priced
-        if tier2.any():
-            p2 = mdl.predict(m2, up[tier2])
-            out.loc[tier2, "tier2_pred"] = p2["pred"].round()
-            out.loc[tier2, "tier2_lo"] = p2["lo"].round()
-            out.loc[tier2, "tier2_hi"] = p2["hi"].round()
+    out, warnings = mdl.predict_upcoming(df, m1, m2)
+    for w in warnings:
+        print(f"warning: {w}")
     out = out[PRED_COLUMNS]
     paths.predictions.parent.mkdir(parents=True, exist_ok=True)
     out.to_csv(paths.predictions, index=False)
@@ -118,9 +121,14 @@ def cmd_predict(paths: Paths) -> pd.DataFrame:
     return out
 
 
+def cmd_site(paths: Paths, http=None) -> None:
+    data = web.build_site(paths, http=http)
+    print(f"wrote {paths.site_dir} ({len(data['games'])} games, {len(data['seasons'])} seasons)")
+
+
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(prog="ticketmodel", description="Mississippi State home attendance model")
-    p.add_argument("command", choices=["fetch", "build", "train", "predict", "all", "add-tickets"])
+    p.add_argument("command", choices=["fetch", "build", "train", "predict", "site", "all", "add-tickets"])
     p.add_argument("--rows", default=None, help="add-tickets: CSV rows opponent,date,getin[,observed], one per line (default: stdin)")
     p.add_argument("--refresh", type=int, nargs="*", default=[], metavar="SEASON", help="force re-download of these seasons")
     p.add_argument("--root", type=Path, default=None, help="repo root (default: this checkout)")
@@ -139,6 +147,8 @@ def main(argv=None) -> int:
             cmd_train(paths)
         if a.command in ("predict", "all"):
             cmd_predict(paths)
+        if a.command in ("site", "all"):
+            cmd_site(paths)
     except (TicketError, cfbd.CfbdError, feat.FeatureError, mdl.ModelError) as e:
         print(f"error: {e}", file=sys.stderr)
         return 1

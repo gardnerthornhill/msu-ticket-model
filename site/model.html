@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How the attendance model works | Davis Wade Forecast</title>
+<meta name="description" content="The variables, weights, accuracy and caveats behind the Mississippi State home attendance forecast, in plain English.">
+<link rel="canonical" href="https://gardnerthornhill.github.io/msu-ticket-model/model.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Davis Wade Forecast">
+<meta property="og:title" content="How the attendance model works">
+<meta property="og:description" content="The variables, weights, accuracy and caveats behind the Mississippi State home attendance forecast, in plain English.">
+<meta property="og:url" content="https://gardnerthornhill.github.io/msu-ticket-model/model.html">
+<meta property="og:image" content="https://gardnerthornhill.github.io/msu-ticket-model/logos/msu.png">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#5D1725">
+<link rel="icon" href="logos/msu.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why does the ticket price matter more than who Mississippi State is playing?", "acceptedAnswer": {"@type": "Answer", "text": "The get-in price is set by thousands of buyers and sellers deciding, in real time, how much they want to be in the building. It already bakes in the opponent, the weather, the record, kickoff time and everything else. Opponent strength on its own explains less: within a season, the rank correlation between price and crowd size was about 0.93 to 0.95."}}, {"@type": "Question", "name": "What does the 80% range mean?", "acceptedAnswer": {"@type": "Answer", "text": "It is a prediction interval. If the model's assumptions hold, the announced crowd lands inside that range four times out of five. It is wider for unusual games and narrower near the middle of the training data. Ranges that touch 60,417 are cut off there, because the stadium cannot hold more."}}, {"@type": "Question", "name": "Why is every forecast capped at 60,417?", "acceptedAnswer": {"@type": "Answer", "text": "That is the largest crowd Davis Wade Stadium has announced; the official capacity is listed a little lower. A linear model can produce numbers above it, so the forecast and the range are clipped."}}, {"@type": "Question", "name": "How often does the forecast change?", "acceptedAnswer": {"@type": "Answer", "text": "Every morning a job refreshes the schedule and ratings from CollegeFootballData, retrains the model and rebuilds this site. Get-in prices are pasted in by hand, because ticketdata.com blocks automated access; a forecast moves whenever its price is updated."}}, {"@type": "Question", "name": "How good is it, honestly?", "acceptedAnswer": {"@type": "Answer", "text": "On the 16 games with both a price and an attendance figure, the price model's leave-one-out error is 2,967 seats (root mean square), against 5,635 for guessing the season average. That is a small sample; the weights are rough and will shift as games are added."}}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <a class="brand" href="index.html">
+      <img src="logos/msu.png" alt="" width="52" height="40">
+      <span class="brand-name">Davis Wade Forecast</span>
+    </a>
+    <nav class="nav" aria-label="Site">
+      <a href="index.html" >2026 outlook</a>
+      <a href="track-record.html" >Track record</a>
+      <a href="model.html" aria-current="page">How it works</a>
+    </nav>
+  </div>
+</header>
+<main id="main" class="wrap">
+<section class="page-head">
+  <h1>How the forecast works</h1>
+  <p class="lede">The forecast is a straight-line model fitted to Mississippi State home games since 2023. One number does most of the work: the cheapest resale ticket on ticketdata.com, the get-in price, compared with the rest of that season. Opponent strength fills in the rest. The model is refit every morning, and every number on this site comes out of that fit.</p>
+</section>
+
+<section class="section">
+  <h2>What goes in</h2>
+  <p>Four variables, all known before kickoff.</p>
+  <dl class="defs">
+    <div><dt>Opponent ranked in the AP Top 25</dt><dd>1 when the opponent was in that week&#39;s AP Top 25, otherwise 0.</dd></div>
+    <div><dt>Opponent Elo rating</dt><dd>CollegeFootballData&#39;s Elo rating for the opponent entering the game. Before an opponent has played, last season&#39;s final Elo stands in.</dd></div>
+    <div><dt>Opponent SP+ rating</dt><dd>Bill Connelly&#39;s SP+ rating for the opponent that season. Positive is better than average.</dd></div>
+    <div><dt>Get-in price, relative to the season</dt><dd>The cheapest resale ticket on ticketdata.com, compared with the median get-in price of that season&#39;s home games. Measured on a log scale, so doubling the price counts the same in any season.</dd></div>
+  </dl>
+</section>
+
+<section class="section">
+  <h2>How much each variable weighs</h2>
+  <p>The price model starts from an average training game, 53,252 fans, and moves that number by each variable's weight times how far the game sits from average. The bars show the full swing each variable can produce: its weight times the gap between the lowest and highest value seen in training.</p>
+  <ul class="swings">
+    <li class="swing">
+      <span class="swing-label">Opponent ranked in the AP Top 25<small>weight 715, give or take 2,789</small></span>
+      <span class="swing-bar" aria-hidden="true"><i class="pos" style="width:3.9%"></i></span>
+      <span class="swing-val">+715 seats</span>
+    </li>
+    <li class="swing">
+      <span class="swing-label">Opponent Elo rating<small>weight 1.95, give or take 6.86</small></span>
+      <span class="swing-bar" aria-hidden="true"><i class="pos" style="width:15.0%"></i></span>
+      <span class="swing-val">+2,724 seats</span>
+    </li>
+    <li class="swing">
+      <span class="swing-label">Opponent SP+ rating<small>weight -48.36, give or take 121</small></span>
+      <span class="swing-bar" aria-hidden="true"><i class="neg" style="width:18.8%"></i></span>
+      <span class="swing-val">-3,419 seats</span>
+    </li>
+    <li class="swing">
+      <span class="swing-label">Get-in price, relative to the season<small>weight 6,405, give or take 1,819</small></span>
+      <span class="swing-bar" aria-hidden="true"><i class="pos" style="width:100.0%"></i></span>
+      <span class="swing-val">+18,173 seats</span>
+    </li>
+  </ul>
+  <p>Read the price bar and stop there. The three opponent variables overlap heavily (a ranked opponent has a high Elo and a high SP+), so their individual weights partly cancel and are not meaningful on their own. Judge the model by its out-of-sample error, below, not by the sign of any one weight.</p>
+
+  <h3>The schedule-only fallback</h3>
+  <p>When a game has no listed get-in price, or the season has fewer than three priced games, the forecast uses a model with the opponent variables only. Its average game is 52,178 fans.</p>
+  <div class="table-scroll">
+  <table class="coef-table">
+    <thead><tr><th scope="col">Variable</th><th scope="col" class="num">Price model weight</th><th scope="col" class="num">Schedule-only weight</th></tr></thead>
+    <tbody>
+      <tr><td>Average game</td><td class="num">53,252</td><td class="num">52,178</td></tr>
+      <tr><td>Opponent ranked in the AP Top 25</td>
+        <td class="num">715 <span class="cell-sub">± 2,789</span></td>
+        <td class="num">8,538 <span class="cell-sub">± 1,972</span></td></tr>
+      <tr><td>Opponent Elo rating</td>
+        <td class="num">1.95 <span class="cell-sub">± 6.86</span></td>
+        <td class="num">-11.90 <span class="cell-sub">± 5.53</span></td></tr>
+      <tr><td>Opponent SP+ rating</td>
+        <td class="num">-48.36 <span class="cell-sub">± 121</span></td>
+        <td class="num">212 <span class="cell-sub">± 89.83</span></td></tr>
+      <tr><td>Get-in price, relative to the season</td>
+        <td class="num">6,405 <span class="cell-sub">± 1,819</span></td>
+        <td class="num"><span class="muted">not used</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section class="section">
+  <h2>How accurate it is</h2>
+  <p>Each game was forecast by a model that had never seen it (leave-one-out). RMSE is the root mean square error in seats; R² is the share of the variation in crowd size the model explains, where zero means no better than the average.</p>
+  <div class="table-scroll">
+  <table class="metrics-table">
+    <thead><tr><th scope="col">Model</th><th scope="col" class="num">Games</th><th scope="col" class="num">RMSE</th><th scope="col" class="num">Typical miss</th><th scope="col" class="num">R²</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Season mean (all games)</td>
+        <td class="num">21</td><td class="num">4,905</td><td class="num">3,790</td><td class="num">-0.02</td>
+      </tr>
+      <tr>
+        <td>Schedule-only (all games)</td>
+        <td class="num">21</td><td class="num">3,182</td><td class="num">2,507</td><td class="num">0.57</td>
+      </tr>
+      <tr>
+        <td>Season mean (games with a price)</td>
+        <td class="num">16</td><td class="num">5,635</td><td class="num">4,874</td><td class="num">-0.22</td>
+      </tr>
+      <tr>
+        <td>Price only (games with a price)</td>
+        <td class="num">16</td><td class="num">3,589</td><td class="num">2,965</td><td class="num">0.50</td>
+      </tr>
+      <tr>
+        <td>Schedule-only (games with a price)</td>
+        <td class="num">16</td><td class="num">3,681</td><td class="num">3,163</td><td class="num">0.48</td>
+      </tr>
+      <tr class="highlight">
+        <td>Price model (games with a price)</td>
+        <td class="num">16</td><td class="num">2,967</td><td class="num">2,288</td><td class="num">0.66</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p>The <a href="track-record.html">track record</a> shows every one of those games.</p>
+
+  <h3>How the variables were chosen</h3>
+  <p>Every subset of up to three schedule variables was scored by leave-one-out error, and the smallest subset within 5% of the best was kept. The price variable was then added in two forms; the season-relative form won.</p>
+  <div class="table-scroll">
+  <table class="cand-table">
+    <thead><tr><th scope="col">Candidate</th><th scope="col" class="num">Leave-one-out RMSE</th></tr></thead>
+    <tbody>
+      <tr><td>opponent ranked in the ap top 25 + opponent elo rating + opponent sp+ rating</td><td class="num">3,182</td></tr>
+      <tr><td>opponent ranked in the ap top 25</td><td class="num">3,530</td></tr>
+      <tr><td>sec game</td><td class="num">4,264</td></tr>
+      <tr><td>power-conference opponent</td><td class="num">4,302</td></tr>
+      <tr><td>opponent sp+ rating</td><td class="num">4,353</td></tr>
+      <tr><td>opponent ranked in the ap top 25 + opponent elo rating + opponent sp+ rating + season-relative price</td><td class="num">2,967</td></tr>
+      <tr><td>opponent ranked in the ap top 25 + opponent elo rating + opponent sp+ rating + get-in price</td><td class="num">3,620</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Where the data comes from</h2>
+  <ul class="plain">
+    <li><strong>Get-in prices</strong> from <a href="https://www.ticketdata.com/performer/mississippi-state-bulldogs-football">ticketdata.com</a>, recorded by hand. Training prices are the final price near game day; an upcoming game's price is whatever was last pasted in, and the date it was seen is shown on each game.</li>
+    <li><strong>Schedule, attendance, AP polls, Elo and SP+</strong> from <a href="https://collegefootballdata.com">CollegeFootballData</a>, refreshed daily during the season.</li>
+    <li><strong>Code and data</strong> are public on <a href="https://github.com/gardnerthornhill/msu-ticket-model">GitHub</a>, including <a href="data.json">everything on this site as JSON</a>.</li>
+  </ul>
+</section>
+
+<section class="section">
+  <h2>What to keep in mind</h2>
+  <ul class="plain">
+<li>Small sample: a couple of dozen games. Coefficients are rough; the leave-one-out numbers are the honest accuracy.</li><li>Attendance is the announced figure and is capped at Davis Wade Stadium capacity (60,417); sellouts flatten the top end, and intervals clipped at capacity no longer carry their nominal 80% coverage.</li><li>The get-in price is the final price recorded by ticketdata near game day, not a price observed weeks out.</li><li>Price levels shift season to season; the season-relative price feature exists for that reason.</li><li>schedule-only features were chosen by the same leave-one-out scores reported here, so the headline RMSE is optimistic; the runner-up subsets in the selection table bracket the realistic range.</li><li>Individual coefficients are not interpretable when the selected features are collinear (for example opponent Elo and SP+); judge the model by its leave-one-out error, not by coefficient signs.</li><li>price model uses a season-relative price, so it only becomes meaningful once a season has at least 3 priced games; predictions leave price model blank until then.</li>  </ul>
+</section>
+
+<section class="section faq">
+  <h2>Questions people ask</h2>
+  <h3>Why does the ticket price matter more than who Mississippi State is playing?</h3>
+  <p>The get-in price is set by thousands of buyers and sellers deciding, in real time, how much they want to be in the building. It already bakes in the opponent, the weather, the record, kickoff time and everything else. Opponent strength on its own explains less: within a season, the rank correlation between price and crowd size was about 0.93 to 0.95.</p>
+  <h3>What does the 80% range mean?</h3>
+  <p>It is a prediction interval. If the model&#39;s assumptions hold, the announced crowd lands inside that range four times out of five. It is wider for unusual games and narrower near the middle of the training data. Ranges that touch 60,417 are cut off there, because the stadium cannot hold more.</p>
+  <h3>Why is every forecast capped at 60,417?</h3>
+  <p>That is the largest crowd Davis Wade Stadium has announced; the official capacity is listed a little lower. A linear model can produce numbers above it, so the forecast and the range are clipped.</p>
+  <h3>How often does the forecast change?</h3>
+  <p>Every morning a job refreshes the schedule and ratings from CollegeFootballData, retrains the model and rebuilds this site. Get-in prices are pasted in by hand, because ticketdata.com blocks automated access; a forecast moves whenever its price is updated.</p>
+  <h3>How good is it, honestly?</h3>
+  <p>On the 16 games with both a price and an attendance figure, the price model&#39;s leave-one-out error is 2,967 seats (root mean square), against 5,635 for guessing the season average. That is a small sample; the weights are rough and will shift as games are added.</p>
+</section>
+</main>
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <p>Forecasts come from a model trained on Mississippi State home games since 2023. Get-in prices are from <a href="https://www.ticketdata.com/performer/mississippi-state-bulldogs-football">ticketdata.com</a>; schedules, attendance and ratings from <a href="https://collegefootballdata.com">CollegeFootballData</a>. Model last retrained 2026-09-03; page built 2026-09-03.</p>
+    <p>An independent project, not affiliated with Mississippi State University or its athletics department. Team marks belong to their schools. <a href="https://github.com/gardnerthornhill/msu-ticket-model">Source and data on GitHub</a>.</p>
+  </div>
+</footer>
+<script src="site.js" defer></script>
+</body>
+</html>

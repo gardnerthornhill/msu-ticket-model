@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m %}
+{% set season_games = data.games | selectattr("season", "equalto", data.current_season) | list %}
+{% set next = (data.games | selectattr("slug", "equalto", data.next_game) | list | first) if data.next_game else none %}
+{% set played_here = season_games | selectattr("status", "equalto", "played") | list %}
+{% block head %}
+<script type="application/ld+json">{{ {"@context": "https://schema.org", "@type": "WebSite", "name": data.site_name, "url": data.site_url ~ "/", "description": page.description, "about": {"@type": "SportsTeam", "name": "Mississippi State Bulldogs football", "sport": "American football"}} | json | safe }}</script>
+{% endblock %}
+{% block main %}
+{% if next %}
+<section class="hero">
+  <p class="hero-kicker">Next at {{ data.venue }}</p>
+  <div class="hero-matchup">
+    {{ m.logo(next, root, "xl", "msu") }}
+    <span class="hero-vs">vs</span>
+    {{ m.logo(next, root, "xl") }}
+  </div>
+  <h1 class="hero-title">{{ next.opponent }}{% if next.ap_rank %} <span class="rank">No. {{ next.ap_rank }}</span>{% endif %}</h1>
+  <p class="hero-when">{{ next.date_label }}. {{ next.kickoff }}.</p>
+  <div class="hero-forecast">
+    <div class="figure">
+      <span class="figure-num">{{ next.forecast.pred | num }}</span>
+      <span class="figure-label">forecast attendance</span>
+    </div>
+    <div class="hero-gauge">
+      {{ m.gauge(next, data, "hero", axis=true) }}
+      {{ m.gauge_legend() }}
+    </div>
+    <dl class="facts">
+      <div><dt>80% range</dt><dd>{{ next.forecast.lo | num }} to {{ next.forecast.hi | num }}</dd></div>
+      <div><dt>Sellout odds</dt><dd>{{ next.forecast.p_sellout | pct }}</dd></div>
+      <div><dt>Get-in price</dt><dd>{% if next.getin %}{{ next.getin | money }}{% if next.observed_label %} on {{ next.observed_label }}{% endif %}{% else %}none listed{% endif %}</dd></div>
+      <div><dt>Model</dt><dd>{{ next.tier_label }}</dd></div>
+    </dl>
+  </div>
+  <a class="hero-link" href="{{ root }}games/{{ next.slug }}.html">Why {{ next.forecast.pred | num }}? See the breakdown</a>
+</section>
+{% else %}
+<section class="hero hero-quiet">
+  <p class="hero-kicker">{{ data.current_season }} season</p>
+  <h1 class="hero-title">No home games left on the schedule</h1>
+  <p class="hero-when">Every {{ data.current_season }} home game is below with the forecast the model made and the crowd that showed up. Paste next season's get-in prices to start a new outlook.</p>
+</section>
+{% endif %}
+
+<section class="board" id="board">
+  <div class="board-head">
+    <div>
+      <h2>{{ data.current_season }} home schedule</h2>
+      <p class="board-sub">{{ season_games | length }} games at {{ data.venue }}. Forecasts move whenever a get-in price is updated.</p>
+    </div>
+    <div class="view-toggle" role="group" aria-label="Row detail">
+      <button type="button" data-view="compact" aria-pressed="true">Compact</button>
+      <button type="button" data-view="deep-dive" aria-pressed="false">Deep dive</button>
+    </div>
+  </div>
+  <div class="rows-head" aria-hidden="true">
+    <span class="rh-week">Week</span>
+    <span class="rh-team">Opponent</span>
+    <span class="rh-price">Get-in</span>
+    <span class="rh-forecast">Forecast</span>
+    <span class="rh-gauge">
+      <span class="rh-axis"><span style="left:0">{{ (data.axis_min / 1000) | round | int }}k</span><span style="left:{{ pos(50000, data) }}%">50k</span><span class="gauge-cap" style="left:100%">Sellout</span></span>
+    </span>
+    <span class="rh-odds">{% if played_here %}Actual{% else %}Sellout odds{% endif %}</span>
+  </div>
+  <ol class="rows">
+    {% for g in season_games %}
+    <li class="row row-{{ g.status }}{% if g.slug == data.next_game %} row-next{% endif %}" id="{{ g.slug }}">
+      <span class="row-week">Week {{ g.week }}</span>
+      <div class="row-team">
+        {{ m.logo(g, root, "sm") }}
+        <span class="row-team-text">
+          <a class="row-name" href="{{ root }}games/{{ g.slug }}.html">{{ g.opponent }}{% if g.ap_rank %} <span class="rank">No. {{ g.ap_rank }}</span>{% endif %}</a>
+          <span class="row-when">{{ g.date_short }}, {{ g.kickoff | replace("Kickoff to be announced", "time TBA") | replace(" CT", "") }}</span>
+        </span>
+      </div>
+      <span class="row-price">{% if g.getin %}{{ g.getin | money }}{% else %}<span class="muted">none</span>{% endif %}</span>
+      <span class="row-forecast"><span class="num">{{ g.forecast.pred | num }}</span><span class="sub">{{ g.forecast.lo | num }} to {{ g.forecast.hi | num }}{% if g.tier == "tier1" %}<span class="sub-tier">{{ g.tier_label | lower }}</span>{% endif %}</span></span>
+      <span class="row-gauge">{{ m.gauge(g, data) }}</span>
+      <span class="row-odds">
+        {% if g.status == "played" %}<span class="num">{{ g.actual | num }}</span><span class="sub">{{ g.error | signed }} {{ m.inside_chip(g) }}</span>
+        {% elif g.status == "unreported" %}<span class="muted">not reported</span>
+        {% else %}<span class="num">{{ g.forecast.p_sellout | pct }}</span><span class="sub">sellout odds</span>{% endif %}
+      </span>
+      <div class="row-dive" hidden>{{ m.terms(g, data, root, bar_max=data.bar_max_current, compact=true) }}</div>
+    </li>
+    {% endfor %}
+  </ol>
+  <p class="board-note">The 80% range is where the model expects the announced crowd to land four times in five. Everything is capped at the {{ data.capacity | num }} sellout figure. <a href="{{ root }}model.html">How it works</a>.</p>
+</section>
+{% endblock %}
