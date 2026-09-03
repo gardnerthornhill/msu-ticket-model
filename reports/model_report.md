@@ -4,7 +4,7 @@ Generated 2026-09-03.
 
 ## Data
 
-- Home games in features: 22
+- Home games in features: 29
 - With attendance (Tier 1 training rows): 21
 - With attendance and price (Tier 2 training rows): 16
 
@@ -97,6 +97,13 @@ Features: opp_ranked + opp_elo + opp_sp + rel_log_price. Rows: 16. Residual SE: 
 - 2024 Eastern Kentucky: no SP+; imputed -43.0
 - 2025 Alcorn State: no Elo; imputed 618.0
 - 2025 Alcorn State: no SP+; imputed -46.6
+- 2026 Missouri: no 2026 Elo yet; using 2025 final Elo 1750
+- 2026 Alabama: no 2026 Elo yet; using 2025 final Elo 1857
+- 2026 Oklahoma: no 2026 Elo yet; using 2025 final Elo 1810
+- 2026 Vanderbilt: no 2026 Elo yet; using 2025 final Elo 1880
+- 2026 Auburn: no 2026 Elo yet; using 2025 final Elo 1670
+- 2026 Tennessee Tech: no Elo; imputed 1159.0
+- 2026 Tennessee Tech: no SP+; imputed -42.9
 
 ## Caveats
 

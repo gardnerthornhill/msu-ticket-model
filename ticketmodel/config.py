@@ -14,6 +14,7 @@ ALIASES = {
     "Southeastern Louisiana": "SE Louisiana",
     "USM": "Southern Miss",
     "Southern Mississippi": "Southern Miss",
+    "Louisiana Monroe": "UL Monroe",
 }
 
 CANDIDATE_FEATURES = ["opp_ranked", "conf_game", "opp_elo", "opp_sp", "opp_p4", "week"]

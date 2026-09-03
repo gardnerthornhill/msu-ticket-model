@@ -57,6 +57,15 @@ def local_datetime(start_date_utc: str) -> datetime:
     return datetime.fromisoformat(start_date_utc.replace("Z", "+00:00")).astimezone(ZoneInfo(TZ))
 
 
+def game_local_date(g: dict) -> tuple[str, float]:
+    """(local YYYY-MM-DD, kickoff hour). CFBD stores TBD kickoffs at midnight Eastern, which
+    is the previous evening in Central, so a TBD game keeps its UTC calendar date and no hour."""
+    if g.get("startTimeTBD"):
+        return g["startDate"][:10], float("nan")
+    local = local_datetime(g["startDate"])
+    return local.strftime("%Y-%m-%d"), local.hour + local.minute / 60
+
+
 FEATURE_COLUMNS = [
     "season", "week", "date", "kickoff_hr", "opponent", "attendance", "completed",
     "conf_game", "opp_p4", "opp_fcs", "opp_ranked", "opp_ap_rank", "opp_elo", "opp_sp",
@@ -78,6 +87,7 @@ def build_features(tickets: pd.DataFrame, seasons: dict) -> tuple[pd.DataFrame, 
         ap = ap_rank_lookup(data["rankings"])
         sp = {t["team"]: float(t["rating"]) for t in data["sp"] if t.get("conference")}
         elo = {t["team"]: float(t["elo"]) for t in data["elo"]}
+        prev_elo = {t["team"]: float(t["elo"]) for t in seasons.get(season - 1, {}).get("elo", [])}
         sp_floor = (min(sp.values()) - 10) if sp else float("nan")
         elo_floor = (min(elo.values()) - 100) if elo else float("nan")
         season_tix = tickets[tickets["season"] == season]
@@ -85,11 +95,11 @@ def build_features(tickets: pd.DataFrame, seasons: dict) -> tuple[pd.DataFrame, 
         if len(tix) < len(season_tix):
             raise FeatureError(f"{season}: two ticket rows resolve to the same CFBD opponent")
         for g in sorted(games, key=lambda g: g["startDate"]):
-            local = local_datetime(g["startDate"])
+            date, kickoff_hr = game_local_date(g)
             opp = g["awayTeam"]
             r = {
-                "season": season, "week": int(g["week"]), "date": local.strftime("%Y-%m-%d"),
-                "kickoff_hr": local.hour + local.minute / 60, "opponent": opp,
+                "season": season, "week": int(g["week"]), "date": date,
+                "kickoff_hr": kickoff_hr, "opponent": opp,
                 "attendance": g.get("attendance"), "completed": int(bool(g.get("completed"))),
                 "conf_game": int(bool(g.get("conferenceGame"))),
                 "opp_p4": int(g.get("awayConference") in P4_CONFERENCES),
@@ -103,6 +113,9 @@ def build_features(tickets: pd.DataFrame, seasons: dict) -> tuple[pd.DataFrame, 
             e = g.get("awayPregameElo")
             if e is None:
                 e = elo.get(opp)
+            if e is None and opp in prev_elo:
+                e = prev_elo[opp]
+                warnings.append(f"{season} {opp}: no {season} Elo yet; using {season - 1} final Elo {e:.0f}")
             if e is None:
                 e = elo_floor
                 warnings.append(f"{season} {opp}: no Elo; imputed {elo_floor}")

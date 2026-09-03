@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from ticketmodel.features import FEATURE_COLUMNS, FeatureError, ap_rank_lookup, build_features, local_datetime, opponent_rank, resolve_opponent
+from ticketmodel.features import FEATURE_COLUMNS, FeatureError, ap_rank_lookup, build_features, game_local_date, local_datetime, opponent_rank, resolve_opponent
 from ticketmodel.tickets import load_tickets
 
 RANKINGS = [
@@ -33,6 +33,7 @@ def test_resolve_alias_exact_and_prefix():
     assert resolve_opponent("UMass", {"Massachusetts"}) == "Massachusetts"
     assert resolve_opponent("UMass Minutemen", {"Massachusetts"}) == "Massachusetts"
     assert resolve_opponent("USM Golden Eagles", {"Southern Miss"}) == "Southern Miss"
+    assert resolve_opponent("Louisiana Monroe Warhawks", {"UL Monroe"}) == "UL Monroe"
 
 
 def test_resolve_alias_target_not_a_home_opponent_raises():
@@ -163,3 +164,28 @@ def test_season_without_cfbd_data_raises(tmp_path, seasons, tickets_text):
     p.write_text(tickets_text + "Rival A,2022-09-10,20,\n")
     with pytest.raises(FeatureError, match="2022"):
         build_features(load_tickets(p), seasons)
+
+
+def test_tbd_kickoff_uses_calendar_date_and_blank_hour():
+    # CFBD stores TBD kickoffs at midnight Eastern (04:00Z / 05:00Z), which is the previous day in Central.
+    date, hr = game_local_date({"startDate": "2026-09-26T04:00:00.000Z", "startTimeTBD": True})
+    assert date == "2026-09-26" and np.isnan(hr)
+    date, hr = game_local_date({"startDate": "2026-09-26T04:00:00.000Z", "startTimeTBD": False})
+    assert date == "2026-09-25" and hr == 23.0
+
+
+def test_build_features_tbd_game_keeps_calendar_date(tickets_df, seasons):
+    for g in seasons[2024]["games"]:
+        if g["awayTeam"] == "Rival D":
+            g["startDate"], g["startTimeTBD"] = "2024-11-09T04:00:00.000Z", True
+    df, _ = build_features(tickets_df, seasons)
+    r = row(df, 2024, "Rival D")
+    assert r["date"] == "2024-11-09" and pd.isna(r["kickoff_hr"])
+
+
+def test_missing_current_season_elo_falls_back_to_previous_season(tickets_df, seasons):
+    # Early in a season CFBD's Elo list only holds teams that have played; use last season's final Elo.
+    seasons[2024]["elo"] = [t for t in seasons[2024]["elo"] if t["team"] != "Rival C"]
+    df, warnings = build_features(tickets_df, seasons)
+    assert row(df, 2024, "Rival C")["opp_elo"] == 1540  # 2023 value
+    assert any("Rival C" in w and "2023" in w for w in warnings)
