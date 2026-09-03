@@ -1,23 +1,23 @@
-opponent,date,change3d,getin
-Ole Miss,2025-11-28,-23,133
-Georgia,2025-11-08,16,45
-Texas,2025-10-25,42,48
-Tennessee,2025-09-27,-9,95
-Northern Illinois,2025-09-20,-31,11
-Alcorn State,2025-09-13,71,26
-Arizona State,2025-09-06,32,32
-Missouri,2024-11-23,,9
+opponent,date,getin,observed
+Ole Miss,2025-11-28,133.0,
+Georgia,2025-11-08,45.0,
+Texas,2025-10-25,48.0,
+Tennessee,2025-09-27,95.0,
+Northern Illinois,2025-09-20,11.0,
+Alcorn State,2025-09-13,26.0,
+Arizona State,2025-09-06,32.0,
+Missouri,2024-11-23,9.0,
 UMass,2024-11-02,,
 Arkansas,2024-10-26,,
-Texas A&M,2024-10-19,,10
+Texas A&M,2024-10-19,10.0,
 Florida,2024-09-21,,
 Toledo,2024-09-14,,
 Eastern Kentucky,2024-08-31,,
-Ole Miss,2023-11-23,82,63
-Southern Miss,2023-11-18,133,19
-Kentucky,2023-11-04,20,10
-Western Michigan,2023-10-07,-33,6
-Alabama,2023-09-30,-39,25
-LSU,2023-09-16,-41,31
-Arizona,2023-09-09,0,12
-Southeastern Louisiana,2023-09-02,33,8
+Ole Miss,2023-11-23,63.0,
+Southern Miss,2023-11-18,19.0,
+Kentucky,2023-11-04,10.0,
+Western Michigan,2023-10-07,6.0,
+Alabama,2023-09-30,25.0,
+LSU,2023-09-16,31.0,
+Arizona,2023-09-09,12.0,
+Southeastern Louisiana,2023-09-02,8.0,
