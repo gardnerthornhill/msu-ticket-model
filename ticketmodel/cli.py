@@ -11,7 +11,7 @@ from . import cfbd
 from . import features as feat
 from . import model as mdl
 from . import report as rpt
-from .config import DEFAULT_PATHS, MIN_TRAINING_ROWS, Paths
+from .config import DEFAULT_PATHS, MIN_PRICED_PER_SEASON, MIN_TRAINING_ROWS, Paths
 from .tickets import TicketError, load_tickets
 
 PRED_COLUMNS = ["season", "date", "opponent", "getin", "tier1_pred", "tier1_lo", "tier1_hi", "tier2_pred", "tier2_lo", "tier2_hi"]
@@ -92,6 +92,7 @@ def cmd_predict(paths: Paths) -> pd.DataFrame:
     if not paths.features.exists():
         raise mdl.ModelError(f"no {paths.features}; run build")
     df = pd.read_csv(paths.features)
+    priced_per_season = df[df["getin"].notna()].groupby("season").size()
     up = df[(df["completed"] == 0) & df["attendance"].isna()].reset_index(drop=True)
     out = up[["season", "date", "opponent", "getin"]].copy()
     for c in PRED_COLUMNS[4:]:
@@ -100,11 +101,16 @@ def cmd_predict(paths: Paths) -> pd.DataFrame:
         p1 = mdl.predict(m1, up)
         out["tier1_pred"], out["tier1_lo"], out["tier1_hi"] = p1["pred"].round(), p1["lo"].round(), p1["hi"].round()
         priced = up["getin"].notna()
-        if priced.any():
-            p2 = mdl.predict(m2, up[priced])
-            out.loc[priced, "tier2_pred"] = p2["pred"].round()
-            out.loc[priced, "tier2_lo"] = p2["lo"].round()
-            out.loc[priced, "tier2_hi"] = p2["hi"].round()
+        for season, n in priced_per_season.items():
+            if n < MIN_PRICED_PER_SEASON and (priced & (up["season"] == season)).any():
+                print(f"warning: season {season} has only {n} priced game(s); Tier 2 needs {MIN_PRICED_PER_SEASON}, showing Tier 1 only")
+        enough_priced = up["season"].map(priced_per_season).fillna(0) >= MIN_PRICED_PER_SEASON
+        tier2 = priced & enough_priced
+        if tier2.any():
+            p2 = mdl.predict(m2, up[tier2])
+            out.loc[tier2, "tier2_pred"] = p2["pred"].round()
+            out.loc[tier2, "tier2_lo"] = p2["lo"].round()
+            out.loc[tier2, "tier2_hi"] = p2["hi"].round()
     out = out[PRED_COLUMNS]
     paths.predictions.parent.mkdir(parents=True, exist_ok=True)
     out.to_csv(paths.predictions, index=False)

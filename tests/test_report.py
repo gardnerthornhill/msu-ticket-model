@@ -41,3 +41,8 @@ def test_report_contains_every_section(tmp_path):
     assert "| 2023 | 2023-09-30 | Mid Major |  | 47000 | 48973 |  |" in text
     assert "2024 Rival D: no ticket row" in text
     assert "7480" in text and "±" in text
+    assert "within 5% of the best" in text
+    assert "optimistic" in text
+    assert "collinear" in text
+    assert "at least 3 priced games" in text
+    assert "nominal 80% coverage" in text

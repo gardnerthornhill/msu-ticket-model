@@ -49,7 +49,19 @@ def test_select_tier1_finds_exact_subset_and_prefers_fewer_features():
     assert set(ranked[0]["features"]) == {"conf_game", "opp_elo"}
     assert ranked[0]["rmse"] < 1e-3
     assert len(ranked) == 6 + 15 + 20
-    assert ranked == sorted(ranked, key=lambda r: (round(r["rmse"], 3), len(r["features"])))
+
+
+def test_rank_prefers_fewer_features_within_tolerance():
+    close = [{"features": ["a", "b", "c"], "rmse": 100.0}, {"features": ["a", "b"], "rmse": 103.0},
+             {"features": ["a"], "rmse": 120.0}]
+    ranked = mdl._rank(close)
+    assert [r["features"] for r in ranked] == [["a", "b"], ["a", "b", "c"], ["a"]]
+
+    far = [{"features": ["a", "b", "c"], "rmse": 100.0}, {"features": ["a", "b"], "rmse": 110.0}]
+    ranked = mdl._rank(far)
+    assert ranked[0]["features"] == ["a", "b", "c"]
+
+    assert mdl._rank([]) == []
 
 
 def test_select_tier2_picks_price_feature_with_lowest_loo():

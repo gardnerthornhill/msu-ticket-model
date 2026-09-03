@@ -19,7 +19,9 @@ ALIASES = {
 CANDIDATE_FEATURES = ["opp_ranked", "conf_game", "opp_elo", "opp_sp", "opp_p4", "week"]
 PRICE_FEATURES = ["log_getin", "rel_log_price"]
 MAX_SUBSET_SIZE = 3
+SELECTION_TOLERANCE = 0.05  # prefer fewer features when LOO-RMSE is within this fraction of the best
 MIN_TRAINING_ROWS = 8
+MIN_PRICED_PER_SEASON = 3  # Tier 2 predictions need this many priced games in the game's season
 REFRESH_WINDOW_DAYS = 14
 INTERVAL = 0.80  # prediction interval coverage
 

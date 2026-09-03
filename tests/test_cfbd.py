@@ -73,7 +73,16 @@ def test_non_200_is_error_and_writes_nothing(tmp_path):
     http = FakeHttp(status=401)
     with pytest.raises(CfbdError, match="HTTP 401"):
         cfbd.fetch_season(2025, tmp_path, http=http, key="k", now=NOW)
-    assert not (tmp_path / "games_2025.json").exists()
+    assert not any((tmp_path / f"{kind}_2025.json").exists() for kind in KINDS)
+
+
+def test_non_json_body_is_error(tmp_path):
+    def http(url, key):
+        return 200, "<html>"
+
+    with pytest.raises(CfbdError, match="non-JSON"):
+        cfbd.fetch_season(2025, tmp_path, http=http, key="k", now=NOW)
+    assert not any((tmp_path / f"{kind}_2025.json").exists() for kind in KINDS)
 
 
 def test_load_season_missing_file_is_error(tmp_path):

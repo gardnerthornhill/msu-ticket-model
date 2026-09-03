@@ -52,6 +52,20 @@ def test_predict_scores_upcoming_games_and_blanks_tier2_without_price(fixture_ro
     assert pd.read_csv(paths.predictions).shape == (2, 10)
 
 
+def test_predict_blanks_tier2_when_season_has_too_few_prices(fixture_root, capsys):
+    paths = Paths(fixture_root)
+    cli.cmd_train(paths)
+    df = pd.read_csv(paths.features)
+    blank = df["season"].eq(2024) & df["opponent"].isin(["FCS U", "Rival A"])
+    df.loc[blank, ["getin", "log_getin", "rel_log_price"]] = float("nan")
+    df.to_csv(paths.features, index=False)
+    out = cli.cmd_predict(paths)
+    c = out[out["opponent"] == "Rival C"].iloc[0]
+    assert pd.isna(c["tier2_pred"])
+    assert c["tier1_pred"] > 0
+    assert "Tier 2 needs 3" in capsys.readouterr().out
+
+
 def test_predict_before_train_is_a_clean_error(fixture_root, capsys):
     cli.cmd_build(Paths(fixture_root))
     assert cli.main(["predict", "--root", str(fixture_root)]) == 1

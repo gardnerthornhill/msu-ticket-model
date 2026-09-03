@@ -41,6 +41,8 @@ def default_http(url: str, key: str) -> tuple[int, str]:
             return resp.status, resp.read().decode()
     except urllib.error.HTTPError as e:
         return e.code, e.read().decode(errors="replace")
+    except (urllib.error.URLError, TimeoutError) as e:
+        raise CfbdError(f"CFBD request failed: {e}")
 
 
 def cache_path(kind: str, season: int, cache_dir: Path) -> Path:
@@ -86,7 +88,10 @@ def fetch_season(season: int, cache_dir: Path, force: bool = False, http=None, k
         status, body = http(url, key)
         if status != 200:
             raise CfbdError(f"CFBD {kind} for {season} returned HTTP {status}: {body[:200]}")
-        payloads[kind] = json.loads(body)
+        try:
+            payloads[kind] = json.loads(body)
+        except json.JSONDecodeError:
+            raise CfbdError(f"CFBD {kind} for {season} returned non-JSON: {body[:200]}")
     Path(cache_dir).mkdir(parents=True, exist_ok=True)
     for kind, data in payloads.items():
         cache_path(kind, season, cache_dir).write_text(json.dumps(data))

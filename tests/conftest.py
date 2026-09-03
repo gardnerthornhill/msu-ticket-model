@@ -31,7 +31,7 @@ def _poll(season, week, ranks, season_type="regular"):
 
 def _sp(season, ratings):
     rows = [{"year": season, "team": t, "conference": CONF[t], "rating": r} for t, r in ratings]
-    rows.append({"year": season, "team": "nationalAverages", "conference": None, "rating": 0.0})
+    rows.append({"year": season, "team": "nationalAverages", "conference": None, "rating": -50.0})
     return rows
 
 

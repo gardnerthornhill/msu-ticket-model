@@ -8,7 +8,15 @@ import pandas as pd
 import statsmodels.api as sm
 from scipy import stats
 
-from .config import CANDIDATE_FEATURES, CAPACITY, INTERVAL, MAX_SUBSET_SIZE, MIN_TRAINING_ROWS, PRICE_FEATURES
+from .config import (
+    CANDIDATE_FEATURES,
+    CAPACITY,
+    INTERVAL,
+    MAX_SUBSET_SIZE,
+    MIN_TRAINING_ROWS,
+    PRICE_FEATURES,
+    SELECTION_TOLERANCE,
+)
 
 TARGET = "attendance"
 
@@ -69,7 +77,16 @@ def loo_metrics(df: pd.DataFrame, features) -> dict:
 
 
 def _rank(results):
-    return sorted(results, key=lambda r: (round(r["rmse"], 3), len(r["features"])))
+    if not results:
+        return results
+    # Round for the tolerance comparison (not the reported rmse) so leave-one-out floating-point
+    # noise on near-exact fits doesn't make a larger subset look spuriously better than a smaller
+    # one that fits just as well; the final rmse tuple element still breaks real ties precisely.
+    best = min(round(r["rmse"], 3) for r in results)
+    return sorted(
+        results,
+        key=lambda r: (round(r["rmse"], 3) > best * (1 + SELECTION_TOLERANCE), len(r["features"]), r["rmse"]),
+    )
 
 
 def select_tier1(df: pd.DataFrame) -> list[dict]:

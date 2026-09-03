@@ -115,7 +115,8 @@ attendance (Tier 1) and additionally non-null price (Tier 2).
 
 **Tier 1 feature selection.** Candidate pool `{opp_ranked, conf_game, opp_elo, opp_sp, opp_p4, week}`.
 Evaluate every subset of size 1–3 by leave-one-out RMSE on the Tier 1 training rows. Choose the
-minimum. Record the top five subsets and their LOO-RMSE in the report.
+minimum LOO-RMSE, except that a smaller subset is preferred when its LOO-RMSE is within 5%
+(`SELECTION_TOLERANCE`) of the best. Record the top five subsets and their LOO-RMSE in the report.
 
 **Tier 2.** The chosen Tier 1 subset plus exactly one of `{log_getin, rel_log_price}`, chosen by
 LOO-RMSE on the Tier 2 training rows. Both alternatives are reported.
@@ -144,7 +145,10 @@ Written by `train`. Contains:
 
 `predict` scores every home game in `features.csv` with null attendance. Output columns:
 season, date, opponent, getin, tier1_pred, tier1_lo, tier1_hi, tier2_pred, tier2_lo, tier2_hi.
-Tier 2 columns are blank when no price is listed. The same table is printed to the terminal.
+Tier 2 columns are blank when no price is listed. Tier 2 is only scored for a game whose season
+has at least 3 priced games (`MIN_PRICED_PER_SEASON`), counting past and upcoming games;
+otherwise Tier 2 is left blank and a warning names the season. The same table is printed to the
+terminal.
 
 ## Project layout
 

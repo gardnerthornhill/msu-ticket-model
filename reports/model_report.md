@@ -21,15 +21,15 @@ Generated 2026-09-03.
 
 ## Tier 1 feature selection
 
-Top candidate subsets by LOO-RMSE (ties within 0.001 go to fewer features).
+Top candidate subsets by LOO-RMSE. A smaller subset is preferred when its LOO-RMSE is within 5% of the best.
 
 | features | LOO RMSE |
 |---|---|
 | opp_ranked + opp_elo + opp_sp | 3182 |
-| opp_ranked + conf_game + opp_elo | 3444 |
-| opp_ranked + conf_game | 3479 |
-| opp_ranked + conf_game + opp_p4 | 3513 |
-| opp_ranked + opp_sp | 3530 |
+| opp_ranked | 3530 |
+| conf_game | 4264 |
+| opp_p4 | 4302 |
+| opp_sp | 4353 |
 
 ## Tier 2 price feature
 
@@ -101,6 +101,9 @@ Features: opp_ranked + opp_elo + opp_sp + rel_log_price. Rows: 16. Residual SE: 
 ## Caveats
 
 - Small sample: a couple of dozen games. Coefficients are rough; the leave-one-out numbers are the honest accuracy.
-- Attendance is the announced figure and is capped at Davis Wade Stadium capacity (60,417); sellouts flatten the top end.
+- Attendance is the announced figure and is capped at Davis Wade Stadium capacity (60,417); sellouts flatten the top end, and intervals clipped at capacity no longer carry their nominal 80% coverage.
 - The get-in price is the final price recorded by ticketdata near game day, not a price observed weeks out.
 - Price levels shift season to season; the season-relative price feature exists for that reason.
+- Tier 1 features were chosen by the same leave-one-out scores reported here, so the headline RMSE is optimistic; the runner-up subsets in the selection table bracket the realistic range.
+- Individual coefficients are not interpretable when the selected features are collinear (for example opponent Elo and SP+); judge the model by its leave-one-out error, not by coefficient signs.
+- Tier 2 uses a season-relative price, so it only becomes meaningful once a season has at least 3 priced games; predictions leave Tier 2 blank until then.

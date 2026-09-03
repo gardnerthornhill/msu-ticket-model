@@ -7,9 +7,16 @@ from .config import CAPACITY, TEAM, VENUE
 
 CAVEATS = [
     "Small sample: a couple of dozen games. Coefficients are rough; the leave-one-out numbers are the honest accuracy.",
-    f"Attendance is the announced figure and is capped at {VENUE} capacity ({CAPACITY:,}); sellouts flatten the top end.",
+    f"Attendance is the announced figure and is capped at {VENUE} capacity ({CAPACITY:,}); sellouts flatten the top end, "
+    "and intervals clipped at capacity no longer carry their nominal 80% coverage.",
     "The get-in price is the final price recorded by ticketdata near game day, not a price observed weeks out.",
     "Price levels shift season to season; the season-relative price feature exists for that reason.",
+    "Tier 1 features were chosen by the same leave-one-out scores reported here, so the headline RMSE is optimistic; "
+    "the runner-up subsets in the selection table bracket the realistic range.",
+    "Individual coefficients are not interpretable when the selected features are collinear (for example opponent Elo "
+    "and SP+); judge the model by its leave-one-out error, not by coefficient signs.",
+    "Tier 2 uses a season-relative price, so it only becomes meaningful once a season has at least 3 priced games; "
+    "predictions leave Tier 2 blank until then.",
 ]
 
 
@@ -41,7 +48,8 @@ def write_report(path, s: dict) -> None:
              "## Leave-one-out accuracy", "", "| model | rows | RMSE | MAE | R² |", "|---|---|---|---|---|"]
     for label, m in s["metrics"].items():
         lines.append(f"| {label} | {m['n']} | {_num(m['rmse'])} | {_num(m['mae'])} | {_num(m['r2'], 3)} |")
-    lines += ["", "## Tier 1 feature selection", "", "Top candidate subsets by LOO-RMSE (ties within 0.001 go to fewer features).", "",
+    lines += ["", "## Tier 1 feature selection", "",
+              "Top candidate subsets by LOO-RMSE. A smaller subset is preferred when its LOO-RMSE is within 5% of the best.", "",
               "| features | LOO RMSE |", "|---|---|"]
     for r in s["tier1_candidates"]:
         lines.append(f"| {_feats(r['features'])} | {_num(r['rmse'])} |")
