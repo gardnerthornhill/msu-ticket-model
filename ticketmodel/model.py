@@ -1,0 +1,88 @@
+"""OLS attendance models: leave-one-out evaluation, feature selection, fit, persist, predict."""
+import hashlib
+import itertools
+import json
+
+import numpy as np
+import pandas as pd
+import statsmodels.api as sm
+from scipy import stats
+
+from .config import CANDIDATE_FEATURES, CAPACITY, INTERVAL, MAX_SUBSET_SIZE, MIN_TRAINING_ROWS, PRICE_FEATURES
+
+TARGET = "attendance"
+
+
+class ModelError(ValueError):
+    """Too few rows, or a missing saved model."""
+
+
+def _design(df: pd.DataFrame, features) -> pd.DataFrame:
+    X = df[list(features)].astype(float)
+    return sm.add_constant(X, has_constant="add")
+
+
+def _clip(a):
+    return np.clip(np.asarray(a, float), 0, CAPACITY)
+
+
+def loo_predictions(df: pd.DataFrame, features) -> np.ndarray:
+    y = df[TARGET].to_numpy(float)
+    n = len(df)
+    preds = np.empty(n)
+    for i in range(n):
+        mask = np.arange(n) != i
+        res = sm.OLS(y[mask], _design(df.iloc[mask], features)).fit()
+        preds[i] = float(res.predict(_design(df.iloc[[i]], features)).iloc[0])
+    return _clip(preds)
+
+
+def season_mean_baseline(df: pd.DataFrame) -> np.ndarray:
+    y = df[TARGET].to_numpy(float)
+    seasons = df["season"].to_numpy()
+    idx = np.arange(len(y))
+    preds = np.empty(len(y))
+    for i in idx:
+        others = (seasons == seasons[i]) & (idx != i)
+        preds[i] = y[others].mean() if others.any() else y[idx != i].mean()
+    return preds
+
+
+def metrics(y, preds) -> dict:
+    y = np.asarray(y, float)
+    preds = np.asarray(preds, float)
+    resid = y - preds
+    ss_tot = float(np.sum((y - y.mean()) ** 2))
+    return {
+        "rmse": float(np.sqrt(np.mean(resid ** 2))),
+        "mae": float(np.mean(np.abs(resid))),
+        "r2": float(1 - np.sum(resid ** 2) / ss_tot) if ss_tot > 0 else float("nan"),
+        "n": int(len(y)),
+    }
+
+
+def loo_metrics(df: pd.DataFrame, features) -> dict:
+    preds = loo_predictions(df, features)
+    out = metrics(df[TARGET], preds)
+    out["preds"] = preds
+    return out
+
+
+def _rank(results):
+    return sorted(results, key=lambda r: (round(r["rmse"], 3), len(r["features"])))
+
+
+def select_tier1(df: pd.DataFrame) -> list[dict]:
+    results = []
+    for k in range(1, MAX_SUBSET_SIZE + 1):
+        for combo in itertools.combinations(CANDIDATE_FEATURES, k):
+            results.append({"features": list(combo), "rmse": loo_metrics(df, combo)["rmse"]})
+    return _rank(results)
+
+
+def select_tier2(df: pd.DataFrame, tier1_features) -> list[dict]:
+    results = []
+    for pf in PRICE_FEATURES:
+        feats = list(tier1_features) + [pf]
+        results.append({"features": feats, "price_feature": pf, "rmse": loo_metrics(df, feats)["rmse"]})
+    return _rank(results)
