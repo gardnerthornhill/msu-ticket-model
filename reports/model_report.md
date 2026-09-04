@@ -1,6 +1,6 @@
 # Mississippi State Attendance Model
 
-Generated 2026-09-03.
+Generated 2026-09-04.
 
 ## Data
 
@@ -102,7 +102,7 @@ Features: opp_ranked + opp_elo + opp_sp + rel_log_price. Rows: 16. Residual SE: 
 - 2026 Oklahoma: no 2026 Elo yet; using 2025 final Elo 1810
 - 2026 Vanderbilt: no 2026 Elo yet; using 2025 final Elo 1880
 - 2026 Auburn: no 2026 Elo yet; using 2025 final Elo 1670
-- 2026 Tennessee Tech: no Elo; imputed 1159.0
+- 2026 Tennessee Tech: no Elo; imputed 805.0
 - 2026 Tennessee Tech: no SP+; imputed -42.9
 
 ## Caveats
