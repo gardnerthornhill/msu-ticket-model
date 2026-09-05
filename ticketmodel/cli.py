@@ -13,10 +13,13 @@ from . import features as feat
 from . import model as mdl
 from . import report as rpt
 from . import site as web
-from .config import DEFAULT_PATHS, MIN_TRAINING_ROWS, Paths
+from .attendance import fill_missing_attendance
+from .history import archive_tickets, archive_forecasts
+from .config import DEFAULT_PATHS, MIN_TRAINING_ROWS, MIN_PRICED_PER_SEASON, TIER2_FEATURES, Paths
 from .tickets import TicketError, load_tickets, upsert_rows
 
-PRED_COLUMNS = ["season", "date", "opponent", "getin", "tier1_pred", "tier1_lo", "tier1_hi", "tier2_pred", "tier2_lo", "tier2_hi"]
+PRED_COLUMNS = ["season", "date", "opponent", "getin", "tier1_pred", "tier1_lo", "tier1_hi", "tier2_pred", "tier2_lo", "tier2_hi",
+                "tier1_p_sellout", "tier2_p_sellout"]
 
 
 def _seasons(paths: Paths) -> list[int]:
@@ -34,6 +37,13 @@ def cmd_build(paths: Paths) -> pd.DataFrame:
     tickets = load_tickets(paths.tickets)
     seasons = {s: cfbd.load_season(s, paths.cache_dir) for s in sorted(set(tickets["season"]))}
     df, warnings = feat.build_features(tickets, seasons)
+    df, corrections = fill_missing_attendance(df, paths.attendance_overrides)
+    warnings.extend(corrections)
+    coverage = df[df["getin"].notna()].groupby("season").size()
+    for season, count in coverage.items():
+        if count < MIN_PRICED_PER_SEASON:
+            warnings.append(f"season {season}: only {count} priced games; sparse historical rows remain in training and diagnostics; new forecasts use Tier 1 until {MIN_PRICED_PER_SEASON} prices are available")
+    archive_tickets(tickets, paths.ticket_history)
     for w in warnings:
         print(f"warning: {w}")
     paths.features.parent.mkdir(parents=True, exist_ok=True)
@@ -53,7 +63,7 @@ def cmd_train(paths: Paths) -> dict:
     tier1_cands = mdl.select_tier1(t1)
     tier1_feats = tier1_cands[0]["features"]
     tier2_cands = mdl.select_tier2(t2, tier1_feats)
-    tier2_feats = tier2_cands[0]["features"]
+    tier2_feats = list(TIER2_FEATURES)
     m1, m2 = mdl.fit(t1, tier1_feats), mdl.fit(t2, tier2_feats)
     mdl.save_model(m1, paths.tier1)
     mdl.save_model(m2, paths.tier2)
@@ -75,6 +85,7 @@ def cmd_train(paths: Paths) -> dict:
         "Tier 1 (all rows)": {k: v for k, v in tier1_loo.items() if k != "preds"},
         "Season mean (priced rows)": mdl.metrics(t2["attendance"], mdl.season_mean_baseline(t2)),
         "Price only (priced rows)": {k: v for k, v in mdl.loo_metrics(t2, ["log_getin"]).items() if k != "preds"},
+        "Relative price only (priced rows)": {k: v for k, v in mdl.loo_metrics(t2, ["rel_log_price"]).items() if k != "preds"},
         "Tier 1 (priced rows)": {k: v for k, v in mdl.loo_metrics(t2, tier1_feats).items() if k != "preds"},
         "Tier 2 (priced rows)": {k: v for k, v in tier2_loo.items() if k != "preds"},
     }
@@ -87,6 +98,14 @@ def cmd_train(paths: Paths) -> dict:
         "tier1_model": m1,
         "tier2_model": m2,
         "per_game": per_game,
+        "validation": mdl.season_validation(t2, tier2_feats),
+        "per_season": [
+            {"season": int(season), "priced_games": int((df["season"].eq(season) & df["getin"].notna()).sum()),
+             **mdl.metrics(g["attendance"], g["tier2_loo"]),
+             "bias": float((g["tier2_loo"] - g["attendance"]).mean()),
+             "inside": int(((g["attendance"] >= g["tier2_lo"]) & (g["attendance"] <= g["tier2_hi"])).sum())}
+            for season, g in per_game[per_game["tier2_loo"].notna()].groupby("season")
+        ],
         "warnings": df.attrs.get("warnings", []),
     }
     rpt.write_report(paths.report, summary)
@@ -114,6 +133,9 @@ def cmd_predict(paths: Paths) -> pd.DataFrame:
     out, warnings = mdl.predict_upcoming(df, m1, m2)
     for w in warnings:
         print(f"warning: {w}")
+    archived = archive_forecasts(df, out, {"tier1": m1, "tier2": m2}, paths.forecast_history)
+    if archived:
+        print(f"archived {archived} pregame forecast snapshot(s)")
     out = out[PRED_COLUMNS]
     paths.predictions.parent.mkdir(parents=True, exist_ok=True)
     out.to_csv(paths.predictions, index=False)

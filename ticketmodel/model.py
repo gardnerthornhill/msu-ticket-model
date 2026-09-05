@@ -99,11 +99,38 @@ def select_tier1(df: pd.DataFrame) -> list[dict]:
 
 
 def select_tier2(df: pd.DataFrame, tier1_features) -> list[dict]:
+    """Compare price-only and legacy augmented models; does not choose the live specification."""
     results = []
     for pf in PRICE_FEATURES:
-        feats = list(tier1_features) + [pf]
-        results.append({"features": feats, "price_feature": pf, "rmse": loo_metrics(df, feats)["rmse"]})
+        for fs in ([], list(tier1_features)):
+            feats = fs + [pf]
+            if any(r["features"] == feats for r in results):
+                continue
+            results.append({"features": feats, "price_feature": pf, "rmse": loo_metrics(df, feats)["rmse"]})
     return _rank(results)
+
+
+def season_validation(df: pd.DataFrame, features) -> dict:
+    """Retrospective season transfer for a fixed specification, with counts and fold predictions.
+
+    Features retain their cached values. These tests hold out attendance labels,
+    not historical information sets; they are not live forecast accuracy.
+    """
+    results = {}
+    for mode in ("season_holdout", "forward"):
+        folds, actuals, predictions = [], [], []
+        for season in sorted(df["season"].unique()):
+            train = df[df["season"] != season] if mode == "season_holdout" else df[df["season"] < season]
+            test = df[df["season"] == season]
+            if len(train) < MIN_TRAINING_ROWS:
+                continue
+            forecast = predict(fit(train, features), test)["pred"].to_numpy()
+            folds.append({"season": int(season), "training_n": len(train), **metrics(test[TARGET], forecast),
+                          "bias": float(np.mean(forecast - test[TARGET].to_numpy()))})
+            actuals.extend(test[TARGET].tolist())
+            predictions.extend(forecast.tolist())
+        results[mode] = {"folds": folds, "metrics": metrics(actuals, predictions) if actuals else None}
+    return results
 
 
 def fit(df: pd.DataFrame, features, check_rows: bool = True) -> dict:

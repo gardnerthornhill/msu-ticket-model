@@ -74,6 +74,24 @@ def test_select_tier2_picks_price_feature_with_lowest_loo():
     assert ranked[0]["price_feature"] == "log_getin" and ranked[0]["rmse"] < 1e-3
     assert ranked[0]["features"] == ["conf_game", "log_getin"]
     assert {r["price_feature"] for r in ranked} == {"log_getin", "rel_log_price"}
+    assert any(r["features"] == ["rel_log_price"] for r in ranked)
+    assert any(r["features"] == ["log_getin"] for r in ranked)
+
+
+def test_season_validation_does_not_fit_to_test_season_attendance():
+    df = pd.DataFrame({"season": [2023] * 8 + [2024] * 8, "x": list(range(8)) * 2,
+                       "attendance": [40000 + 1000 * x for x in range(8)] * 2})
+    baseline = mdl.season_validation(df, ["x"])
+    assert baseline["forward"]["metrics"]["rmse"] < 1e-6
+    assert baseline["forward"]["metrics"]["n"] == 8
+    assert baseline["season_holdout"]["metrics"]["n"] == 16
+    # Changing every held-out target by 5,000 must change the error by 5,000,
+    # rather than allowing the forecast to learn that shift.
+    df.loc[df.season == 2024, "attendance"] += 5000
+    result = mdl.season_validation(df, ["x"])
+    assert result["forward"]["metrics"]["rmse"] == pytest.approx(5000)
+    assert result["forward"]["folds"][0]["bias"] == pytest.approx(-5000)
+    assert result["forward"]["folds"][0]["training_n"] == 8
 
 
 def test_fit_recovers_exact_coefficients():

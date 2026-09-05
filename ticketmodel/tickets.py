@@ -1,8 +1,12 @@
 """Load and validate the hand-maintained data/tickets.csv."""
 import csv
 import io
+from pathlib import Path
 
+import numpy as np
 import pandas as pd
+
+from .history import archive_tickets
 
 REQUIRED = ["opponent", "date", "getin", "observed"]
 
@@ -28,11 +32,21 @@ def _validate(df: pd.DataFrame, label: str) -> pd.DataFrame:
     except (ValueError, TypeError) as e:
         raise TicketError(f"{label}: bad date, expected YYYY-MM-DD: {e}") from e
     df["date"] = parsed.dt.strftime("%Y-%m-%d")
+    if parsed.isna().any():
+        raise TicketError(f"{label}: date is required")
     try:
         df["getin"] = pd.to_numeric(df["getin"].replace("", None))
     except (ValueError, TypeError) as e:
         raise TicketError(f"{label}: getin must be a number or blank: {e}") from e
+    prices = df["getin"].dropna()
+    if (prices <= 0).any() or not np.isfinite(prices).all():
+        raise TicketError(f"{label}: getin must be positive and finite, or blank")
     df["observed"] = df["observed"].where(df["observed"].notna() & (df["observed"].astype(str) != ""), None)
+    try:
+        observed = pd.to_datetime(df["observed"].dropna(), format="%Y-%m-%d")
+    except (ValueError, TypeError) as e:
+        raise TicketError(f"{label}: bad observed date, expected YYYY-MM-DD: {e}") from e
+    df.loc[observed.index, "observed"] = observed.dt.strftime("%Y-%m-%d")
     df["season"] = parsed.dt.year.astype(int)
     dups = df.duplicated(subset=["opponent", "date"], keep=False)
     if dups.any():
@@ -61,6 +75,7 @@ def upsert_rows(path, rows_text: str, today: str) -> tuple[int, int]:
     new = _validate(pd.DataFrame(rows, columns=REQUIRED), "pasted rows")
     new["observed"] = new["observed"].where(new["observed"].notna(), today)
     existing = load_tickets(path).drop(columns="season")
+    previous = existing.copy()
     keyed = {(r.opponent, r.date): i for i, r in enumerate(existing.itertuples(index=False))}
     added = updated = 0
     for r in new.itertuples(index=False):
@@ -74,5 +89,8 @@ def upsert_rows(path, rows_text: str, today: str) -> tuple[int, int]:
     out = existing.copy()
     out["getin"] = out["getin"].map(lambda v: "" if pd.isna(v) else f"{float(v):g}")
     out["observed"] = out["observed"].fillna("")
+    history_path = Path(path).with_name("ticket_history.csv")
+    archive_tickets(previous, history_path)
+    archive_tickets(out, history_path)
     out.to_csv(path, index=False)
     return added, updated

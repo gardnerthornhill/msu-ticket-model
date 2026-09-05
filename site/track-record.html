@@ -36,13 +36,13 @@
 <main id="main" class="wrap">
 <section class="page-head">
   <h1>Track record</h1>
-  <p class="lede">Across 21 tracked home games since 2023, the forecast missed the announced crowd by 1,974 on a typical game, and the real number landed inside the 80% range 18 times out of 21. Each game here is scored with a model that never saw that game: it was refit on the other games first, so the numbers are what the model would have said beforehand.</p>
+  <p class="lede">Across 22 tracked home games since 2023, the retrospective forecast missed the announced crowd by 1,556 on a typical game, and the real number landed inside the 80% range 19 times out of 22. Each game's attendance was held out while fitting the other games. Historical prices and season references are used, so these results are not forecasts saved before kickoff.</p>
 </section>
 
 <section class="kpis" aria-label="Headline accuracy">
-  <div class="kpi"><span class="kpi-value">21</span><span class="kpi-label">games scored, 16 of them with a get-in price</span></div>
-  <div class="kpi"><span class="kpi-value">1,974</span><span class="kpi-label">typical miss in seats (mean absolute error)</span></div>
-  <div class="kpi"><span class="kpi-value">86%</span><span class="kpi-label">of games inside the 80% range, 18 of 21</span></div>
+  <div class="kpi"><span class="kpi-value">22</span><span class="kpi-label">games scored, 17 of them with a get-in price</span></div>
+  <div class="kpi"><span class="kpi-value">1,556</span><span class="kpi-label">typical miss in seats (mean absolute error)</span></div>
+  <div class="kpi"><span class="kpi-value">86%</span><span class="kpi-label">of games inside the 80% range, 19 of 22</span></div>
   <div class="kpi"><span class="kpi-value">2</span><span class="kpi-label">games announced at the full 60,417</span></div>
 </section>
 
@@ -51,7 +51,7 @@
   <p>Dots on the line are perfect calls. Above it, more people came than forecast. Filled dots used the price model; hollow dots had no listed price and used the schedule-only model.</p>
   <div class="scatter-wrap">
   <svg class="scatter" viewBox="0 0 640 520" role="img" aria-labelledby="scatter-title" data-scatter>
-    <title id="scatter-title">Forecast versus actual attendance for 21 games</title>
+    <title id="scatter-title">Forecast versus actual attendance for 22 games</title>
     <line class="grid" x1="64" x2="616" y1="379.87" y2="379.87"/>
     <line class="grid" y1="20" y2="468" x1="172.59" x2="172.59"/>
     <text class="tick" x="56" y="379.87" text-anchor="end" dominant-baseline="middle">40k</text>
@@ -78,45 +78,52 @@
     <text class="axis-label" x="340.0" y="512" text-anchor="middle">Forecast</text>
     <text class="axis-label" transform="translate(16 244.0) rotate(-90)" text-anchor="middle">Actual</text>
     <a href="games/2023-se-louisiana.html" class="dot-link">
-      <circle class="dot-hit" cx="368.59" cy="202.89" r="14"
-        data-label="2023 SE Louisiana" data-forecast="49,025" data-actual="50,041" data-error="-1,016"/>
-      <circle class="dot dot-priced" cx="368.59" cy="202.89" r="6">
-        <title>2023 SE Louisiana: forecast 49,025, actual 50,041 (-1,016)</title>
+      <circle class="dot-hit" cx="368.83" cy="202.89" r="14"
+        data-label="2023 SE Louisiana" data-forecast="49,036" data-actual="50,041" data-error="-1,005"/>
+      <circle class="dot dot-priced" cx="368.83" cy="202.89" r="6">
+        <title>2023 SE Louisiana: forecast 49,036, actual 50,041 (-1,005)</title>
       </circle>
     </a>
     <a href="games/2023-arizona.html" class="dot-link">
-      <circle class="dot-hit" cx="368.16" cy="174.56" r="14"
-        data-label="2023 Arizona" data-forecast="49,005" data-actual="51,648" data-error="-2,643"/>
-      <circle class="dot dot-priced" cx="368.16" cy="174.56" r="6">
-        <title>2023 Arizona: forecast 49,005, actual 51,648 (-2,643)</title>
+      <circle class="dot-hit" cx="427.29" cy="174.56" r="14"
+        data-label="2023 Arizona" data-forecast="51,728" data-actual="51,648" data-error="+80"/>
+      <circle class="dot dot-priced" cx="427.29" cy="174.56" r="6">
+        <title>2023 Arizona: forecast 51,728, actual 51,648 (+80)</title>
       </circle>
     </a>
     <a href="games/2023-lsu.html" class="dot-link">
-      <circle class="dot-hit" cx="538.55" cy="25.87" r="14"
-        data-label="2023 LSU" data-forecast="56,851" data-actual="60,084" data-error="-3,233"/>
-      <circle class="dot dot-priced" cx="538.55" cy="25.87" r="6">
-        <title>2023 LSU: forecast 56,851, actual 60,084 (-3,233)</title>
+      <circle class="dot-hit" cx="551.5" cy="25.87" r="14"
+        data-label="2023 LSU" data-forecast="57,447" data-actual="60,084" data-error="-2,637"/>
+      <circle class="dot dot-priced" cx="551.5" cy="25.87" r="6">
+        <title>2023 LSU: forecast 57,447, actual 60,084 (-2,637)</title>
       </circle>
     </a>
     <a href="games/2023-alabama.html" class="dot-link">
-      <circle class="dot-hit" cx="522.55" cy="25.39" r="14"
-        data-label="2023 Alabama" data-forecast="56,114" data-actual="60,111" data-error="-3,997"/>
-      <circle class="dot dot-priced" cx="522.55" cy="25.39" r="6">
-        <title>2023 Alabama: forecast 56,114, actual 60,111 (-3,997)</title>
+      <circle class="dot-hit" cx="520.81" cy="25.39" r="14"
+        data-label="2023 Alabama" data-forecast="56,034" data-actual="60,111" data-error="-4,077"/>
+      <circle class="dot dot-priced" cx="520.81" cy="25.39" r="6">
+        <title>2023 Alabama: forecast 56,034, actual 60,111 (-4,077)</title>
       </circle>
     </a>
     <a href="games/2023-western-michigan.html" class="dot-link">
-      <circle class="dot-hit" cx="331.17" cy="253.7" r="14"
-        data-label="2023 Western Michigan" data-forecast="47,302" data-actual="47,158" data-error="+144"/>
-      <circle class="dot dot-priced" cx="331.17" cy="253.7" r="6">
-        <title>2023 Western Michigan: forecast 47,302, actual 47,158 (+144)</title>
+      <circle class="dot-hit" cx="332.17" cy="253.7" r="14"
+        data-label="2023 Western Michigan" data-forecast="47,348" data-actual="47,158" data-error="+190"/>
+      <circle class="dot dot-priced" cx="332.17" cy="253.7" r="6">
+        <title>2023 Western Michigan: forecast 47,348, actual 47,158 (+190)</title>
       </circle>
     </a>
     <a href="games/2023-kentucky.html" class="dot-link">
-      <circle class="dot-hit" cx="370.68" cy="162.56" r="14"
-        data-label="2023 Kentucky" data-forecast="49,121" data-actual="52,329" data-error="-3,208"/>
-      <circle class="dot dot-priced" cx="370.68" cy="162.56" r="6">
-        <title>2023 Kentucky: forecast 49,121, actual 52,329 (-3,208)</title>
+      <circle class="dot-hit" cx="398.65" cy="162.56" r="14"
+        data-label="2023 Kentucky" data-forecast="50,409" data-actual="52,329" data-error="-1,920"/>
+      <circle class="dot dot-priced" cx="398.65" cy="162.56" r="6">
+        <title>2023 Kentucky: forecast 50,409, actual 52,329 (-1,920)</title>
+      </circle>
+    </a>
+    <a href="games/2023-southern-miss.html" class="dot-link">
+      <circle class="dot-hit" cx="491.8" cy="135.66" r="14"
+        data-label="2023 Southern Miss" data-forecast="54,698" data-actual="53,855" data-error="+843"/>
+      <circle class="dot dot-priced" cx="491.8" cy="135.66" r="6">
+        <title>2023 Southern Miss: forecast 54,698, actual 53,855 (+843)</title>
       </circle>
     </a>
     <a href="games/2023-ole-miss.html" class="dot-link">
@@ -127,101 +134,101 @@
       </circle>
     </a>
     <a href="games/2024-eastern-kentucky.html" class="dot-link">
-      <circle class="dot-hit" cx="372.26" cy="226.1" r="14"
-        data-label="2024 Eastern Kentucky" data-forecast="49,194" data-actual="48,724" data-error="+470"/>
-      <circle class="dot dot-schedule" cx="372.26" cy="226.1" r="6">
-        <title>2024 Eastern Kentucky: forecast 49,194, actual 48,724 (+470)</title>
+      <circle class="dot-hit" cx="387.27" cy="226.1" r="14"
+        data-label="2024 Eastern Kentucky" data-forecast="49,885" data-actual="48,724" data-error="+1,161"/>
+      <circle class="dot dot-schedule" cx="387.27" cy="226.1" r="6">
+        <title>2024 Eastern Kentucky: forecast 49,885, actual 48,724 (+1,161)</title>
       </circle>
     </a>
     <a href="games/2024-toledo.html" class="dot-link">
-      <circle class="dot-hit" cx="332.17" cy="249.23" r="14"
-        data-label="2024 Toledo" data-forecast="47,348" data-actual="47,412" data-error="-64"/>
-      <circle class="dot dot-schedule" cx="332.17" cy="249.23" r="6">
-        <title>2024 Toledo: forecast 47,348, actual 47,412 (-64)</title>
+      <circle class="dot-hit" cx="341.14" cy="249.23" r="14"
+        data-label="2024 Toledo" data-forecast="47,761" data-actual="47,412" data-error="+349"/>
+      <circle class="dot dot-schedule" cx="341.14" cy="249.23" r="6">
+        <title>2024 Toledo: forecast 47,761, actual 47,412 (+349)</title>
       </circle>
     </a>
     <a href="games/2024-florida.html" class="dot-link">
-      <circle class="dot-hit" cx="427.47" cy="209.69" r="14"
-        data-label="2024 Florida" data-forecast="51,736" data-actual="49,655" data-error="+2,081"/>
-      <circle class="dot dot-schedule" cx="427.47" cy="209.69" r="6">
-        <title>2024 Florida: forecast 51,736, actual 49,655 (+2,081)</title>
+      <circle class="dot-hit" cx="435.96" cy="209.69" r="14"
+        data-label="2024 Florida" data-forecast="52,127" data-actual="49,655" data-error="+2,472"/>
+      <circle class="dot dot-schedule" cx="435.96" cy="209.69" r="6">
+        <title>2024 Florida: forecast 52,127, actual 49,655 (+2,472)</title>
       </circle>
     </a>
     <a href="games/2024-texas-a-m.html" class="dot-link">
-      <circle class="dot-hit" cx="497.53" cy="201.37" r="14"
-        data-label="2024 Texas A&amp;M" data-forecast="54,962" data-actual="50,127" data-error="+4,835"/>
-      <circle class="dot dot-priced" cx="497.53" cy="201.37" r="6">
-        <title>2024 Texas A&amp;M: forecast 54,962, actual 50,127 (+4,835)</title>
+      <circle class="dot-hit" cx="470.8" cy="201.37" r="14"
+        data-label="2024 Texas A&amp;M" data-forecast="53,731" data-actual="50,127" data-error="+3,604"/>
+      <circle class="dot dot-priced" cx="470.8" cy="201.37" r="6">
+        <title>2024 Texas A&amp;M: forecast 53,731, actual 50,127 (+3,604)</title>
       </circle>
     </a>
     <a href="games/2024-arkansas.html" class="dot-link">
-      <circle class="dot-hit" cx="409.25" cy="215.9" r="14"
-        data-label="2024 Arkansas" data-forecast="50,897" data-actual="49,303" data-error="+1,594"/>
-      <circle class="dot dot-schedule" cx="409.25" cy="215.9" r="6">
-        <title>2024 Arkansas: forecast 50,897, actual 49,303 (+1,594)</title>
+      <circle class="dot-hit" cx="417.41" cy="215.9" r="14"
+        data-label="2024 Arkansas" data-forecast="51,273" data-actual="49,303" data-error="+1,970"/>
+      <circle class="dot dot-schedule" cx="417.41" cy="215.9" r="6">
+        <title>2024 Arkansas: forecast 51,273, actual 49,303 (+1,970)</title>
       </circle>
     </a>
     <a href="games/2024-massachusetts.html" class="dot-link">
-      <circle class="dot-hit" cx="373.65" cy="227.99" r="14"
-        data-label="2024 Massachusetts" data-forecast="49,258" data-actual="48,617" data-error="+641"/>
-      <circle class="dot dot-schedule" cx="373.65" cy="227.99" r="6">
-        <title>2024 Massachusetts: forecast 49,258, actual 48,617 (+641)</title>
+      <circle class="dot-hit" cx="383.88" cy="227.99" r="14"
+        data-label="2024 Massachusetts" data-forecast="49,729" data-actual="48,617" data-error="+1,112"/>
+      <circle class="dot dot-schedule" cx="383.88" cy="227.99" r="6">
+        <title>2024 Massachusetts: forecast 49,729, actual 48,617 (+1,112)</title>
       </circle>
     </a>
     <a href="games/2024-missouri.html" class="dot-link">
-      <circle class="dot-hit" cx="500.98" cy="241.96" r="14"
-        data-label="2024 Missouri" data-forecast="55,121" data-actual="47,824" data-error="+7,297"/>
-      <circle class="dot dot-priced" cx="500.98" cy="241.96" r="6">
-        <title>2024 Missouri: forecast 55,121, actual 47,824 (+7,297)</title>
+      <circle class="dot-hit" cx="458.52" cy="241.96" r="14"
+        data-label="2024 Missouri" data-forecast="53,166" data-actual="47,824" data-error="+5,342"/>
+      <circle class="dot dot-priced" cx="458.52" cy="241.96" r="6">
+        <title>2024 Missouri: forecast 53,166, actual 47,824 (+5,342)</title>
       </circle>
     </a>
     <a href="games/2025-arizona-state.html" class="dot-link">
-      <circle class="dot-hit" cx="433.4" cy="189.37" r="14"
-        data-label="2025 Arizona State" data-forecast="52,009" data-actual="50,808" data-error="+1,201"/>
-      <circle class="dot dot-priced" cx="433.4" cy="189.37" r="6">
-        <title>2025 Arizona State: forecast 52,009, actual 50,808 (+1,201)</title>
+      <circle class="dot-hit" cx="412.2" cy="189.37" r="14"
+        data-label="2025 Arizona State" data-forecast="51,033" data-actual="50,808" data-error="+225"/>
+      <circle class="dot dot-priced" cx="412.2" cy="189.37" r="6">
+        <title>2025 Arizona State: forecast 51,033, actual 50,808 (+225)</title>
       </circle>
     </a>
     <a href="games/2025-alcorn-state.html" class="dot-link">
-      <circle class="dot-hit" cx="408.51" cy="218.45" r="14"
-        data-label="2025 Alcorn State" data-forecast="50,863" data-actual="49,158" data-error="+1,705"/>
-      <circle class="dot dot-priced" cx="408.51" cy="218.45" r="6">
-        <title>2025 Alcorn State: forecast 50,863, actual 49,158 (+1,705)</title>
+      <circle class="dot-hit" cx="384.42" cy="218.45" r="14"
+        data-label="2025 Alcorn State" data-forecast="49,754" data-actual="49,158" data-error="+596"/>
+      <circle class="dot dot-priced" cx="384.42" cy="218.45" r="6">
+        <title>2025 Alcorn State: forecast 49,754, actual 49,158 (+596)</title>
       </circle>
     </a>
     <a href="games/2025-northern-illinois.html" class="dot-link">
-      <circle class="dot-hit" cx="250.69" cy="277.59" r="14"
-        data-label="2025 Northern Illinois" data-forecast="43,596" data-actual="45,803" data-error="-2,207"/>
-      <circle class="dot dot-priced" cx="250.69" cy="277.59" r="6">
-        <title>2025 Northern Illinois: forecast 43,596, actual 45,803 (-2,207)</title>
+      <circle class="dot-hit" cx="249.88" cy="277.59" r="14"
+        data-label="2025 Northern Illinois" data-forecast="43,559" data-actual="45,803" data-error="-2,244"/>
+      <circle class="dot dot-priced" cx="249.88" cy="277.59" r="6">
+        <title>2025 Northern Illinois: forecast 43,559, actual 45,803 (-2,244)</title>
       </circle>
     </a>
     <a href="games/2025-tennessee.html" class="dot-link">
-      <circle class="dot-hit" cx="559.36" cy="20.0" r="14"
-        data-label="2025 Tennessee" data-forecast="57,809" data-actual="60,417" data-error="-2,608"/>
-      <circle class="dot dot-priced" cx="559.36" cy="20.0" r="6">
-        <title>2025 Tennessee: forecast 57,809, actual 60,417 (-2,608)</title>
+      <circle class="dot-hit" cx="554.56" cy="20.0" r="14"
+        data-label="2025 Tennessee" data-forecast="57,588" data-actual="60,417" data-error="-2,829"/>
+      <circle class="dot dot-priced" cx="554.56" cy="20.0" r="6">
+        <title>2025 Tennessee: forecast 57,588, actual 60,417 (-2,829)</title>
       </circle>
     </a>
     <a href="games/2025-texas.html" class="dot-link">
-      <circle class="dot-hit" cx="486.21" cy="156.37" r="14"
-        data-label="2025 Texas" data-forecast="54,441" data-actual="52,680" data-error="+1,761"/>
-      <circle class="dot dot-priced" cx="486.21" cy="156.37" r="6">
-        <title>2025 Texas: forecast 54,441, actual 52,680 (+1,761)</title>
+      <circle class="dot-hit" cx="469.06" cy="156.37" r="14"
+        data-label="2025 Texas" data-forecast="53,651" data-actual="52,680" data-error="+971"/>
+      <circle class="dot dot-priced" cx="469.06" cy="156.37" r="6">
+        <title>2025 Texas: forecast 53,651, actual 52,680 (+971)</title>
       </circle>
     </a>
     <a href="games/2025-georgia.html" class="dot-link">
-      <circle class="dot-hit" cx="467.58" cy="150.43" r="14"
-        data-label="2025 Georgia" data-forecast="53,583" data-actual="53,017" data-error="+566"/>
-      <circle class="dot dot-priced" cx="467.58" cy="150.43" r="6">
-        <title>2025 Georgia: forecast 53,583, actual 53,017 (+566)</title>
+      <circle class="dot-hit" cx="459.13" cy="150.43" r="14"
+        data-label="2025 Georgia" data-forecast="53,194" data-actual="53,017" data-error="+177"/>
+      <circle class="dot dot-priced" cx="459.13" cy="150.43" r="6">
+        <title>2025 Georgia: forecast 53,194, actual 53,017 (+177)</title>
       </circle>
     </a>
     <a href="games/2025-ole-miss.html" class="dot-link">
-      <circle class="dot-hit" cx="612.18" cy="20.0" r="14"
-        data-label="2025 Ole Miss" data-forecast="60,241" data-actual="60,417" data-error="-176"/>
-      <circle class="dot dot-priced" cx="612.18" cy="20.0" r="6">
-        <title>2025 Ole Miss: forecast 60,241, actual 60,417 (-176)</title>
+      <circle class="dot-hit" cx="606.7" cy="20.0" r="14"
+        data-label="2025 Ole Miss" data-forecast="59,989" data-actual="60,417" data-error="-428"/>
+      <circle class="dot dot-priced" cx="606.7" cy="20.0" r="6">
+        <title>2025 Ole Miss: forecast 59,989, actual 60,417 (-428)</title>
       </circle>
     </a>
   </svg>
@@ -262,10 +269,10 @@
         <td data-value="2025-11-28"><a class="game-cell" href="games/2025-ole-miss.html"><img class="logo logo-xs" src="logos/145.png" alt="Ole Miss" width="80" height="80" loading="lazy">
 <span><span class="game-name">Ole Miss <span class="rank">No. 6</span></span><span class="game-date">Fri, Nov 28, 2025</span></span></a></td>
         <td class="num" data-value="133.0">$133</td>
-        <td class="num" data-value="60241">60,241</td>
-        <td class="num range-cell">55,834 to 60,417</td>
+        <td class="num" data-value="59989">59,989</td>
+        <td class="num range-cell">56,550 to 60,417</td>
         <td class="num" data-value="60417">60,417<span class="cell-sub">sellout</span></td>
-        <td class="num" data-value="-176">-176</td>
+        <td class="num" data-value="-428">-428</td>
         <td data-value="a"><span class="chip chip-good"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Inside</span>
 </td>
       </tr>
@@ -273,10 +280,10 @@
         <td data-value="2025-11-08"><a class="game-cell" href="games/2025-georgia.html"><img class="logo logo-xs" src="logos/61.png" alt="Georgia" width="80" height="80" loading="lazy">
 <span><span class="game-name">Georgia <span class="rank">No. 5</span></span><span class="game-date">Sat, Nov 8, 2025</span></span></a></td>
         <td class="num" data-value="45.0">$45</td>
-        <td class="num" data-value="53583">53,583</td>
-        <td class="num range-cell">49,505 to 57,660</td>
+        <td class="num" data-value="53194">53,194</td>
+        <td class="num range-cell">50,007 to 56,380</td>
         <td class="num" data-value="53017">53,017</td>
-        <td class="num" data-value="566">+566</td>
+        <td class="num" data-value="177">+177</td>
         <td data-value="a"><span class="chip chip-good"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Inside</span>
 </td>
       </tr>
@@ -284,10 +291,10 @@
         <td data-value="2025-10-25"><a class="game-cell" href="games/2025-texas.html"><img class="logo logo-xs" src="logos/251.png" alt="Texas" width="80" height="80" loading="lazy">
 <span><span class="game-name">Texas <span class="rank">No. 22</span></span><span class="game-date">Sat, Oct 25, 2025</span></span></a></td>
         <td class="num" data-value="48.0">$48</td>
-        <td class="num" data-value="54441">54,441</td>
-        <td class="num range-cell">50,494 to 58,389</td>
+        <td class="num" data-value="53651">53,651</td>
+        <td class="num range-cell">50,482 to 56,819</td>
         <td class="num" data-value="52680">52,680</td>
-        <td class="num" data-value="1761">+1,761</td>
+        <td class="num" data-value="971">+971</td>
         <td data-value="a"><span class="chip chip-good"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Inside</span>
 </td>
       </tr>
@@ -295,10 +302,10 @@
         <td data-value="2025-09-27"><a class="game-cell" href="games/2025-tennessee.html"><img class="logo logo-xs" src="logos/2633.png" alt="Tennessee" width="80" height="80" loading="lazy">
 <span><span class="game-name">Tennessee <span class="rank">No. 15</span></span><span class="game-date">Sat, Sep 27, 2025</span></span></a></td>
         <td class="num" data-value="95.0">$95</td>
-        <td class="num" data-value="57809">57,809</td>
-        <td class="num range-cell">53,897 to 60,417</td>
+        <td class="num" data-value="57588">57,588</td>
+        <td class="num range-cell">54,449 to 60,417</td>
         <td class="num" data-value="60417">60,417<span class="cell-sub">sellout</span></td>
-        <td class="num" data-value="-2608">-2,608</td>
+        <td class="num" data-value="-2829">-2,829</td>
         <td data-value="a"><span class="chip chip-good"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Inside</span>
 </td>
       </tr>
@@ -306,10 +313,10 @@
         <td data-value="2025-09-20"><a class="game-cell" href="games/2025-northern-illinois.html"><img class="logo logo-xs" src="logos/2459.png" alt="Northern Illinois" width="80" height="80" loading="lazy">
 <span><span class="game-name">Northern Illinois</span><span class="game-date">Sat, Sep 20, 2025</span></span></a></td>
         <td class="num" data-value="11.0">$11</td>
-        <td class="num" data-value="43596">43,596</td>
-        <td class="num range-cell">38,769 to 48,424</td>
+        <td class="num" data-value="43559">43,559</td>
+        <td class="num range-cell">39,957 to 47,161</td>
         <td class="num" data-value="45803">45,803</td>
-        <td class="num" data-value="-2207">-2,207</td>
+        <td class="num" data-value="-2244">-2,244</td>
         <td data-value="a"><span class="chip chip-good"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Inside</span>
 </td>
       </tr>
@@ -317,10 +324,10 @@
         <td data-value="2025-09-13"><a class="game-cell" href="games/2025-alcorn-state.html"><img class="logo logo-xs" src="logos/2016.png" alt="Alcorn State" width="80" height="80" loading="lazy">
 <span><span class="game-name">Alcorn State</span><span class="game-date">Sat, Sep 13, 2025</span></span></a></td>
         <td class="num" data-value="26.0">$26</td>
-        <td class="num" data-value="50863">50,863</td>
-        <td class="num range-cell">45,519 to 56,207</td>
+        <td class="num" data-value="49754">49,754</td>
+        <td class="num range-cell">46,508 to 53,000</td>
         <td class="num" data-value="49158">49,158</td>
-        <td class="num" data-value="1705">+1,705</td>
+        <td class="num" data-value="596">+596</td>
         <td data-value="a"><span class="chip chip-good"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Inside</span>
 </td>
       </tr>
@@ -328,10 +335,10 @@
         <td data-value="2025-09-06"><a class="game-cell" href="games/2025-arizona-state.html"><img class="logo logo-xs" src="logos/9.png" alt="Arizona State" width="80" height="80" loading="lazy">
 <span><span class="game-name">Arizona State <span class="rank">No. 12</span></span><span class="game-date">Sat, Sep 6, 2025</span></span></a></td>
         <td class="num" data-value="32.0">$32</td>
-        <td class="num" data-value="52009">52,009</td>
-        <td class="num range-cell">47,677 to 56,341</td>
+        <td class="num" data-value="51033">51,033</td>
+        <td class="num range-cell">47,821 to 54,245</td>
         <td class="num" data-value="50808">50,808</td>
-        <td class="num" data-value="1201">+1,201</td>
+        <td class="num" data-value="225">+225</td>
         <td data-value="a"><span class="chip chip-good"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Inside</span>
 </td>
       </tr>
@@ -339,10 +346,10 @@
         <td data-value="2024-11-23"><a class="game-cell" href="games/2024-missouri.html"><img class="logo logo-xs" src="logos/142.png" alt="Missouri" width="80" height="80" loading="lazy">
 <span><span class="game-name">Missouri</span><span class="game-date">Sat, Nov 23, 2024</span></span></a></td>
         <td class="num" data-value="9.0">$9</td>
-        <td class="num" data-value="55121">55,121</td>
-        <td class="num range-cell">51,698 to 58,543</td>
+        <td class="num" data-value="53166">53,166</td>
+        <td class="num range-cell">50,621 to 55,711</td>
         <td class="num" data-value="47824">47,824</td>
-        <td class="num" data-value="7297">+7,297</td>
+        <td class="num" data-value="5342">+5,342</td>
         <td data-value="b"><span class="chip chip-miss"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>Outside</span>
 </td>
       </tr>
@@ -350,10 +357,10 @@
         <td data-value="2024-11-02"><a class="game-cell" href="games/2024-massachusetts.html"><img class="logo logo-xs" src="logos/113.png" alt="Massachusetts" width="80" height="80" loading="lazy">
 <span><span class="game-name">Massachusetts</span><span class="game-date">Sat, Nov 2, 2024</span></span></a></td>
         <td class="num" data-value="-1"><span class="muted">none</span></td>
-        <td class="num" data-value="49258">49,258<span class="cell-sub">schedule-only model</span></td>
-        <td class="num range-cell">44,803 to 53,714</td>
+        <td class="num" data-value="49729">49,729<span class="cell-sub">schedule-only model</span></td>
+        <td class="num range-cell">45,147 to 54,312</td>
         <td class="num" data-value="48617">48,617</td>
-        <td class="num" data-value="641">+641</td>
+        <td class="num" data-value="1112">+1,112</td>
         <td data-value="a"><span class="chip chip-good"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Inside</span>
 </td>
       </tr>
@@ -361,10 +368,10 @@
         <td data-value="2024-10-26"><a class="game-cell" href="games/2024-arkansas.html"><img class="logo logo-xs" src="logos/8.png" alt="Arkansas" width="80" height="80" loading="lazy">
 <span><span class="game-name">Arkansas</span><span class="game-date">Sat, Oct 26, 2024</span></span></a></td>
         <td class="num" data-value="-1"><span class="muted">none</span></td>
-        <td class="num" data-value="50897">50,897<span class="cell-sub">schedule-only model</span></td>
-        <td class="num range-cell">46,323 to 55,472</td>
+        <td class="num" data-value="51273">51,273<span class="cell-sub">schedule-only model</span></td>
+        <td class="num range-cell">46,561 to 55,985</td>
         <td class="num" data-value="49303">49,303</td>
-        <td class="num" data-value="1594">+1,594</td>
+        <td class="num" data-value="1970">+1,970</td>
         <td data-value="a"><span class="chip chip-good"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Inside</span>
 </td>
       </tr>
@@ -372,10 +379,10 @@
         <td data-value="2024-10-19"><a class="game-cell" href="games/2024-texas-a-m.html"><img class="logo logo-xs" src="logos/245.png" alt="Texas A&amp;M" width="80" height="80" loading="lazy">
 <span><span class="game-name">Texas A&amp;M <span class="rank">No. 14</span></span><span class="game-date">Sat, Oct 19, 2024</span></span></a></td>
         <td class="num" data-value="10.0">$10</td>
-        <td class="num" data-value="54962">54,962</td>
-        <td class="num range-cell">51,285 to 58,639</td>
+        <td class="num" data-value="53731">53,731</td>
+        <td class="num range-cell">50,818 to 56,643</td>
         <td class="num" data-value="50127">50,127</td>
-        <td class="num" data-value="4835">+4,835</td>
+        <td class="num" data-value="3604">+3,604</td>
         <td data-value="b"><span class="chip chip-miss"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>Outside</span>
 </td>
       </tr>
@@ -383,10 +390,10 @@
         <td data-value="2024-09-21"><a class="game-cell" href="games/2024-florida.html"><img class="logo logo-xs" src="logos/57.png" alt="Florida" width="80" height="80" loading="lazy">
 <span><span class="game-name">Florida</span><span class="game-date">Sat, Sep 21, 2024</span></span></a></td>
         <td class="num" data-value="-1"><span class="muted">none</span></td>
-        <td class="num" data-value="51736">51,736<span class="cell-sub">schedule-only model</span></td>
-        <td class="num range-cell">47,038 to 56,433</td>
+        <td class="num" data-value="52127">52,127<span class="cell-sub">schedule-only model</span></td>
+        <td class="num range-cell">47,290 to 56,963</td>
         <td class="num" data-value="49655">49,655</td>
-        <td class="num" data-value="2081">+2,081</td>
+        <td class="num" data-value="2472">+2,472</td>
         <td data-value="a"><span class="chip chip-good"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Inside</span>
 </td>
       </tr>
@@ -394,10 +401,10 @@
         <td data-value="2024-09-14"><a class="game-cell" href="games/2024-toledo.html"><img class="logo logo-xs" src="logos/2649.png" alt="Toledo" width="80" height="80" loading="lazy">
 <span><span class="game-name">Toledo</span><span class="game-date">Sat, Sep 14, 2024</span></span></a></td>
         <td class="num" data-value="-1"><span class="muted">none</span></td>
-        <td class="num" data-value="47348">47,348<span class="cell-sub">schedule-only model</span></td>
-        <td class="num range-cell">42,729 to 51,967</td>
+        <td class="num" data-value="47761">47,761<span class="cell-sub">schedule-only model</span></td>
+        <td class="num range-cell">42,995 to 52,526</td>
         <td class="num" data-value="47412">47,412</td>
-        <td class="num" data-value="-64">-64</td>
+        <td class="num" data-value="349">+349</td>
         <td data-value="a"><span class="chip chip-good"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Inside</span>
 </td>
       </tr>
@@ -405,10 +412,10 @@
         <td data-value="2024-08-31"><a class="game-cell" href="games/2024-eastern-kentucky.html"><img class="logo logo-xs" src="logos/2198.png" alt="Eastern Kentucky" width="80" height="80" loading="lazy">
 <span><span class="game-name">Eastern Kentucky</span><span class="game-date">Sat, Aug 31, 2024</span></span></a></td>
         <td class="num" data-value="-1"><span class="muted">none</span></td>
-        <td class="num" data-value="49194">49,194<span class="cell-sub">schedule-only model</span></td>
-        <td class="num range-cell">44,195 to 54,193</td>
+        <td class="num" data-value="49885">49,885<span class="cell-sub">schedule-only model</span></td>
+        <td class="num range-cell">44,761 to 55,010</td>
         <td class="num" data-value="48724">48,724</td>
-        <td class="num" data-value="470">+470</td>
+        <td class="num" data-value="1161">+1,161</td>
         <td data-value="a"><span class="chip chip-good"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Inside</span>
 </td>
       </tr>
@@ -417,9 +424,20 @@
 <span><span class="game-name">Ole Miss <span class="rank">No. 12</span></span><span class="game-date">Thu, Nov 23, 2023</span></span></a></td>
         <td class="num" data-value="63.0">$63</td>
         <td class="num" data-value="60417">60,417</td>
-        <td class="num range-cell">58,901 to 60,417</td>
+        <td class="num range-cell">59,477 to 60,417</td>
         <td class="num" data-value="60412">60,412</td>
         <td class="num" data-value="5">+5</td>
+        <td data-value="a"><span class="chip chip-good"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Inside</span>
+</td>
+      </tr>
+      <tr data-season="2023">
+        <td data-value="2023-11-18"><a class="game-cell" href="games/2023-southern-miss.html"><img class="logo logo-xs" src="logos/2572.png" alt="Southern Miss" width="80" height="80" loading="lazy">
+<span><span class="game-name">Southern Miss</span><span class="game-date">Sat, Nov 18, 2023</span></span></a></td>
+        <td class="num" data-value="19.0">$19</td>
+        <td class="num" data-value="54698">54,698</td>
+        <td class="num range-cell">51,516 to 57,880</td>
+        <td class="num" data-value="53855">53,855</td>
+        <td class="num" data-value="843">+843</td>
         <td data-value="a"><span class="chip chip-good"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Inside</span>
 </td>
       </tr>
@@ -427,10 +445,10 @@
         <td data-value="2023-11-04"><a class="game-cell" href="games/2023-kentucky.html"><img class="logo logo-xs" src="logos/96.png" alt="Kentucky" width="80" height="80" loading="lazy">
 <span><span class="game-name">Kentucky</span><span class="game-date">Sat, Nov 4, 2023</span></span></a></td>
         <td class="num" data-value="10.0">$10</td>
-        <td class="num" data-value="49121">49,121</td>
-        <td class="num range-cell">45,134 to 53,108</td>
+        <td class="num" data-value="50409">50,409</td>
+        <td class="num range-cell">47,260 to 53,559</td>
         <td class="num" data-value="52329">52,329</td>
-        <td class="num" data-value="-3208">-3,208</td>
+        <td class="num" data-value="-1920">-1,920</td>
         <td data-value="a"><span class="chip chip-good"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Inside</span>
 </td>
       </tr>
@@ -438,10 +456,10 @@
         <td data-value="2023-10-07"><a class="game-cell" href="games/2023-western-michigan.html"><img class="logo logo-xs" src="logos/2711.png" alt="Western Michigan" width="80" height="80" loading="lazy">
 <span><span class="game-name">Western Michigan</span><span class="game-date">Sat, Oct 7, 2023</span></span></a></td>
         <td class="num" data-value="6.0">$6</td>
-        <td class="num" data-value="47302">47,302</td>
-        <td class="num range-cell">43,315 to 51,288</td>
+        <td class="num" data-value="47348">47,348</td>
+        <td class="num range-cell">43,969 to 50,727</td>
         <td class="num" data-value="47158">47,158</td>
-        <td class="num" data-value="144">+144</td>
+        <td class="num" data-value="190">+190</td>
         <td data-value="a"><span class="chip chip-good"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Inside</span>
 </td>
       </tr>
@@ -449,10 +467,10 @@
         <td data-value="2023-09-30"><a class="game-cell" href="games/2023-alabama.html"><img class="logo logo-xs" src="logos/333.png" alt="Alabama" width="80" height="80" loading="lazy">
 <span><span class="game-name">Alabama <span class="rank">No. 12</span></span><span class="game-date">Sat, Sep 30, 2023</span></span></a></td>
         <td class="num" data-value="25.0">$25</td>
-        <td class="num" data-value="56114">56,114</td>
-        <td class="num range-cell">52,630 to 59,598</td>
+        <td class="num" data-value="56034">56,034</td>
+        <td class="num range-cell">53,149 to 58,919</td>
         <td class="num" data-value="60111">60,111</td>
-        <td class="num" data-value="-3997">-3,997</td>
+        <td class="num" data-value="-4077">-4,077</td>
         <td data-value="b"><span class="chip chip-miss"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>Outside</span>
 </td>
       </tr>
@@ -460,10 +478,10 @@
         <td data-value="2023-09-16"><a class="game-cell" href="games/2023-lsu.html"><img class="logo logo-xs" src="logos/99.png" alt="LSU" width="80" height="80" loading="lazy">
 <span><span class="game-name">LSU <span class="rank">No. 14</span></span><span class="game-date">Sat, Sep 16, 2023</span></span></a></td>
         <td class="num" data-value="31.0">$31</td>
-        <td class="num" data-value="56851">56,851</td>
-        <td class="num range-cell">52,888 to 60,417</td>
+        <td class="num" data-value="57447">57,447</td>
+        <td class="num range-cell">54,296 to 60,417</td>
         <td class="num" data-value="60084">60,084</td>
-        <td class="num" data-value="-3233">-3,233</td>
+        <td class="num" data-value="-2637">-2,637</td>
         <td data-value="a"><span class="chip chip-good"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Inside</span>
 </td>
       </tr>
@@ -471,10 +489,10 @@
         <td data-value="2023-09-09"><a class="game-cell" href="games/2023-arizona.html"><img class="logo logo-xs" src="logos/12.png" alt="Arizona" width="80" height="80" loading="lazy">
 <span><span class="game-name">Arizona</span><span class="game-date">Sat, Sep 9, 2023</span></span></a></td>
         <td class="num" data-value="12.0">$12</td>
-        <td class="num" data-value="49005">49,005</td>
-        <td class="num range-cell">43,377 to 54,633</td>
+        <td class="num" data-value="51728">51,728</td>
+        <td class="num range-cell">48,529 to 54,927</td>
         <td class="num" data-value="51648">51,648</td>
-        <td class="num" data-value="-2643">-2,643</td>
+        <td class="num" data-value="80">+80</td>
         <td data-value="a"><span class="chip chip-good"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Inside</span>
 </td>
       </tr>
@@ -482,10 +500,10 @@
         <td data-value="2023-09-02"><a class="game-cell" href="games/2023-se-louisiana.html"><img class="logo logo-xs" src="logos/2545.png" alt="SE Louisiana" width="80" height="80" loading="lazy">
 <span><span class="game-name">SE Louisiana</span><span class="game-date">Sat, Sep 2, 2023</span></span></a></td>
         <td class="num" data-value="8.0">$8</td>
-        <td class="num" data-value="49025">49,025</td>
-        <td class="num range-cell">44,633 to 53,416</td>
+        <td class="num" data-value="49036">49,036</td>
+        <td class="num range-cell">45,781 to 52,292</td>
         <td class="num" data-value="50041">50,041</td>
-        <td class="num" data-value="-1016">-1,016</td>
+        <td class="num" data-value="-1005">-1,005</td>
         <td data-value="a"><span class="chip chip-good"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Inside</span>
 </td>
       </tr>
@@ -497,7 +515,7 @@
 </main>
 <footer class="footer">
   <div class="wrap footer-inner">
-    <p>Forecasts come from a model trained on Mississippi State home games since 2023. Get-in prices are from <a href="https://www.ticketdata.com/performer/mississippi-state-bulldogs-football">ticketdata.com</a>; schedules, attendance and ratings from <a href="https://collegefootballdata.com">CollegeFootballData</a>. Model last retrained 2026-09-04; page built 2026-09-04.</p>
+    <p>Forecasts come from a model trained on Mississippi State home games since 2023. Get-in prices are from <a href="https://www.ticketdata.com/performer/mississippi-state-bulldogs-football">ticketdata.com</a>; schedules, attendance and ratings from <a href="https://collegefootballdata.com">CollegeFootballData</a>. Model last retrained 2026-09-05; page built 2026-09-05.</p>
     <p>An independent project, not affiliated with Mississippi State University or its athletics department. Team marks belong to their schools. <a href="data.json">Everything on this site as JSON</a>.</p>
   </div>
 </footer>

@@ -6,17 +6,15 @@ import pandas as pd
 from .config import CAPACITY, TEAM, VENUE
 
 CAVEATS = [
-    "Small sample: a couple of dozen games. Coefficients are rough; the leave-one-out numbers are the honest accuracy.",
-    f"Attendance is the announced figure and is capped at {VENUE} capacity ({CAPACITY:,}); sellouts flatten the top end, "
-    "and intervals clipped at capacity no longer carry their nominal 80% coverage.",
-    "The get-in price is the final price recorded by ticketdata near game day, not a price observed weeks out.",
-    "Price levels shift season to season; the season-relative price feature exists for that reason.",
-    "Tier 1 features were chosen by the same leave-one-out scores reported here, so the headline RMSE is optimistic; "
-    "the runner-up subsets in the selection table bracket the realistic range.",
-    "Individual coefficients are not interpretable when the selected features are collinear (for example opponent Elo "
-    "and SP+); judge the model by its leave-one-out error, not by coefficient signs.",
-    "Tier 2 uses a season-relative price, so it only becomes meaningful once a season has at least 3 priced games; "
-    "predictions leave Tier 2 blank until then.",
+    "Small sample: a couple of dozen games across three historical seasons. These are retrospective tests, not forecasts recorded before kickoff.",
+    f"The target is announced attendance, not ticket scans or ticket sales. Predictions are capped at {CAPACITY:,}; "
+    "nominal 80% coverage is conditional on model assumptions and has not been established for weeks-ahead forecasts.",
+    "Historical prices were collected from the past-events table; their observation dates are unknown. Current prices may be weeks before kickoff, and price age matters.",
+    "The season reference uses all available prices, including upcoming games. Historical final-price references were not necessarily available on the forecast date. A common percentage change in every price leaves relative-price predictions unchanged.",
+    "The Tier 2 specification is fixed to relative log-price alone. Alternatives are diagnostics and do not automatically change production. It was chosen after examining this small dataset, so its retrospective scores may still be optimistic.",
+    "Tier 1 features are selected using the same leave-one-out scores reported. Its opponent ratings are collinear and cached SP+ values are season-level, not verified pregame snapshots.",
+    "Live Tier 2 forecasts require at least 3 priced games. Sparse historical seasons are retained in training and shown separately in diagnostics rather than dropping difficult outcomes; their season references are less reliable.",
+    f"Sellout odds are an uncalibrated model probability of reaching {CAPACITY:,} announced attendees, not a verified probability that ticket inventory sells out.",
 ]
 
 
@@ -53,12 +51,32 @@ def write_report(path, s: dict) -> None:
               "| features | LOO RMSE |", "|---|---|"]
     for r in s["tier1_candidates"]:
         lines.append(f"| {_feats(r['features'])} | {_num(r['rmse'])} |")
-    lines += ["", "## Tier 2 price feature", "", "| features | LOO RMSE |", "|---|---|"]
+    lines += ["", "## Tier 2 price feature", "", "Production uses relative log-price alone. These alternatives are comparisons, not an automatic selection rule.",
+              "", "| features | LOO RMSE |", "|---|---|"]
     for r in s["tier2_candidates"]:
         lines.append(f"| {_feats(r['features'])} | {_num(r['rmse'])} |")
     lines += ["", "## Fitted models", ""]
     lines += _model_block("Tier 1 (game features only)", s["tier1_model"])
-    lines += _model_block("Tier 2 (game features + price)", s["tier2_model"])
+    lines += _model_block("Tier 2 (relative price only)", s["tier2_model"])
+    if s.get("per_season"):
+        lines += ["## Price-model results by season", "", "Positive bias means overprediction. Sparse-price seasons remain visible.", "",
+                  "| season | priced reference games | scored games | RMSE | MAE | bias | inside 80% range |",
+                  "|---|---|---|---|---|---|---|"]
+        for r in s["per_season"]:
+            lines.append(f"| {r['season']} | {r['priced_games']} | {r['n']} | {_num(r['rmse'])} | {_num(r['mae'])} | {_num(r['bias'])} | {r['inside']}/{r['n']} |")
+        lines.append("")
+    if s.get("validation"):
+        lines += ["## Season transfer", "", "Fixed relative-price specification, refitted without the test season. Forward tests train only on earlier seasons. "
+                  "Both retain archived features and full-season price references; neither is a live forecast replay. Folds with fewer than 8 training games are skipped.", "",
+                  "| test | season | training games | scored games | RMSE | MAE | bias |", "|---|---|---|---|---|---|---|"]
+        for mode, label in (("season_holdout", "Season held out"), ("forward", "Earlier seasons only")):
+            result = s["validation"][mode]
+            for r in result["folds"]:
+                lines.append(f"| {label} | {r['season']} | {r['training_n']} | {r['n']} | {_num(r['rmse'])} | {_num(r['mae'])} | {_num(r['bias'])} |")
+            if result["metrics"]:
+                r = result["metrics"]
+                lines.append(f"| {label}, pooled | all | — | {r['n']} | {_num(r['rmse'])} | {_num(r['mae'])} | — |")
+        lines.append("")
     lines += ["## Per-game leave-one-out predictions", "",
               "| season | date | opponent | price | actual | Tier 1 LOO | Tier 2 LOO |", "|---|---|---|---|---|---|---|"]
     for _, r in s["per_game"].iterrows():

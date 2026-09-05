@@ -10,7 +10,7 @@
 {% block main %}
 <section class="page-head">
   <h1>Track record</h1>
-  <p class="lede">Across {{ t.n }} tracked home games since {{ data.seasons[0] }}, the forecast missed the announced crowd by {{ t.mae | num }} on a typical game, and the real number landed inside the 80% range {{ t.inside }} times out of {{ t.n }}. Each game here is scored with a model that never saw that game: it was refit on the other games first, so the numbers are what the model would have said beforehand.</p>
+  <p class="lede">Across {{ t.n }} tracked home games since {{ data.seasons[0] }}, the retrospective forecast missed the announced crowd by {{ t.mae | num }} on a typical game, and the real number landed inside the 80% range {{ t.inside }} times out of {{ t.n }}. Each game's attendance was held out while fitting the other games. Historical prices and season references are used, so these results are not forecasts saved before kickoff.</p>
 </section>
 
 <section class="kpis" aria-label="Headline accuracy">

@@ -48,18 +48,18 @@
 
   <div class="hero-forecast">
     <div class="figure">
-      <span class="figure-num">55,121</span>
-      <span class="figure-label">forecast, made without this game</span>
+      <span class="figure-num">53,166</span>
+      <span class="figure-label">retrospective forecast, attendance held out</span>
     </div>
     <div class="figure figure-actual">
       <span class="figure-num">47,824</span>
       <span class="figure-label">announced attendance</span>
     </div>
     <div class="hero-gauge">
-      <div class="gauge gauge-hero" role="img" aria-label="Forecast 55,121; 80% range 51,698 to 58,543; actual 47,824; capacity 60,417">
+      <div class="gauge gauge-hero" role="img" aria-label="Forecast 53,166; 80% range 50,621 to 55,711; actual 47,824; capacity 60,417">
   <div class="gauge-track">
-    <div class="gauge-band" style="left:65.7%;width:26.929999999999993%"></div>
-    <div class="gauge-point" style="left:79.16%"></div>
+    <div class="gauge-band" style="left:61.46%;width:20.020000000000003%"></div>
+    <div class="gauge-point" style="left:71.47%"></div>
     <div class="gauge-actual" style="left:50.45%"></div>
   </div>
   <div class="gauge-axis" aria-hidden="true">
@@ -74,8 +74,8 @@
 <span><i class="key key-actual"></i>Actual</span></div>
     </div>
     <dl class="facts">
-      <div><dt>80% range</dt><dd>51,698 to 58,543</dd></div>
-      <div><dt>Miss</dt><dd>+7,297 <span class="chip chip-miss"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>Outside</span>
+      <div><dt>80% range</dt><dd>50,621 to 55,711</dd></div>
+      <div><dt>Miss</dt><dd>+5,342 <span class="chip chip-miss"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>Outside</span>
 </dd></div>
       <div><dt>Get-in price</dt><dd>$9</dd></div>
       <div><dt>Model</dt><dd>Price model</dd></div>
@@ -84,40 +84,19 @@
 </section>
 
 <section class="section">
-  <h2>Why 55,121</h2>
+  <h2>Why 53,166</h2>
   <div class="dive">
-  <p class="dive-lead">Start from an average game in the training set, <strong>53,614</strong>. Each variable then moves the number by its weight times how far this game sits from that average.</p>
+  <p class="dive-lead">Start from an average game in the training set, <strong>53,629</strong>. Each variable then moves the number by its weight times how far this game sits from that average.</p>
   <ul class="terms">
-    <li class="term">
-      <span class="term-label">Opponent ranked in the AP Top 25<small>Unranked</small></span>
-      <span class="term-bar" aria-hidden="true">
-        <i class="term-fill pos" style="left:50%;width:9.8%"></i>
-      </span>
-      <span class="term-val">+2,155</span>
-    </li>
-    <li class="term">
-      <span class="term-label">Opponent Elo rating<small>1,684</small></span>
-      <span class="term-bar" aria-hidden="true">
-        <i class="term-fill pos" style="left:50%;width:3.33%"></i>
-      </span>
-      <span class="term-val">+732</span>
-    </li>
-    <li class="term">
-      <span class="term-label">Opponent SP+ rating<small>+14.0</small></span>
-      <span class="term-bar" aria-hidden="true">
-        <i class="term-fill neg" style="right:50%;width:4.14%"></i>
-      </span>
-      <span class="term-val">-911</span>
-    </li>
     <li class="term">
       <span class="term-label">Get-in price, relative to the season<small>$9, 95% of the season median</small></span>
       <span class="term-bar" aria-hidden="true">
-        <i class="term-fill neg" style="right:50%;width:2.14%"></i>
+        <i class="term-fill neg" style="right:50%;width:2.11%"></i>
       </span>
-      <span class="term-val">-470</span>
+      <span class="term-val">-463</span>
     </li>
   </ul>
-  <p class="dive-total">Adds up to <strong>55,121</strong>. Price model, 80% range 51,698 to 58,543.
+  <p class="dive-total">Adds up to <strong>53,166</strong>. Price model, 80% range 50,621 to 55,711.
 </p>
 </div>
 </section>
@@ -129,42 +108,24 @@
     <thead><tr><th scope="col">Variable</th><th scope="col">This game</th><th scope="col">Training average</th><th scope="col" class="num">Weight</th><th scope="col" class="num">Seats moved</th></tr></thead>
     <tbody>
       <tr>
-        <td><span class="input-name">Opponent ranked in the AP Top 25</span><span class="cell-sub">1 when the opponent was in that week&#39;s AP Top 25, otherwise 0.</span></td>
-        <td>Unranked</td>
-        <td>60% of games ranked</td>
-        <td class="num">715</td>
-        <td class="num">+2,155</td>
-      </tr>
-      <tr>
-        <td><span class="input-name">Opponent Elo rating</span><span class="cell-sub">CollegeFootballData&#39;s Elo rating for the opponent entering the game. Before an opponent has played, last season&#39;s final Elo stands in.</span></td>
-        <td>1,684</td>
-        <td>1,584</td>
-        <td class="num">1.95</td>
-        <td class="num">+732</td>
-      </tr>
-      <tr>
-        <td><span class="input-name">Opponent SP+ rating</span><span class="cell-sub">Bill Connelly&#39;s SP+ rating for the opponent that season. Positive is better than average.</span></td>
-        <td>+14.0</td>
-        <td>+4.7</td>
-        <td class="num">-48.36</td>
-        <td class="num">-911</td>
-      </tr>
-      <tr>
-        <td><span class="input-name">Get-in price, relative to the season</span><span class="cell-sub">The cheapest resale ticket on ticketdata.com, compared with the median get-in price of that season&#39;s home games. Measured on a log scale, so doubling the price counts the same in any season.</span></td>
+        <td><span class="input-name">Get-in price, relative to the season</span><span class="cell-sub">The cheapest resale ticket on ticketdata.com, compared with that season&#39;s median price on a log scale. All listed home games contribute to the reference. A doubling relative to that reference has the same effect in any season.</span></td>
         <td>$9, 95% of the season median</td>
-        <td>the season median</td>
-        <td class="num">6,405</td>
-        <td class="num">-470</td>
+        <td>1.02× the season reference</td>
+        <td class="num">6,313</td>
+        <td class="num">-463</td>
       </tr>
     </tbody>
   </table>
   </div>
   <p class="board-note">Weight is the change in forecast attendance for a one-unit change in the variable. Seats moved is that weight times this game's distance from the training average. <a href="../model.html">How the weights were fitted</a>.</p>
+  <h3>Data notes</h3>
+  <ul class="notes">
+<li>Only 2 prices are recorded for this season. Its price reference is less reliable; historical results remain visible in the evaluation.</li>  </ul>
 </section>
 </main>
 <footer class="footer">
   <div class="wrap footer-inner">
-    <p>Forecasts come from a model trained on Mississippi State home games since 2023. Get-in prices are from <a href="https://www.ticketdata.com/performer/mississippi-state-bulldogs-football">ticketdata.com</a>; schedules, attendance and ratings from <a href="https://collegefootballdata.com">CollegeFootballData</a>. Model last retrained 2026-09-04; page built 2026-09-04.</p>
+    <p>Forecasts come from a model trained on Mississippi State home games since 2023. Get-in prices are from <a href="https://www.ticketdata.com/performer/mississippi-state-bulldogs-football">ticketdata.com</a>; schedules, attendance and ratings from <a href="https://collegefootballdata.com">CollegeFootballData</a>. Model last retrained 2026-09-05; page built 2026-09-05.</p>
     <p>An independent project, not affiliated with Mississippi State University or its athletics department. Team marks belong to their schools. <a href="../data.json">Everything on this site as JSON</a>.</p>
   </div>
 </footer>

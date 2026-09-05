@@ -3,11 +3,11 @@
 {% set t2 = data.models.tier2 %}{% set t1 = data.models.tier1 %}
 {% set faq = [
   ("Why does the ticket price matter more than who Mississippi State is playing?",
-   "The get-in price is set by thousands of buyers and sellers deciding, in real time, how much they want to be in the building. It already bakes in the opponent, the weather, the record, kickoff time and everything else. Opponent strength on its own explains less: within a season, the rank correlation between price and crowd size was about 0.93 to 0.95."),
+   "Resale prices reflect demand for a game and can respond to the opponent, team record and kickoff time. In the historical sample, season-relative price alone predicted attendance better than adding opponent ratings. Prices do not measure every source of demand, and this relationship is not proof that raising prices increases attendance."),
   ("What does the 80% range mean?",
-   "It is a prediction interval. If the model's assumptions hold, the announced crowd lands inside that range four times out of five. It is wider for unusual games and narrower near the middle of the training data. Ranges that touch " ~ (data.capacity | num) ~ " are cut off there, because the stadium cannot hold more."),
+   "It is a prediction interval. If the model's assumptions hold, the announced crowd lands inside that range four times out of five. It includes game-to-game variation and is wider for unusual price ratios. Small samples, price changes and future team performance make that coverage uncertain, especially weeks before kickoff."),
   ("Why is every forecast capped at " ~ (data.capacity | num) ~ "?",
-   "That is the largest crowd Davis Wade Stadium has announced; the official capacity is listed a little lower. A linear model can produce numbers above it, so the forecast and the range are clipped."),
+   "That is the upper attendance figure used in the training data; official capacity is listed a little lower. A linear model can produce numbers above it, so the forecast and the range are clipped. The associated sellout percentage is a model estimate, not a calibrated measure of ticket inventory."),
   ("How often does the forecast change?",
    "Every morning a job refreshes the schedule and ratings from CollegeFootballData, retrains the model and rebuilds this site. Get-in prices are pasted in by hand, because ticketdata.com blocks automated access; a forecast moves whenever its price is updated."),
   ("How good is it, honestly?",
@@ -21,12 +21,12 @@
 {% block main %}
 <section class="page-head">
   <h1>How the forecast works</h1>
-  <p class="lede">The forecast is a straight-line model fitted to Mississippi State home games since {{ data.seasons[0] }}. One number does most of the work: the cheapest resale ticket on ticketdata.com, the get-in price, compared with the rest of that season. Opponent strength fills in the rest. The model is refit every morning, and every number on this site comes out of that fit.</p>
+  <p class="lede">The price forecast is a simple regression fitted to Mississippi State home games since {{ data.seasons[0] }}. It uses the cheapest resale ticket on ticketdata.com, the get-in price, compared with the rest of that season. Relative price alone performed better in our historical comparisons than adding opponent ratings. The same price formula is refit as data is updated; the schedule-only model remains the fallback when a price is unavailable.</p>
 </section>
 
 <section class="section">
   <h2>What goes in</h2>
-  <p>Four variables, all known before kickoff.</p>
+  <p>One price variable. The date the price was observed matters: today's price is not necessarily the price near kickoff.</p>
   <dl class="defs">
     {% for f in t2.features %}
     <div><dt>{{ t2.labels[f] }}</dt><dd>{{ t2.help[f] }}</dd></div>
@@ -47,7 +47,7 @@
     </li>
     {% endfor %}
   </ul>
-  <p>Read the price bar and stop there. The three opponent variables overlap heavily (a ranked opponent has a high Elo and a high SP+), so their individual weights partly cancel and are not meaningful on their own. Judge the model by its out-of-sample error, below, not by the sign of any one weight.</p>
+  <p>The weight applies to the natural log of price divided by the season reference. Doubling a game's price relative to that reference adds about {{ (t2.coef.rel_log_price * 0.6931471805599453) | num }} predicted attendees before the capacity cap. If every price rises by the same percentage, the reference rises too and the forecasts stay the same.</p>
 
   <h3>The schedule-only fallback</h3>
   <p>When a game has no listed get-in price, or the season has fewer than three priced games, the forecast uses a model with the opponent variables only. Its average game is {{ t1.baseline | num }} fans.</p>
@@ -56,9 +56,9 @@
     <thead><tr><th scope="col">Variable</th><th scope="col" class="num">Price model weight</th><th scope="col" class="num">Schedule-only weight</th></tr></thead>
     <tbody>
       <tr><td>Average game</td><td class="num">{{ t2.baseline | num }}</td><td class="num">{{ t1.baseline | num }}</td></tr>
-      {% for f in t2.features %}
-      <tr><td>{{ t2.labels[f] }}</td>
-        <td class="num">{{ t2.coef[f] | dec(t2.coef[f] | abs < 100 and 2 or 0) }} <span class="cell-sub">± {{ t2.stderr[f] | dec(t2.stderr[f] | abs < 100 and 2 or 0) }}</span></td>
+      {% for f in (t2.features + t1.features) | unique %}
+      <tr><td>{{ t2.labels.get(f, t1.labels.get(f)) }}</td>
+        <td class="num">{% if f in t2.coef %}{{ t2.coef[f] | dec(t2.coef[f] | abs < 100 and 2 or 0) }} <span class="cell-sub">± {{ t2.stderr[f] | dec(t2.stderr[f] | abs < 100 and 2 or 0) }}</span>{% else %}<span class="muted">not used</span>{% endif %}</td>
         <td class="num">{% if f in t1.coef %}{{ t1.coef[f] | dec(t1.coef[f] | abs < 100 and 2 or 0) }} <span class="cell-sub">± {{ t1.stderr[f] | dec(t1.stderr[f] | abs < 100 and 2 or 0) }}</span>{% else %}<span class="muted">not used</span>{% endif %}</td></tr>
       {% endfor %}
     </tbody>
@@ -68,14 +68,14 @@
 
 <section class="section">
   <h2>How accurate it is</h2>
-  <p>Each game was forecast by a model that had never seen it (leave-one-out). RMSE is the root mean square error in seats; R² is the share of the variation in crowd size the model explains, where zero means no better than the average.</p>
+  <p>Each game's attendance was held out while fitting the other games (leave-one-out). These are retrospective comparisons using historical prices and season references, not a record of forecasts made before kickoff. RMSE gives extra weight to large misses; typical miss is mean absolute error. R² compares squared error with the variation around the sample mean.</p>
   <div class="table-scroll">
   <table class="metrics-table">
     <thead><tr><th scope="col">Model</th><th scope="col" class="num">Games</th><th scope="col" class="num">RMSE</th><th scope="col" class="num">Typical miss</th><th scope="col" class="num">R²</th></tr></thead>
     <tbody>
       {% for label, mt in data.metrics.items() %}
       <tr{% if label == "Tier 2 (priced rows)" %} class="highlight"{% endif %}>
-        <td>{{ label | replace("Tier 2", "Price model") | replace("Tier 1", "Schedule-only") | replace("(priced rows)", "(games with a price)") | replace("(all rows)", "(all games)") }}</td>
+        <td>{{ label | replace("Price only", "Raw log-price only") | replace("Tier 2", "Price model") | replace("Tier 1", "Schedule-only") | replace("(priced rows)", "(games with a price)") | replace("(all rows)", "(all games)") }}</td>
         <td class="num">{{ mt.n }}</td><td class="num">{{ mt.rmse | num }}</td><td class="num">{{ mt.mae | num }}</td><td class="num">{{ mt.r2 | dec(2) }}</td>
       </tr>
       {% endfor %}
@@ -84,8 +84,37 @@
   </div>
   <p>The <a href="{{ root }}track-record.html">track record</a> shows every one of those games.</p>
 
+  {% if data.validation %}
+  <h3>How well it transfers between seasons</h3>
+  <p>The price formula stays fixed while its weights are fitted on other seasons. The forward test uses earlier seasons only. Both tests still use archived prices and full-season references, so they do not establish accuracy weeks before kickoff.</p>
+  <div class="table-scroll">
+  <table class="metrics-table">
+    <thead><tr><th scope="col">Test</th><th scope="col" class="num">Games</th><th scope="col" class="num">RMSE</th><th scope="col" class="num">Typical miss</th></tr></thead>
+    <tbody>
+      {% for key, label in [("season_holdout", "Each season held out"), ("forward", "Earlier seasons only")] %}
+      {% set result = data.validation[key].metrics %}
+      {% if result %}<tr><td>{{ label }}</td><td class="num">{{ result.n }}</td><td class="num">{{ result.rmse | num }}</td><td class="num">{{ result.mae | num }}</td></tr>{% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {% endif %}
+
+  {% if data.per_season %}
+  <h3>Where the price model misses</h3>
+  <div class="table-scroll">
+  <table class="metrics-table">
+    <thead><tr><th scope="col">Season</th><th scope="col" class="num">Games scored</th><th scope="col" class="num">RMSE</th><th scope="col" class="num">Average over / under</th><th scope="col" class="num">Inside range</th></tr></thead>
+    <tbody>
+      {% for r in data.per_season %}<tr><td>{{ r.season }}{% if r.priced_games < 3 %}<span class="cell-sub">only {{ r.priced_games }} recorded prices</span>{% endif %}</td><td class="num">{{ r.n }}</td><td class="num">{{ r.rmse | num }}</td><td class="num">{{ r.bias | signed }}</td><td class="num">{{ r.inside }} / {{ r.n }}</td></tr>{% endfor %}
+    </tbody>
+  </table>
+  </div>
+  <p>Positive values mean the forecast was too high. Sparse historical seasons remain in training and in these comparisons, even though their price references are less reliable. New forecasts require at least three listed prices.</p>
+  {% endif %}
+
   <h3>How the variables were chosen</h3>
-  <p>Every subset of up to three schedule variables was scored by leave-one-out error, and the smallest subset within 5% of the best was kept. The price variable was then added in two forms; the season-relative form won.</p>
+  <p>The production price model uses relative log-price alone. The comparisons below include raw price and the former combinations with opponent ratings, but they do not automatically change the production formula. The schedule-only fallback separately selects up to three schedule variables by leave-one-out error, preferring a smaller subset within 5% of the best.</p>
   <div class="table-scroll">
   <table class="cand-table">
     <thead><tr><th scope="col">Candidate</th><th scope="col" class="num">Leave-one-out RMSE</th></tr></thead>
@@ -104,8 +133,9 @@
 <section class="section">
   <h2>Where the data comes from</h2>
   <ul class="plain">
-    <li><strong>Get-in prices</strong> from <a href="https://www.ticketdata.com/performer/mississippi-state-bulldogs-football">ticketdata.com</a>, recorded by hand. Training prices are the final price near game day; an upcoming game's price is whatever was last pasted in, and the date it was seen is shown on each game.</li>
+    <li><strong>Get-in prices</strong> from <a href="https://www.ticketdata.com/performer/mississippi-state-bulldogs-football">ticketdata.com</a>, recorded by hand. Historical prices came from the past-events table and have unknown observation dates. Each upcoming game shows its latest recorded price and observation date; price and pregame forecast history is now preserved for future evaluation.</li>
     <li><strong>Schedule, attendance, AP polls, Elo and SP+</strong> from <a href="https://collegefootballdata.com">CollegeFootballData</a>, refreshed daily during the season.</li>
+    <li><strong>Missing attendance</strong> can be filled from a documented official source. Southern Miss 2023 uses the <a href="https://hailstate.com/news/2023/11/18/football-postgame-notes-mississippi-state-vs-southern-miss">official postgame attendance of 53,855</a>.</li>
     <li><strong>Every number on this site</strong> is available as <a href="{{ root }}data.json">one JSON file</a>: games, forecasts, weights and accuracy.</li>
   </ul>
 </section>

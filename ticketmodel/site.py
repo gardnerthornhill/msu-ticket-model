@@ -31,8 +31,8 @@ FEATURE_LABELS = {
     "week": "Week of the season",
 }
 FEATURE_HELP = {
-    "rel_log_price": "The cheapest resale ticket on ticketdata.com, compared with the median get-in price of that "
-                     "season's home games. Measured on a log scale, so doubling the price counts the same in any season.",
+    "rel_log_price": "The cheapest resale ticket on ticketdata.com, compared with that season's median price on a log scale. "
+                     "All listed home games contribute to the reference. A doubling relative to that reference has the same effect in any season.",
     "log_getin": "The cheapest resale ticket on ticketdata.com, on a log scale.",
     "opp_ranked": "1 when the opponent was in that week's AP Top 25, otherwise 0.",
     "opp_elo": "CollegeFootballData's Elo rating for the opponent entering the game. Before an opponent has "
@@ -111,7 +111,7 @@ def display_value(feature: str, x: float, row) -> str:
 
 def mean_value(feature: str, m: float) -> str:
     if feature == "rel_log_price":
-        return "the season median"
+        return f"{math.exp(m):.2f}× the season reference"
     if feature == "opp_ranked":
         return f"{m:.0%} of games ranked"
     if feature == "opp_elo":
@@ -156,7 +156,7 @@ def breakdown(model: dict, row) -> dict:
         terms.append({
             "feature": f, "label": model["labels"][f], "value": x,
             "display": display_value(f, x, row), "mean_display": model["mean_labels"][f],
-            "contribution": contribution,
+            "contribution": contribution, "weight": model["coef"][f],
         })
     total = model["baseline"] + sum(t["contribution"] for t in terms)
     return {"baseline": model["baseline"], "terms": terms, "total": total, "capped": total > CAPACITY}
@@ -260,6 +260,9 @@ def site_data(paths: Paths, today: str | None = None) -> dict:
             "breakdown": breakdown(explain or models[tier], row),
             "notes": game_notes(warnings, season, opp),
         })
+        count = priced_per_season.get(season, 0)
+        if priced and count < 3:
+            games[-1]["notes"].append(f"Only {count} prices are recorded for this season. Its price reference is less reliable; historical results remain visible in the evaluation.")
     games.sort(key=lambda g: g["date"])
 
     played = [g for g in games if g["status"] == "played"]
@@ -293,6 +296,7 @@ def site_data(paths: Paths, today: str | None = None) -> dict:
         "games": games, "track": track, "models": models, "metrics": summary["metrics"],
         "tier1_candidates": summary.get("tier1_candidates", []), "tier2_candidates": summary.get("tier2_candidates", []),
         "counts": summary.get("counts", {}), "caveats": CAVEATS, "warnings": warnings,
+        "validation": summary.get("validation", {}), "per_season": summary.get("per_season", []),
     }
 
 

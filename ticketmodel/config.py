@@ -19,6 +19,8 @@ ALIASES = {
 
 CANDIDATE_FEATURES = ["opp_ranked", "conf_game", "opp_elo", "opp_sp", "opp_p4", "week"]
 PRICE_FEATURES = ["log_getin", "rel_log_price"]
+# Keep the production specification stable; candidate scores are diagnostics, not a daily switch.
+TIER2_FEATURES = ["rel_log_price"]
 MAX_SUBSET_SIZE = 3
 SELECTION_TOLERANCE = 0.05  # prefer fewer features when LOO-RMSE is within this fraction of the best
 MIN_TRAINING_ROWS = 8
@@ -49,6 +51,18 @@ class Paths:
     @property
     def features(self) -> Path:
         return self.data_dir / "features.csv"
+
+    @property
+    def attendance_overrides(self) -> Path:
+        return self.data_dir / "attendance_overrides.csv"
+
+    @property
+    def ticket_history(self) -> Path:
+        return self.data_dir / "ticket_history.csv"
+
+    @property
+    def forecast_history(self) -> Path:
+        return self.reports_dir / "forecast_history.jsonl"
 
     @property
     def models_dir(self) -> Path:

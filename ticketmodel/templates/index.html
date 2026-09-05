@@ -41,7 +41,7 @@
 <section class="hero hero-quiet">
   <p class="hero-kicker">{{ data.current_season }} season</p>
   <h1 class="hero-title">No home games left on the schedule</h1>
-  <p class="hero-when">Every {{ data.current_season }} home game is below with the forecast the model made and the crowd that showed up. Paste next season's get-in prices to start a new outlook.</p>
+  <p class="hero-when">Every {{ data.current_season }} home game is below with its retrospective forecast and announced attendance. Paste next season's get-in prices to start a new outlook.</p>
 </section>
 {% endif %}
 
@@ -89,6 +89,6 @@
     </li>
     {% endfor %}
   </ol>
-  <p class="board-note">The 80% range is where the model expects the announced crowd to land four times in five. Everything is capped at the {{ data.capacity | num }} sellout figure. <a href="{{ root }}model.html">How it works</a>.</p>
+  <p class="board-note">The 80% range assumes prices and demand behave like the training games; weeks-ahead accuracy and sellout odds are still unverified. Forecasts are capped at {{ data.capacity | num }} announced attendees. <a href="{{ root }}model.html">How it works</a>.</p>
 </section>
 {% endblock %}

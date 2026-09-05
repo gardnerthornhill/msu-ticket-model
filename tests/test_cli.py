@@ -30,7 +30,10 @@ def test_train_writes_models_and_report(fixture_root):
     assert paths.features.exists() and paths.tier1.exists() and paths.tier2.exists() and paths.report.exists()
     assert summary["counts"] == {"games": 12, "with_attendance": 10, "with_price": 8}
     assert set(summary["metrics"]) == {"Season mean (all rows)", "Tier 1 (all rows)", "Season mean (priced rows)",
-                                       "Price only (priced rows)", "Tier 1 (priced rows)", "Tier 2 (priced rows)"}
+                                       "Price only (priced rows)", "Relative price only (priced rows)", "Tier 1 (priced rows)", "Tier 2 (priced rows)"}
+    assert summary["tier2_model"]["features"] == ["rel_log_price"]
+    assert sum(r["n"] for r in summary["per_season"]) == 8
+    assert paths.ticket_history.exists()
     per_game = summary["per_game"]
     assert len(per_game) == 10
     assert per_game["tier2_loo"].notna().sum() == 8
@@ -42,14 +45,14 @@ def test_predict_scores_upcoming_games_and_blanks_tier2_without_price(fixture_ro
     cli.cmd_train(paths)
     out = cli.cmd_predict(paths)
     assert list(out.columns) == ["season", "date", "opponent", "getin", "tier1_pred", "tier1_lo", "tier1_hi",
-                                 "tier2_pred", "tier2_lo", "tier2_hi"]
+                                 "tier2_pred", "tier2_lo", "tier2_hi", "tier1_p_sellout", "tier2_p_sellout"]
     assert list(out["opponent"]) == ["Rival C", "Rival D"]
     c = out[out["opponent"] == "Rival C"].iloc[0]
     d = out[out["opponent"] == "Rival D"].iloc[0]
     assert 0 < c["tier1_pred"] <= 60417 and c["tier1_lo"] <= c["tier1_pred"] <= c["tier1_hi"]
     assert c["tier2_pred"] > 0 and pd.isna(d["tier2_pred"]) and pd.isna(d["tier2_lo"])
     assert paths.predictions.exists()
-    assert pd.read_csv(paths.predictions).shape == (2, 10)
+    assert pd.read_csv(paths.predictions).shape == (2, 12)
 
 
 def test_predict_blanks_tier2_when_season_has_too_few_prices(fixture_root, capsys):

@@ -4,47 +4,51 @@ Predicts announced attendance at Mississippi State home football games from the 
 **get-in ticket price**, using the price as a live read on demand and CollegeFootballData (CFBD)
 for the schedule and opponent strength.
 
-The headline finding from the 2023–2025 seasons: the get-in price on
-[ticketdata.com](https://www.ticketdata.com/performer/mississippi-state-bulldogs-football) tracks
-attendance more closely than any schedule feature. Within a season the rank correlation between
-price and crowd size was about 0.93–0.95. A price model beats an opponent-quality model out of
-sample.
+The production price model uses **season-relative log get-in price alone**. In the
+2023–2025 audit it predicted attendance better than the former combination of price,
+AP ranked status, opponent Elo and opponent SP+. The formula stays fixed while its
+coefficients are refitted as data arrives; diagnostic comparisons never silently switch
+production back to raw prices or extra opponent variables.
 
 ## The price model
 
-The model of interest here is **Tier 2**: ordinary least squares on
+Tier 2 is ordinary least squares with an intercept and one feature:
 
-| feature | meaning |
-|---|---|
-| `rel_log_price` | log get-in price minus the season's median log price (so 2023 and 2025 price levels can share one model) |
-| `opp_ranked` | opponent in the AP Top 25 that week |
-| `opp_elo` | opponent Elo entering the game (last season's final Elo before they have played) |
-| `opp_sp` | opponent SP+ rating for the season |
+`rel_log_price = ln(getin) - median(ln(getin)) within the season`
 
-The price coefficient dominates. Predictions are clipped at Davis Wade Stadium capacity (60,417)
-and come with an 80% prediction interval.
+The reference includes every home game with a recorded price, even upcoming games and
+games without attendance. For an even number of prices it is the geometric mean of the
+two middle prices. This allows different seasons' dollar price levels to share a model.
+A common percentage change in all prices cancels out, so the model cannot measure a
+season-wide change in demand from relative price alone.
 
-Leave-one-out accuracy on the 16 games with both a price and an attendance figure:
+Predictions are clipped to 0–60,417 announced attendees and have an observation-level
+80% prediction interval. The reported sellout percentage is the model's tail probability
+above that attendance threshold; it is not calibrated to ticket inventory.
 
-| model | LOO RMSE | LOO R² |
-|---|---|---|
-| Season-mean baseline | 5,635 | -0.22 |
-| Price only | 3,589 | 0.51 |
-| Opponent features only (Tier 1) | 3,681 | 0.48 |
-| **Tier 2: opponent features + price** | **2,967** | **0.66** |
+Tier 1 remains a schedule-only fallback. It chooses up to three schedule variables by
+leave-one-out error. Its Elo and SP+ coefficients overlap and should not be interpreted
+individually. Live Tier 2 forecasts require at least three listed prices in that season.
+Sparse historical seasons remain in training and in the per-season diagnostics so hard
+outcomes are not discarded; their references are less reliable.
 
-A schedule-only model (Tier 1) is fitted alongside as the baseline and as the fallback for games
-with no listed price. It is not the focus, and its coefficients should not be read individually:
-opponent Elo and SP+ are collinear and partly cancel.
+`reports/model_report.md` and the site's explanation page show:
 
-Full accuracy tables, the chosen features, per-game leave-one-out predictions, and caveats are
-regenerated into `reports/model_report.md` on every training run.
+- Common-sample leave-one-out comparisons, including raw and relative price alone.
+- The current price formula versus the legacy price-plus-opponent alternatives.
+- Price-model error, bias, price coverage and interval coverage by season.
+- Whole-season holdouts and forward tests using only earlier seasons for fitting.
+
+These are **retrospective** tests with cached features and full-season price references,
+not a record of forecasts made before kickoff. Price observation dates in the original
+historical sample are unknown. The fixed price formula was chosen after studying the
+same small dataset, so prospective validation is still needed.
 
 ## The site
 
 `site/` is a static site generated from the model outputs: a 2026 outlook with the forecast,
 80% range and sellout odds for every home game, a track record of every tracked game scored
-leave-one-out, a page per game showing how much each variable moved the number, and a
+leave-one-out, a page per game showing how the price moved the number, and a
 plain-English explanation of the weights. It is rebuilt by `python3 -m ticketmodel site`
 (and by `all`), so the daily Action keeps it current. To look at it locally:
 
@@ -66,7 +70,7 @@ absolute links to itself. The pages deliberately carry no link back to the repos
 ## How the data flows
 
 ```
-data/tickets.csv  (get-in prices, hand-maintained)
+data/tickets.csv  (latest get-in prices, hand-maintained)
         +
 data/cfbd_raw/    (CFBD games, AP polls, SP+, Elo; fetched once per season)
         |
@@ -79,9 +83,22 @@ data/features.csv -> models/tier2.json (+ tier1.json) -> reports/model_report.md
 
 - **Ticket prices** come from ticketdata.com, which sits behind Cloudflare, so they are pasted in
   by hand. `scripts/ticketdata_console.js` prints ready-to-paste CSV rows from the loaded page.
-  Prices are frozen at the time you paste them; update a row whenever you want a fresh read.
-- **CFBD data** is fetched with your own API key and cached. A finished season is never
-  re-downloaded. Only a season with an unfinished game, or a game in the last 14 days, refreshes.
+  Update a row whenever you want a fresh read. Previous values and supplied observation dates are preserved in `data/ticket_history.csv`.
+- **CFBD data** is fetched with your own API key and cached. Finished seasons refresh only
+  when explicitly forced; open or recently played seasons refresh automatically.
+- **Missing attendance** is filled from `data/attendance_overrides.csv`, which records an
+  official source for each correction. It does not rewrite the CFBD cache or replace an
+  existing CFBD attendance value. Southern Miss 2023 is restored to 53,855 from the official
+  Mississippi State postgame notes. Conflicting source values produce a warning.
+- **Price history** records distinct price/observation-date versions when prices are updated
+  or features are built. `recorded_at` is ingestion time, separate from `observed`. Unknown
+  historical dates remain unknown.
+- **Forecast history** in `reports/forecast_history.jsonl` preserves the inputs, fitted model,
+  season reference and forecast as they existed before kickoff. Changed inputs/models and
+  each new forecast day create a snapshot; identical reruns on the same day do not. No
+  snapshot is recorded after kickoff, even when the feed still says incomplete. TBD games
+  stop being archived at midnight locally on game day. This history supports future
+  evaluation at consistent horizons without pretending retrospective fits were live calls.
 
 ## Setup
 
@@ -144,7 +161,7 @@ python3 -m ticketmodel add-tickets --rows "Alabama,2026-10-03,91"
 ```
 python3 -m ticketmodel fetch     # CFBD -> data/cfbd_raw/ (per the refresh rule; --refresh 2025 to force)
 python3 -m ticketmodel build     # -> data/features.csv
-python3 -m ticketmodel train     # -> models/*.json, reports/model_report.md
+python3 -m ticketmodel train     # -> models/*.json, reports/model_report.md (fixed relative-price production formula)
 python3 -m ticketmodel predict   # -> reports/predictions.csv
 python3 -m ticketmodel site      # -> site/ (downloads any missing opponent logos)
 python3 -m ticketmodel all       # fetch, build, train, predict, site
@@ -154,14 +171,16 @@ python3 -m pytest                # tests, no network
 
 ## Caveats
 
-- Small sample: a couple of dozen games. The leave-one-out numbers are the honest accuracy;
-  coefficients are rough.
-- The training prices are the final get-in prices recorded near game day. A price pasted weeks
-  out is an earlier snapshot and will move; predictions move with it.
-- Attendance is the announced figure and is capped at capacity, so sellouts flatten the top end
-  and clipped intervals no longer carry their nominal coverage.
-- Feature subsets were chosen by the same leave-one-out scores reported, so the headline RMSE
-  is a little optimistic.
+- Small sample: only a few seasons and fewer than two dozen priced outcomes.
+- The target is announced attendance, not ticket scans or sales.
+- Historical prices came from the past-events table and have no verified observation dates.
+  Current prices can be weeks before kickoff; retrospective error is not weeks-ahead accuracy.
+- Full-season relative price references can contain information unavailable on the historical
+  forecast date. SP+ in the schedule fallback is also season-level, not a dated pregame snapshot.
+- The sparse 2024 season remains visible in training and diagnostics. Recovering its missing
+  prices is preferable to dropping its difficult outcomes.
+- Nominal 80% intervals and sellout odds depend on model assumptions; calibration is uncertain.
+- MSU record/losses was an exploratory candidate and is not part of the production formula.
 
 ## Layout
 
@@ -169,9 +188,9 @@ python3 -m pytest                # tests, no network
 ticketmodel/      config, tickets loader, CFBD fetch/cache, feature build, model, report, site, CLI
 ticketmodel/templates, ticketmodel/static   Jinja templates, CSS and JS for the site
 scripts/          browser console snippet for ticketdata.com
-data/             tickets.csv, features.csv, cfbd_raw/
+data/             tickets.csv, ticket_history.csv, attendance_overrides.csv, features.csv, cfbd_raw/
 models/           fitted models as JSON
-reports/          model_report.md, train_summary.json, predictions.csv
+reports/          model_report.md, train_summary.json, predictions.csv, forecast_history.jsonl
 logos/            team logos (MSU mark plus ESPN logos by team id)
 site/             generated static site (published by Netlify)
 exploration/      the original correlation analysis that motivated the model
