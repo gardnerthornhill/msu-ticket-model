@@ -1305,7 +1305,7 @@
    "actual": null,
    "completed": 0,
    "status": "upcoming",
-   "getin": 29.0,
+   "getin": 30.0,
    "observed": "2026-09-05",
    "observed_label": "Sat, Sep 5",
    "ranked": 0,
@@ -1313,14 +1313,14 @@
    "elo": 1177.0,
    "sp": -28.9,
    "conf_game": 0,
-   "rel_log_price": -0.4168938039317869,
+   "rel_log_price": -0.3829922522561055,
    "tier": "tier2",
    "tier_label": "Price model",
    "forecast": {
-    "pred": 50533,
-    "lo": 47438,
-    "hi": 53629,
-    "p_sellout": 0.0003286410406931693
+    "pred": 50749,
+    "lo": 47658,
+    "hi": 53840,
+    "p_sellout": 0.00039156623248718574
    },
    "error": null,
    "inside": null,
@@ -1331,14 +1331,14 @@
      {
       "feature": "rel_log_price",
       "label": "Get-in price, relative to the season",
-      "value": -0.4168938039317869,
-      "display": "$29, 66% of the season median",
+      "value": -0.3829922522561055,
+      "display": "$30, 68% of the season median",
       "mean_display": "1.02\u00d7 the season reference",
-      "contribution": -2754.2295603553407,
+      "contribution": -2538.73825196238,
       "weight": 6356.384818442961
      }
     ],
-    "total": 50533.35867493878,
+    "total": 50748.84998333175,
     "capped": false
    },
    "notes": []
@@ -1413,22 +1413,22 @@
    "actual": null,
    "completed": 0,
    "status": "upcoming",
-   "getin": 89.0,
+   "getin": 88.0,
    "observed": "2026-09-05",
    "observed_label": "Sat, Sep 5",
    "ranked": 1,
    "ap_rank": 13,
-   "elo": 1857.0,
+   "elo": 1829.0,
    "sp": 17.6,
    "conf_game": 1,
-   "rel_log_price": 0.7044467358138786,
+   "rel_log_price": 0.6931471805599458,
    "tier": "tier2",
    "tier_label": "Price model",
    "forecast": {
-    "pred": 57661,
-    "lo": 54518,
+    "pred": 57589,
+    "lo": 54448,
     "hi": 60417,
-    "p_sellout": 0.1290828712176072
+    "p_sellout": 0.12306314770770405
    },
    "error": null,
    "inside": null,
@@ -1439,19 +1439,17 @@
      {
       "feature": "rel_log_price",
       "label": "Get-in price, relative to the season",
-      "value": 0.7044467358138786,
-      "display": "$89, 2\u00d7 the season median",
+      "value": 0.6931471805599458,
+      "display": "$88, 2\u00d7 the season median",
       "mean_display": "1.02\u00d7 the season reference",
-      "contribution": 4373.442422788643,
+      "contribution": 4301.618101317387,
       "weight": 6356.384818442961
      }
     ],
-    "total": 57661.03065808277,
+    "total": 57589.20633661151,
     "capped": false
    },
-   "notes": [
-    "No 2026 Elo yet; using 2025 final Elo 1857."
-   ]
+   "notes": []
   },
   {
    "season": 2026,
@@ -1921,7 +1919,6 @@
   "2025 Alcorn State: no Elo; imputed 618.0",
   "2025 Alcorn State: no SP+; imputed -46.6",
   "2026 Missouri: no 2026 Elo yet; using 2025 final Elo 1750",
-  "2026 Alabama: no 2026 Elo yet; using 2025 final Elo 1857",
   "2026 Vanderbilt: no 2026 Elo yet; using 2025 final Elo 1880",
   "2026 Auburn: no 2026 Elo yet; using 2025 final Elo 1670",
   "2026 Tennessee Tech: no Elo; imputed 805.0",
