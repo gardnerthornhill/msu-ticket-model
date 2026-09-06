@@ -10,7 +10,7 @@
 {% block main %}
 <section class="page-head">
   <h1>Track record</h1>
-  <p class="lede">Across {{ t.n }} tracked home games since {{ data.seasons[0] }}, the retrospective forecast missed the announced crowd by {{ t.mae | num }} on a typical game, and the real number landed inside the 80% range {{ t.inside }} times out of {{ t.n }}. Each game's attendance was held out while fitting the other games. Historical prices and season references are used, so these results are not forecasts saved before kickoff.</p>
+  <p class="lede">Across {{ t.n }} tracked home games since {{ data.seasons[0] }}, the forecast missed the announced crowd by {{ t.mae | num }} on a typical game, and the real number landed inside the 80% range {{ t.inside }} times out of {{ t.n }}. {{ t.recorded }} result{% if t.recorded != 1 %}s were{% else %} was{% endif %} saved before kickoff; earlier games use leave-one-out estimates with each game's attendance held out.</p>
 </section>
 
 <section class="kpis" aria-label="Headline accuracy">
@@ -88,7 +88,7 @@
       <tr data-season="{{ g.season }}">
         <td data-value="{{ g.date }}"><a class="game-cell" href="{{ root }}games/{{ g.slug }}.html">{{ m.logo(g, root, "xs") }}<span><span class="game-name">{{ g.opponent }}{% if g.ap_rank %} <span class="rank">No. {{ g.ap_rank }}</span>{% endif %}</span><span class="game-date">{{ g.date_label }}</span></span></a></td>
         <td class="num" data-value="{{ g.getin or -1 }}">{% if g.getin %}{{ g.getin | money }}{% else %}<span class="muted">none</span>{% endif %}</td>
-        <td class="num" data-value="{{ g.forecast.pred }}">{{ g.forecast.pred | num }}{% if g.tier == "tier1" %}<span class="cell-sub">schedule-only model</span>{% endif %}</td>
+        <td class="num" data-value="{{ g.forecast.pred }}">{{ g.forecast.pred | num }}{% if g.forecast_kind == "recorded" %}<span class="cell-sub">recorded pregame</span>{% elif g.tier == "tier1" %}<span class="cell-sub">schedule-only model</span>{% endif %}</td>
         <td class="num range-cell">{{ g.forecast.lo | num }} to {{ g.forecast.hi | num }}</td>
         <td class="num" data-value="{{ g.actual }}">{{ g.actual | num }}{% if g.sellout %}<span class="cell-sub">sellout</span>{% endif %}</td>
         <td class="num" data-value="{{ g.error }}">{{ g.error | signed }}</td>
@@ -98,6 +98,6 @@
     </tbody>
   </table>
   </div>
-  <p class="board-note">Miss is forecast minus actual, so a negative number means more fans came than the model expected. The 2024 rows without a price show what the schedule-only model would have said.</p>
+  <p class="board-note">Miss is forecast minus actual, so a negative number means more fans came than the model expected. “Recorded pregame” marks a forecast archived before kickoff; all other rows are leave-one-out estimates. The 2024 rows without a price use the schedule-only model.</p>
 </section>
 {% endblock %}

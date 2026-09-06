@@ -1,52 +1,52 @@
 {
- "generated": "2026-09-05",
+ "generated": "2026-09-06",
  "counts": {
   "games": 29,
-  "with_attendance": 22,
-  "with_price": 17
+  "with_attendance": 23,
+  "with_price": 18
  },
  "metrics": {
   "Season mean (all rows)": {
-   "rmse": 4746.204986802304,
-   "mae": 3607.318181818182,
-   "r2": 0.007778238258121073,
-   "n": 22
+   "rmse": 4698.368116430657,
+   "mae": 3601.9367588932805,
+   "r2": 0.006569220499742179,
+   "n": 23
   },
   "Tier 1 (all rows)": {
-   "rmse": 3299.8806711703373,
-   "mae": 2688.9555986266605,
-   "r2": 0.520363487963116,
-   "n": 22
+   "rmse": 3270.040455371912,
+   "mae": 2724.496882395783,
+   "r2": 0.5187732268320331,
+   "n": 23
   },
   "Season mean (priced rows)": {
-   "rmse": 5415.023103769033,
-   "mae": 4574.35294117647,
-   "r2": -0.1962350891812661,
-   "n": 17
+   "rmse": 5369.055616996284,
+   "mae": 4571.143790849674,
+   "r2": -0.1901627123765839,
+   "n": 18
   },
   "Price only (priced rows)": {
-   "rmse": 3486.416725544238,
-   "mae": 2858.804002690911,
-   "r2": 0.5041223866254136,
-   "n": 17
+   "rmse": 3651.9769708733884,
+   "mae": 3063.1135854361605,
+   "r2": 0.44936147307129815,
+   "n": 18
   },
   "Relative price only (priced rows)": {
-   "rmse": 2237.926325524275,
-   "mae": 1598.2538186836862,
-   "r2": 0.7956815996632854,
-   "n": 17
+   "rmse": 2229.1444075180366,
+   "mae": 1602.0653528186158,
+   "r2": 0.7948427157026684,
+   "n": 18
   },
   "Tier 1 (priced rows)": {
-   "rmse": 3777.0950275856967,
-   "mae": 3286.838830483994,
-   "r2": 0.4179882771812823,
-   "n": 17
+   "rmse": 3697.8854467840483,
+   "mae": 3259.518040444193,
+   "r2": 0.4354304625911366,
+   "n": 18
   },
   "Tier 2 (priced rows)": {
-   "rmse": 2237.926325524275,
-   "mae": 1598.2538186836862,
-   "r2": 0.7956815996632854,
-   "n": 17
+   "rmse": 2229.1444075180366,
+   "mae": 1602.0653528186158,
+   "r2": 0.7948427157026684,
+   "n": 18
   }
  },
  "tier1_candidates": [
@@ -56,31 +56,31 @@
     "opp_elo",
     "opp_sp"
    ],
-   "rmse": 3299.8806711703373
+   "rmse": 3270.040455371912
   },
   {
    "features": [
     "opp_ranked"
    ],
-   "rmse": 3611.5513845290116
+   "rmse": 3529.306599021463
   },
   {
    "features": [
     "opp_sp"
    ],
-   "rmse": 4303.086342461098
+   "rmse": 4193.495525218266
   },
   {
    "features": [
     "conf_game"
    ],
-   "rmse": 4312.047307301971
+   "rmse": 4212.619397522097
   },
   {
    "features": [
     "opp_p4"
    ],
-   "rmse": 4364.687947216649
+   "rmse": 4262.023826472993
   }
  ],
  "tier2_candidates": [
@@ -89,14 +89,14 @@
     "rel_log_price"
    ],
    "price_feature": "rel_log_price",
-   "rmse": 2237.926325524275
+   "rmse": 2229.1444075180366
   },
   {
    "features": [
     "log_getin"
    ],
    "price_feature": "log_getin",
-   "rmse": 3486.416725544238
+   "rmse": 3651.9769708733884
   },
   {
    "features": [
@@ -106,7 +106,7 @@
     "rel_log_price"
    ],
    "price_feature": "rel_log_price",
-   "rmse": 2764.2385179953867
+   "rmse": 2658.9144661631917
   },
   {
    "features": [
@@ -116,7 +116,7 @@
     "log_getin"
    ],
    "price_feature": "log_getin",
-   "rmse": 3570.157114416376
+   "rmse": 3356.9361651025984
   }
  ],
  "tier1_model": {
@@ -125,75 +125,75 @@
    "opp_elo",
    "opp_sp"
   ],
-  "intercept": 66503.15058517708,
+  "intercept": 64793.62598404872,
   "coef": {
-   "opp_ranked": 8262.968774055706,
-   "opp_elo": -11.992569186642719,
-   "opp_sp": 210.11731384885115
+   "opp_ranked": 8048.113852169942,
+   "opp_elo": -10.708025353615703,
+   "opp_sp": 185.52829201019733
   },
   "stderr": {
-   "const": 8117.071219383023,
-   "opp_ranked": 2042.2024685617948,
-   "opp_elo": 5.751234955623349,
-   "opp_sp": 93.38487161112701
+   "const": 7622.692195558952,
+   "opp_ranked": 1990.3323151849654,
+   "opp_elo": 5.366273987642813,
+   "opp_sp": 85.1245585073752
   },
-  "resid_se": 3164.246467771955,
-  "df_resid": 18,
-  "n": 22,
+  "resid_se": 3120.3404723333183,
+  "df_resid": 19,
+  "n": 23,
   "xtx_inv": [
    [
-    6.58048805351197,
-    0.6938610564204507,
-    -0.004629186932408475,
-    0.0696195447651297
+    5.967779912755502,
+    0.616855227064969,
+    -0.0041687955094783105,
+    0.06080663043589715
    ],
    [
-    0.6938610564196587,
-    0.41654026183660353,
-    -0.0005828550559704383,
-    0.0040985741145585924
+    0.6168552270609707,
+    0.4068620849680615,
+    -0.0005249925583240609,
+    0.0029909574013944006
    ],
    [
-    -0.004629186932408809,
-    -0.0005828550559710729,
-    3.3035555387771056e-06,
-    -4.851869018827364e-05
+    -0.0041687955094767614,
+    -0.0005249925583266211,
+    2.9576155255645735e-06,
+    -4.189663002890921e-05
    ],
    [
-    0.0696195447651433,
-    0.0040985741145693755,
-    -4.851869018828032e-05,
-    0.0008709885465844619
+    0.06080663043593195,
+    0.0029909574014376395,
+    -4.18966300289483e-05,
+    0.0007442276080419505
    ]
   ],
-  "data_hash": "846e58b99ace"
+  "data_hash": "2fa6213e6657"
  },
  "tier2_model": {
   "features": [
    "rel_log_price"
   ],
-  "intercept": 53183.29612115373,
+  "intercept": 53073.91519178465,
   "coef": {
-   "rel_log_price": 6356.384818442961
+   "rel_log_price": 6442.804015559826
   },
   "stderr": {
-   "const": 538.7974956301562,
-   "rel_log_price": 762.556790772059
+   "const": 519.1565649544781,
+   "rel_log_price": 749.6107898789484
   },
-  "resid_se": 2220.9199472364667,
-  "df_resid": 15,
-  "n": 17,
+  "resid_se": 2202.5180195134517,
+  "df_resid": 16,
+  "n": 18,
   "xtx_inv": [
    [
-    0.058855266067109405,
-    -0.0019342823365312049
+    0.055559427249675955,
+    0.000669679305339221
    ],
    [
-    -0.001934282336531204,
-    0.1178904366820885
+    0.0006696793053392211,
+    0.11583311027508511
    ]
   ],
-  "data_hash": "522035d28ed9"
+  "data_hash": "0caeaadc993c"
  },
  "per_game": [
   {
@@ -202,14 +202,14 @@
    "opponent": "SE Louisiana",
    "getin": 8.0,
    "attendance": 50041.0,
-   "tier1_loo": 48199.0,
-   "tier1_lo": 43430.0,
-   "tier1_hi": 52969.0,
-   "tier1_p_sellout": 0.0016468452371830309,
-   "tier2_loo": 49036.0,
-   "tier2_lo": 45781.0,
-   "tier2_hi": 52292.0,
-   "tier2_p_sellout": 0.00016993824881725468
+   "tier1_loo": 48587.0,
+   "tier1_lo": 43937.0,
+   "tier1_hi": 53236.0,
+   "tier1_p_sellout": 0.0016483646010486733,
+   "tier2_loo": 48862.0,
+   "tier2_lo": 45671.0,
+   "tier2_hi": 52053.0,
+   "tier2_p_sellout": 0.00010509940430027499
   },
   {
    "season": 2023,
@@ -217,14 +217,14 @@
    "opponent": "Arizona",
    "getin": 12.0,
    "attendance": 51648.0,
-   "tier1_loo": 52832.0,
-   "tier1_lo": 47681.0,
-   "tier1_hi": 57982.0,
-   "tier1_p_sellout": 0.03307371166869469,
-   "tier2_loo": 51728.0,
-   "tier2_lo": 48529.0,
-   "tier2_hi": 54927.0,
-   "tier2_p_sellout": 0.001304665261951582
+   "tier1_loo": 52482.0,
+   "tier1_lo": 47456.0,
+   "tier1_hi": 57507.0,
+   "tier1_p_sellout": 0.0250111233147022,
+   "tier2_loo": 51590.0,
+   "tier2_lo": 48442.0,
+   "tier2_hi": 54738.0,
+   "tier2_p_sellout": 0.0009468038831338913
   },
   {
    "season": 2023,
@@ -232,14 +232,14 @@
    "opponent": "LSU",
    "getin": 31.0,
    "attendance": 60084.0,
-   "tier1_loo": 58144.0,
-   "tier1_lo": 53305.0,
+   "tier1_loo": 57887.0,
+   "tier1_lo": 53177.0,
    "tier1_hi": 60417.0,
-   "tier1_p_sellout": 0.2696876979088493,
-   "tier2_loo": 57447.0,
-   "tier2_lo": 54296.0,
+   "tier1_p_sellout": 0.24205256537558445,
+   "tier2_loo": 57395.0,
+   "tier2_lo": 54287.0,
    "tier2_hi": 60417.0,
-   "tier2_p_sellout": 0.11277569003988808
+   "tier2_p_sellout": 0.10603543878286216
   },
   {
    "season": 2023,
@@ -247,14 +247,14 @@
    "opponent": "Alabama",
    "getin": 25.0,
    "attendance": 60111.0,
-   "tier1_loo": 55576.0,
-   "tier1_lo": 51183.0,
-   "tier1_hi": 59970.0,
-   "tier1_p_sellout": 0.08002064052929941,
-   "tier2_loo": 56034.0,
-   "tier2_lo": 53149.0,
-   "tier2_hi": 58919.0,
-   "tier2_p_sellout": 0.03014718866167727
+   "tier1_loo": 55604.0,
+   "tier1_lo": 51280.0,
+   "tier1_hi": 59929.0,
+   "tier1_p_sellout": 0.07800845395706077,
+   "tier2_loo": 55967.0,
+   "tier2_lo": 53119.0,
+   "tier2_hi": 58816.0,
+   "tier2_p_sellout": 0.026821075135116744
   },
   {
    "season": 2023,
@@ -262,14 +262,14 @@
    "opponent": "Western Michigan",
    "getin": 6.0,
    "attendance": 47158.0,
-   "tier1_loo": 48302.0,
-   "tier1_lo": 43731.0,
-   "tier1_hi": 52873.0,
-   "tier1_p_sellout": 0.001274212532439062,
-   "tier2_loo": 47348.0,
-   "tier2_lo": 43969.0,
-   "tier2_hi": 50727.0,
-   "tier2_p_sellout": 6.696468972455365e-05
+   "tier1_loo": 48594.0,
+   "tier1_lo": 44154.0,
+   "tier1_hi": 53033.0,
+   "tier1_p_sellout": 0.0011622234559927633,
+   "tier2_loo": 47122.0,
+   "tier2_lo": 43809.0,
+   "tier2_hi": 50436.0,
+   "tier2_p_sellout": 3.834160635948647e-05
   },
   {
    "season": 2023,
@@ -277,14 +277,14 @@
    "opponent": "Kentucky",
    "getin": 10.0,
    "attendance": 52329.0,
-   "tier1_loo": 49018.0,
-   "tier1_lo": 44427.0,
-   "tier1_hi": 53609.0,
-   "tier1_p_sellout": 0.0020680094221300353,
-   "tier2_loo": 50409.0,
-   "tier2_lo": 47260.0,
-   "tier2_hi": 53559.0,
-   "tier2_p_sellout": 0.00038613807681236637
+   "tier1_loo": 49127.0,
+   "tier1_lo": 44610.0,
+   "tier1_hi": 53644.0,
+   "tier1_p_sellout": 0.0018828509236249143,
+   "tier2_loo": 50265.0,
+   "tier2_lo": 47176.0,
+   "tier2_hi": 53353.0,
+   "tier2_p_sellout": 0.00025510394088008984
   },
   {
    "season": 2023,
@@ -292,14 +292,14 @@
    "opponent": "Southern Miss",
    "getin": 19.0,
    "attendance": 53855.0,
-   "tier1_loo": 48882.0,
-   "tier1_lo": 44652.0,
-   "tier1_hi": 53112.0,
-   "tier1_p_sellout": 0.0010214981420871652,
-   "tier2_loo": 54698.0,
-   "tier2_lo": 51516.0,
-   "tier2_hi": 57880.0,
-   "tier2_p_sellout": 0.01492501331596238
+   "tier1_loo": 49091.0,
+   "tier1_lo": 44919.0,
+   "tier1_hi": 53264.0,
+   "tier1_p_sellout": 0.0009990596766198132,
+   "tier2_loo": 54600.0,
+   "tier2_lo": 51462.0,
+   "tier2_hi": 57739.0,
+   "tier2_p_sellout": 0.012624627993353597
   },
   {
    "season": 2023,
@@ -307,14 +307,14 @@
    "opponent": "Ole Miss",
    "getin": 63.0,
    "attendance": 60412.0,
-   "tier1_loo": 58037.0,
-   "tier1_lo": 53217.0,
+   "tier1_loo": 57789.0,
+   "tier1_lo": 53097.0,
    "tier1_hi": 60417.0,
-   "tier1_p_sellout": 0.25953067664891266,
+   "tier1_p_sellout": 0.2328536268872981,
    "tier2_loo": 60417.0,
-   "tier2_lo": 59477.0,
+   "tier2_lo": 59541.0,
    "tier2_hi": 60417.0,
-   "tier2_p_sellout": 0.8303807173603464
+   "tier2_p_sellout": 0.834901544690613
   },
   {
    "season": 2024,
@@ -322,10 +322,10 @@
    "opponent": "Eastern Kentucky",
    "getin": null,
    "attendance": 48724.0,
-   "tier1_loo": 49885.0,
-   "tier1_lo": 44761.0,
-   "tier1_hi": 55010.0,
-   "tier1_p_sellout": 0.006973692993836532,
+   "tier1_loo": 50143.0,
+   "tier1_lo": 45143.0,
+   "tier1_hi": 55143.0,
+   "tier1_p_sellout": 0.006819312576554317,
    "tier2_loo": null,
    "tier2_lo": null,
    "tier2_hi": null,
@@ -337,10 +337,10 @@
    "opponent": "Toledo",
    "getin": null,
    "attendance": 47412.0,
-   "tier1_loo": 47761.0,
-   "tier1_lo": 42995.0,
-   "tier1_hi": 52526.0,
-   "tier1_p_sellout": 0.0012548711191934614,
+   "tier1_loo": 48117.0,
+   "tier1_lo": 43495.0,
+   "tier1_hi": 52739.0,
+   "tier1_p_sellout": 0.001168477713742055,
    "tier2_loo": null,
    "tier2_lo": null,
    "tier2_hi": null,
@@ -352,10 +352,10 @@
    "opponent": "Florida",
    "getin": null,
    "attendance": 49655.0,
-   "tier1_loo": 52127.0,
-   "tier1_lo": 47290.0,
-   "tier1_hi": 56963.0,
-   "tier1_p_sellout": 0.01769842949473257,
+   "tier1_loo": 51935.0,
+   "tier1_lo": 47185.0,
+   "tier1_hi": 56684.0,
+   "tier1_p_sellout": 0.01440484538922862,
    "tier2_loo": null,
    "tier2_lo": null,
    "tier2_hi": null,
@@ -367,14 +367,14 @@
    "opponent": "Texas A&M",
    "getin": 10.0,
    "attendance": 50127.0,
-   "tier1_loo": 57899.0,
-   "tier1_lo": 54018.0,
+   "tier1_loo": 57832.0,
+   "tier1_lo": 53987.0,
    "tier1_hi": 60417.0,
-   "tier1_p_sellout": 0.1995102804468688,
-   "tier2_loo": 53731.0,
-   "tier2_lo": 50818.0,
-   "tier2_hi": 56643.0,
-   "tier2_p_sellout": 0.004010883022636672
+   "tier1_p_sellout": 0.1913894371899063,
+   "tier2_loo": 53608.0,
+   "tier2_lo": 50710.0,
+   "tier2_hi": 56506.0,
+   "tier2_p_sellout": 0.003305398836250678
   },
   {
    "season": 2024,
@@ -382,10 +382,10 @@
    "opponent": "Arkansas",
    "getin": null,
    "attendance": 49303.0,
-   "tier1_loo": 51273.0,
+   "tier1_loo": 51192.0,
    "tier1_lo": 46561.0,
-   "tier1_hi": 55985.0,
-   "tier1_p_sellout": 0.009584288413554737,
+   "tier1_hi": 55823.0,
+   "tier1_p_sellout": 0.00813956528005267,
    "tier2_loo": null,
    "tier2_lo": null,
    "tier2_hi": null,
@@ -397,10 +397,10 @@
    "opponent": "Massachusetts",
    "getin": null,
    "attendance": 48617.0,
-   "tier1_loo": 49729.0,
-   "tier1_lo": 45147.0,
-   "tier1_hi": 54312.0,
-   "tier1_p_sellout": 0.003186822036689345,
+   "tier1_loo": 49886.0,
+   "tier1_lo": 45399.0,
+   "tier1_hi": 54374.0,
+   "tier1_p_sellout": 0.002943585447273731,
    "tier2_loo": null,
    "tier2_lo": null,
    "tier2_hi": null,
@@ -412,14 +412,14 @@
    "opponent": "Missouri",
    "getin": 9.0,
    "attendance": 47824.0,
-   "tier1_loo": 49584.0,
-   "tier1_lo": 44793.0,
-   "tier1_hi": 54374.0,
-   "tier1_p_sellout": 0.0038980216787148007,
-   "tier2_loo": 53166.0,
-   "tier2_lo": 50621.0,
-   "tier2_hi": 55711.0,
-   "tier2_p_sellout": 0.0009152494031587317
+   "tier1_loo": 49713.0,
+   "tier1_lo": 45018.0,
+   "tier1_hi": 54408.0,
+   "tier1_p_sellout": 0.0035739185952100563,
+   "tier2_loo": 53025.0,
+   "tier2_lo": 50454.0,
+   "tier2_hi": 55595.0,
+   "tier2_p_sellout": 0.0007790306629573132
   },
   {
    "season": 2025,
@@ -427,14 +427,14 @@
    "opponent": "Arizona State",
    "getin": 32.0,
    "attendance": 50808.0,
-   "tier1_loo": 56010.0,
-   "tier1_lo": 51593.0,
+   "tier1_loo": 56168.0,
+   "tier1_lo": 51857.0,
    "tier1_hi": 60417.0,
-   "tier1_p_sellout": 0.1004178210837164,
-   "tier2_loo": 51033.0,
-   "tier2_lo": 47821.0,
-   "tier2_hi": 54245.0,
-   "tier2_p_sellout": 0.0007555197994852192
+   "tier1_p_sellout": 0.10310957312517557,
+   "tier2_loo": 50883.0,
+   "tier2_lo": 47723.0,
+   "tier2_hi": 54042.0,
+   "tier2_p_sellout": 0.000528632729087401
   },
   {
    "season": 2025,
@@ -442,14 +442,14 @@
    "opponent": "Alcorn State",
    "getin": 26.0,
    "attendance": 49158.0,
-   "tier1_loo": 49367.0,
-   "tier1_lo": 44110.0,
-   "tier1_hi": 54623.0,
-   "tier1_p_sellout": 0.006112386408229721,
-   "tier2_loo": 49754.0,
-   "tier2_lo": 46508.0,
-   "tier2_hi": 53000.0,
-   "tier2_p_sellout": 0.00029175451190903597
+   "tier1_loo": 49695.0,
+   "tier1_lo": 44575.0,
+   "tier1_hi": 54815.0,
+   "tier1_p_sellout": 0.006099109218571825,
+   "tier2_loo": 49577.0,
+   "tier2_lo": 46384.0,
+   "tier2_hi": 52770.0,
+   "tier2_p_sellout": 0.00019111837527367685
   },
   {
    "season": 2025,
@@ -457,14 +457,14 @@
    "opponent": "Northern Illinois",
    "getin": 11.0,
    "attendance": 45803.0,
-   "tier1_loo": 45429.0,
-   "tier1_lo": 39939.0,
-   "tier1_hi": 50918.0,
-   "tier1_p_sellout": 0.0010110908338869344,
-   "tier2_loo": 43559.0,
-   "tier2_lo": 39957.0,
-   "tier2_hi": 47161.0,
-   "tier2_p_sellout": 9.861278087131084e-06
+   "tier1_loo": 46284.0,
+   "tier1_lo": 41162.0,
+   "tier1_hi": 51407.0,
+   "tier1_p_sellout": 0.0008746108092315089,
+   "tier2_loo": 43283.0,
+   "tier2_lo": 39787.0,
+   "tier2_hi": 46779.0,
+   "tier2_p_sellout": 4.4342352824032806e-06
   },
   {
    "season": 2025,
@@ -472,14 +472,14 @@
    "opponent": "Tennessee",
    "getin": 95.0,
    "attendance": 60417.0,
-   "tier1_loo": 55270.0,
-   "tier1_lo": 50958.0,
-   "tier1_hi": 59582.0,
-   "tier1_p_sellout": 0.06493310088647093,
-   "tier2_loo": 57588.0,
-   "tier2_lo": 54449.0,
+   "tier1_loo": 55352.0,
+   "tier1_lo": 51101.0,
+   "tier1_hi": 59603.0,
+   "tier1_p_sellout": 0.06518028937849905,
+   "tier2_loo": 57539.0,
+   "tier2_lo": 54442.0,
    "tier2_hi": 60417.0,
-   "tier2_p_sellout": 0.12277302867472127
+   "tier2_p_sellout": 0.11597445598123862
   },
   {
    "season": 2025,
@@ -487,14 +487,14 @@
    "opponent": "Texas",
    "getin": 48.0,
    "attendance": 52680.0,
-   "tier1_loo": 55290.0,
-   "tier1_lo": 50611.0,
-   "tier1_hi": 59968.0,
-   "tier1_p_sellout": 0.08107956896554804,
-   "tier2_loo": 53651.0,
-   "tier2_lo": 50482.0,
-   "tier2_hi": 56819.0,
-   "tier2_p_sellout": 0.006149563609225294
+   "tier1_loo": 55477.0,
+   "tier1_lo": 50908.0,
+   "tier1_hi": 60046.0,
+   "tier1_p_sellout": 0.0837537292867741,
+   "tier2_loo": 53538.0,
+   "tier2_lo": 50413.0,
+   "tier2_hi": 56663.0,
+   "tier2_p_sellout": 0.004953977166206665
   },
   {
    "season": 2025,
@@ -502,14 +502,14 @@
    "opponent": "Georgia",
    "getin": 45.0,
    "attendance": 53017.0,
-   "tier1_loo": 56073.0,
-   "tier1_lo": 51493.0,
+   "tier1_loo": 56155.0,
+   "tier1_lo": 51662.0,
    "tier1_hi": 60417.0,
-   "tier1_p_sellout": 0.1115023663554757,
-   "tier2_loo": 53194.0,
-   "tier2_lo": 50007.0,
-   "tier2_hi": 56380.0,
-   "tier2_p_sellout": 0.004334791700906088
+   "tier1_p_sellout": 0.11152120667503493,
+   "tier2_loo": 53077.0,
+   "tier2_lo": 49939.0,
+   "tier2_hi": 56215.0,
+   "tier2_p_sellout": 0.003400742526145585
   },
   {
    "season": 2025,
@@ -517,14 +517,29 @@
    "opponent": "Ole Miss",
    "getin": 133.0,
    "attendance": 60417.0,
-   "tier1_loo": 55757.0,
-   "tier1_lo": 51382.0,
-   "tier1_hi": 60132.0,
-   "tier1_p_sellout": 0.08683037009469728,
-   "tier2_loo": 59989.0,
-   "tier2_lo": 56550.0,
+   "tier1_loo": 55759.0,
+   "tier1_lo": 51454.0,
+   "tier1_hi": 60064.0,
+   "tier1_p_sellout": 0.08360731512156414,
+   "tier2_loo": 59970.0,
+   "tier2_lo": 56578.0,
    "tier2_hi": 60417.0,
-   "tier2_p_sellout": 0.43471754343228347
+   "tier2_p_sellout": 0.4309769954995539
+  },
+  {
+   "season": 2026,
+   "date": "2026-09-05",
+   "opponent": "UL Monroe",
+   "getin": 30.0,
+   "attendance": 48771.0,
+   "tier1_loo": 46316.0,
+   "tier1_lo": 41582.0,
+   "tier1_hi": 51049.0,
+   "tier1_p_sellout": 0.0004552441216844776,
+   "tier2_loo": 50749.0,
+   "tier2_lo": 47658.0,
+   "tier2_hi": 53840.0,
+   "tier2_p_sellout": 0.00039156623248718574
   }
  ],
  "validation": {
@@ -532,37 +547,46 @@
    "folds": [
     {
      "season": 2023,
-     "training_n": 9,
-     "rmse": 2139.3442893693536,
-     "mae": 1568.7210884807982,
-     "r2": 0.8017100365145768,
+     "training_n": 10,
+     "rmse": 2221.6808042703246,
+     "mae": 1660.6927031035684,
+     "r2": 0.7861532305625483,
      "n": 8,
-     "bias": -1530.0423679524874
+     "bias": -1647.637323317993
     },
     {
      "season": 2024,
-     "training_n": 15,
-     "rmse": 4839.032912510553,
-     "mae": 4769.367663550234,
-     "r2": -16.65994177268477,
+     "training_n": 16,
+     "rmse": 4681.698436229236,
+     "mae": 4610.692778541255,
+     "r2": -15.53023345885289,
      "n": 2,
-     "bias": 4769.367663550234
+     "bias": 4610.692778541255
     },
     {
      "season": 2025,
-     "training_n": 10,
-     "rmse": 1295.9848222199423,
-     "mae": 895.2250813053761,
-     "r2": 0.9351327591475536,
+     "training_n": 11,
+     "rmse": 1381.687673330088,
+     "mae": 951.8697796522528,
+     "r2": 0.9262698086757387,
      "n": 7,
-     "bias": -621.7277071404772
+     "bias": -792.9118226730789
+    },
+    {
+     "season": 2026,
+     "training_n": 17,
+     "rmse": 1977.8499833317474,
+     "mae": 1977.8499833317474,
+     "r2": NaN,
+     "n": 1,
+     "bias": 1977.8499833317474
     }
    ],
    "metrics": {
-    "rmse": 2366.479981898531,
-    "mae": 1667.9458590637933,
-    "r2": 0.7715339991054775,
-    "n": 17
+    "rmse": 2364.0694858076117,
+    "mae": 1730.436979044921,
+    "r2": 0.769255685441196,
+    "n": 18
    }
   },
   "forward": {
@@ -584,13 +608,22 @@
      "r2": 0.9351327591475536,
      "n": 7,
      "bias": -621.7277071404772
+    },
+    {
+     "season": 2026,
+     "training_n": 17,
+     "rmse": 1977.8499833317474,
+     "mae": 1977.8499833317474,
+     "r2": NaN,
+     "n": 1,
+     "bias": 1977.8499833317474
     }
    ],
    "metrics": {
-    "rmse": 2629.7888239452564,
-    "mae": 1797.5169065692712,
-    "r2": 0.7056738125176447,
-    "n": 9
+    "rmse": 2572.041871422232,
+    "mae": 1815.5502142455189,
+    "r2": 0.7025008503622698,
+    "n": 10
    }
   }
  },
@@ -598,32 +631,42 @@
   {
    "season": 2023,
    "priced_games": 8,
-   "rmse": 1904.7735101580975,
-   "mae": 1344.625,
-   "r2": 0.8428095874317584,
+   "rmse": 1956.185829618444,
+   "mae": 1365.0,
+   "r2": 0.8342095212380771,
    "n": 8,
-   "bias": -1065.125,
+   "bias": -1177.5,
    "inside": 7
   },
   {
    "season": 2024,
    "priced_games": 2,
-   "rmse": 4556.631431221972,
-   "mae": 4473.0,
-   "r2": -14.658851968462665,
+   "rmse": 4425.367894311161,
+   "mae": 4341.0,
+   "r2": -13.769672889804289,
    "n": 2,
-   "bias": 4473.0,
+   "bias": 4341.0,
    "inside": 0
   },
   {
    "season": 2025,
    "priced_games": 7,
-   "rmse": 1444.2977532351147,
-   "mae": 1067.142857142857,
-   "r2": 0.9194363626155606,
+   "rmse": 1500.1925114559701,
+   "mae": 1036.7142857142858,
+   "r2": 0.9130800273010476,
    "n": 7,
-   "bias": -504.57142857142856,
+   "bias": -633.2857142857143,
    "inside": 7
+  },
+  {
+   "season": 2026,
+   "priced_games": 7,
+   "rmse": 1978.0,
+   "mae": 1978.0,
+   "r2": NaN,
+   "n": 1,
+   "bias": 1978.0,
+   "inside": 1
   }
  ],
  "warnings": [
@@ -635,10 +678,10 @@
   "2025 Alcorn State: no SP+; imputed -46.6",
   "2026 Missouri: no 2026 Elo yet; using 2025 final Elo 1750",
   "2026 Vanderbilt: no 2026 Elo yet; using 2025 final Elo 1880",
-  "2026 Auburn: no 2026 Elo yet; using 2025 final Elo 1670",
   "2026 Tennessee Tech: no Elo; imputed 805.0",
   "2026 Tennessee Tech: no SP+; imputed -42.9",
   "2023 Southern Miss: missing attendance filled with 53,855 from https://hailstate.com/news/2023/11/18/football-postgame-notes-mississippi-state-vs-southern-miss",
+  "2026 UL Monroe: missing attendance filled with 48,771 from https://hailstate.com/sports/football/stats/2026/ulm/boxscore/27455",
   "season 2024: only 2 priced games; sparse historical rows remain in training and diagnostics; new forecasts use Tier 1 until 3 prices are available"
  ]
 }

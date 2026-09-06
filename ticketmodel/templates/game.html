@@ -22,7 +22,7 @@
   <div class="hero-forecast">
     <div class="figure">
       <span class="figure-num">{{ f.pred | num }}</span>
-      <span class="figure-label">{% if g.status == "played" %}retrospective forecast, attendance held out{% else %}forecast attendance{% endif %}</span>
+      <span class="figure-label">{% if g.status == "played" and g.forecast_kind == "recorded" %}recorded pregame forecast{% elif g.status == "played" %}retrospective forecast, attendance held out{% else %}forecast attendance{% endif %}</span>
     </div>
     {% if g.status == "played" %}
     <div class="figure figure-actual">
@@ -47,6 +47,8 @@
   </div>
   {% if g.status == "unreported" %}
   <p class="notice">CollegeFootballData has no announced attendance for this game, so it is not part of the track record. The forecast above uses the full model.</p>
+  {% elif g.status == "played" and g.forecast_kind == "recorded" %}
+  <p class="notice">This forecast was archived before kickoff on {{ g.forecast_date }}. Its model, inputs, price and interval are preserved exactly as they appeared then.</p>
   {% endif %}
 </section>
 

@@ -192,6 +192,28 @@ def site_url() -> str:
     return os.environ.get("SITE_URL", SITE_URL).strip().rstrip("/")
 
 
+def recorded_forecasts(path: Path) -> dict[tuple[int, str, str], dict]:
+    """Return the latest archived pregame snapshot for each scheduled game."""
+    latest = {}
+    if not path.exists():
+        return latest
+    for line_number, line in enumerate(path.read_text().splitlines(), start=1):
+        if not line.strip():
+            continue
+        try:
+            snapshot = json.loads(line)
+            key = (int(snapshot["season"]), snapshot["date"], snapshot["opponent"])
+            recorded_at = snapshot["recorded_at"]
+            snapshot["tier"]
+            snapshot["model"]
+            snapshot["forecast"]
+        except (json.JSONDecodeError, KeyError, TypeError, ValueError) as exc:
+            raise SiteError(f"invalid forecast snapshot on line {line_number} of {path}") from exc
+        if key not in latest or recorded_at > latest[key]["recorded_at"]:
+            latest[key] = snapshot
+    return latest
+
+
 def site_data(paths: Paths, today: str | None = None) -> dict:
     today = today or date.today().isoformat()
     for p in (paths.features, paths.train_summary, paths.tier1, paths.tier2):
@@ -206,6 +228,7 @@ def site_data(paths: Paths, today: str | None = None) -> dict:
     seasons = sorted(int(s) for s in df["season"].unique())
     ids = opponent_ids(seasons, paths.cache_dir)
     loo = {(int(r["season"]), r["opponent"]): r for r in summary["per_game"]}
+    recorded = recorded_forecasts(paths.forecast_history)
     upcoming_df, upcoming_warnings = mdl.predict_upcoming(df, m1, m2)
     upcoming = {(int(r.season), r.opponent): r for r in upcoming_df.itertuples(index=False)}
     priced_per_season = df[df["getin"].notna()].groupby("season").size().to_dict()
@@ -215,31 +238,49 @@ def site_data(paths: Paths, today: str | None = None) -> dict:
     for row in df.itertuples(index=False):
         season, opp = int(row.season), row.opponent
         key = (season, opp)
+        snapshot = recorded.get((season, row.date, opp))
         played = _none(row.attendance) is not None
         priced = _none(row.getin) is not None
         explain = None
         if played and key in loo:
             r = loo[key]
-            tier = "tier2" if priced and r.get("tier2_loo") is not None else "tier1"
-            forecast = {"pred": _int(r[f"{tier}_loo"]), "lo": _int(r[f"{tier}_lo"]), "hi": _int(r[f"{tier}_hi"]),
-                        "p_sellout": _none(r[f"{tier}_p_sellout"])}
+            if snapshot:
+                tier = snapshot["tier"]
+                forecast = {name: _int(snapshot["forecast"][name]) for name in ("pred", "lo", "hi")}
+                forecast["p_sellout"] = _none(snapshot["forecast"]["p_sellout"])
+                forecast_kind = "recorded"
+                # Use the archived model and inputs so the explanation cannot drift as later data arrives.
+                train = t2 if tier == "tier2" else t1
+                prior = train[train["date"] < row.date].reset_index(drop=True)
+                explain = describe_model(snapshot["model"], prior if len(prior) else train)
+                forecast_row = pd.Series(snapshot.get("inputs", row._asdict()))
+            else:
+                tier = "tier2" if priced and r.get("tier2_loo") is not None else "tier1"
+                forecast = {"pred": _int(r[f"{tier}_loo"]), "lo": _int(r[f"{tier}_lo"]), "hi": _int(r[f"{tier}_hi"]),
+                            "p_sellout": _none(r[f"{tier}_p_sellout"])}
+                forecast_kind = "retrospective"
+                forecast_row = row
+                # Explain the game with the same leave-one-out fit that produced its forecast.
+                train = t2 if tier == "tier2" else t1
+                others = train[~((train["season"] == season) & (train["opponent"] == opp))].reset_index(drop=True)
+                explain = describe_model(mdl.fit(others, models[tier]["features"], check_rows=False), others)
             status = "played"
-            # Explain the game with the same leave-one-out fit that produced its forecast.
-            train = t2 if tier == "tier2" else t1
-            others = train[~((train["season"] == season) & (train["opponent"] == opp))].reset_index(drop=True)
-            explain = describe_model(mdl.fit(others, models[tier]["features"], check_rows=False), others)
         elif key in upcoming:
             u = upcoming[key]
             tier = "tier2" if _none(u.tier2_pred) is not None else "tier1"
             forecast = {"pred": _int(getattr(u, f"{tier}_pred")), "lo": _int(getattr(u, f"{tier}_lo")),
                         "hi": _int(getattr(u, f"{tier}_hi")), "p_sellout": _none(getattr(u, f"{tier}_p_sellout"))}
             status = "upcoming"
+            forecast_kind = "current"
+            forecast_row = row
         else:
             # Played, but CFBD never posted an attendance figure: forecast with the full model.
             tier = "tier2" if priced and priced_per_season.get(season, 0) >= 3 else "tier1"
             p = mdl.predict(m1 if tier == "tier1" else m2, df[(df["season"] == season) & (df["opponent"] == opp)]).iloc[0]
             forecast = {"pred": _int(p["pred"]), "lo": _int(p["lo"]), "hi": _int(p["hi"]), "p_sellout": _none(p["p_sellout"])}
             status = "unreported"
+            forecast_kind = "current"
+            forecast_row = row
         actual = _int(row.attendance) if played else None
         error = forecast["pred"] - actual if actual is not None else None
         inside = (forecast["lo"] <= actual <= forecast["hi"]) if actual is not None else None
@@ -256,8 +297,11 @@ def site_data(paths: Paths, today: str | None = None) -> dict:
             "elo": _none(row.opp_elo), "sp": _none(row.opp_sp), "conf_game": int(row.conf_game),
             "rel_log_price": _none(row.rel_log_price),
             "tier": tier, "tier_label": TIER_LABELS[tier], "forecast": forecast,
+            "forecast_kind": forecast_kind,
+            "forecast_recorded_at": snapshot["recorded_at"] if forecast_kind == "recorded" else None,
+            "forecast_date": snapshot.get("forecast_date") if forecast_kind == "recorded" else None,
             "error": error, "inside": inside, "sellout": actual is not None and actual >= CAPACITY,
-            "breakdown": breakdown(explain or models[tier], row),
+            "breakdown": breakdown(explain or models[tier], forecast_row),
             "notes": game_notes(warnings, season, opp),
         })
         count = priced_per_season.get(season, 0)
@@ -274,6 +318,7 @@ def site_data(paths: Paths, today: str | None = None) -> dict:
         "inside": int(sum(1 for g in played if g["inside"])),
         "inside_rate": (sum(1 for g in played if g["inside"]) / len(played)) if played else None,
         "priced": sum(1 for g in played if g["tier"] == "tier2"),
+        "recorded": sum(1 for g in played if g["forecast_kind"] == "recorded"),
         "sellouts": sum(1 for g in played if g["sellout"]),
     }
     current = seasons[-1]
@@ -331,8 +376,8 @@ def _pages(data: dict) -> list[dict]:
                         f"home game at {VENUE}, driven by the resale get-in price."},
         {"template": "track-record.html", "out": "track-record.html", "root": "", "path": "track-record.html",
          "title": "Track record: forecast vs. actual attendance",
-         "description": "How the attendance model would have done on every tracked Mississippi State home game since "
-                        "2023, using leave-one-out forecasts and 80% ranges."},
+         "description": "Recorded pregame forecasts where available and leave-one-out estimates for earlier Mississippi "
+                        "State home games, with actual attendance and 80% ranges."},
         {"template": "model.html", "out": "model.html", "root": "", "path": "model.html",
          "title": "How the attendance model works",
          "description": "The variables, weights, accuracy and caveats behind the Mississippi State home attendance "

@@ -1,8 +1,9 @@
 import json
 
+import pandas as pd
 import pytest
 
-from ticketmodel import cli, site
+from ticketmodel import cli, model, site
 from ticketmodel.config import CAPACITY, Paths
 
 
@@ -42,6 +43,34 @@ def test_site_data_played_games_use_leave_one_out_forecast(trained):
     assert g["actual"] == 60000 and g["error"] == g["forecast"]["pred"] - 60000
     assert g["inside"] == (row["tier2_lo"] <= 60000 <= row["tier2_hi"])
     assert data["track"]["n"] == 10 and 0 <= data["track"]["inside_rate"] <= 1
+
+
+def test_site_data_prefers_latest_recorded_pregame_forecast(trained):
+    features = pd.read_csv(trained.features)
+    row = features[(features["season"] == 2023) & (features["opponent"] == "Rival A")]
+    fitted = model.load_model(trained.tier2)
+    prediction = model.predict(fitted, row).iloc[0]
+    entry = {
+        "snapshot_id": "test-snapshot",
+        "recorded_at": "2023-09-01T12:00:00+00:00",
+        "forecast_date": "2023-09-01",
+        "season": 2023,
+        "date": row.iloc[0]["date"],
+        "opponent": "Rival A",
+        "tier": "tier2",
+        "inputs": row.iloc[0].drop(labels=["attendance", "completed"]).to_dict(),
+        "model": fitted,
+        "forecast": {name: float(prediction[name]) for name in ("pred", "lo", "hi", "p_sellout")},
+    }
+    trained.forecast_history.parent.mkdir(parents=True, exist_ok=True)
+    trained.forecast_history.write_text(json.dumps(entry) + "\n")
+
+    data = site.site_data(trained, today="2024-10-20")
+    g = by_game(data)[(2023, "Rival A")]
+    assert g["forecast_kind"] == "recorded"
+    assert g["forecast"]["pred"] == round(prediction["pred"])
+    assert g["forecast_date"] == "2023-09-01"
+    assert data["track"]["recorded"] == 1
 
 
 def test_site_data_breakdown_sums_to_the_unclipped_forecast(trained):
