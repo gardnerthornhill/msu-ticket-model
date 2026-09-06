@@ -48,7 +48,8 @@ same small dataset, so prospective validation is still needed.
 
 `site/` is a static site generated from the model outputs: a 2026 outlook with the forecast,
 80% range and sellout odds for every home game, a track record of every tracked game scored
-leave-one-out, a page per game showing how the price moved the number, and a
+with its archived pregame forecast where available and leave-one-out otherwise, a page per game
+showing how the price moved the number, and a
 plain-English explanation of the weights. It is rebuilt by `python3 -m ticketmodel site`
 (and by `all`), so the daily Action keeps it current. To look at it locally:
 
