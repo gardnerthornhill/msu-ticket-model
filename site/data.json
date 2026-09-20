@@ -1429,7 +1429,7 @@
    "actual": null,
    "completed": 0,
    "status": "upcoming",
-   "getin": 50.0,
+   "getin": 49.0,
    "observed": "2026-09-20",
    "observed_label": "Sun, Sep 20",
    "ranked": 1,
@@ -1437,14 +1437,14 @@
    "elo": 1666.0,
    "sp": 15.4,
    "conf_game": 1,
-   "rel_log_price": 0.0202027073175194,
+   "rel_log_price": 0.0,
    "tier": "tier2",
    "tier_label": "Price model",
    "forecast": {
-    "pred": 53242,
-    "lo": 50258,
-    "hi": 56226,
-    "p_sellout": 0.002707041886851305
+    "pred": 53112,
+    "lo": 50128,
+    "hi": 56096,
+    "p_sellout": 0.002394424901554715
    },
    "forecast_kind": "current",
    "forecast_recorded_at": null,
@@ -1458,14 +1458,14 @@
      {
       "feature": "rel_log_price",
       "label": "Get-in price, relative to the season",
-      "value": 0.0202027073175194,
-      "display": "$50, at the season median",
+      "value": 0.0,
+      "display": "$49, at the season median",
       "mean_display": "0.99\u00d7 the season reference",
-      "contribution": 205.44243690307502,
+      "contribution": 75.591828057914,
       "weight": 6427.3865281687795
      }
     ],
-    "total": 53242.109103569725,
+    "total": 53112.25849472456,
     "capped": false
    },
    "notes": []
@@ -1485,7 +1485,7 @@
    "actual": null,
    "completed": 0,
    "status": "upcoming",
-   "getin": 123.0,
+   "getin": 114.0,
    "observed": "2026-09-20",
    "observed_label": "Sun, Sep 20",
    "ranked": 1,
@@ -1493,14 +1493,14 @@
    "elo": 1823.0,
    "sp": 17.6,
    "conf_game": 1,
-   "rel_log_price": 0.9203640572617906,
+   "rel_log_price": 0.8443781502838692,
    "tier": "tier2",
    "tier_label": "Price model",
    "forecast": {
-    "pred": 59028,
-    "lo": 55906,
+    "pred": 58539,
+    "lo": 55439,
     "hi": 60417,
-    "p_sellout": 0.2801045183475158
+    "p_sellout": 0.21503341559212474
    },
    "forecast_kind": "current",
    "forecast_recorded_at": null,
@@ -1514,14 +1514,14 @@
      {
       "feature": "rel_log_price",
       "label": "Get-in price, relative to the season",
-      "value": 0.9203640572617906,
-      "display": "$123, 2.5\u00d7 the season median",
+      "value": 0.8443781502838692,
+      "display": "$114, 2.3\u00d7 the season median",
       "mean_display": "0.99\u00d7 the season reference",
-      "contribution": 5991.127370713106,
+      "contribution": 5502.736575872527,
       "weight": 6427.3865281687795
      }
     ],
-    "total": 59027.794037379754,
+    "total": 58539.40324253918,
     "capped": false
    },
    "notes": []
