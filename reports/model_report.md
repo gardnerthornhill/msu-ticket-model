@@ -16,9 +16,9 @@ Generated 2026-09-23.
 | Tier 1 (all rows) | 23 | 3270 | 2724 | 0.519 |
 | Season mean (priced rows) | 18 | 5369 | 4571 | -0.190 |
 | Price only (priced rows) | 18 | 3652 | 3063 | 0.449 |
-| Relative price only (priced rows) | 18 | 2194 | 1560 | 0.801 |
+| Relative price only (priced rows) | 18 | 2189 | 1553 | 0.802 |
 | Tier 1 (priced rows) | 18 | 3698 | 3260 | 0.435 |
-| Tier 2 (priced rows) | 18 | 2194 | 1560 | 0.801 |
+| Tier 2 (priced rows) | 18 | 2189 | 1553 | 0.802 |
 
 ## Tier 1 feature selection
 
@@ -38,9 +38,9 @@ Production uses relative log-price alone. These alternatives are comparisons, no
 
 | features | LOO RMSE |
 |---|---|
-| rel_log_price | 2194 |
+| rel_log_price | 2189 |
 | log_getin | 3652 |
-| opp_ranked + opp_elo + opp_sp + rel_log_price | 2633 |
+| opp_ranked + opp_elo + opp_sp + rel_log_price | 2631 |
 | opp_ranked + opp_elo + opp_sp + log_getin | 3357 |
 
 ## Fitted models
@@ -58,12 +58,12 @@ Features: opp_ranked + opp_elo + opp_sp. Rows: 23. Residual SE: 3120.
 
 ### Tier 2 (relative price only)
 
-Features: rel_log_price. Rows: 18. Residual SE: 2173.
+Features: rel_log_price. Rows: 18. Residual SE: 2168.
 
 | term | coefficient | std err |
 |---|---|---|
-| intercept | 53112 | ± 512 |
-| rel_log_price | 6427.39 | ± 735.52 |
+| intercept | 53119 | ± 511 |
+| rel_log_price | 6422.74 | ± 733.26 |
 
 ## Price-model results by season
 
@@ -71,10 +71,10 @@ Positive bias means overprediction. Sparse-price seasons remain visible.
 
 | season | priced reference games | scored games | RMSE | MAE | bias | inside 80% range |
 |---|---|---|---|---|---|---|
-| 2023 | 8 | 8 | 1934 | 1342 | -1138 | 7/8 |
-| 2024 | 2 | 2 | 4465 | 4382 | 4382 | 0/2 |
-| 2025 | 7 | 7 | 1474 | 1040 | -586 | 7/7 |
-| 2026 | 7 | 1 | 1294 | 1294 | 1294 | 1/1 |
+| 2023 | 8 | 8 | 1930 | 1340 | -1131 | 7/8 |
+| 2024 | 2 | 2 | 4473 | 4390 | 4390 | 0/2 |
+| 2025 | 7 | 7 | 1469 | 1041 | -577 | 7/7 |
+| 2026 | 7 | 1 | 1165 | 1165 | 1165 | 1/1 |
 
 ## Season transfer
 
@@ -82,43 +82,43 @@ Fixed relative-price specification, refitted without the test season. Forward te
 
 | test | season | training games | scored games | RMSE | MAE | bias |
 |---|---|---|---|---|---|---|
-| Season held out | 2023 | 10 | 8 | 2176 | 1614 | -1586 |
-| Season held out | 2024 | 16 | 2 | 4724 | 4654 | 4654 |
-| Season held out | 2025 | 11 | 7 | 1345 | 928 | -726 |
-| Season held out | 2026 | 17 | 1 | 1294 | 1294 | 1294 |
-| Season held out, pooled | all | — | 18 | 2319 | 1667 | — |
+| Season held out | 2023 | 10 | 8 | 2168 | 1605 | -1574 |
+| Season held out | 2024 | 16 | 2 | 4732 | 4662 | 4662 |
+| Season held out | 2025 | 11 | 7 | 1338 | 923 | -714 |
+| Season held out | 2026 | 17 | 1 | 1165 | 1165 | 1165 |
+| Season held out, pooled | all | — | 18 | 2313 | 1655 | — |
 | Earlier seasons only | 2024 | 8 | 2 | 5024 | 4956 | 4956 |
 | Earlier seasons only | 2025 | 10 | 7 | 1296 | 895 | -622 |
-| Earlier seasons only | 2026 | 17 | 1 | 1294 | 1294 | 1294 |
-| Earlier seasons only, pooled | all | — | 10 | 2528 | 1747 | — |
+| Earlier seasons only | 2026 | 17 | 1 | 1165 | 1165 | 1165 |
+| Earlier seasons only, pooled | all | — | 10 | 2522 | 1734 | — |
 
 ## Per-game leave-one-out predictions
 
 | season | date | opponent | price | actual | Tier 1 LOO | Tier 2 LOO |
 |---|---|---|---|---|---|---|
-| 2023 | 2023-09-02 | SE Louisiana | 8 | 50041 | 48587 | 48917 |
-| 2023 | 2023-09-09 | Arizona | 12 | 51648 | 52482 | 51635 |
-| 2023 | 2023-09-16 | LSU | 31 | 60084 | 57887 | 57425 |
-| 2023 | 2023-09-30 | Alabama | 25 | 60111 | 55604 | 55999 |
-| 2023 | 2023-10-07 | Western Michigan | 6 | 47158 | 48594 | 47184 |
-| 2023 | 2023-11-04 | Kentucky | 10 | 52329 | 49127 | 50315 |
-| 2023 | 2023-11-18 | Southern Miss | 19 | 53855 | 49091 | 54638 |
+| 2023 | 2023-09-02 | SE Louisiana | 8 | 50041 | 48587 | 48928 |
+| 2023 | 2023-09-09 | Arizona | 12 | 51648 | 52482 | 51643 |
+| 2023 | 2023-09-16 | LSU | 31 | 60084 | 57887 | 57429 |
+| 2023 | 2023-09-30 | Alabama | 25 | 60111 | 55604 | 56004 |
+| 2023 | 2023-10-07 | Western Michigan | 6 | 47158 | 48594 | 47198 |
+| 2023 | 2023-11-04 | Kentucky | 10 | 52329 | 49127 | 50325 |
+| 2023 | 2023-11-18 | Southern Miss | 19 | 53855 | 49091 | 54644 |
 | 2023 | 2023-11-23 | Ole Miss | 63 | 60412 | 57789 | 60417 |
 | 2024 | 2024-08-31 | Eastern Kentucky |  | 48724 | 50143 |  |
 | 2024 | 2024-09-14 | Toledo |  | 47412 | 48117 |  |
 | 2024 | 2024-09-21 | Florida |  | 49655 | 51935 |  |
-| 2024 | 2024-10-19 | Texas A&M | 10 | 50127 | 57832 | 53648 |
+| 2024 | 2024-10-19 | Texas A&M | 10 | 50127 | 57832 | 53656 |
 | 2024 | 2024-10-26 | Arkansas |  | 49303 | 51192 |  |
 | 2024 | 2024-11-02 | Massachusetts |  | 48617 | 49886 |  |
-| 2024 | 2024-11-23 | Missouri | 9 | 47824 | 49713 | 53066 |
-| 2025 | 2025-09-06 | Arizona State | 32 | 50808 | 56168 | 50929 |
-| 2025 | 2025-09-13 | Alcorn State | 26 | 49158 | 49695 | 49628 |
-| 2025 | 2025-09-20 | Northern Illinois | 11 | 45803 | 46284 | 43381 |
-| 2025 | 2025-09-27 | Tennessee | 95 | 60417 | 55352 | 57569 |
-| 2025 | 2025-10-25 | Texas | 48 | 52680 | 55477 | 53578 |
-| 2025 | 2025-11-08 | Georgia | 45 | 53017 | 56155 | 53118 |
-| 2025 | 2025-11-28 | Ole Miss | 133 | 60417 | 55759 | 59996 |
-| 2026 | 2026-09-05 | UL Monroe | 30 | 48771 | 46316 | 50065 |
+| 2024 | 2024-11-23 | Missouri | 9 | 47824 | 49713 | 53074 |
+| 2025 | 2025-09-06 | Arizona State | 32 | 50808 | 56168 | 50939 |
+| 2025 | 2025-09-13 | Alcorn State | 26 | 49158 | 49695 | 49639 |
+| 2025 | 2025-09-20 | Northern Illinois | 11 | 45803 | 46284 | 43403 |
+| 2025 | 2025-09-27 | Tennessee | 95 | 60417 | 55352 | 57573 |
+| 2025 | 2025-10-25 | Texas | 48 | 52680 | 55477 | 53585 |
+| 2025 | 2025-11-08 | Georgia | 45 | 53017 | 56155 | 53125 |
+| 2025 | 2025-11-28 | Ole Miss | 133 | 60417 | 55759 | 59999 |
+| 2026 | 2026-09-05 | UL Monroe | 30 | 48771 | 46316 | 49936 |
 
 ## Warnings
 
