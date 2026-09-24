@@ -5,8 +5,8 @@
  "venue": "Davis Wade Stadium",
  "capacity": 60417,
  "interval": 0.8,
- "generated": "2026-09-23",
- "trained": "2026-09-23",
+ "generated": "2026-09-24",
+ "trained": "2026-09-24",
  "seasons": [
   2023,
   2024,
@@ -46,31 +46,31 @@
    "tier": "tier2",
    "tier_label": "Price model",
    "forecast": {
-    "pred": 48928,
-    "lo": 45787,
-    "hi": 52069,
-    "p_sellout": 9.550634228377895e-05
+    "pred": 48905,
+    "lo": 45751,
+    "hi": 52059,
+    "p_sellout": 9.751494515124269e-05
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
    "forecast_date": null,
-   "error": -1113,
+   "error": -1136,
    "inside": true,
    "sellout": false,
    "breakdown": {
-    "baseline": 53212.8823529412,
+    "baseline": 53212.88235294118,
     "terms": [
      {
       "feature": "rel_log_price",
       "label": "Get-in price, relative to the season",
       "value": -0.6352312727973843,
       "display": "$8, 53% of the season median",
-      "mean_display": "1.02\u00d7 the season reference",
-      "contribution": -4284.481489944991,
-      "weight": 6501.916479186826
+      "mean_display": "1.03\u00d7 the season reference",
+      "contribution": -4307.45057027261,
+      "weight": 6513.039151914036
      }
     ],
-    "total": 48928.400862996205,
+    "total": 48905.43178266857,
     "capped": false
    },
    "notes": [
@@ -105,19 +105,19 @@
    "tier": "tier2",
    "tier_label": "Price model",
    "forecast": {
-    "pred": 51643,
-    "lo": 48545,
-    "hi": 54742,
-    "p_sellout": 0.0008780513150769575
+    "pred": 51626,
+    "lo": 48515,
+    "hi": 54737,
+    "p_sellout": 0.000893155773309972
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
    "forecast_date": null,
-   "error": -5,
+   "error": -22,
    "inside": true,
    "sellout": false,
    "breakdown": {
-    "baseline": 53118.352941176476,
+    "baseline": 53118.352941176505,
     "terms": [
      {
       "feature": "rel_log_price",
@@ -125,11 +125,11 @@
       "value": -0.2297661646892197,
       "display": "$12, 79% of the season median",
       "mean_display": "1.00\u00d7 the season reference",
-      "contribution": -1474.948058689913,
-      "weight": 6422.850896602016
+      "contribution": -1492.5230714624438,
+      "weight": 6432.124479420284
      }
     ],
-    "total": 51643.40488248656,
+    "total": 51625.82986971406,
     "capped": false
    },
    "notes": []
@@ -161,19 +161,19 @@
    "tier": "tier2",
    "tier_label": "Price model",
    "forecast": {
-    "pred": 57429,
-    "lo": 54369,
+    "pred": 57420,
+    "lo": 54348,
     "hi": 60417,
-    "p_sellout": 0.10509846684719744
+    "p_sellout": 0.10535144225066836
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
    "forecast_date": null,
-   "error": -2655,
+   "error": -2664,
    "inside": true,
    "sellout": false,
    "breakdown": {
-    "baseline": 52622.117647058796,
+    "baseline": 52622.11764705883,
     "terms": [
      {
       "feature": "rel_log_price",
@@ -181,11 +181,11 @@
       "value": 0.7193143900079262,
       "display": "$31, 2.1\u00d7 the season median",
       "mean_display": "0.95\u00d7 the season reference",
-      "contribution": 4807.011642594257,
-      "weight": 6200.450634133531
+      "contribution": 4798.134636230175,
+      "weight": 6208.229590543398
      }
     ],
-    "total": 57429.12928965305,
+    "total": 57420.25228328901,
     "capped": false
    },
    "notes": []
@@ -217,15 +217,15 @@
    "tier": "tier2",
    "tier_label": "Price model",
    "forecast": {
-    "pred": 56004,
-    "lo": 53204,
-    "hi": 58804,
-    "p_sellout": 0.025908327292378214
+    "pred": 55994,
+    "lo": 53181,
+    "hi": 58807,
+    "p_sellout": 0.026126190231707837
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
    "forecast_date": null,
-   "error": -4107,
+   "error": -4117,
    "inside": false,
    "sellout": false,
    "breakdown": {
@@ -237,11 +237,11 @@
       "value": 0.5042030103909805,
       "display": "$25, 1.7\u00d7 the season median",
       "mean_display": "0.96\u00d7 the season reference",
-      "contribution": 3383.5115816559032,
-      "weight": 6179.894617692467
+      "contribution": 3373.1394257207767,
+      "weight": 6188.0904931325185
      }
     ],
-    "total": 56004.0409934206,
+    "total": 55993.66883748548,
     "capped": false
    },
    "notes": []
@@ -273,19 +273,19 @@
    "tier": "tier2",
    "tier_label": "Price model",
    "forecast": {
-    "pred": 47198,
-    "lo": 43941,
-    "hi": 50455,
-    "p_sellout": 3.408578009340965e-05
+    "pred": 47171,
+    "lo": 43899,
+    "hi": 50443,
+    "p_sellout": 3.502514392294076e-05
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
    "forecast_date": null,
-   "error": 40,
+   "error": 13,
    "inside": true,
    "sellout": false,
    "breakdown": {
-    "baseline": 53382.47058823529,
+    "baseline": 53382.47058823531,
     "terms": [
      {
       "feature": "rel_log_price",
@@ -293,11 +293,11 @@
       "value": -0.9229133452491652,
       "display": "$6, 40% of the season median",
       "mean_display": "1.04\u00d7 the season reference",
-      "contribution": -6184.714037841197,
-      "weight": 6418.599744255007
+      "contribution": -6211.321256895052,
+      "weight": 6430.188470240326
      }
     ],
-    "total": 47197.756550394086,
+    "total": 47171.14933134025,
     "capped": false
    },
    "notes": []
@@ -329,19 +329,19 @@
    "tier": "tier2",
    "tier_label": "Price model",
    "forecast": {
-    "pred": 50325,
-    "lo": 47283,
-    "hi": 53366,
-    "p_sellout": 0.0002346120547740999
+    "pred": 50305,
+    "lo": 47251,
+    "hi": 53358,
+    "p_sellout": 0.00023879212891817015
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
    "forecast_date": null,
-   "error": -2004,
+   "error": -2024,
    "inside": true,
    "sellout": false,
    "breakdown": {
-    "baseline": 53078.29411764708,
+    "baseline": 53078.29411764706,
     "terms": [
      {
       "feature": "rel_log_price",
@@ -349,11 +349,11 @@
       "value": -0.4120877214831742,
       "display": "$10, 66% of the season median",
       "mean_display": "1.01\u00d7 the season reference",
-      "contribution": -2753.4795335073973,
-      "weight": 6514.227066643278
+      "contribution": -2773.667670792408,
+      "weight": 6524.920288726811
      }
     ],
-    "total": 50324.81458413968,
+    "total": 50304.62644685466,
     "capped": false
    },
    "notes": []
@@ -385,31 +385,31 @@
    "tier": "tier2",
    "tier_label": "Price model",
    "forecast": {
-    "pred": 54644,
-    "lo": 51556,
-    "hi": 57733,
-    "p_sellout": 0.012112542799115448
+    "pred": 54631,
+    "lo": 51529,
+    "hi": 57732,
+    "p_sellout": 0.01222872871469892
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
    "forecast_date": null,
-   "error": 789,
+   "error": 776,
    "inside": true,
    "sellout": false,
    "breakdown": {
-    "baseline": 52988.5294117647,
+    "baseline": 52988.52941176472,
     "terms": [
      {
       "feature": "rel_log_price",
       "label": "Get-in price, relative to the season",
       "value": 0.2297661646892201,
       "display": "$19, 1.3\u00d7 the season median",
-      "mean_display": "0.97\u00d7 the season reference",
-      "contribution": 1655.7752736105665,
-      "weight": 6444.637984391773
+      "mean_display": "0.98\u00d7 the season reference",
+      "contribution": 1642.4259688558056,
+      "weight": 6452.991554964568
      }
     ],
-    "total": 54644.30468537527,
+    "total": 54630.95538062053,
     "capped": false
    },
    "notes": [
@@ -444,9 +444,9 @@
    "tier_label": "Price model",
    "forecast": {
     "pred": 60417,
-    "lo": 59625,
+    "lo": 59607,
     "hi": 60417,
-    "p_sellout": 0.8409353602659335
+    "p_sellout": 0.8397086667689708
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
@@ -455,7 +455,7 @@
    "inside": true,
    "sellout": false,
    "breakdown": {
-    "baseline": 52602.82352941175,
+    "baseline": 52602.82352941177,
     "terms": [
      {
       "feature": "rel_log_price",
@@ -463,11 +463,11 @@
       "value": 1.4284619119143125,
       "display": "$63, 4.2\u00d7 the season median",
       "mean_display": "0.91\u00d7 the season reference",
-      "contribution": 10471.638423308686,
-      "weight": 6861.562978002669
+      "contribution": 10470.197220705628,
+      "weight": 6871.430498414171
      }
     ],
-    "total": 63074.461952720434,
+    "total": 63073.0207501174,
     "capped": true
    },
    "notes": []
@@ -724,15 +724,15 @@
    "tier": "tier2",
    "tier_label": "Price model",
    "forecast": {
-    "pred": 53656,
-    "lo": 50817,
-    "hi": 56494,
-    "p_sellout": 0.0030227057169435368
+    "pred": 53641,
+    "lo": 50786,
+    "hi": 56495,
+    "p_sellout": 0.0030912630382613636
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
    "forecast_date": null,
-   "error": 3529,
+   "error": 3514,
    "inside": false,
    "sellout": false,
    "breakdown": {
@@ -743,12 +743,12 @@
       "label": "Get-in price, relative to the season",
       "value": 0.0526802578289133,
       "display": "$10, 1.1\u00d7 the season median",
-      "mean_display": "0.98\u00d7 the season reference",
-      "contribution": 447.7041803128635,
-      "weight": 6449.191267399425
+      "mean_display": "0.99\u00d7 the season reference",
+      "contribution": 432.7485872587434,
+      "weight": 6457.111567967708
      }
     ],
-    "total": 53655.52770972462,
+    "total": 53640.5721166705,
     "capped": false
    },
    "notes": [
@@ -930,19 +930,19 @@
    "tier": "tier2",
    "tier_label": "Price model",
    "forecast": {
-    "pred": 53074,
-    "lo": 50575,
-    "hi": 55572,
-    "p_sellout": 0.0006553282728000517
+    "pred": 53058,
+    "lo": 50539,
+    "hi": 55577,
+    "p_sellout": 0.0006861493134305092
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
    "forecast_date": null,
-   "error": 5250,
+   "error": 5234,
    "inside": false,
    "sellout": false,
    "breakdown": {
-    "baseline": 53343.29411764708,
+    "baseline": 53343.29411764706,
     "terms": [
      {
       "feature": "rel_log_price",
@@ -950,11 +950,11 @@
       "value": -0.0526802578289129,
       "display": "$9, 95% of the season median",
       "mean_display": "0.99\u00d7 the season reference",
-      "contribution": -269.63452084097054,
-      "weight": 6398.84659340569
+      "contribution": -285.33098181182925,
+      "weight": 6406.277120701704
      }
     ],
-    "total": 53073.65959680611,
+    "total": 53057.963135835234,
     "capped": false
    },
    "notes": [
@@ -988,19 +988,19 @@
    "tier": "tier2",
    "tier_label": "Price model",
    "forecast": {
-    "pred": 50939,
-    "lo": 47829,
-    "hi": 54048,
-    "p_sellout": 0.00048610673564504085
+    "pred": 50920,
+    "lo": 47797,
+    "hi": 54043,
+    "p_sellout": 0.0004954812918918695
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
    "forecast_date": null,
-   "error": 131,
+   "error": 112,
    "inside": true,
    "sellout": false,
    "breakdown": {
-    "baseline": 53167.76470588236,
+    "baseline": 53167.76470588233,
     "terms": [
      {
       "feature": "rel_log_price",
@@ -1008,11 +1008,11 @@
       "value": -0.3409265869705931,
       "display": "$32, 71% of the season median",
       "mean_display": "1.01\u00d7 the season reference",
-      "contribution": -2229.171783518078,
-      "weight": 6417.8381100422985
+      "contribution": -2247.899850612235,
+      "weight": 6427.322127160511
      }
     ],
-    "total": 50938.59292236428,
+    "total": 50919.86485527009,
     "capped": false
    },
    "notes": []
@@ -1044,19 +1044,19 @@
    "tier": "tier2",
    "tier_label": "Price model",
    "forecast": {
-    "pred": 49639,
-    "lo": 46499,
-    "hi": 52779,
-    "p_sellout": 0.00017290333970840702
+    "pred": 49618,
+    "lo": 46463,
+    "hi": 52772,
+    "p_sellout": 0.00017697175778879165
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
    "forecast_date": null,
-   "error": 481,
+   "error": 460,
    "inside": true,
    "sellout": false,
    "breakdown": {
-    "baseline": 53264.823529411806,
+    "baseline": 53264.82352941177,
     "terms": [
      {
       "feature": "rel_log_price",
@@ -1064,11 +1064,11 @@
       "value": -0.5485659517488375,
       "display": "$26, 58% of the season median",
       "mean_display": "1.02\u00d7 the season reference",
-      "contribution": -3626.2366741601404,
-      "weight": 6393.298108374723
+      "contribution": -3647.209664460272,
+      "weight": 6403.166182989738
      }
     ],
-    "total": 49638.58685525166,
+    "total": 49617.6138649515,
     "capped": false
    },
    "notes": [
@@ -1103,19 +1103,19 @@
    "tier": "tier2",
    "tier_label": "Price model",
    "forecast": {
-    "pred": 43403,
-    "lo": 39968,
-    "hi": 46839,
-    "p_sellout": 3.9401826864234285e-06
+    "pred": 43360,
+    "lo": 39909,
+    "hi": 46811,
+    "p_sellout": 4.03367990462806e-06
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
    "forecast_date": null,
-   "error": -2400,
+   "error": -2443,
    "inside": true,
    "sellout": false,
    "breakdown": {
-    "baseline": 53462.176470588274,
+    "baseline": 53462.176470588245,
     "terms": [
      {
       "feature": "rel_log_price",
@@ -1123,11 +1123,11 @@
       "value": -1.408767216971949,
       "display": "$11, 24% of the season median",
       "mean_display": "1.07\u00d7 the season reference",
-      "contribution": -10058.916124205183,
-      "weight": 6805.786015142083
+      "contribution": -10102.05774203507,
+      "weight": 6823.88855323078
      }
     ],
-    "total": 43403.26034638309,
+    "total": 43360.11872855318,
     "capped": false
    },
    "notes": []
@@ -1159,31 +1159,31 @@
    "tier": "tier2",
    "tier_label": "Price model",
    "forecast": {
-    "pred": 57573,
-    "lo": 54524,
+    "pred": 57564,
+    "lo": 54503,
     "hi": 60417,
-    "p_sellout": 0.11506756360669206
+    "p_sellout": 0.11532235687991409
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
    "forecast_date": null,
-   "error": -2844,
+   "error": -2853,
    "inside": true,
    "sellout": true,
    "breakdown": {
-    "baseline": 52602.5294117647,
+    "baseline": 52602.52941176472,
     "terms": [
      {
       "feature": "rel_log_price",
       "label": "Get-in price, relative to the season",
       "value": 0.7472144018302211,
       "display": "$95, 2.1\u00d7 the season median",
-      "mean_display": "0.94\u00d7 the season reference",
-      "contribution": 4970.1080789829675,
-      "weight": 6175.510256780892
+      "mean_display": "0.95\u00d7 the season reference",
+      "contribution": 4961.463977111989,
+      "weight": 6183.218445823817
      }
     ],
-    "total": 57572.637490747664,
+    "total": 57563.99338887671,
     "capped": false
    },
    "notes": []
@@ -1215,15 +1215,15 @@
    "tier": "tier2",
    "tier_label": "Price model",
    "forecast": {
-    "pred": 53585,
-    "lo": 50510,
-    "hi": 56659,
-    "p_sellout": 0.004681773402989697
+    "pred": 53570,
+    "lo": 50482,
+    "hi": 56658,
+    "p_sellout": 0.0047434264902008055
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
    "forecast_date": null,
-   "error": 905,
+   "error": 890,
    "inside": true,
    "sellout": false,
    "breakdown": {
@@ -1234,12 +1234,12 @@
       "label": "Get-in price, relative to the season",
       "value": 0.0645385211375715,
       "display": "$48, 1.1\u00d7 the season median",
-      "mean_display": "0.98\u00d7 the season reference",
-      "contribution": 527.1670429689816,
-      "weight": 6430.747506339048
+      "mean_display": "0.99\u00d7 the season reference",
+      "contribution": 512.4014934499319,
+      "weight": 6439.249761471301
      }
     ],
-    "total": 53584.81410179254,
+    "total": 53570.04855227348,
     "capped": false
    },
    "notes": []
@@ -1271,19 +1271,19 @@
    "tier": "tier2",
    "tier_label": "Price model",
    "forecast": {
-    "pred": 53125,
-    "lo": 50036,
-    "hi": 56215,
-    "p_sellout": 0.0032077042148663548
+    "pred": 53110,
+    "lo": 50008,
+    "hi": 56212,
+    "p_sellout": 0.003250457917523376
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
    "forecast_date": null,
-   "error": 108,
+   "error": 93,
    "inside": true,
    "sellout": false,
    "breakdown": {
-    "baseline": 53037.823529411755,
+    "baseline": 53037.82352941178,
     "terms": [
      {
       "feature": "rel_log_price",
@@ -1291,11 +1291,11 @@
       "value": 0.0,
       "display": "$45, at the season median",
       "mean_display": "0.99\u00d7 the season reference",
-      "contribution": 87.61543089179658,
-      "weight": 6422.896688101104
+      "contribution": 72.29089100063388,
+      "weight": 6431.679935520191
      }
     ],
-    "total": 53125.43896030355,
+    "total": 53110.114420412414,
     "capped": false
    },
    "notes": []
@@ -1327,19 +1327,19 @@
    "tier": "tier2",
    "tier_label": "Price model",
    "forecast": {
-    "pred": 59999,
-    "lo": 56660,
+    "pred": 59993,
+    "lo": 56640,
     "hi": 60417,
-    "p_sellout": 0.4344722037568582
+    "p_sellout": 0.4337973653949002
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
    "forecast_date": null,
-   "error": -418,
+   "error": -424,
    "inside": true,
    "sellout": true,
    "breakdown": {
-    "baseline": 52602.529411764706,
+    "baseline": 52602.52941176469,
     "terms": [
      {
       "feature": "rel_log_price",
@@ -1347,11 +1347,11 @@
       "value": 1.083686638451434,
       "display": "$133, 3\u00d7 the season median",
       "mean_display": "0.93\u00d7 the season reference",
-      "contribution": 7396.406201622333,
-      "weight": 6370.314101597018
+      "contribution": 7390.304536721661,
+      "weight": 6378.250191416795
      }
     ],
-    "total": 59998.93561338704,
+    "total": 59992.83394848635,
     "capped": false
    },
    "notes": []
@@ -1379,7 +1379,7 @@
    "elo": 1177.0,
    "sp": -28.9,
    "conf_game": 0,
-   "rel_log_price": -0.5108256237659905,
+   "rel_log_price": -0.4700036292457357,
    "tier": "tier2",
    "tier_label": "Price model",
    "forecast": {
@@ -1429,9 +1429,9 @@
    "actual": null,
    "completed": 0,
    "status": "upcoming",
-   "getin": 50.0,
-   "observed": "2026-09-23",
-   "observed_label": "Wed, Sep 23",
+   "getin": 48.0,
+   "observed": "2026-09-24",
+   "observed_label": "Thu, Sep 24",
    "ranked": 1,
    "ap_rank": 25,
    "elo": 1666.0,
@@ -1441,10 +1441,10 @@
    "tier": "tier2",
    "tier_label": "Price model",
    "forecast": {
-    "pred": 53119,
-    "lo": 50141,
-    "hi": 56097,
-    "p_sellout": 0.002378622864419204
+    "pred": 53105,
+    "lo": 50115,
+    "hi": 56095,
+    "p_sellout": 0.002414052734508973
    },
    "forecast_kind": "current",
    "forecast_recorded_at": null,
@@ -1453,19 +1453,19 @@
    "inside": null,
    "sellout": false,
    "breakdown": {
-    "baseline": 53036.666666666664,
+    "baseline": 53036.666666666635,
     "terms": [
      {
       "feature": "rel_log_price",
       "label": "Get-in price, relative to the season",
       "value": 0.0,
-      "display": "$50, at the season median",
+      "display": "$48, at the season median",
       "mean_display": "0.99\u00d7 the season reference",
-      "contribution": 82.7458487964083,
-      "weight": 6422.736933855015
+      "contribution": 68.2735251475904,
+      "weight": 6431.566398197039
      }
     ],
-    "total": 53119.412515463075,
+    "total": 53104.940191814225,
     "capped": false
    },
    "notes": []
@@ -1485,22 +1485,22 @@
    "actual": null,
    "completed": 0,
    "status": "upcoming",
-   "getin": 122.0,
-   "observed": "2026-09-23",
-   "observed_label": "Wed, Sep 23",
+   "getin": 119.0,
+   "observed": "2026-09-24",
+   "observed_label": "Thu, Sep 24",
    "ranked": 1,
    "ap_rank": 13,
    "elo": 1823.0,
    "sp": 17.6,
    "conf_game": 1,
-   "rel_log_price": 0.8919980393051108,
+   "rel_log_price": 0.9079224822036384,
    "tier": "tier2",
    "tier_label": "Price model",
    "forecast": {
-    "pred": 58848,
-    "lo": 55741,
+    "pred": 58944,
+    "lo": 55820,
     "hi": 60417,
-    "p_sellout": 0.2547281298668308
+    "p_sellout": 0.2687826030031969
    },
    "forecast_kind": "current",
    "forecast_recorded_at": null,
@@ -1509,19 +1509,19 @@
    "inside": null,
    "sellout": false,
    "breakdown": {
-    "baseline": 53036.666666666664,
+    "baseline": 53036.666666666635,
     "terms": [
      {
       "feature": "rel_log_price",
       "label": "Get-in price, relative to the season",
-      "value": 0.8919980393051108,
-      "display": "$122, 2.4\u00d7 the season median",
+      "value": 0.9079224822036384,
+      "display": "$119, 2.5\u00d7 the season median",
       "mean_display": "0.99\u00d7 the season reference",
-      "contribution": 5811.814600767601,
-      "weight": 6422.736933855015
+      "contribution": 5907.63725385616,
+      "weight": 6431.566398197039
      }
     ],
-    "total": 58848.48126743427,
+    "total": 58944.3039205228,
     "capped": false
    },
    "notes": []
@@ -1542,21 +1542,21 @@
    "completed": 0,
    "status": "upcoming",
    "getin": 50.0,
-   "observed": "2026-09-23",
-   "observed_label": "Wed, Sep 23",
+   "observed": "2026-09-24",
+   "observed_label": "Thu, Sep 24",
    "ranked": 1,
    "ap_rank": 10,
    "elo": 1799.0,
    "sp": 18.8,
    "conf_game": 1,
-   "rel_log_price": 0.0,
+   "rel_log_price": 0.0408219945202548,
    "tier": "tier2",
    "tier_label": "Price model",
    "forecast": {
-    "pred": 53119,
-    "lo": 50141,
-    "hi": 56097,
-    "p_sellout": 0.002378622864419204
+    "pred": 53367,
+    "lo": 50377,
+    "hi": 56358,
+    "p_sellout": 0.00309230248201792
    },
    "forecast_kind": "current",
    "forecast_recorded_at": null,
@@ -1565,19 +1565,19 @@
    "inside": null,
    "sellout": false,
    "breakdown": {
-    "baseline": 53036.666666666664,
+    "baseline": 53036.666666666635,
     "terms": [
      {
       "feature": "rel_log_price",
       "label": "Get-in price, relative to the season",
-      "value": 0.0,
+      "value": 0.0408219945202548,
       "display": "$50, at the season median",
       "mean_display": "0.99\u00d7 the season reference",
-      "contribution": 82.7458487964083,
-      "weight": 6422.736933855015
+      "contribution": 330.8228934114448,
+      "weight": 6431.566398197039
      }
     ],
-    "total": 53119.412515463075,
+    "total": 53367.48956007808,
     "capped": false
    },
    "notes": []
@@ -1597,22 +1597,22 @@
    "actual": null,
    "completed": 0,
    "status": "upcoming",
-   "getin": 44.0,
-   "observed": "2026-09-23",
-   "observed_label": "Wed, Sep 23",
+   "getin": 45.0,
+   "observed": "2026-09-24",
+   "observed_label": "Thu, Sep 24",
    "ranked": 0,
    "ap_rank": null,
    "elo": 1753.0,
    "sp": 9.8,
    "conf_game": 1,
-   "rel_log_price": -0.1278333715098849,
+   "rel_log_price": -0.0645385211375715,
    "tier": "tier2",
    "tier_label": "Price model",
    "forecast": {
-    "pred": 52298,
-    "lo": 49318,
-    "hi": 55279,
-    "p_sellout": 0.0010986804012237893
+    "pred": 52690,
+    "lo": 49699,
+    "hi": 55681,
+    "p_sellout": 0.0016341845028814924
    },
    "forecast_kind": "current",
    "forecast_recorded_at": null,
@@ -1621,19 +1621,19 @@
    "inside": null,
    "sellout": false,
    "breakdown": {
-    "baseline": 53036.666666666664,
+    "baseline": 53036.666666666635,
     "terms": [
      {
       "feature": "rel_log_price",
       "label": "Get-in price, relative to the season",
-      "value": -0.1278333715098849,
-      "display": "$44, 88% of the season median",
+      "value": -0.0645385211375715,
+      "display": "$45, 94% of the season median",
       "mean_display": "0.99\u00d7 the season reference",
-      "contribution": -738.294267779339,
-      "weight": 6422.736933855015
+      "contribution": -346.8102587901438,
+      "weight": 6431.566398197039
      }
     ],
-    "total": 52298.372398887324,
+    "total": 52689.85640787649,
     "capped": false
    },
    "notes": []
@@ -1653,22 +1653,22 @@
    "actual": null,
    "completed": 0,
    "status": "upcoming",
-   "getin": 64.0,
-   "observed": "2026-09-23",
-   "observed_label": "Wed, Sep 23",
+   "getin": 65.0,
+   "observed": "2026-09-24",
+   "observed_label": "Thu, Sep 24",
    "ranked": 0,
    "ap_rank": null,
    "elo": 1613.0,
    "sp": 11.5,
    "conf_game": 1,
-   "rel_log_price": 0.2468600779315255,
+   "rel_log_price": 0.3031862589877456,
    "tier": "tier2",
    "tier_label": "Price model",
    "forecast": {
-    "pred": 54705,
-    "lo": 51716,
-    "hi": 57694,
-    "p_sellout": 0.010601327417230692
+    "pred": 55055,
+    "lo": 52049,
+    "hi": 58061,
+    "p_sellout": 0.014920454441941589
    },
    "forecast_kind": "current",
    "forecast_recorded_at": null,
@@ -1677,19 +1677,19 @@
    "inside": null,
    "sellout": false,
    "breakdown": {
-    "baseline": 53036.666666666664,
+    "baseline": 53036.666666666635,
     "terms": [
      {
       "feature": "rel_log_price",
       "label": "Get-in price, relative to the season",
-      "value": 0.2468600779315255,
-      "display": "$64, 1.3\u00d7 the season median",
+      "value": 0.3031862589877456,
+      "display": "$65, 1.4\u00d7 the season median",
       "mean_display": "0.99\u00d7 the season reference",
-      "contribution": 1668.2631888215444,
-      "weight": 6422.736933855015
+      "contribution": 2018.2360808482401,
+      "weight": 6431.566398197039
      }
     ],
-    "total": 54704.92985548821,
+    "total": 55054.902747514876,
     "capped": false
    },
    "notes": []
@@ -1709,22 +1709,22 @@
    "actual": null,
    "completed": 0,
    "status": "upcoming",
-   "getin": 19.0,
-   "observed": "2026-09-23",
-   "observed_label": "Wed, Sep 23",
+   "getin": 17.0,
+   "observed": "2026-09-24",
+   "observed_label": "Thu, Sep 24",
    "ranked": 0,
    "ap_rank": null,
    "elo": 829.0,
    "sp": -42.9,
    "conf_game": 0,
-   "rel_log_price": -0.9675840262617056,
+   "rel_log_price": -1.037987666851675,
    "tier": "tier2",
    "tier_label": "Price model",
    "forecast": {
-    "pred": 46905,
-    "lo": 43783,
-    "hi": 50026,
-    "p_sellout": 1.3914023102608779e-05
+    "pred": 46429,
+    "lo": 43272,
+    "hi": 49586,
+    "p_sellout": 1.0735840367812583e-05
    },
    "forecast_kind": "current",
    "forecast_recorded_at": null,
@@ -1733,19 +1733,19 @@
    "inside": null,
    "sellout": false,
    "breakdown": {
-    "baseline": 53036.666666666664,
+    "baseline": 53036.666666666635,
     "terms": [
      {
       "feature": "rel_log_price",
       "label": "Get-in price, relative to the season",
-      "value": -0.9675840262617056,
-      "display": "$19, 38% of the season median",
+      "value": -1.037987666851675,
+      "display": "$17, 35% of the season median",
       "mean_display": "0.99\u00d7 the season reference",
-      "contribution": -6131.791813282789,
-      "weight": 6422.736933855015
+      "contribution": -6607.613074718585,
+      "weight": 6431.566398197039
      }
     ],
-    "total": 46904.87485338387,
+    "total": 46429.053591948046,
     "capped": false
    },
    "notes": [
@@ -1756,8 +1756,8 @@
  ],
  "track": {
   "n": 23,
-  "rmse": 2102.9399090011025,
-  "mae": 1579.304347826087,
+  "rmse": 2104.778641671086,
+  "mae": 1579.1304347826087,
   "inside": 20,
   "inside_rate": 0.8695652173913043,
   "priced": 18,
@@ -1831,19 +1831,19 @@
    "features": [
     "rel_log_price"
    ],
-   "intercept": 53119.412515463075,
+   "intercept": 53104.940191814225,
    "coef": {
-    "rel_log_price": 6422.736933855015
+    "rel_log_price": 6431.566398197039
    },
    "stderr": {
-    "const": 511.18377152075834,
-    "rel_log_price": 733.2627605577222
+    "const": 513.2715927120952,
+    "rel_log_price": 737.9483451749137
    },
-   "resid_se": 2168.398696025911,
+   "resid_se": 2177.3733088322156,
    "df_resid": 16,
    "n": 18,
    "means": {
-    "rel_log_price": -0.012883269180813716
+    "rel_log_price": -0.010615380596355115
    },
    "range": {
     "rel_log_price": [
@@ -1852,9 +1852,9 @@
     ]
    },
    "swing": {
-    "rel_log_price": 18222.776315907082
+    "rel_log_price": 18247.827529330734
    },
-   "baseline": 53036.666666666664,
+   "baseline": 53036.666666666635,
    "labels": {
     "rel_log_price": "Get-in price, relative to the season"
    },
@@ -1892,9 +1892,9 @@
    "n": 18
   },
   "Relative price only (priced rows)": {
-   "rmse": 2189.1709027956226,
-   "mae": 1552.6305111207864,
-   "r2": 0.8021345949341141,
+   "rmse": 2199.996845759504,
+   "mae": 1566.9054755027257,
+   "r2": 0.8001727781385992,
    "n": 18
   },
   "Tier 1 (priced rows)": {
@@ -1904,9 +1904,9 @@
    "n": 18
   },
   "Tier 2 (priced rows)": {
-   "rmse": 2189.1709027956226,
-   "mae": 1552.6305111207864,
-   "r2": 0.8021345949341141,
+   "rmse": 2199.996845759504,
+   "mae": 1566.9054755027257,
+   "r2": 0.8001727781385992,
    "n": 18
   }
  },
@@ -1950,7 +1950,7 @@
     "rel_log_price"
    ],
    "price_feature": "rel_log_price",
-   "rmse": 2189.1709027956226
+   "rmse": 2199.996845759504
   },
   {
    "features": [
@@ -1967,7 +1967,7 @@
     "rel_log_price"
    ],
    "price_feature": "rel_log_price",
-   "rmse": 2630.508016013078
+   "rmse": 2637.1273804869015
   },
   {
    "features": [
@@ -2014,44 +2014,44 @@
     {
      "season": 2023,
      "training_n": 10,
-     "rmse": 2167.705228650182,
-     "mae": 1604.5363261300445,
-     "r2": 0.796417792707162,
+     "rmse": 2183.9784785128404,
+     "mae": 1622.8309162412716,
+     "r2": 0.7933496823037822,
      "n": 8,
-     "bias": -1574.4660670315407
+     "bias": -1597.7978678279123
     },
     {
      "season": 2024,
      "training_n": 16,
-     "rmse": 4732.307253421728,
-     "mae": 4661.958710556322,
-     "r2": -15.889546317213078,
+     "rmse": 4716.172114532282,
+     "mae": 4645.638067694326,
+     "r2": -15.7745704371269,
      "n": 2,
-     "bias": 4661.958710556322
+     "bias": 4645.638067694326
     },
     {
      "season": 2025,
      "training_n": 11,
-     "rmse": 1338.1718660268257,
-     "mae": 923.4932279720025,
-     "r2": 0.9308408917712164,
+     "rmse": 1351.6496060823915,
+     "mae": 932.1891236745485,
+     "r2": 0.9294407689747242,
      "n": 7,
-     "bias": -713.7374391403033
+     "bias": -739.2147158789313
     },
     {
      "season": 2026,
      "training_n": 17,
-     "rmse": 1165.2918813759316,
-     "mae": 1165.2918813759316,
+     "rmse": 1424.7721876030482,
+     "mae": 1424.7721876030482,
      "r2": NaN,
      "n": 1,
-     "bias": 1165.2918813759316
+     "bias": 1424.7721876030482
     }
    ],
    "metrics": {
-    "rmse": 2312.692806594069,
-    "mae": 1654.9973615184972,
-    "r2": 0.779175918160446,
+    "rmse": 2326.9117250907652,
+    "mae": 1679.1121954802063,
+    "r2": 0.7764522257351294,
     "n": 18
    }
   },
@@ -2078,17 +2078,17 @@
     {
      "season": 2026,
      "training_n": 17,
-     "rmse": 1165.2918813759316,
-     "mae": 1165.2918813759316,
+     "rmse": 1424.7721876030482,
+     "mae": 1424.7721876030482,
      "r2": NaN,
      "n": 1,
-     "bias": 1165.2918813759316
+     "bias": 1424.7721876030482
     }
    ],
    "metrics": {
-    "rmse": 2521.9042110224377,
-    "mae": 1734.2944040499374,
-    "r2": 0.7139863017529349,
+    "rmse": 2535.1938607036254,
+    "mae": 1760.2424346726489,
+    "r2": 0.7109639530549232,
     "n": 10
    }
   }
@@ -2097,41 +2097,41 @@
   {
    "season": 2023,
    "priced_games": 8,
-   "rmse": 1929.8779106461632,
-   "mae": 1339.75,
-   "r2": 0.8386388282487458,
+   "rmse": 1937.6697022454575,
+   "mae": 1344.625,
+   "r2": 0.837333221561849,
    "n": 8,
-   "bias": -1131.25,
+   "bias": -1146.125,
    "inside": 7
   },
   {
    "season": 2024,
    "priced_games": 2,
-   "rmse": 4473.049351393298,
-   "mae": 4389.5,
-   "r2": -14.089661411261227,
+   "rmse": 4457.743375296519,
+   "mae": 4374.0,
+   "r2": -13.986569840656026,
    "n": 2,
-   "bias": 4389.5,
+   "bias": 4374.0,
    "inside": 0
   },
   {
    "season": 2025,
    "priced_games": 7,
-   "rmse": 1468.8319460422576,
-   "mae": 1041.0,
-   "r2": 0.9166760568692,
+   "rmse": 1479.021249726608,
+   "mae": 1039.2857142857142,
+   "r2": 0.9155160088878791,
    "n": 7,
-   "bias": -576.7142857142857,
+   "bias": -595.0,
    "inside": 7
   },
   {
    "season": 2026,
    "priced_games": 7,
-   "rmse": 1165.0,
-   "mae": 1165.0,
+   "rmse": 1425.0,
+   "mae": 1425.0,
    "r2": NaN,
    "n": 1,
-   "bias": 1165.0,
+   "bias": 1425.0,
    "inside": 1
   }
  ]
