@@ -1,6 +1,6 @@
 # Mississippi State Attendance Model
 
-Generated 2026-09-24.
+Generated 2026-10-01.
 
 ## Data
 
@@ -13,11 +13,11 @@ Generated 2026-09-24.
 | model | rows | RMSE | MAE | R² |
 |---|---|---|---|---|
 | Season mean (all rows) | 23 | 4698 | 3602 | 0.007 |
-| Tier 1 (all rows) | 23 | 3270 | 2724 | 0.519 |
+| Tier 1 (all rows) | 23 | 3271 | 2726 | 0.519 |
 | Season mean (priced rows) | 18 | 5369 | 4571 | -0.190 |
 | Price only (priced rows) | 18 | 3652 | 3063 | 0.449 |
 | Relative price only (priced rows) | 18 | 2200 | 1567 | 0.800 |
-| Tier 1 (priced rows) | 18 | 3698 | 3260 | 0.435 |
+| Tier 1 (priced rows) | 18 | 3699 | 3262 | 0.435 |
 | Tier 2 (priced rows) | 18 | 2200 | 1567 | 0.800 |
 
 ## Tier 1 feature selection
@@ -26,7 +26,7 @@ Top candidate subsets by LOO-RMSE. A smaller subset is preferred when its LOO-RM
 
 | features | LOO RMSE |
 |---|---|
-| opp_ranked + opp_elo + opp_sp | 3270 |
+| opp_ranked + opp_elo + opp_sp | 3271 |
 | opp_ranked | 3529 |
 | opp_sp | 4193 |
 | conf_game | 4213 |
@@ -41,20 +41,20 @@ Production uses relative log-price alone. These alternatives are comparisons, no
 | rel_log_price | 2200 |
 | log_getin | 3652 |
 | opp_ranked + opp_elo + opp_sp + rel_log_price | 2637 |
-| opp_ranked + opp_elo + opp_sp + log_getin | 3357 |
+| opp_ranked + opp_elo + opp_sp + log_getin | 3356 |
 
 ## Fitted models
 
 ### Tier 1 (game features only)
 
-Features: opp_ranked + opp_elo + opp_sp. Rows: 23. Residual SE: 3120.
+Features: opp_ranked + opp_elo + opp_sp. Rows: 23. Residual SE: 3121.
 
 | term | coefficient | std err |
 |---|---|---|
-| intercept | 64794 | ± 7623 |
-| opp_ranked | 8048.11 | ± 1990.33 |
-| opp_elo | -10.71 | ± 5.37 |
-| opp_sp | 185.53 | ± 85.12 |
+| intercept | 64769 | ± 7619 |
+| opp_ranked | 8045.91 | ± 1990.59 |
+| opp_elo | -10.69 | ± 5.36 |
+| opp_sp | 185.20 | ± 85.06 |
 
 ### Tier 2 (relative price only)
 
@@ -96,29 +96,29 @@ Fixed relative-price specification, refitted without the test season. Forward te
 
 | season | date | opponent | price | actual | Tier 1 LOO | Tier 2 LOO |
 |---|---|---|---|---|---|---|
-| 2023 | 2023-09-02 | SE Louisiana | 8 | 50041 | 48587 | 48905 |
-| 2023 | 2023-09-09 | Arizona | 12 | 51648 | 52482 | 51626 |
-| 2023 | 2023-09-16 | LSU | 31 | 60084 | 57887 | 57420 |
-| 2023 | 2023-09-30 | Alabama | 25 | 60111 | 55604 | 55994 |
-| 2023 | 2023-10-07 | Western Michigan | 6 | 47158 | 48594 | 47171 |
-| 2023 | 2023-11-04 | Kentucky | 10 | 52329 | 49127 | 50305 |
-| 2023 | 2023-11-18 | Southern Miss | 19 | 53855 | 49091 | 54631 |
-| 2023 | 2023-11-23 | Ole Miss | 63 | 60412 | 57789 | 60417 |
-| 2024 | 2024-08-31 | Eastern Kentucky |  | 48724 | 50143 |  |
-| 2024 | 2024-09-14 | Toledo |  | 47412 | 48117 |  |
-| 2024 | 2024-09-21 | Florida |  | 49655 | 51935 |  |
-| 2024 | 2024-10-19 | Texas A&M | 10 | 50127 | 57832 | 53641 |
-| 2024 | 2024-10-26 | Arkansas |  | 49303 | 51192 |  |
-| 2024 | 2024-11-02 | Massachusetts |  | 48617 | 49886 |  |
-| 2024 | 2024-11-23 | Missouri | 9 | 47824 | 49713 | 53058 |
-| 2025 | 2025-09-06 | Arizona State | 32 | 50808 | 56168 | 50920 |
-| 2025 | 2025-09-13 | Alcorn State | 26 | 49158 | 49695 | 49618 |
-| 2025 | 2025-09-20 | Northern Illinois | 11 | 45803 | 46284 | 43360 |
-| 2025 | 2025-09-27 | Tennessee | 95 | 60417 | 55352 | 57564 |
-| 2025 | 2025-10-25 | Texas | 48 | 52680 | 55477 | 53570 |
-| 2025 | 2025-11-08 | Georgia | 45 | 53017 | 56155 | 53110 |
+| 2023 | 2023-09-02 | SE Louisiana | 8 | 50041 | 48590 | 48905 |
+| 2023 | 2023-09-09 | Arizona | 12 | 51648 | 52476 | 51626 |
+| 2023 | 2023-09-16 | LSU | 31 | 60084 | 57884 | 57420 |
+| 2023 | 2023-09-30 | Alabama | 25 | 60111 | 55605 | 55994 |
+| 2023 | 2023-10-07 | Western Michigan | 6 | 47158 | 48597 | 47171 |
+| 2023 | 2023-11-04 | Kentucky | 10 | 52329 | 49128 | 50305 |
+| 2023 | 2023-11-18 | Southern Miss | 19 | 53855 | 49093 | 54631 |
+| 2023 | 2023-11-23 | Ole Miss | 63 | 60412 | 57785 | 60417 |
+| 2024 | 2024-08-31 | Eastern Kentucky |  | 48724 | 50145 |  |
+| 2024 | 2024-09-14 | Toledo |  | 47412 | 48121 |  |
+| 2024 | 2024-09-21 | Florida |  | 49655 | 51931 |  |
+| 2024 | 2024-10-19 | Texas A&M | 10 | 50127 | 57831 | 53641 |
+| 2024 | 2024-10-26 | Arkansas |  | 49303 | 51190 |  |
+| 2024 | 2024-11-02 | Massachusetts |  | 48617 | 49887 |  |
+| 2024 | 2024-11-23 | Missouri | 9 | 47824 | 49714 | 53058 |
+| 2025 | 2025-09-06 | Arizona State | 32 | 50808 | 56170 | 50920 |
+| 2025 | 2025-09-13 | Alcorn State | 26 | 49158 | 49698 | 49618 |
+| 2025 | 2025-09-20 | Northern Illinois | 11 | 45803 | 46294 | 43360 |
+| 2025 | 2025-09-27 | Tennessee | 95 | 60417 | 55353 | 57564 |
+| 2025 | 2025-10-25 | Texas | 48 | 52680 | 55480 | 53570 |
+| 2025 | 2025-11-08 | Georgia | 45 | 53017 | 56156 | 53110 |
 | 2025 | 2025-11-28 | Ole Miss | 133 | 60417 | 55759 | 59993 |
-| 2026 | 2026-09-05 | UL Monroe | 30 | 48771 | 46316 | 50196 |
+| 2026 | 2026-09-05 | UL Monroe | 30 | 48771 | 46294 | 50196 |
 
 ## Warnings
 
@@ -128,8 +128,8 @@ Fixed relative-price specification, refitted without the test season. Forward te
 - 2024 Eastern Kentucky: no SP+; imputed -43.0
 - 2025 Alcorn State: no Elo; imputed 618.0
 - 2025 Alcorn State: no SP+; imputed -46.6
-- 2026 Tennessee Tech: no Elo; imputed 829.0
-- 2026 Tennessee Tech: no SP+; imputed -42.9
+- 2026 Tennessee Tech: no Elo; imputed 786.0
+- 2026 Tennessee Tech: no SP+; imputed -39.0
 - 2023 Southern Miss: missing attendance filled with 53,855 from https://hailstate.com/news/2023/11/18/football-postgame-notes-mississippi-state-vs-southern-miss
 - 2026 UL Monroe: missing attendance filled with 48,771 from https://hailstate.com/sports/football/stats/2026/ulm/boxscore/27455
 - season 2024: only 2 priced games; sparse historical rows remain in training and diagnostics; new forecasts use Tier 1 until 3 prices are available
