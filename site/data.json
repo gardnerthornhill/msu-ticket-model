@@ -5,8 +5,8 @@
  "venue": "Davis Wade Stadium",
  "capacity": 60417,
  "interval": 0.8,
- "generated": "2026-10-03",
- "trained": "2026-10-03",
+ "generated": "2026-10-04",
+ "trained": "2026-10-04",
  "seasons": [
   2023,
   2024,
@@ -14,7 +14,7 @@
   2026
  ],
  "current_season": 2026,
- "next_game": "2026-alabama",
+ "next_game": "2026-oklahoma",
  "axis_min": 35000,
  "bar_max": 11000,
  "bar_max_current": 7000,
@@ -1483,8 +1483,8 @@
    "logo": "333.png",
    "attendance": null,
    "actual": null,
-   "completed": 0,
-   "status": "upcoming",
+   "completed": 1,
+   "status": "unreported",
    "getin": 119.0,
    "observed": "2026-09-24",
    "observed_label": "Thu, Sep 24",
@@ -1602,7 +1602,7 @@
    "observed_label": "Thu, Sep 24",
    "ranked": 0,
    "ap_rank": null,
-   "elo": 1731.0,
+   "elo": 1702.0,
    "sp": 7.5,
    "conf_game": 1,
    "rel_log_price": -0.0645385211375715,
@@ -1658,7 +1658,7 @@
    "observed_label": "Thu, Sep 24",
    "ranked": 0,
    "ap_rank": null,
-   "elo": 1679.0,
+   "elo": 1669.0,
    "sp": 11.4,
    "conf_game": 1,
    "rel_log_price": 0.3031862589877456,
@@ -1714,7 +1714,7 @@
    "observed_label": "Thu, Sep 24",
    "ranked": 0,
    "ap_rank": null,
-   "elo": 786.0,
+   "elo": 762.0,
    "sp": -39.0,
    "conf_game": 0,
    "rel_log_price": -1.037987666851675,
@@ -1749,7 +1749,7 @@
     "capped": false
    },
    "notes": [
-    "No Elo; imputed 786.0.",
+    "No Elo; imputed 762.0.",
     "No SP+; imputed -39.0."
    ]
   }
@@ -2002,7 +2002,7 @@
   "2024 Eastern Kentucky: no SP+; imputed -43.0",
   "2025 Alcorn State: no Elo; imputed 618.0",
   "2025 Alcorn State: no SP+; imputed -46.6",
-  "2026 Tennessee Tech: no Elo; imputed 786.0",
+  "2026 Tennessee Tech: no Elo; imputed 762.0",
   "2026 Tennessee Tech: no SP+; imputed -39.0",
   "2023 Southern Miss: missing attendance filled with 53,855 from https://hailstate.com/news/2023/11/18/football-postgame-notes-mississippi-state-vs-southern-miss",
   "2026 UL Monroe: missing attendance filled with 48,771 from https://hailstate.com/sports/football/stats/2026/ulm/boxscore/27455",

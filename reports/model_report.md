@@ -1,6 +1,6 @@
 # Mississippi State Attendance Model
 
-Generated 2026-10-03.
+Generated 2026-10-04.
 
 ## Data
 
@@ -128,7 +128,7 @@ Fixed relative-price specification, refitted without the test season. Forward te
 - 2024 Eastern Kentucky: no SP+; imputed -43.0
 - 2025 Alcorn State: no Elo; imputed 618.0
 - 2025 Alcorn State: no SP+; imputed -46.6
-- 2026 Tennessee Tech: no Elo; imputed 786.0
+- 2026 Tennessee Tech: no Elo; imputed 762.0
 - 2026 Tennessee Tech: no SP+; imputed -39.0
 - 2023 Southern Miss: missing attendance filled with 53,855 from https://hailstate.com/news/2023/11/18/football-postgame-notes-mississippi-state-vs-southern-miss
 - 2026 UL Monroe: missing attendance filled with 48,771 from https://hailstate.com/sports/football/stats/2026/ulm/boxscore/27455
