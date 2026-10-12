@@ -5,8 +5,8 @@
  "venue": "Davis Wade Stadium",
  "capacity": 60417,
  "interval": 0.8,
- "generated": "2026-10-11",
- "trained": "2026-10-11",
+ "generated": "2026-10-12",
+ "trained": "2026-10-12",
  "seasons": [
   2023,
   2024,
@@ -276,7 +276,7 @@
     "pred": 47171,
     "lo": 43899,
     "hi": 50443,
-    "p_sellout": 3.502514392294082e-05
+    "p_sellout": 3.5025143922940695e-05
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
@@ -502,7 +502,7 @@
     "pred": 50134,
     "lo": 45139,
     "hi": 55129,
-    "p_sellout": 0.006745741628026203
+    "p_sellout": 0.0067457416280160745
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
@@ -511,7 +511,7 @@
    "inside": true,
    "sellout": false,
    "breakdown": {
-    "baseline": 52256.68181817501,
+    "baseline": 52256.68181817554,
     "terms": [
      {
       "feature": "opp_ranked",
@@ -519,8 +519,8 @@
       "value": 0.0,
       "display": "Unranked",
       "mean_display": "41% of games ranked",
-      "contribution": -3378.646184253759,
-      "weight": 8258.912894842522
+      "contribution": -3378.6461842536914,
+      "weight": 8258.912894842357
      },
      {
       "feature": "opp_elo",
@@ -528,8 +528,8 @@
       "value": 660.0,
       "display": "660",
       "mean_display": "1,515",
-      "contribution": 9728.793358413477,
-      "weight": -11.37991566807191
+      "contribution": 9728.79335841335,
+      "weight": -11.37991566807176
      },
      {
       "feature": "opp_sp",
@@ -537,11 +537,11 @@
       "value": -43.0,
       "display": "-43.0",
       "mean_display": "+1.9",
-      "contribution": -8472.571895441033,
-      "weight": 188.75603210096477
+      "contribution": -8472.571895441073,
+      "weight": 188.75603210096568
      }
     ],
-    "total": 50134.2570968937,
+    "total": 50134.25709689412,
     "capped": false
    },
    "notes": [
@@ -579,7 +579,7 @@
     "pred": 48098,
     "lo": 43478,
     "hi": 52718,
-    "p_sellout": 0.0011496051824503033
+    "p_sellout": 0.0011496051824550135
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
@@ -588,7 +588,7 @@
    "inside": true,
    "sellout": false,
    "breakdown": {
-    "baseline": 52316.318181821196,
+    "baseline": 52316.31818181984,
     "terms": [
      {
       "feature": "opp_ranked",
@@ -596,8 +596,8 @@
       "value": 0.0,
       "display": "Unranked",
       "mean_display": "41% of games ranked",
-      "contribution": -3243.274704954735,
-      "weight": 7928.004834333797
+      "contribution": -3243.274704954804,
+      "weight": 7928.004834333964
      },
      {
       "feature": "opp_elo",
@@ -605,8 +605,8 @@
       "value": 1524.0,
       "display": "1,524",
       "mean_display": "1,476",
-      "contribution": -507.30998696864026,
-      "weight": -10.489492211757621
+      "contribution": -507.3099869687172,
+      "weight": -10.489492211759213
      },
      {
       "feature": "opp_sp",
@@ -614,11 +614,11 @@
       "value": -2.5,
       "display": "-2.5",
       "mean_display": "+0.0",
-      "contribution": -467.7293498175189,
-      "weight": 183.75081599973953
+      "contribution": -467.7293498175142,
+      "weight": 183.7508159997377
      }
     ],
-    "total": 48098.0041400803,
+    "total": 48098.00414007881,
     "capped": false
    },
    "notes": []
@@ -653,7 +653,7 @@
     "pred": 51953,
     "lo": 47208,
     "hi": 56699,
-    "p_sellout": 0.01450114066474812
+    "p_sellout": 0.014501140664754488
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
@@ -662,7 +662,7 @@
    "inside": true,
    "sellout": false,
    "breakdown": {
-    "baseline": 52214.363636363036,
+    "baseline": 52214.36363636381,
     "terms": [
      {
       "feature": "opp_ranked",
@@ -670,8 +670,8 @@
       "value": 0.0,
       "display": "Unranked",
       "mean_display": "41% of games ranked",
-      "contribution": -3183.1256806175884,
-      "weight": 7780.973885954104
+      "contribution": -3183.1256806177776,
+      "weight": 7780.973885954567
      },
      {
       "feature": "opp_elo",
@@ -679,8 +679,8 @@
       "value": 1485.0,
       "display": "1,485",
       "mean_display": "1,477",
-      "contribution": -88.20661169157103,
-      "weight": -11.62003267793164
+      "contribution": -88.2066116915716,
+      "weight": -11.620032677931714
      },
      {
       "feature": "opp_sp",
@@ -688,11 +688,11 @@
       "value": 13.8,
       "display": "+13.8",
       "mean_display": "-0.7",
-      "contribution": 3010.3939060330663,
-      "weight": 207.67847580033697
+      "contribution": 3010.3939060330845,
+      "weight": 207.67847580033822
      }
     ],
-    "total": 51953.42525008694,
+    "total": 51953.425250087545,
     "capped": false
    },
    "notes": []
@@ -785,7 +785,7 @@
     "pred": 51203,
     "lo": 46576,
     "hi": 55829,
-    "p_sellout": 0.008148701132069669
+    "p_sellout": 0.008148701132066723
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
@@ -794,7 +794,7 @@
    "inside": true,
    "sellout": false,
    "breakdown": {
-    "baseline": 52230.36363636402,
+    "baseline": 52230.36363636422,
     "terms": [
      {
       "feature": "opp_ranked",
@@ -802,8 +802,8 @@
       "value": 0.0,
       "display": "Unranked",
       "mean_display": "41% of games ranked",
-      "contribution": -3194.203394697499,
-      "weight": 7808.052742593885
+      "contribution": -3194.2033946974916,
+      "weight": 7808.052742593868
      },
      {
       "feature": "opp_elo",
@@ -811,8 +811,8 @@
       "value": 1490.0,
       "display": "1,490",
       "mean_display": "1,477",
-      "contribution": -143.86929512179572,
-      "weight": -11.223845718721705
+      "contribution": -143.86929512179438,
+      "weight": -11.223845718721602
      },
      {
       "feature": "opp_sp",
@@ -820,11 +820,11 @@
       "value": 11.0,
       "display": "+11.0",
       "mean_display": "-0.6",
-      "contribution": 2310.39540432313,
-      "weight": 199.71983848765763
+      "contribution": 2310.3954043231106,
+      "weight": 199.71983848765592
      }
     ],
-    "total": 51202.68635086785,
+    "total": 51202.68635086805,
     "capped": false
    },
    "notes": []
@@ -859,7 +859,7 @@
     "pred": 49882,
     "lo": 45399,
     "hi": 54365,
-    "p_sellout": 0.002914747349359284
+    "p_sellout": 0.002914747349362211
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
@@ -868,7 +868,7 @@
    "inside": true,
    "sellout": false,
    "breakdown": {
-    "baseline": 52261.54545454738,
+    "baseline": 52261.54545454751,
     "terms": [
      {
       "feature": "opp_ranked",
@@ -876,8 +876,8 @@
       "value": 0.0,
       "display": "Unranked",
       "mean_display": "41% of games ranked",
-      "contribution": -3303.7454004337037,
-      "weight": 8075.8220899490525
+      "contribution": -3303.7454004335755,
+      "weight": 8075.82208994874
      },
      {
       "feature": "opp_elo",
@@ -885,8 +885,8 @@
       "value": 1025.0,
       "display": "1,025",
       "mean_display": "1,498",
-      "contribution": 5241.09937389324,
-      "weight": -11.073099608724796
+      "contribution": 5241.099373893137,
+      "weight": -11.07309960872458
      },
      {
       "feature": "opp_sp",
@@ -894,11 +894,11 @@
       "value": -21.9,
       "display": "-21.9",
       "mean_display": "+0.9",
-      "contribution": -4317.177882278158,
-      "weight": 189.12368261672538
+      "contribution": -4317.177882278146,
+      "weight": 189.12368261672486
      }
     ],
-    "total": 49881.72154572875,
+    "total": 49881.72154572892,
     "capped": false
    },
    "notes": []
@@ -950,8 +950,8 @@
       "value": -0.0526802578289129,
       "display": "$9, 95% of the season median",
       "mean_display": "0.99\u00d7 the season reference",
-      "contribution": -285.3309818118291,
-      "weight": 6406.2771207017
+      "contribution": -285.3309818118292,
+      "weight": 6406.277120701702
      }
     ],
     "total": 53057.963135835234,
@@ -991,7 +991,7 @@
     "pred": 50920,
     "lo": 47797,
     "hi": 54043,
-    "p_sellout": 0.0004954812918918723
+    "p_sellout": 0.0004954812918918727
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
@@ -1106,7 +1106,7 @@
     "pred": 43360,
     "lo": 39909,
     "hi": 46811,
-    "p_sellout": 4.033679904628086e-06
+    "p_sellout": 4.033679904628093e-06
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
@@ -1179,8 +1179,8 @@
       "value": 0.7472144018302211,
       "display": "$95, 2.1\u00d7 the season median",
       "mean_display": "0.95\u00d7 the season reference",
-      "contribution": 4961.463977111984,
-      "weight": 6183.218445823811
+      "contribution": 4961.463977111983,
+      "weight": 6183.21844582381
      }
     ],
     "total": 57563.993388876705,
@@ -1771,17 +1771,17 @@
     "opp_elo",
     "opp_sp"
    ],
-   "intercept": 64915.87135597697,
+   "intercept": 64915.871355977564,
    "coef": {
-    "opp_ranked": 8059.110554027898,
-    "opp_elo": -10.7963189916969,
-    "opp_sp": 187.16418925042478
+    "opp_ranked": 8059.110554028506,
+    "opp_elo": -10.796318991696829,
+    "opp_sp": 187.16418925042444
    },
    "stderr": {
-    "const": 7642.037258732785,
-    "opp_ranked": 1989.0580930741646,
-    "opp_elo": 5.38076245639233,
-    "opp_sp": 85.46421061428475
+    "const": 7642.03725873284,
+    "opp_ranked": 1989.0580930743165,
+    "opp_elo": 5.380762456392321,
+    "opp_sp": 85.46421061428461
    },
    "resid_se": 3117.3368235734574,
    "df_resid": 19,
@@ -1806,11 +1806,11 @@
     ]
    },
    "swing": {
-    "opp_ranked": 8059.110554027898,
-    "opp_elo": -15104.050269383963,
-    "opp_sp": 13232.508180005032
+    "opp_ranked": 8059.110554028506,
+    "opp_elo": -15104.050269383864,
+    "opp_sp": 13232.508180005008
    },
-   "baseline": 52103.08695652398,
+   "baseline": 52103.086956524916,
    "labels": {
     "opp_ranked": "Opponent ranked in the AP Top 25",
     "opp_elo": "Opponent Elo rating",
@@ -1874,9 +1874,9 @@
    "n": 23
   },
   "Tier 1 (all rows)": {
-   "rmse": 3265.906714371795,
-   "mae": 2716.5521006635254,
-   "r2": 0.5199891197412607,
+   "rmse": 3265.9067143719476,
+   "mae": 2716.552100663609,
+   "r2": 0.5199891197412159,
    "n": 23
   },
   "Season mean (priced rows)": {
@@ -1886,26 +1886,26 @@
    "n": 18
   },
   "Price only (priced rows)": {
-   "rmse": 3651.976970873385,
+   "rmse": 3651.9769708733847,
    "mae": 3063.113585436159,
-   "r2": 0.44936147307129903,
+   "r2": 0.44936147307129914,
    "n": 18
   },
   "Relative price only (priced rows)": {
    "rmse": 2199.996845759507,
-   "mae": 1566.9054755027255,
+   "mae": 1566.905475502725,
    "r2": 0.8001727781385989,
    "n": 18
   },
   "Tier 1 (priced rows)": {
-   "rmse": 3693.9430790745114,
-   "mae": 3247.651905305001,
-   "r2": 0.4366336119581653,
+   "rmse": 3693.9430790745105,
+   "mae": 3247.6519053050633,
+   "r2": 0.43663361195816563,
    "n": 18
   },
   "Tier 2 (priced rows)": {
    "rmse": 2199.996845759507,
-   "mae": 1566.9054755027255,
+   "mae": 1566.905475502725,
    "r2": 0.8001727781385989,
    "n": 18
   }
@@ -1917,13 +1917,13 @@
     "opp_elo",
     "opp_sp"
    ],
-   "rmse": 3265.906714371795
+   "rmse": 3265.9067143719476
   },
   {
    "features": [
     "opp_ranked"
    ],
-   "rmse": 3529.3065990214645
+   "rmse": 3529.306599021466
   },
   {
    "features": [
@@ -1935,13 +1935,13 @@
    "features": [
     "conf_game"
    ],
-   "rmse": 4212.619397522092
+   "rmse": 4212.619397522091
   },
   {
    "features": [
     "opp_p4"
    ],
-   "rmse": 4262.023826472993
+   "rmse": 4262.023826472994
   }
  ],
  "tier2_candidates": [
@@ -1957,7 +1957,7 @@
     "log_getin"
    ],
    "price_feature": "log_getin",
-   "rmse": 3651.976970873385
+   "rmse": 3651.9769708733847
   },
   {
    "features": [
@@ -1967,7 +1967,7 @@
     "rel_log_price"
    ],
    "price_feature": "rel_log_price",
-   "rmse": 2638.8869210759804
+   "rmse": 2638.8869210761636
   },
   {
    "features": [
@@ -1977,7 +1977,7 @@
     "log_getin"
    ],
    "price_feature": "log_getin",
-   "rmse": 3359.5991997327837
+   "rmse": 3359.5991997324913
   }
  ],
  "counts": {
@@ -2032,11 +2032,11 @@
     {
      "season": 2025,
      "training_n": 11,
-     "rmse": 1351.6496060823858,
-     "mae": 932.1891236745442,
-     "r2": 0.9294407689747247,
+     "rmse": 1351.6496060823874,
+     "mae": 932.1891236745453,
+     "r2": 0.9294407689747245,
      "n": 7,
-     "bias": -739.214715878923
+     "bias": -739.214715878924
     },
     {
      "season": 2026,
@@ -2049,9 +2049,9 @@
     }
    ],
    "metrics": {
-    "rmse": 2326.911725090763,
-    "mae": 1679.1121954802043,
-    "r2": 0.7764522257351298,
+    "rmse": 2326.9117250907634,
+    "mae": 1679.1121954802047,
+    "r2": 0.7764522257351297,
     "n": 18
    }
   },
@@ -2069,11 +2069,11 @@
     {
      "season": 2025,
      "training_n": 10,
-     "rmse": 1295.9848222199428,
-     "mae": 895.2250813053771,
-     "r2": 0.9351327591475534,
+     "rmse": 1295.9848222199423,
+     "mae": 895.2250813053761,
+     "r2": 0.9351327591475536,
      "n": 7,
-     "bias": -621.7277071404782
+     "bias": -621.7277071404772
     },
     {
      "season": 2026,
@@ -2086,9 +2086,9 @@
     }
    ],
    "metrics": {
-    "rmse": 2535.1938607036204,
-    "mae": 1760.2424346726468,
-    "r2": 0.7109639530549244,
+    "rmse": 2535.19386070362,
+    "mae": 1760.2424346726461,
+    "r2": 0.7109639530549245,
     "n": 10
    }
   }
