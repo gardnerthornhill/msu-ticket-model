@@ -285,6 +285,8 @@ def site_data(paths: Paths, today: str | None = None) -> dict:
         error = forecast["pred"] - actual if actual is not None else None
         inside = (forecast["lo"] <= actual <= forecast["hi"]) if actual is not None else None
         opp_id = ids.get(key)
+        forecast_inputs = forecast_row if isinstance(forecast_row, pd.Series) else forecast_row._asdict()
+        forecast_observed = forecast_inputs.get("observed")
         games.append({
             "season": season, "week": int(row.week), "date": row.date, "date_label": date_label(row.date),
             "date_short": date_label(row.date, year=False), "kickoff": kickoff_label(row.kickoff_hr),
@@ -293,6 +295,8 @@ def site_data(paths: Paths, today: str | None = None) -> dict:
             "attendance": actual, "actual": actual, "completed": int(row.completed), "status": status,
             "getin": _none(row.getin), "observed": row.observed if isinstance(row.observed, str) else None,
             "observed_label": date_label(row.observed, year=False) if isinstance(row.observed, str) else None,
+            "forecast_getin": _none(forecast_inputs.get("getin")),
+            "forecast_observed_label": date_label(forecast_observed, year=False) if isinstance(forecast_observed, str) else None,
             "ranked": int(row.opp_ranked), "ap_rank": _int(row.opp_ap_rank) if int(row.opp_ranked) else None,
             "elo": _none(row.opp_elo), "sp": _none(row.opp_sp), "conf_game": int(row.conf_game),
             "rel_log_price": _none(row.rel_log_price),

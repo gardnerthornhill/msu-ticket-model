@@ -41,7 +41,10 @@
       {% else %}
       <div><dt>Sellout odds</dt><dd>{{ f.p_sellout | pct }}</dd></div>
       {% endif %}
-      <div><dt>Get-in price</dt><dd>{% if g.getin %}{{ g.getin | money }}{% if g.observed_label %} on {{ g.observed_label }}{% endif %}{% else %}none listed{% endif %}</dd></div>
+      <div><dt>{% if g.forecast_kind == "recorded" %}Forecast get-in price{% else %}Get-in price{% endif %}</dt><dd>{% if g.forecast_getin %}{{ g.forecast_getin | money }}{% if g.forecast_observed_label %} on {{ g.forecast_observed_label }}{% endif %}{% else %}none listed{% endif %}</dd></div>
+      {% if g.forecast_kind == "recorded" %}
+      <div><dt>Latest recorded price</dt><dd>{% if g.getin %}{{ g.getin | money }}{% if g.observed_label %}, collected {{ g.observed_label }}{% endif %}{% else %}none listed{% endif %}</dd></div>
+      {% endif %}
       <div><dt>Model</dt><dd>{{ g.tier_label }}</dd></div>
     </dl>
   </div>
@@ -51,6 +54,20 @@
   <p class="notice">This forecast was archived before kickoff on {{ g.forecast_date }}. Its model, inputs, price and interval are preserved exactly as they appeared then.</p>
   {% endif %}
 </section>
+
+{% if g.season == 2026 and g.opponent in ["Missouri", "Alabama"] and g.status == "played" %}
+<section class="section">
+  <h2>Sellout context</h2>
+  {% if g.opponent == "Missouri" %}
+  <p>Mississippi State's <a href="https://static.hailstate.com/custompages/stats/fb/2026/ms0926.PDF">official game book</a> reports {{ g.actual | num }} announced attendees. A field observation supplied on October 13 describes a crowd driven mainly by Mississippi State supporters, with few visiting Missouri fans.</p>
+  <p>That observation suggests strong home support can fill the stadium even when the cheapest resale ticket is modest. The price model does not directly measure home-team momentum, primary ticket sales or fan campaigns. This result remains a forecast miss in the track record.</p>
+  {% else %}
+  <p>Mississippi State's <a href="https://hailstate.com/sports/football/stats/2026/alabama/boxscore/27571">official box score</a> reports {{ g.actual | num }} announced attendees. A field observation supplied on October 13 describes Alabama supporters contributing to the crowd, helped by proximity and the matchup.</p>
+  <p>The price model combines demand into one resale-price signal; it does not separately estimate home support and visiting support.</p>
+  {% endif %}
+  <p class="board-note">Fan composition is qualitative observer context, not a measured attendance split or a numerical adjustment. The pregame forecast above stays as originally recorded.</p>
+</section>
+{% endif %}
 
 <section class="section">
   <h2>Why {{ f.pred | num }}</h2>

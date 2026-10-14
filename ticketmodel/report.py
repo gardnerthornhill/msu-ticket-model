@@ -15,6 +15,7 @@ CAVEATS = [
     "Tier 1 features are selected using the same leave-one-out scores reported. Its opponent ratings are collinear and cached SP+ values are season-level, not verified pregame snapshots.",
     "Live Tier 2 forecasts require at least 3 priced games. Sparse historical seasons are retained in training and shown separately in diagnostics rather than dropping difficult outcomes; their season references are less reliable.",
     f"Sellout odds are an uncalibrated model probability of reaching {CAPACITY:,} announced attendees, not a verified probability that ticket inventory sells out.",
+    "The cheapest resale listing does not measure primary ticket sales or the mix of home and visiting fans. Home-team momentum, fan campaigns and visiting support can affect turnout without a proportional change in get-in price; these drivers are not explicit inputs in the price model.",
 ]
 
 

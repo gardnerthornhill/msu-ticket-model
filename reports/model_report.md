@@ -5,20 +5,20 @@ Generated 2026-10-13.
 ## Data
 
 - Home games in features: 29
-- With attendance (Tier 1 training rows): 23
-- With attendance and price (Tier 2 training rows): 18
+- With attendance (Tier 1 training rows): 25
+- With attendance and price (Tier 2 training rows): 20
 
 ## Leave-one-out accuracy
 
 | model | rows | RMSE | MAE | R² |
 |---|---|---|---|---|
-| Season mean (all rows) | 23 | 4698 | 3602 | 0.007 |
-| Tier 1 (all rows) | 23 | 3266 | 2717 | 0.520 |
-| Season mean (priced rows) | 18 | 5369 | 4571 | -0.190 |
-| Price only (priced rows) | 18 | 3652 | 3063 | 0.449 |
-| Relative price only (priced rows) | 18 | 2200 | 1567 | 0.800 |
-| Tier 1 (priced rows) | 18 | 3694 | 3248 | 0.437 |
-| Tier 2 (priced rows) | 18 | 2200 | 1567 | 0.800 |
+| Season mean (all rows) | 25 | 5288 | 4106 | -0.095 |
+| Tier 1 (all rows) | 25 | 3220 | 2664 | 0.594 |
+| Season mean (priced rows) | 20 | 5924 | 5053 | -0.314 |
+| Price only (priced rows) | 20 | 3625 | 2952 | 0.508 |
+| Relative price only (priced rows) | 20 | 2842 | 1943 | 0.698 |
+| Tier 1 (priced rows) | 20 | 3600 | 3103 | 0.515 |
+| Tier 2 (priced rows) | 20 | 2842 | 1943 | 0.698 |
 
 ## Tier 1 feature selection
 
@@ -26,11 +26,11 @@ Top candidate subsets by LOO-RMSE. A smaller subset is preferred when its LOO-RM
 
 | features | LOO RMSE |
 |---|---|
-| opp_ranked + opp_elo + opp_sp | 3266 |
-| opp_ranked | 3529 |
-| opp_sp | 4194 |
-| conf_game | 4213 |
-| opp_p4 | 4262 |
+| opp_ranked + opp_elo + opp_sp | 3220 |
+| opp_ranked | 3510 |
+| conf_game | 4310 |
+| opp_sp | 4317 |
+| opp_p4 | 4391 |
 
 ## Tier 2 price feature
 
@@ -38,32 +38,32 @@ Production uses relative log-price alone. These alternatives are comparisons, no
 
 | features | LOO RMSE |
 |---|---|
-| rel_log_price | 2200 |
-| log_getin | 3652 |
-| opp_ranked + opp_elo + opp_sp + rel_log_price | 2639 |
-| opp_ranked + opp_elo + opp_sp + log_getin | 3360 |
+| rel_log_price | 2842 |
+| log_getin | 3625 |
+| opp_ranked + opp_elo + opp_sp + rel_log_price | 3182 |
+| opp_ranked + opp_elo + opp_sp + log_getin | 3211 |
 
 ## Fitted models
 
 ### Tier 1 (game features only)
 
-Features: opp_ranked + opp_elo + opp_sp. Rows: 23. Residual SE: 3117.
+Features: opp_ranked + opp_elo + opp_sp. Rows: 25. Residual SE: 3101.
 
 | term | coefficient | std err |
 |---|---|---|
-| intercept | 64916 | ± 7642 |
-| opp_ranked | 8059.11 | ± 1989.06 |
-| opp_elo | -10.80 | ± 5.38 |
-| opp_sp | 187.16 | ± 85.46 |
+| intercept | 65782 | ± 7373 |
+| opp_ranked | 8647.91 | ± 1893.27 |
+| opp_elo | -11.39 | ± 5.19 |
+| opp_sp | 198.24 | ± 82.99 |
 
 ### Tier 2 (relative price only)
 
-Features: rel_log_price. Rows: 18. Residual SE: 2177.
+Features: rel_log_price. Rows: 20. Residual SE: 2856.
 
 | term | coefficient | std err |
 |---|---|---|
-| intercept | 53105 | ± 513 |
-| rel_log_price | 6431.57 | ± 737.95 |
+| intercept | 53591 | ± 639 |
+| rel_log_price | 6318.95 | ± 917.32 |
 
 ## Price-model results by season
 
@@ -71,10 +71,10 @@ Positive bias means overprediction. Sparse-price seasons remain visible.
 
 | season | priced reference games | scored games | RMSE | MAE | bias | inside 80% range |
 |---|---|---|---|---|---|---|
-| 2023 | 8 | 8 | 1938 | 1345 | -1146 | 7/8 |
-| 2024 | 2 | 2 | 4458 | 4374 | 4374 | 0/2 |
-| 2025 | 7 | 7 | 1479 | 1039 | -595 | 7/7 |
-| 2026 | 7 | 1 | 1425 | 1425 | 1425 | 1/1 |
+| 2023 | 8 | 8 | 1670 | 1275 | -654 | 8/8 |
+| 2024 | 2 | 2 | 4937 | 4860 | 4860 | 0/2 |
+| 2025 | 7 | 7 | 1290 | 1083 | -20 | 7/7 |
+| 2026 | 7 | 3 | 5126 | 3785 | -2451 | 2/3 |
 
 ## Season transfer
 
@@ -82,43 +82,45 @@ Fixed relative-price specification, refitted without the test season. Forward te
 
 | test | season | training games | scored games | RMSE | MAE | bias |
 |---|---|---|---|---|---|---|
-| Season held out | 2023 | 10 | 8 | 2184 | 1623 | -1598 |
-| Season held out | 2024 | 16 | 2 | 4716 | 4646 | 4646 |
-| Season held out | 2025 | 11 | 7 | 1352 | 932 | -739 |
-| Season held out | 2026 | 17 | 1 | 1425 | 1425 | 1425 |
-| Season held out, pooled | all | — | 18 | 2327 | 1679 | — |
+| Season held out | 2023 | 12 | 8 | 1617 | 1186 | -798 |
+| Season held out | 2024 | 18 | 2 | 5195 | 5129 | 5129 |
+| Season held out | 2025 | 13 | 7 | 1153 | 981 | 80 |
+| Season held out | 2026 | 17 | 3 | 5040 | 3659 | -2709 |
+| Season held out, pooled | all | — | 20 | 2832 | 1879 | — |
 | Earlier seasons only | 2024 | 8 | 2 | 5024 | 4956 | 4956 |
 | Earlier seasons only | 2025 | 10 | 7 | 1296 | 895 | -622 |
-| Earlier seasons only | 2026 | 17 | 1 | 1425 | 1425 | 1425 |
-| Earlier seasons only, pooled | all | — | 10 | 2535 | 1760 | — |
+| Earlier seasons only | 2026 | 17 | 3 | 5040 | 3659 | -2709 |
+| Earlier seasons only, pooled | all | — | 12 | 3396 | 2263 | — |
 
 ## Per-game leave-one-out predictions
 
 | season | date | opponent | price | actual | Tier 1 LOO | Tier 2 LOO |
 |---|---|---|---|---|---|---|
-| 2023 | 2023-09-02 | SE Louisiana | 8 | 50041 | 48570 | 48905 |
-| 2023 | 2023-09-09 | Arizona | 12 | 51648 | 52511 | 51626 |
-| 2023 | 2023-09-16 | LSU | 31 | 60084 | 57905 | 57420 |
-| 2023 | 2023-09-30 | Alabama | 25 | 60111 | 55602 | 55994 |
-| 2023 | 2023-10-07 | Western Michigan | 6 | 47158 | 48579 | 47171 |
-| 2023 | 2023-11-04 | Kentucky | 10 | 52329 | 49125 | 50305 |
-| 2023 | 2023-11-18 | Southern Miss | 19 | 53855 | 49085 | 54631 |
-| 2023 | 2023-11-23 | Ole Miss | 63 | 60412 | 57806 | 60417 |
-| 2024 | 2024-08-31 | Eastern Kentucky |  | 48724 | 50134 |  |
-| 2024 | 2024-09-14 | Toledo |  | 47412 | 48098 |  |
-| 2024 | 2024-09-21 | Florida |  | 49655 | 51953 |  |
-| 2024 | 2024-10-19 | Texas A&M | 10 | 50127 | 57836 | 53641 |
-| 2024 | 2024-10-26 | Arkansas |  | 49303 | 51203 |  |
-| 2024 | 2024-11-02 | Massachusetts |  | 48617 | 49882 |  |
-| 2024 | 2024-11-23 | Missouri | 9 | 47824 | 49709 | 53058 |
-| 2025 | 2025-09-06 | Arizona State | 32 | 50808 | 56157 | 50920 |
-| 2025 | 2025-09-13 | Alcorn State | 26 | 49158 | 49683 | 49618 |
-| 2025 | 2025-09-20 | Northern Illinois | 11 | 45803 | 46238 | 43360 |
-| 2025 | 2025-09-27 | Tennessee | 95 | 60417 | 55347 | 57564 |
-| 2025 | 2025-10-25 | Texas | 48 | 52680 | 55465 | 53570 |
-| 2025 | 2025-11-08 | Georgia | 45 | 53017 | 56149 | 53110 |
-| 2025 | 2025-11-28 | Ole Miss | 133 | 60417 | 55759 | 59993 |
-| 2026 | 2026-09-05 | UL Monroe | 30 | 48771 | 46421 | 50196 |
+| 2023 | 2023-09-02 | SE Louisiana | 8 | 50041 | 48515 | 49528 |
+| 2023 | 2023-09-09 | Arizona | 12 | 51648 | 52757 | 52169 |
+| 2023 | 2023-09-16 | LSU | 31 | 60084 | 58796 | 57922 |
+| 2023 | 2023-09-30 | Alabama | 25 | 60111 | 56305 | 56513 |
+| 2023 | 2023-10-07 | Western Michigan | 6 | 47158 | 48523 | 47860 |
+| 2023 | 2023-11-04 | Kentucky | 10 | 52329 | 49168 | 50886 |
+| 2023 | 2023-11-18 | Southern Miss | 19 | 53855 | 49091 | 55111 |
+| 2023 | 2023-11-23 | Ole Miss | 63 | 60412 | 58715 | 60417 |
+| 2024 | 2024-08-31 | Eastern Kentucky |  | 48724 | 50123 |  |
+| 2024 | 2024-09-14 | Toledo |  | 47412 | 48019 |  |
+| 2024 | 2024-09-21 | Florida |  | 49655 | 52122 |  |
+| 2024 | 2024-10-19 | Texas A&M | 10 | 50127 | 58288 | 54124 |
+| 2024 | 2024-10-26 | Arkansas |  | 49303 | 51326 |  |
+| 2024 | 2024-11-02 | Massachusetts |  | 48617 | 49898 |  |
+| 2024 | 2024-11-23 | Missouri | 9 | 47824 | 49734 | 53548 |
+| 2025 | 2025-09-06 | Arizona State | 32 | 50808 | 56637 | 51480 |
+| 2025 | 2025-09-13 | Alcorn State | 26 | 49158 | 49656 | 50214 |
+| 2025 | 2025-09-20 | Northern Illinois | 11 | 45803 | 45974 | 44291 |
+| 2025 | 2025-09-27 | Tennessee | 95 | 60417 | 56033 | 58070 |
+| 2025 | 2025-10-25 | Texas | 48 | 52680 | 55985 | 54068 |
+| 2025 | 2025-11-08 | Georgia | 45 | 53017 | 56693 | 53621 |
+| 2025 | 2025-11-28 | Ole Miss | 133 | 60417 | 56479 | 60417 |
+| 2026 | 2026-09-05 | UL Monroe | 30 | 48771 | 46254 | 50772 |
+| 2026 | 2026-09-26 | Missouri | 39 | 60417 | 58467 | 51798 |
+| 2026 | 2026-10-03 | Alabama | 128 | 60417 | 56658 | 59683 |
 
 ## Warnings
 
@@ -132,6 +134,8 @@ Fixed relative-price specification, refitted without the test season. Forward te
 - 2026 Tennessee Tech: no SP+; imputed -38.6
 - 2023 Southern Miss: missing attendance filled with 53,855 from https://hailstate.com/news/2023/11/18/football-postgame-notes-mississippi-state-vs-southern-miss
 - 2026 UL Monroe: missing attendance filled with 48,771 from https://hailstate.com/sports/football/stats/2026/ulm/boxscore/27455
+- 2026 Missouri: missing attendance filled with 60,417 from https://static.hailstate.com/custompages/stats/fb/2026/ms0926.PDF
+- 2026 Alabama: missing attendance filled with 60,417 from https://hailstate.com/sports/football/stats/2026/alabama/boxscore/27571
 - season 2024: only 2 priced games; sparse historical rows remain in training and diagnostics; new forecasts use Tier 1 until 3 prices are available
 
 ## Caveats
@@ -144,3 +148,4 @@ Fixed relative-price specification, refitted without the test season. Forward te
 - Tier 1 features are selected using the same leave-one-out scores reported. Its opponent ratings are collinear and cached SP+ values are season-level, not verified pregame snapshots.
 - Live Tier 2 forecasts require at least 3 priced games. Sparse historical seasons are retained in training and shown separately in diagnostics rather than dropping difficult outcomes; their season references are less reliable.
 - Sellout odds are an uncalibrated model probability of reaching 60,417 announced attendees, not a verified probability that ticket inventory sells out.
+- The cheapest resale listing does not measure primary ticket sales or the mix of home and visiting fans. Home-team momentum, fan campaigns and visiting support can affect turnout without a proportional change in get-in price; these drivers are not explicit inputs in the price model.

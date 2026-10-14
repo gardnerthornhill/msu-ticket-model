@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Missouri at Mississippi State, Sat, Sep 26, 2026: attendance forecast | Davis Wade Forecast</title>
+<title>Missouri at Mississippi State, Sat, Sep 26, 2026: attendance forecast vs. actual | Davis Wade Forecast</title>
 <meta name="description" content="Forecast attendance for Missouri at Davis Wade Stadium on Sat, Sep 26, 2026, with the 80% range, sellout odds and how each variable moved the number.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Davis Wade Forecast">
-<meta property="og:title" content="Missouri at Mississippi State, Sat, Sep 26, 2026: attendance forecast">
+<meta property="og:title" content="Missouri at Mississippi State, Sat, Sep 26, 2026: attendance forecast vs. actual">
 <meta property="og:description" content="Forecast attendance for Missouri at Davis Wade Stadium on Sat, Sep 26, 2026, with the 80% range, sellout odds and how each variable moved the number.">
 <meta name="twitter:card" content="summary">
 <meta name="theme-color" content="#5D1725">
@@ -49,13 +49,18 @@
   <div class="hero-forecast">
     <div class="figure">
       <span class="figure-num">53,105</span>
-      <span class="figure-label">forecast attendance</span>
+      <span class="figure-label">recorded pregame forecast</span>
+    </div>
+    <div class="figure figure-actual">
+      <span class="figure-num">60,417</span>
+      <span class="figure-label">announced attendance, a sellout</span>
     </div>
     <div class="hero-gauge">
-      <div class="gauge gauge-hero" role="img" aria-label="Forecast 53,105; 80% range 50,115 to 56,095; capacity 60,417">
+      <div class="gauge gauge-hero" role="img" aria-label="Forecast 53,105; 80% range 50,115 to 56,095; actual 60,417; capacity 60,417">
   <div class="gauge-track">
     <div class="gauge-band" style="left:59.47%;width:23.53%"></div>
     <div class="gauge-point" style="left:71.23%"></div>
+    <div class="gauge-actual" style="left:100.0%"></div>
   </div>
   <div class="gauge-axis" aria-hidden="true">
     <span style="left:0">35k</span>
@@ -66,16 +71,25 @@
       <div class="gauge-legend" aria-hidden="true">
   <span><i class="key key-band"></i>80% range</span>
   <span><i class="key key-point"></i>Forecast</span>
-</div>
+<span><i class="key key-actual"></i>Actual</span></div>
     </div>
     <dl class="facts">
       <div><dt>80% range</dt><dd>50,115 to 56,095</dd></div>
-      <div><dt>Sellout odds</dt><dd>0%</dd></div>
-      <div><dt>Get-in price</dt><dd>$48 on Thu, Sep 24</dd></div>
+      <div><dt>Miss</dt><dd>-7,312 <span class="chip chip-miss"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>Outside</span>
+</dd></div>
+      <div><dt>Forecast get-in price</dt><dd>$48 on Thu, Sep 24</dd></div>
+      <div><dt>Latest recorded price</dt><dd>$39, collected Tue, Oct 13</dd></div>
       <div><dt>Model</dt><dd>Price model</dd></div>
     </dl>
   </div>
-  <p class="notice">CollegeFootballData has no announced attendance for this game, so it is not part of the track record. The forecast above uses the full model.</p>
+  <p class="notice">This forecast was archived before kickoff on 2026-09-24. Its model, inputs, price and interval are preserved exactly as they appeared then.</p>
+</section>
+
+<section class="section">
+  <h2>Sellout context</h2>
+  <p>Mississippi State's <a href="https://static.hailstate.com/custompages/stats/fb/2026/ms0926.PDF">official game book</a> reports 60,417 announced attendees. A field observation supplied on October 13 describes a crowd driven mainly by Mississippi State supporters, with few visiting Missouri fans.</p>
+  <p>That observation suggests strong home support can fill the stadium even when the cheapest resale ticket is modest. The price model does not directly measure home-team momentum, primary ticket sales or fan campaigns. This result remains a forecast miss in the track record.</p>
+  <p class="board-note">Fan composition is qualitative observer context, not a measured attendance split or a numerical adjustment. The pregame forecast above stays as originally recorded.</p>
 </section>
 
 <section class="section">
@@ -113,6 +127,9 @@
   </table>
   </div>
   <p class="board-note">Weight is the change in forecast attendance for a one-unit change in the variable. Seats moved is that weight times this game's distance from the training average. <a href="../model.html">How the weights were fitted</a>.</p>
+  <h3>Data notes</h3>
+  <ul class="notes">
+<li>Missing attendance filled with 60,417 from https://static.hailstate.com/custompages/stats/fb/2026/ms0926.PDF.</li>  </ul>
 </section>
 </main>
 <footer class="footer">

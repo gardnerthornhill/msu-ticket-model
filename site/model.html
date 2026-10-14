@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why does the ticket price matter more than who Mississippi State is playing?", "acceptedAnswer": {"@type": "Answer", "text": "Resale prices reflect demand for a game and can respond to the opponent, team record and kickoff time. In the historical sample, season-relative price alone predicted attendance better than adding opponent ratings. Prices do not measure every source of demand, and this relationship is not proof that raising prices increases attendance."}}, {"@type": "Question", "name": "What does the 80% range mean?", "acceptedAnswer": {"@type": "Answer", "text": "It is a prediction interval. If the model's assumptions hold, the announced crowd lands inside that range four times out of five. It includes game-to-game variation and is wider for unusual price ratios. Small samples, price changes and future team performance make that coverage uncertain, especially weeks before kickoff."}}, {"@type": "Question", "name": "Why is every forecast capped at 60,417?", "acceptedAnswer": {"@type": "Answer", "text": "That is the upper attendance figure used in the training data; official capacity is listed a little lower. A linear model can produce numbers above it, so the forecast and the range are clipped. The associated sellout percentage is a model estimate, not a calibrated measure of ticket inventory."}}, {"@type": "Question", "name": "How often does the forecast change?", "acceptedAnswer": {"@type": "Answer", "text": "Every morning a job refreshes the schedule and ratings from CollegeFootballData, retrains the model and rebuilds this site. Get-in prices are pasted in by hand, because ticketdata.com blocks automated access; a forecast moves whenever its price is updated."}}, {"@type": "Question", "name": "How good is it, honestly?", "acceptedAnswer": {"@type": "Answer", "text": "On the 18 games with both a price and an attendance figure, the price model's leave-one-out error is 2,200 seats (root mean square), against 5,369 for guessing the season average. That is a small sample; the weights are rough and will shift as games are added."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why does the ticket price matter more than who Mississippi State is playing?", "acceptedAnswer": {"@type": "Answer", "text": "Resale prices reflect demand for a game and can respond to the opponent, team record and kickoff time. In the historical sample, season-relative price alone predicted attendance better than adding opponent ratings. Prices do not measure every source of demand, and this relationship is not proof that raising prices increases attendance."}}, {"@type": "Question", "name": "What does the 80% range mean?", "acceptedAnswer": {"@type": "Answer", "text": "It is a prediction interval. If the model's assumptions hold, the announced crowd lands inside that range four times out of five. It includes game-to-game variation and is wider for unusual price ratios. Small samples, price changes and future team performance make that coverage uncertain, especially weeks before kickoff."}}, {"@type": "Question", "name": "Why is every forecast capped at 60,417?", "acceptedAnswer": {"@type": "Answer", "text": "That is the upper attendance figure used in the training data; official capacity is listed a little lower. A linear model can produce numbers above it, so the forecast and the range are clipped. The associated sellout percentage is a model estimate, not a calibrated measure of ticket inventory."}}, {"@type": "Question", "name": "How often does the forecast change?", "acceptedAnswer": {"@type": "Answer", "text": "Every morning a job refreshes the schedule and ratings from CollegeFootballData, retrains the model and rebuilds this site. Get-in prices are pasted in by hand, because ticketdata.com blocks automated access; a forecast moves whenever its price is updated."}}, {"@type": "Question", "name": "How good is it, honestly?", "acceptedAnswer": {"@type": "Answer", "text": "On the 20 games with both a price and an attendance figure, the price model's leave-one-out error is 2,842 seats (root mean square), against 5,924 for guessing the season average. That is a small sample; the weights are rough and will shift as games are added."}}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -49,35 +49,35 @@
 
 <section class="section">
   <h2>How much each variable weighs</h2>
-  <p>The price model starts from an average training game, 53,037 fans, and moves that number by each variable's weight times how far the game sits from average. The bars show the full swing each variable can produce: its weight times the gap between the lowest and highest value seen in training.</p>
+  <p>The price model starts from an average training game, 53,775 fans, and moves that number by each variable's weight times how far the game sits from average. The bars show the full swing each variable can produce: its weight times the gap between the lowest and highest value seen in training.</p>
   <ul class="swings">
     <li class="swing">
-      <span class="swing-label">Get-in price, relative to the season<small>weight 6,432, give or take 738</small></span>
+      <span class="swing-label">Get-in price, relative to the season<small>weight 6,319, give or take 917</small></span>
       <span class="swing-bar" aria-hidden="true"><i class="pos" style="width:100.0%"></i></span>
-      <span class="swing-val">+18,248 seats</span>
+      <span class="swing-val">+17,928 seats</span>
     </li>
   </ul>
-  <p>The weight applies to the natural log of price divided by the season reference. Doubling a game's price relative to that reference adds about 4,458 predicted attendees before the capacity cap. If every price rises by the same percentage, the reference rises too and the forecasts stay the same.</p>
+  <p>The weight applies to the natural log of price divided by the season reference. Doubling a game's price relative to that reference adds about 4,380 predicted attendees before the capacity cap. If every price rises by the same percentage, the reference rises too and the forecasts stay the same.</p>
 
   <h3>The schedule-only fallback</h3>
-  <p>When a game has no listed get-in price, or the season has fewer than three priced games, the forecast uses a model with the opponent variables only. Its average game is 52,103 fans.</p>
+  <p>When a game has no listed get-in price, or the season has fewer than three priced games, the forecast uses a model with the opponent variables only. Its average game is 52,768 fans.</p>
   <div class="table-scroll">
   <table class="coef-table">
     <thead><tr><th scope="col">Variable</th><th scope="col" class="num">Price model weight</th><th scope="col" class="num">Schedule-only weight</th></tr></thead>
     <tbody>
-      <tr><td>Average game</td><td class="num">53,037</td><td class="num">52,103</td></tr>
+      <tr><td>Average game</td><td class="num">53,775</td><td class="num">52,768</td></tr>
       <tr><td>Get-in price, relative to the season</td>
-        <td class="num">6,432 <span class="cell-sub">± 738</span></td>
+        <td class="num">6,319 <span class="cell-sub">± 917</span></td>
         <td class="num"><span class="muted">not used</span></td></tr>
       <tr><td>Opponent ranked in the AP Top 25</td>
         <td class="num"><span class="muted">not used</span></td>
-        <td class="num">8,059 <span class="cell-sub">± 1,989</span></td></tr>
+        <td class="num">8,648 <span class="cell-sub">± 1,893</span></td></tr>
       <tr><td>Opponent Elo rating</td>
         <td class="num"><span class="muted">not used</span></td>
-        <td class="num">-10.80 <span class="cell-sub">± 5.38</span></td></tr>
+        <td class="num">-11.39 <span class="cell-sub">± 5.19</span></td></tr>
       <tr><td>Opponent SP+ rating</td>
         <td class="num"><span class="muted">not used</span></td>
-        <td class="num">187 <span class="cell-sub">± 85.46</span></td></tr>
+        <td class="num">198 <span class="cell-sub">± 82.99</span></td></tr>
     </tbody>
   </table>
   </div>
@@ -92,31 +92,31 @@
     <tbody>
       <tr>
         <td>Season mean (all games)</td>
-        <td class="num">23</td><td class="num">4,698</td><td class="num">3,602</td><td class="num">0.01</td>
+        <td class="num">25</td><td class="num">5,288</td><td class="num">4,106</td><td class="num">-0.10</td>
       </tr>
       <tr>
         <td>Schedule-only (all games)</td>
-        <td class="num">23</td><td class="num">3,266</td><td class="num">2,717</td><td class="num">0.52</td>
+        <td class="num">25</td><td class="num">3,220</td><td class="num">2,664</td><td class="num">0.59</td>
       </tr>
       <tr>
         <td>Season mean (games with a price)</td>
-        <td class="num">18</td><td class="num">5,369</td><td class="num">4,571</td><td class="num">-0.19</td>
+        <td class="num">20</td><td class="num">5,924</td><td class="num">5,053</td><td class="num">-0.31</td>
       </tr>
       <tr>
         <td>Raw log-price only (games with a price)</td>
-        <td class="num">18</td><td class="num">3,652</td><td class="num">3,063</td><td class="num">0.45</td>
+        <td class="num">20</td><td class="num">3,625</td><td class="num">2,952</td><td class="num">0.51</td>
       </tr>
       <tr>
         <td>Relative price only (games with a price)</td>
-        <td class="num">18</td><td class="num">2,200</td><td class="num">1,567</td><td class="num">0.80</td>
+        <td class="num">20</td><td class="num">2,842</td><td class="num">1,943</td><td class="num">0.70</td>
       </tr>
       <tr>
         <td>Schedule-only (games with a price)</td>
-        <td class="num">18</td><td class="num">3,694</td><td class="num">3,248</td><td class="num">0.44</td>
+        <td class="num">20</td><td class="num">3,600</td><td class="num">3,103</td><td class="num">0.51</td>
       </tr>
       <tr class="highlight">
         <td>Price model (games with a price)</td>
-        <td class="num">18</td><td class="num">2,200</td><td class="num">1,567</td><td class="num">0.80</td>
+        <td class="num">20</td><td class="num">2,842</td><td class="num">1,943</td><td class="num">0.70</td>
       </tr>
     </tbody>
   </table>
@@ -129,7 +129,7 @@
   <table class="metrics-table">
     <thead><tr><th scope="col">Test</th><th scope="col" class="num">Games</th><th scope="col" class="num">RMSE</th><th scope="col" class="num">Typical miss</th></tr></thead>
     <tbody>
-<tr><td>Each season held out</td><td class="num">18</td><td class="num">2,327</td><td class="num">1,679</td></tr><tr><td>Earlier seasons only</td><td class="num">10</td><td class="num">2,535</td><td class="num">1,760</td></tr>    </tbody>
+<tr><td>Each season held out</td><td class="num">20</td><td class="num">2,832</td><td class="num">1,879</td></tr><tr><td>Earlier seasons only</td><td class="num">12</td><td class="num">3,396</td><td class="num">2,263</td></tr>    </tbody>
   </table>
   </div>
 
@@ -138,7 +138,7 @@
   <table class="metrics-table">
     <thead><tr><th scope="col">Season</th><th scope="col" class="num">Games scored</th><th scope="col" class="num">RMSE</th><th scope="col" class="num">Average over / under</th><th scope="col" class="num">Inside range</th></tr></thead>
     <tbody>
-<tr><td>2023</td><td class="num">8</td><td class="num">1,938</td><td class="num">-1,146</td><td class="num">7 / 8</td></tr><tr><td>2024<span class="cell-sub">only 2 recorded prices</span></td><td class="num">2</td><td class="num">4,458</td><td class="num">+4,374</td><td class="num">0 / 2</td></tr><tr><td>2025</td><td class="num">7</td><td class="num">1,479</td><td class="num">-595</td><td class="num">7 / 7</td></tr><tr><td>2026</td><td class="num">1</td><td class="num">1,425</td><td class="num">+1,425</td><td class="num">1 / 1</td></tr>    </tbody>
+<tr><td>2023</td><td class="num">8</td><td class="num">1,670</td><td class="num">-654</td><td class="num">8 / 8</td></tr><tr><td>2024<span class="cell-sub">only 2 recorded prices</span></td><td class="num">2</td><td class="num">4,937</td><td class="num">+4,860</td><td class="num">0 / 2</td></tr><tr><td>2025</td><td class="num">7</td><td class="num">1,290</td><td class="num">-20</td><td class="num">7 / 7</td></tr><tr><td>2026</td><td class="num">3</td><td class="num">5,126</td><td class="num">-2,451</td><td class="num">2 / 3</td></tr>    </tbody>
   </table>
   </div>
   <p>Positive values mean the forecast was too high. Sparse historical seasons remain in training and in these comparisons, even though their price references are less reliable. New forecasts require at least three listed prices.</p>
@@ -149,15 +149,15 @@
   <table class="cand-table">
     <thead><tr><th scope="col">Candidate</th><th scope="col" class="num">Leave-one-out RMSE</th></tr></thead>
     <tbody>
-      <tr><td>opponent ranked in the ap top 25 + opponent elo rating + opponent sp+ rating</td><td class="num">3,266</td></tr>
-      <tr><td>opponent ranked in the ap top 25</td><td class="num">3,529</td></tr>
-      <tr><td>opponent sp+ rating</td><td class="num">4,194</td></tr>
-      <tr><td>sec game</td><td class="num">4,213</td></tr>
-      <tr><td>power-conference opponent</td><td class="num">4,262</td></tr>
-      <tr><td>season-relative price</td><td class="num">2,200</td></tr>
-      <tr><td>get-in price</td><td class="num">3,652</td></tr>
-      <tr><td>opponent ranked in the ap top 25 + opponent elo rating + opponent sp+ rating + season-relative price</td><td class="num">2,639</td></tr>
-      <tr><td>opponent ranked in the ap top 25 + opponent elo rating + opponent sp+ rating + get-in price</td><td class="num">3,360</td></tr>
+      <tr><td>opponent ranked in the ap top 25 + opponent elo rating + opponent sp+ rating</td><td class="num">3,220</td></tr>
+      <tr><td>opponent ranked in the ap top 25</td><td class="num">3,510</td></tr>
+      <tr><td>sec game</td><td class="num">4,310</td></tr>
+      <tr><td>opponent sp+ rating</td><td class="num">4,317</td></tr>
+      <tr><td>power-conference opponent</td><td class="num">4,391</td></tr>
+      <tr><td>season-relative price</td><td class="num">2,842</td></tr>
+      <tr><td>get-in price</td><td class="num">3,625</td></tr>
+      <tr><td>opponent ranked in the ap top 25 + opponent elo rating + opponent sp+ rating + season-relative price</td><td class="num">3,182</td></tr>
+      <tr><td>opponent ranked in the ap top 25 + opponent elo rating + opponent sp+ rating + get-in price</td><td class="num">3,211</td></tr>
     </tbody>
   </table>
   </div>
@@ -176,7 +176,7 @@
 <section class="section">
   <h2>What to keep in mind</h2>
   <ul class="plain">
-<li>Small sample: a couple of dozen games across three historical seasons. These are retrospective tests, not forecasts recorded before kickoff.</li><li>The target is announced attendance, not ticket scans or ticket sales. Predictions are capped at 60,417; nominal 80% coverage is conditional on model assumptions and has not been established for weeks-ahead forecasts.</li><li>Historical prices were collected from the past-events table; their observation dates are unknown. Current prices may be weeks before kickoff, and price age matters.</li><li>The season reference uses all available prices, including upcoming games. Historical final-price references were not necessarily available on the forecast date. A common percentage change in every price leaves relative-price predictions unchanged.</li><li>The price model specification is fixed to relative log-price alone. Alternatives are diagnostics and do not automatically change production. It was chosen after examining this small dataset, so its retrospective scores may still be optimistic.</li><li>schedule-only features are selected using the same leave-one-out scores reported. Its opponent ratings are collinear and cached SP+ values are season-level, not verified pregame snapshots.</li><li>Live price model forecasts require at least 3 priced games. Sparse historical seasons are retained in training and shown separately in diagnostics rather than dropping difficult outcomes; their season references are less reliable.</li><li>Sellout odds are an uncalibrated model probability of reaching 60,417 announced attendees, not a verified probability that ticket inventory sells out.</li>  </ul>
+<li>Small sample: a couple of dozen games across three historical seasons. These are retrospective tests, not forecasts recorded before kickoff.</li><li>The target is announced attendance, not ticket scans or ticket sales. Predictions are capped at 60,417; nominal 80% coverage is conditional on model assumptions and has not been established for weeks-ahead forecasts.</li><li>Historical prices were collected from the past-events table; their observation dates are unknown. Current prices may be weeks before kickoff, and price age matters.</li><li>The season reference uses all available prices, including upcoming games. Historical final-price references were not necessarily available on the forecast date. A common percentage change in every price leaves relative-price predictions unchanged.</li><li>The price model specification is fixed to relative log-price alone. Alternatives are diagnostics and do not automatically change production. It was chosen after examining this small dataset, so its retrospective scores may still be optimistic.</li><li>schedule-only features are selected using the same leave-one-out scores reported. Its opponent ratings are collinear and cached SP+ values are season-level, not verified pregame snapshots.</li><li>Live price model forecasts require at least 3 priced games. Sparse historical seasons are retained in training and shown separately in diagnostics rather than dropping difficult outcomes; their season references are less reliable.</li><li>Sellout odds are an uncalibrated model probability of reaching 60,417 announced attendees, not a verified probability that ticket inventory sells out.</li><li>The cheapest resale listing does not measure primary ticket sales or the mix of home and visiting fans. Home-team momentum, fan campaigns and visiting support can affect turnout without a proportional change in get-in price; these drivers are not explicit inputs in the price model.</li>  </ul>
 </section>
 
 <section class="section faq">
@@ -190,7 +190,7 @@
   <h3>How often does the forecast change?</h3>
   <p>Every morning a job refreshes the schedule and ratings from CollegeFootballData, retrains the model and rebuilds this site. Get-in prices are pasted in by hand, because ticketdata.com blocks automated access; a forecast moves whenever its price is updated.</p>
   <h3>How good is it, honestly?</h3>
-  <p>On the 18 games with both a price and an attendance figure, the price model&#39;s leave-one-out error is 2,200 seats (root mean square), against 5,369 for guessing the season average. That is a small sample; the weights are rough and will shift as games are added.</p>
+  <p>On the 20 games with both a price and an attendance figure, the price model&#39;s leave-one-out error is 2,842 seats (root mean square), against 5,924 for guessing the season average. That is a small sample; the weights are rough and will shift as games are added.</p>
 </section>
 </main>
 <footer class="footer">

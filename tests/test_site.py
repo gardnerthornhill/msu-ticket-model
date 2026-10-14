@@ -65,11 +65,19 @@ def test_site_data_prefers_latest_recorded_pregame_forecast(trained):
     trained.forecast_history.parent.mkdir(parents=True, exist_ok=True)
     trained.forecast_history.write_text(json.dumps(entry) + "\n")
 
+    # A final price collected after the game must not replace the archived forecast's input.
+    features.loc[row.index, "getin"] = 5
+    features.loc[row.index, "observed"] = "2023-09-15"
+    features.to_csv(trained.features, index=False)
+
     data = site.site_data(trained, today="2024-10-20")
     g = by_game(data)[(2023, "Rival A")]
     assert g["forecast_kind"] == "recorded"
     assert g["forecast"]["pred"] == round(prediction["pred"])
     assert g["forecast_date"] == "2023-09-01"
+    assert g["getin"] == 5
+    assert g["forecast_getin"] == entry["inputs"]["getin"]
+    assert g["observed_label"] == site.date_label("2023-09-15", year=False)
     assert data["track"]["recorded"] == 1
 
 

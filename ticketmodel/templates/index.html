@@ -77,7 +77,7 @@
           <span class="row-when">{{ g.date_short }}, {{ g.kickoff | replace("Kickoff to be announced", "time TBA") | replace(" CT", "") }}</span>
         </span>
       </div>
-      <span class="row-price">{% if g.getin %}{{ g.getin | money }}{% else %}<span class="muted">none</span>{% endif %}</span>
+      <span class="row-price">{% if g.forecast_getin %}{{ g.forecast_getin | money }}{% else %}<span class="muted">none</span>{% endif %}</span>
       <span class="row-forecast"><span class="num">{{ g.forecast.pred | num }}</span><span class="sub">{{ g.forecast.lo | num }} to {{ g.forecast.hi | num }}{% if g.forecast_kind == "recorded" %}<span class="sub-tier">recorded pregame</span>{% elif g.tier == "tier1" %}<span class="sub-tier">{{ g.tier_label | lower }}</span>{% endif %}</span></span>
       <span class="row-gauge">{{ m.gauge(g, data) }}</span>
       <span class="row-odds">

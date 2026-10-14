@@ -122,6 +122,26 @@ python3 -m ticketmodel all
 Once CFBD posts the attendance, the game moves from predictions into the training set on the
 next run.
 
+## October 13, 2026 update: two sellouts with different demand
+
+Missouri (September 26) and Alabama (October 3) both recorded 60,417 announced attendees,
+according to the official [Missouri game book](https://static.hailstate.com/custompages/stats/fb/2026/ms0926.PDF)
+and [Alabama box score](https://hailstate.com/sports/football/stats/2026/alabama/boxscore/27571).
+These sourced corrections fill missing CFBD attendance and include both results in training.
+TicketData's final recorded prices are $39 and $128 respectively, collected on October 13.
+That collection date is not a pregame observation; prior prices and original pregame forecasts
+remain archived, and the site scores each game against its recorded forecast.
+
+Field observations supplied by the project owner on October 13 describe the Missouri crowd as
+driven mainly by Mississippi State fans with little visiting support, while Alabama's crowd
+benefited from visiting fans, proximity and the matchup. These are qualitative observations,
+not measured fan counts. They suggest a gap in the price signal: home enthusiasm and primary
+ticket sales can produce a sellout without a high cheapest resale listing, while visiting
+demand can lift resale prices. Relative price alone also cannot measure a season-wide demand
+increase. Both games remain in training and evaluation; no manual attendance boost or fan-mix
+coefficient is inferred from these two cases. A future model comparison would need dated MSU
+momentum, primary-sales/inventory and visiting-demand data available before kickoff.
+
 ## Starting a new season
 
 The pipeline only fetches and predicts seasons that have at least one row in `data/tickets.csv`.
