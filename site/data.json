@@ -5,8 +5,8 @@
  "venue": "Davis Wade Stadium",
  "capacity": 60417,
  "interval": 0.8,
- "generated": "2026-10-17",
- "trained": "2026-10-17",
+ "generated": "2026-10-18",
+ "trained": "2026-10-18",
  "seasons": [
   2023,
   2024,
@@ -1602,7 +1602,7 @@
    "forecast_observed_label": "Tue, Oct 13",
    "ranked": 0,
    "ap_rank": null,
-   "elo": 1747.0,
+   "elo": 1716.0,
    "sp": 12.2,
    "conf_game": 1,
    "rel_log_price": 0.13613217432458,
@@ -1660,7 +1660,7 @@
    "forecast_observed_label": "Tue, Oct 13",
    "ranked": 0,
    "ap_rank": null,
-   "elo": 1610.0,
+   "elo": 1577.0,
    "sp": 1.2,
    "conf_game": 1,
    "rel_log_price": 0.0,
@@ -1718,7 +1718,7 @@
    "forecast_observed_label": "Tue, Oct 13",
    "ranked": 0,
    "ap_rank": null,
-   "elo": 1669.0,
+   "elo": 1699.0,
    "sp": 11.0,
    "conf_game": 1,
    "rel_log_price": 0.4855078157817005,
@@ -1776,7 +1776,7 @@
    "forecast_observed_label": "Tue, Oct 13",
    "ranked": 0,
    "ap_rank": null,
-   "elo": 779.0,
+   "elo": 768.0,
    "sp": -38.6,
    "conf_game": 0,
    "rel_log_price": -1.09861228866811,
@@ -1811,7 +1811,7 @@
     "capped": false
    },
    "notes": [
-    "No Elo; imputed 779.0.",
+    "No Elo; imputed 768.0.",
     "No SP+; imputed -38.6."
    ]
   }
@@ -2065,7 +2065,7 @@
   "2024 Eastern Kentucky: no SP+; imputed -43.0",
   "2025 Alcorn State: no Elo; imputed 618.0",
   "2025 Alcorn State: no SP+; imputed -46.6",
-  "2026 Tennessee Tech: no Elo; imputed 779.0",
+  "2026 Tennessee Tech: no Elo; imputed 768.0",
   "2026 Tennessee Tech: no SP+; imputed -38.6",
   "2023 Southern Miss: missing attendance filled with 53,855 from https://hailstate.com/news/2023/11/18/football-postgame-notes-mississippi-state-vs-southern-miss",
   "2026 UL Monroe: missing attendance filled with 48,771 from https://hailstate.com/sports/football/stats/2026/ulm/boxscore/27455",
