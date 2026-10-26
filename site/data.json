@@ -5,8 +5,8 @@
  "venue": "Davis Wade Stadium",
  "capacity": 60417,
  "interval": 0.8,
- "generated": "2026-10-25",
- "trained": "2026-10-25",
+ "generated": "2026-10-26",
+ "trained": "2026-10-26",
  "seasons": [
   2023,
   2024,
@@ -16,7 +16,7 @@
  "current_season": 2026,
  "next_game": "2026-vanderbilt",
  "axis_min": 35000,
- "bar_max": 10000,
+ "bar_max": 11000,
  "bar_max_current": 8000,
  "games": [
   {
@@ -517,19 +517,19 @@
    "tier": "tier1",
    "tier_label": "Schedule-only model",
    "forecast": {
-    "pred": 50097,
-    "lo": 45061,
-    "hi": 55134,
-    "p_sellout": 0.006655931951048219
+    "pred": 50052,
+    "lo": 45088,
+    "hi": 55015,
+    "p_sellout": 0.0059370483043181725
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
    "forecast_date": null,
-   "error": 1373,
+   "error": 1328,
    "inside": true,
    "sellout": false,
    "breakdown": {
-    "baseline": 52936.70833332774,
+    "baseline": 52936.708333330425,
     "terms": [
      {
       "feature": "opp_ranked",
@@ -537,8 +537,8 @@
       "value": 0.0,
       "display": "Unranked",
       "mean_display": "46% of games ranked",
-      "contribution": -4109.133850832296,
-      "weight": 8965.382947270464
+      "contribution": -4129.948522559334,
+      "weight": 9010.796776493095
      },
      {
       "feature": "opp_elo",
@@ -546,20 +546,20 @@
       "value": 660.0,
       "display": "660",
       "mean_display": "1,539",
-      "contribution": 9826.56521808929,
-      "weight": -11.173428968311129
+      "contribution": 10662.434074434128,
+      "weight": -12.123864963586445
      },
      {
       "feature": "opp_sp",
       "label": "Opponent SP+ rating",
       "value": -43.0,
       "display": "-43.0",
-      "mean_display": "+3.1",
-      "contribution": -8556.74401398332,
-      "weight": 185.57912193710433
+      "mean_display": "+3.4",
+      "contribution": -9417.542242695035,
+      "weight": 203.11018496107192
      }
     ],
-    "total": 50097.39568660141,
+    "total": 50051.65164251019,
     "capped": false
    },
    "notes": [
@@ -596,15 +596,15 @@
    "tier": "tier1",
    "tier_label": "Schedule-only model",
    "forecast": {
-    "pred": 48103,
-    "lo": 43440,
-    "hi": 52767,
-    "p_sellout": 0.0011295740785856679
+    "pred": 47919,
+    "lo": 43308,
+    "hi": 52529,
+    "p_sellout": 0.0009090480694439363
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
    "forecast_date": null,
-   "error": 691,
+   "error": 507,
    "inside": true,
    "sellout": false,
    "breakdown": {
@@ -616,8 +616,8 @@
       "value": 0.0,
       "display": "Unranked",
       "mean_display": "46% of games ranked",
-      "contribution": -3965.3753643146893,
-      "weight": 8651.728067595686
+      "contribution": -4004.863321611834,
+      "weight": 8737.883610789457
      },
      {
       "feature": "opp_elo",
@@ -625,20 +625,20 @@
       "value": 1524.0,
       "display": "1,524",
       "mean_display": "1,503",
-      "contribution": -212.40586127353868,
-      "weight": -10.34024476788014
+      "contribution": -233.9053235841733,
+      "weight": -11.386871736349164
      },
      {
       "feature": "opp_sp",
       "label": "Opponent SP+ rating",
       "value": -2.5,
       "display": "-2.5",
-      "mean_display": "+1.4",
-      "contribution": -710.2174744143953,
-      "weight": 181.13941961684895
+      "mean_display": "+1.7",
+      "contribution": -834.0274692371163,
+      "weight": 199.56788895005775
      }
     ],
-    "total": 48103.376299993535,
+    "total": 47918.57888556304,
     "capped": false
    },
    "notes": []
@@ -672,19 +672,19 @@
    "tier": "tier1",
    "tier_label": "Schedule-only model",
    "forecast": {
-    "pred": 51898,
-    "lo": 47092,
-    "hi": 56704,
-    "p_sellout": 0.014594458397276897
+    "pred": 52120,
+    "lo": 47386,
+    "hi": 56853,
+    "p_sellout": 0.015415534896979962
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
    "forecast_date": null,
-   "error": 2243,
+   "error": 2465,
    "inside": true,
    "sellout": false,
    "breakdown": {
-    "baseline": 52897.91666667015,
+    "baseline": 52897.91666666234,
     "terms": [
      {
       "feature": "opp_ranked",
@@ -692,8 +692,8 @@
       "value": 0.0,
       "display": "Unranked",
       "mean_display": "46% of games ranked",
-      "contribution": -3899.7604626031803,
-      "weight": 8508.568282043303
+      "contribution": -3912.3168849922686,
+      "weight": 8535.964112710404
      },
      {
       "feature": "opp_elo",
@@ -701,20 +701,20 @@
       "value": 1485.0,
       "display": "1,485",
       "mean_display": "1,505",
-      "contribution": 229.67527083194472,
-      "weight": -11.43611307047032
+      "contribution": 251.95369727030211,
+      "weight": -12.54541231221426
      },
      {
       "feature": "opp_sp",
       "label": "Opponent SP+ rating",
       "value": 13.8,
       "display": "+13.8",
-      "mean_display": "+0.7",
-      "contribution": 2670.343398088924,
-      "weight": 204.49343188938792
+      "mean_display": "+1.0",
+      "contribution": 2882.278720675383,
+      "weight": 225.17802505276427
      }
     ],
-    "total": 51898.17487298784,
+    "total": 52119.83219961576,
     "capped": false
    },
    "notes": []
@@ -808,19 +808,19 @@
    "tier": "tier1",
    "tier_label": "Schedule-only model",
    "forecast": {
-    "pred": 51160,
-    "lo": 46478,
-    "hi": 55843,
-    "p_sellout": 0.008199917282754269
+    "pred": 51298,
+    "lo": 46687,
+    "hi": 55909,
+    "p_sellout": 0.008183392891231413
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
    "forecast_date": null,
-   "error": 1857,
+   "error": 1995,
    "inside": true,
    "sellout": false,
    "breakdown": {
-    "baseline": 52912.58333333434,
+    "baseline": 52912.5833333312,
     "terms": [
      {
       "feature": "opp_ranked",
@@ -828,8 +828,8 @@
       "value": 0.0,
       "display": "Unranked",
       "mean_display": "46% of games ranked",
-      "contribution": -3912.395280149244,
-      "weight": 8536.13515668926
+      "contribution": -3928.460754986683,
+      "weight": 8571.187101789126
      },
      {
       "feature": "opp_elo",
@@ -837,20 +837,20 @@
       "value": 1490.0,
       "display": "1,490",
       "mean_display": "1,505",
-      "contribution": 164.46829116494482,
-      "weight": -11.0566918430215
+      "contribution": 179.8826906711115,
+      "weight": -12.092953994696572
      },
      {
       "feature": "opp_sp",
       "label": "Opponent SP+ rating",
       "value": 11.0,
       "display": "+11.0",
-      "mean_display": "+0.9",
-      "contribution": 1995.8001514015411,
-      "weight": 196.79212667887015
+      "mean_display": "+1.1",
+      "contribution": 2134.314466704688,
+      "weight": 215.95087352829898
      }
     ],
-    "total": 51160.45649575158,
+    "total": 51298.31973572032,
     "capped": false
    },
    "notes": []
@@ -884,19 +884,19 @@
    "tier": "tier1",
    "tier_label": "Schedule-only model",
    "forecast": {
-    "pred": 49858,
-    "lo": 45327,
-    "hi": 54389,
-    "p_sellout": 0.0028955652555509278
+    "pred": 49840,
+    "lo": 45376,
+    "hi": 54305,
+    "p_sellout": 0.0025785233357298
    },
    "forecast_kind": "retrospective",
    "forecast_recorded_at": null,
    "forecast_date": null,
-   "error": 1241,
+   "error": 1223,
    "inside": true,
    "sellout": false,
    "breakdown": {
-    "baseline": 52941.16666666388,
+    "baseline": 52941.16666666636,
     "terms": [
      {
       "feature": "opp_ranked",
@@ -904,8 +904,8 @@
       "value": 0.0,
       "display": "Unranked",
       "mean_display": "46% of games ranked",
-      "contribution": -4030.1902095133364,
-      "weight": 8793.142275301825
+      "contribution": -4053.851266129697,
+      "weight": 8844.76639882843
      },
      {
       "feature": "opp_elo",
@@ -913,20 +913,20 @@
       "value": 1025.0,
       "display": "1,025",
       "mean_display": "1,524",
-      "contribution": 5439.985532046391,
-      "weight": -10.89631553739888
+      "contribution": 5923.637054357892,
+      "weight": -11.86507171629022
      },
      {
       "feature": "opp_sp",
       "label": "Opponent SP+ rating",
       "value": -21.9,
       "display": "-21.9",
-      "mean_display": "+2.2",
-      "contribution": -4493.043162241134,
-      "weight": 186.20797080605635
+      "mean_display": "+2.5",
+      "contribution": -4970.840111943535,
+      "weight": 203.82737516939147
      }
     ],
-    "total": 49857.9188269558,
+    "total": 49840.11234295102,
     "capped": false
    },
    "notes": []
@@ -1423,7 +1423,7 @@
    "ranked": 0,
    "ap_rank": null,
    "elo": 1177.0,
-   "sp": -27.4,
+   "sp": -24.2,
    "conf_game": 0,
    "rel_log_price": -0.4700036292457357,
    "tier": "tier2",
@@ -1483,7 +1483,7 @@
    "ranked": 1,
    "ap_rank": 19,
    "elo": 1690.0,
-   "sp": 13.6,
+   "sp": 14.2,
    "conf_game": 1,
    "rel_log_price": -0.20763936477824485,
    "tier": "tier2",
@@ -1543,7 +1543,7 @@
    "ranked": 1,
    "ap_rank": 7,
    "elo": 1929.0,
-   "sp": 18.5,
+   "sp": 20.9,
    "conf_game": 1,
    "rel_log_price": 0.9808292530117257,
    "tier": "tier2",
@@ -1603,7 +1603,7 @@
    "ranked": 0,
    "ap_rank": null,
    "elo": 1716.0,
-   "sp": 9.8,
+   "sp": 10.3,
    "conf_game": 1,
    "rel_log_price": 0.13613217432458002,
    "tier": "tier2",
@@ -1661,7 +1661,7 @@
    "ranked": 0,
    "ap_rank": null,
    "elo": 1542.0,
-   "sp": 0.3,
+   "sp": -1.4,
    "conf_game": 1,
    "rel_log_price": 0.0,
    "tier": "tier2",
@@ -1719,7 +1719,7 @@
    "ranked": 0,
    "ap_rank": null,
    "elo": 1669.0,
-   "sp": 8.9,
+   "sp": 6.5,
    "conf_game": 1,
    "rel_log_price": 0.48550781578170055,
    "tier": "tier2",
@@ -1777,7 +1777,7 @@
    "ranked": 0,
    "ap_rank": null,
    "elo": 749.0,
-   "sp": -37.4,
+   "sp": -39.1,
    "conf_game": 0,
    "rel_log_price": -1.09861228866811,
    "tier": "tier2",
@@ -1812,14 +1812,14 @@
    },
    "notes": [
     "No Elo; imputed 749.0.",
-    "No SP+; imputed -37.4."
+    "No SP+; imputed -39.1."
    ]
   }
  ],
  "track": {
   "n": 25,
-  "rmse": 2487.003305184776,
-  "mae": 1826.72,
+  "rmse": 2496.5581026685522,
+  "mae": 1831.24,
   "inside": 22,
   "inside_rate": 0.88,
   "priced": 20,
@@ -1833,25 +1833,25 @@
     "opp_elo",
     "opp_sp"
    ],
-   "intercept": 64677.96377506482,
+   "intercept": 66055.77120004754,
    "coef": {
-    "opp_ranked": 8780.707948539308,
-    "opp_elo": -10.640624848744606,
-    "opp_sp": 184.49673658908526
+    "opp_ranked": 8833.09550441035,
+    "opp_elo": -11.620151179799533,
+    "opp_sp": 202.2670600271391
    },
    "stderr": {
-    "const": 7668.719710888957,
-    "opp_ranked": 1948.4265405638594,
-    "opp_elo": 5.396852750793231,
-    "opp_sp": 86.58899338854887
+    "const": 7728.393094390849,
+    "opp_ranked": 1921.084953712701,
+    "opp_elo": 5.4457916597405776,
+    "opp_sp": 87.95504525550199
    },
-   "resid_se": 3171.174394612965,
+   "resid_se": 3125.70292038922,
    "df_resid": 21,
    "n": 25,
    "means": {
     "opp_ranked": 0.44,
     "opp_elo": 1504.28,
-    "opp_sp": 1.2640000000000002
+    "opp_sp": 1.5120000000000002
    },
    "range": {
     "opp_ranked": [
@@ -1868,11 +1868,11 @@
     ]
    },
    "swing": {
-    "opp_ranked": 8780.707948539308,
-    "opp_elo": -14886.234163393703,
-    "opp_sp": 13043.919276848328
+    "opp_ranked": 8833.09550441035,
+    "opp_elo": -16256.591500539547,
+    "opp_sp": 14300.281143918735
    },
-   "baseline": 52768.20000000118,
+   "baseline": 52768.20000000029,
    "labels": {
     "opp_ranked": "Opponent ranked in the AP Top 25",
     "opp_elo": "Opponent Elo rating",
@@ -1886,7 +1886,7 @@
    "mean_labels": {
     "opp_ranked": "44% of games ranked",
     "opp_elo": "1,504",
-    "opp_sp": "+1.3"
+    "opp_sp": "+1.5"
    }
   },
   "tier2": {
@@ -1936,9 +1936,9 @@
    "n": 25
   },
   "Tier 1 (all rows)": {
-   "rmse": 3285.9806067757736,
-   "mae": 2705.671598368643,
-   "r2": 0.5770645817615285,
+   "rmse": 3237.857604075774,
+   "mae": 2637.0679054143525,
+   "r2": 0.5893616041641743,
    "n": 25
   },
   "Season mean (priced rows)": {
@@ -1960,9 +1960,9 @@
    "n": 20
   },
   "Tier 1 (priced rows)": {
-   "rmse": 3677.521040938087,
-   "mae": 3182.8950656639363,
-   "r2": 0.49349623988626423,
+   "rmse": 3631.533240800987,
+   "mae": 3080.901469113734,
+   "r2": 0.5060848030639198,
    "n": 20
   },
   "Tier 2 (priced rows)": {
@@ -1979,7 +1979,7 @@
     "opp_elo",
     "opp_sp"
    ],
-   "rmse": 3285.9806067757736
+   "rmse": 3237.857604075774
   },
   {
    "features": [
@@ -1997,7 +1997,7 @@
    "features": [
     "opp_sp"
    ],
-   "rmse": 4379.777371899038
+   "rmse": 4363.886652318856
   },
   {
    "features": [
@@ -2029,7 +2029,7 @@
     "rel_log_price"
    ],
    "price_feature": "rel_log_price",
-   "rmse": 3153.2423679228386
+   "rmse": 3177.0527670864776
   },
   {
    "features": [
@@ -2039,7 +2039,7 @@
     "log_getin"
    ],
    "price_feature": "log_getin",
-   "rmse": 3293.4258096979124
+   "rmse": 3296.150262124226
   }
  ],
  "counts": {
@@ -2066,7 +2066,7 @@
   "2025 Alcorn State: no Elo; imputed 618.0",
   "2025 Alcorn State: no SP+; imputed -46.6",
   "2026 Tennessee Tech: no Elo; imputed 749.0",
-  "2026 Tennessee Tech: no SP+; imputed -37.4",
+  "2026 Tennessee Tech: no SP+; imputed -39.1",
   "2023 Southern Miss: missing attendance filled with 53,855 from https://hailstate.com/news/2023/11/18/football-postgame-notes-mississippi-state-vs-southern-miss",
   "2026 UL Monroe: missing attendance filled with 48,771 from https://hailstate.com/sports/football/stats/2026/ulm/boxscore/27455",
   "2026 Missouri: missing attendance filled with 60,417 from https://static.hailstate.com/custompages/stats/fb/2026/ms0926.PDF",
