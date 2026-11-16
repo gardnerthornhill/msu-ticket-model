@@ -1,6 +1,6 @@
 # Mississippi State Attendance Model
 
-Generated 2026-11-15.
+Generated 2026-11-16.
 
 ## Data
 
@@ -13,11 +13,11 @@ Generated 2026-11-15.
 | model | rows | RMSE | MAE | R² |
 |---|---|---|---|---|
 | Season mean (all rows) | 25 | 5288 | 4106 | -0.095 |
-| Tier 1 (all rows) | 25 | 3218 | 2626 | 0.594 |
+| Tier 1 (all rows) | 25 | 3243 | 2647 | 0.588 |
 | Season mean (priced rows) | 20 | 5924 | 5053 | -0.314 |
 | Price only (priced rows) | 20 | 3625 | 2952 | 0.508 |
 | Relative price only (priced rows) | 20 | 2842 | 1943 | 0.698 |
-| Tier 1 (priced rows) | 20 | 3614 | 3065 | 0.511 |
+| Tier 1 (priced rows) | 20 | 3640 | 3098 | 0.504 |
 | Tier 2 (priced rows) | 20 | 2842 | 1943 | 0.698 |
 
 ## Tier 1 feature selection
@@ -26,10 +26,10 @@ Top candidate subsets by LOO-RMSE. A smaller subset is preferred when its LOO-RM
 
 | features | LOO RMSE |
 |---|---|
-| opp_ranked + opp_elo + opp_sp | 3218 |
+| opp_ranked + opp_elo + opp_sp | 3243 |
 | opp_ranked | 3510 |
 | conf_game | 4310 |
-| opp_sp | 4358 |
+| opp_sp | 4377 |
 | opp_p4 | 4391 |
 
 ## Tier 2 price feature
@@ -40,21 +40,21 @@ Production uses relative log-price alone. These alternatives are comparisons, no
 |---|---|
 | rel_log_price | 2842 |
 | log_getin | 3625 |
-| opp_ranked + opp_elo + opp_sp + rel_log_price | 3177 |
-| opp_ranked + opp_elo + opp_sp + log_getin | 3306 |
+| opp_ranked + opp_elo + opp_sp + rel_log_price | 3143 |
+| opp_ranked + opp_elo + opp_sp + log_getin | 3341 |
 
 ## Fitted models
 
 ### Tier 1 (game features only)
 
-Features: opp_ranked + opp_elo + opp_sp. Rows: 25. Residual SE: 3105.
+Features: opp_ranked + opp_elo + opp_sp. Rows: 25. Residual SE: 3133.
 
 | term | coefficient | std err |
 |---|---|---|
-| intercept | 66657 | ± 7751 |
-| opp_ranked | 8862.95 | ± 1909.40 |
-| opp_elo | -12.05 | ± 5.46 |
-| opp_sp | 209.59 | ± 88.31 |
+| intercept | 66155 | ± 7846 |
+| opp_ranked | 8908.18 | ± 1931.87 |
+| opp_elo | -11.70 | ± 5.53 |
+| opp_sp | 202.19 | ± 88.94 |
 
 ### Tier 2 (relative price only)
 
@@ -96,31 +96,31 @@ Fixed relative-price specification, refitted without the test season. Forward te
 
 | season | date | opponent | price | actual | Tier 1 LOO | Tier 2 LOO |
 |---|---|---|---|---|---|---|
-| 2023 | 2023-09-02 | SE Louisiana | 8 | 50041 | 48382 | 49528 |
-| 2023 | 2023-09-09 | Arizona | 12 | 51648 | 52920 | 52169 |
-| 2023 | 2023-09-16 | LSU | 31 | 60084 | 59009 | 57922 |
-| 2023 | 2023-09-30 | Alabama | 25 | 60111 | 56375 | 56513 |
-| 2023 | 2023-10-07 | Western Michigan | 6 | 47158 | 48387 | 47860 |
-| 2023 | 2023-11-04 | Kentucky | 10 | 52329 | 49099 | 50886 |
-| 2023 | 2023-11-18 | Southern Miss | 19 | 53855 | 49017 | 55111 |
-| 2023 | 2023-11-23 | Ole Miss | 63 | 60412 | 58921 | 60417 |
-| 2024 | 2024-08-31 | Eastern Kentucky |  | 48724 | 50056 |  |
-| 2024 | 2024-09-14 | Toledo |  | 47412 | 47837 |  |
-| 2024 | 2024-09-21 | Florida |  | 49655 | 52205 |  |
-| 2024 | 2024-10-19 | Texas A&M | 10 | 50127 | 58420 | 54124 |
-| 2024 | 2024-10-26 | Arkansas |  | 49303 | 51350 |  |
-| 2024 | 2024-11-02 | Massachusetts |  | 48617 | 49842 |  |
-| 2024 | 2024-11-23 | Missouri | 9 | 47824 | 49637 | 53548 |
-| 2025 | 2025-09-06 | Arizona State | 32 | 50808 | 56649 | 51480 |
-| 2025 | 2025-09-13 | Alcorn State | 26 | 49158 | 49568 | 50214 |
-| 2025 | 2025-09-20 | Northern Illinois | 11 | 45803 | 45574 | 44291 |
-| 2025 | 2025-09-27 | Tennessee | 95 | 60417 | 56091 | 58070 |
-| 2025 | 2025-10-25 | Texas | 48 | 52680 | 55979 | 54068 |
-| 2025 | 2025-11-08 | Georgia | 45 | 53017 | 56726 | 53621 |
-| 2025 | 2025-11-28 | Ole Miss | 133 | 60417 | 56558 | 60417 |
-| 2026 | 2026-09-05 | UL Monroe | 30 | 48771 | 47442 | 50772 |
-| 2026 | 2026-09-26 | Missouri | 39 | 60417 | 57719 | 51798 |
-| 2026 | 2026-10-03 | Alabama | 128 | 60417 | 56675 | 59683 |
+| 2023 | 2023-09-02 | SE Louisiana | 8 | 50041 | 48466 | 49528 |
+| 2023 | 2023-09-09 | Arizona | 12 | 51648 | 52763 | 52169 |
+| 2023 | 2023-09-16 | LSU | 31 | 60084 | 58992 | 57922 |
+| 2023 | 2023-09-30 | Alabama | 25 | 60111 | 56440 | 56513 |
+| 2023 | 2023-10-07 | Western Michigan | 6 | 47158 | 48444 | 47860 |
+| 2023 | 2023-11-04 | Kentucky | 10 | 52329 | 49075 | 50886 |
+| 2023 | 2023-11-18 | Southern Miss | 19 | 53855 | 49036 | 55111 |
+| 2023 | 2023-11-23 | Ole Miss | 63 | 60412 | 58904 | 60417 |
+| 2024 | 2024-08-31 | Eastern Kentucky |  | 48724 | 50121 |  |
+| 2024 | 2024-09-14 | Toledo |  | 47412 | 47894 |  |
+| 2024 | 2024-09-21 | Florida |  | 49655 | 52096 |  |
+| 2024 | 2024-10-19 | Texas A&M | 10 | 50127 | 58473 | 54124 |
+| 2024 | 2024-10-26 | Arkansas |  | 49303 | 51274 |  |
+| 2024 | 2024-11-02 | Massachusetts |  | 48617 | 49862 |  |
+| 2024 | 2024-11-23 | Missouri | 9 | 47824 | 49616 | 53548 |
+| 2025 | 2025-09-06 | Arizona State | 32 | 50808 | 56753 | 51480 |
+| 2025 | 2025-09-13 | Alcorn State | 26 | 49158 | 49652 | 50214 |
+| 2025 | 2025-09-20 | Northern Illinois | 11 | 45803 | 45767 | 44291 |
+| 2025 | 2025-09-27 | Tennessee | 95 | 60417 | 56179 | 58070 |
+| 2025 | 2025-10-25 | Texas | 48 | 52680 | 56088 | 54068 |
+| 2025 | 2025-11-08 | Georgia | 45 | 53017 | 56800 | 53621 |
+| 2025 | 2025-11-28 | Ole Miss | 133 | 60417 | 56615 | 60417 |
+| 2026 | 2026-09-05 | UL Monroe | 30 | 48771 | 47256 | 50772 |
+| 2026 | 2026-09-26 | Missouri | 39 | 60417 | 57110 | 51798 |
+| 2026 | 2026-10-03 | Alabama | 128 | 60417 | 56775 | 59683 |
 
 ## Warnings
 
@@ -131,7 +131,7 @@ Fixed relative-price specification, refitted without the test season. Forward te
 - 2025 Alcorn State: no Elo; imputed 618.0
 - 2025 Alcorn State: no SP+; imputed -46.6
 - 2026 Tennessee Tech: no Elo; imputed 766.0
-- 2026 Tennessee Tech: no SP+; imputed -37.4
+- 2026 Tennessee Tech: no SP+; imputed -38.3
 - 2023 Southern Miss: missing attendance filled with 53,855 from https://hailstate.com/news/2023/11/18/football-postgame-notes-mississippi-state-vs-southern-miss
 - 2026 UL Monroe: missing attendance filled with 48,771 from https://hailstate.com/sports/football/stats/2026/ulm/boxscore/27455
 - 2026 Missouri: missing attendance filled with 60,417 from https://static.hailstate.com/custompages/stats/fb/2026/ms0926.PDF
