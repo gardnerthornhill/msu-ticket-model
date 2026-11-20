@@ -1,6 +1,6 @@
 # Mississippi State Attendance Model
 
-Generated 2026-11-19.
+Generated 2026-11-20.
 
 ## Data
 
